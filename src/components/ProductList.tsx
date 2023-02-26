@@ -1,7 +1,10 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { Product } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface ProductListProps {
   products: Product[]
@@ -16,10 +19,9 @@ export function ProductList({ products }: ProductListProps) {
             className="w-74 flex flex-col rounded-lg overflow-hidden bg-white border border-zinc-300 transition ease-in-out duration-300 hover:shadow-xl"
             key={product.id}
           >
-            <a
+            <Link
               className="w-full h-74 relative"
-              target="_blank"
-              href={product.html_url}
+              href={`/product/${product.id}`}
               rel="noreferrer"
             >
               <Image
@@ -29,18 +31,17 @@ export function ProductList({ products }: ProductListProps) {
                 fill
                 priority
               />
-            </a>
+            </Link>
             <div className="flex flex-col gap-4 p-4">
-              <a
+              <Link
                 className="h-10"
-                target="_blank"
-                href={product.html_url}
+                href={`/product/${product.id}`}
                 rel="noreferrer"
               >
                 <h4 className="line-clamp-2 text-sm font-medium">
                   {product.title}
                 </h4>
-              </a>
+              </Link>
               <h5 className="text-sm font-medium text-zinc-500">
                 Menor preço via{' '}
                 <a
@@ -63,6 +64,15 @@ export function ProductList({ products }: ProductListProps) {
                 </div>
               )}
             </div>
+            <a
+              href={product.html_url}
+              target="_blank"
+              className="inline-flex justify-between items-center mt-auto px-4 py-2 text-sm font-medium cursor-pointer bg-zinc-100 hover:bg-zinc-200 transition ease-in-out duration-300"
+              rel="noreferrer"
+            >
+              Acessar site
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            </a>
           </div>
         )
       })}

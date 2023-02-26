@@ -14,7 +14,7 @@ export function Menu() {
   const { categories } = useCategory()
 
   return (
-    <NavigationMenu.Root className="flex justify-center relative z-10 max-sm:hidden ">
+    <NavigationMenu.Root className="flex justify-center relative z-[2] max-sm:hidden ">
       <NavigationMenu.List className="flex justify-center">
         <NavigationMenu.Item>
           <NavigationMenu.Trigger className="group flex items-center justify-between gap-3 py-2 px-3 select-none text-sm font-medium rdx-state-open:bg-white">

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 
 import { ProductList } from '@/components/ProductList'
 import { useCategory } from '@/contexts/CategoryContext'
@@ -25,6 +25,10 @@ export default function CategoryProducts({
   const subcategory = category?.subcategories?.find(
     ({ id }) => paths?.length && id === paths[1],
   )
+
+  useEffect(() => {
+    setSortOrder('default')
+  }, [products])
 
   function handleSortOrderChange(event: ChangeEvent<HTMLSelectElement>) {
     const newSortOrder = event.target.value
@@ -85,9 +89,7 @@ export default function CategoryProducts({
           value={sortOrder}
           onChange={handleSortOrderChange}
         >
-          <option value="default" selected>
-            Padrão
-          </option>
+          <option value="default">Padrão</option>
           <option value="low-to-high">Menor preço</option>
           <option value="high-to-low">Maior preço</option>
         </select>

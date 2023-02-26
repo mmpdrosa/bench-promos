@@ -1,3 +1,6 @@
+import { faUser } from '@fortawesome/free-regular-svg-icons'
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Dialog, DialogContent } from '@mui/material'
 import { useState } from 'react'
 
@@ -29,12 +32,18 @@ export function AuthDialogsWrapper() {
   return (
     <>
       {!user ? (
-        <button
+        <div
+          className="group flex items-center gap-2 p-2 rounded-full bg-white bg-opacity-50 cursor-pointer"
           onClick={() => handleSignInOpenChange(true)}
-          className="px-5 py-2.5 rounded-full text-sm font-bold text-center bg-violet-500 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-200"
         >
-          Entrar
-        </button>
+          <div className="w-8 h-8 inline-flex items-center justify-center rounded-full bg-white">
+            <FontAwesomeIcon icon={faUser} />
+          </div>
+          <span className="text-sm font-bold group-hover:underline">
+            Entrar
+          </span>
+          <FontAwesomeIcon icon={faChevronRight} size="sm" />
+        </div>
       ) : (
         <UserMenuAvatar />
       )}
