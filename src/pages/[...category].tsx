@@ -11,18 +11,20 @@ import { api } from '@/lib/axios'
 import { Category, Product } from '@/models'
 
 export default function CategoryProducts({
-  products,
+  products = [],
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { categories } = useCategory()
 
   const [sortOrder, setSortOrder] = useState('default')
 
-  const paths = usePathname()!.split('/')
-  paths!.shift()
+  const paths = usePathname()?.split('/')
+  paths?.shift()
 
-  const category = categories.find(({ id }) => id === paths[0])
+  const category = categories.find(({ id }) => paths?.length && id === paths[0])
 
-  const subcategory = category?.subcategories?.find(({ id }) => id === paths[1])
+  const subcategory = category?.subcategories?.find(
+    ({ id }) => paths?.length && id === paths[1],
+  )
 
   function handleSortOrderChange(event: ChangeEvent<HTMLSelectElement>) {
     const newSortOrder = event.target.value
@@ -53,11 +55,11 @@ export default function CategoryProducts({
               <div className="flex items-center">
                 <FontAwesomeIcon icon={faChevronRight} />
                 <Link
-                  href={`/${category!.id}`}
+                  href={`/${category.id}`}
                   className="ml-1 md:ml-2 cursor-pointer hover:text-violet-500"
-                  title={category!.name}
+                  title={category.name}
                 >
-                  {category!.name}
+                  {category.name}
                 </Link>
               </div>
             </li>
@@ -66,8 +68,8 @@ export default function CategoryProducts({
             <li aria-current="page">
               <div className="flex items-center">
                 <FontAwesomeIcon icon={faChevronRight} />
-                <span className="ml-1 md:ml-2" title={subcategory!.name}>
-                  {subcategory!.name}
+                <span className="ml-1 md:ml-2" title={subcategory.name}>
+                  {subcategory.name}
                 </span>
               </div>
             </li>
@@ -90,6 +92,7 @@ export default function CategoryProducts({
           <option value="high-to-low">Maior preço</option>
         </select>
       </div>
+
       <ProductList products={products} />
     </div>
   )
