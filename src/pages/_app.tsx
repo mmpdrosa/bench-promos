@@ -3,7 +3,6 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 import { Montserrat } from '@next/font/google'
 import { TooltipProvider } from '@radix-ui/react-tooltip'
 import type { AppProps } from 'next/app'
-import { ProSidebarProvider } from 'react-pro-sidebar'
 
 import { Layout } from '@/components/layout'
 import { AuthProvider } from '@/contexts/AuthContext'
@@ -21,20 +20,18 @@ const montserrat = Montserrat({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ProSidebarProvider>
-      <TooltipProvider>
-        <AuthProvider>
-          <CategoryProvider>
-            <div
-              className={`min-h-full text-black bg-zinc-100 ${montserrat.className}`}
-            >
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </div>
-          </CategoryProvider>
-        </AuthProvider>
-      </TooltipProvider>
-    </ProSidebarProvider>
+    <TooltipProvider>
+      <AuthProvider>
+        <CategoryProvider>
+          <div
+            className={`min-h-full text-black bg-zinc-100 ${montserrat.className}`}
+          >
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </div>
+        </CategoryProvider>
+      </AuthProvider>
+    </TooltipProvider>
   )
 }
