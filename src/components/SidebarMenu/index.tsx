@@ -90,11 +90,12 @@ function Dropdown({ id, name, items }: DropdownProps) {
       </button>
       <ul className={`pl-9 py-2.5 bg-white ${toggle ? 'block' : 'hidden'}`}>
         {items?.map((item) => (
-          <li
-            key={item.id}
-            className="px-3 py-3.5 leading-none hover:underline"
-          >
-            <Link href={`/${id}/${item.id}`} title={item.name}>
+          <li key={item.id}>
+            <Link
+              href={`/${id}/${item.id}`}
+              title={item.name}
+              className="block px-3 py-3.5 leading-none hover:underline"
+            >
               {item.name}
             </Link>
           </li>

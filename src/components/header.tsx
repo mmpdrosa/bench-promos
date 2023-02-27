@@ -13,7 +13,7 @@ export function Header() {
         <SidebarMenu />
 
         <Link href="/" title="Bench Shop">
-          <Image priority src={LogoImg} height={96} alt="Logo" />
+          <Image src={LogoImg} height={96} alt="Logo" />
         </Link>
 
         <AuthDialogsWrapper />
