@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate'
 
 import { Product } from '@/models'
@@ -18,11 +18,27 @@ interface ProductListProps {
 }
 
 export function ProductList({ products }: ProductListProps) {
+  const [sortOrder, setSortOrder] = useState('default')
   const [productOffset, setProductOffset] = useState(0)
+
+  useEffect(() => {
+    setSortOrder('default')
+  }, [products])
 
   const endOffset = productOffset + 8
   const currentProducts = products.slice(productOffset, endOffset)
   const pageCount = Math.ceil(products.length / 8)
+
+  function handleSortOrderChange(event: ChangeEvent<HTMLSelectElement>) {
+    const newSortOrder = event.target.value
+    setSortOrder(newSortOrder)
+
+    if (newSortOrder === 'low-to-high') {
+      products.sort((a, b) => a.price - b.price)
+    } else if (newSortOrder === 'high-to-low') {
+      products.sort((a, b) => b.price - a.price)
+    }
+  }
 
   const handlePageClick = ({ selected }: { selected: number }) => {
     const newOffset = (selected * 8) % products.length
@@ -33,6 +49,20 @@ export function ProductList({ products }: ProductListProps) {
 
   return (
     <>
+      <div className="flex justify-between items-center">
+        <span className="text-xs">{products.length} resultados</span>
+
+        <select
+          className="block w-max p-2.5 rounded text-sm bg-gray-50 border border-gray-300  focus:ring-violet-500 focus:border-violet-500"
+          value={sortOrder}
+          onChange={handleSortOrderChange}
+        >
+          <option value="default">Padrão</option>
+          <option value="low-to-high">Menor preço</option>
+          <option value="high-to-low">Maior preço</option>
+        </select>
+      </div>
+
       <div className="grid grid-cols-fill justify-center gap-8">
         {currentProducts.map((product) => {
           return (
@@ -105,7 +135,7 @@ export function ProductList({ products }: ProductListProps) {
           onPageChange={handlePageClick}
           containerClassName="flex bg-white border rounded-lg shadow-sm mt-6"
           pageClassName="px-3 py-2 rounded-md text-xl font-medium text-zinc-500 hover:text-violet-500"
-          activeLinkClassName="text-white font-bold text-violet-700"
+          activeLinkClassName="font-bold text-violet-700"
           previousClassName="px-3 py-2 rounded-md text-xl font-medium text-zinc-500 hover:text-violet-500"
           nextClassName="px-3 py-2 rounded-md text-xl font-medium text-zinc-500 hover:text-violet-500"
           previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}

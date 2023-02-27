@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ChangeEvent, useEffect, useState } from 'react'
 
 import { ProductList } from '@/components/ProductList'
 import { useCategory } from '@/contexts/CategoryContext'
@@ -15,8 +14,6 @@ export default function CategoryProducts({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { categories } = useCategory()
 
-  const [sortOrder, setSortOrder] = useState('default')
-
   const paths = usePathname()?.split('/')
   paths?.shift()
 
@@ -25,21 +22,6 @@ export default function CategoryProducts({
   const subcategory = category?.subcategories?.find(
     ({ id }) => paths?.length && id === paths[1],
   )
-
-  useEffect(() => {
-    setSortOrder('default')
-  }, [products])
-
-  function handleSortOrderChange(event: ChangeEvent<HTMLSelectElement>) {
-    const newSortOrder = event.target.value
-    setSortOrder(newSortOrder)
-
-    if (newSortOrder === 'low-to-high') {
-      products.sort((a, b) => a.price - b.price)
-    } else if (newSortOrder === 'high-to-low') {
-      products.sort((a, b) => b.price - a.price)
-    }
-  }
 
   return (
     <div className="max-w-screen-xl flex flex-col gap-8 py-8 mx-auto">
@@ -80,20 +62,6 @@ export default function CategoryProducts({
           )}
         </ol>
       </nav>
-
-      <div className="flex justify-between items-center">
-        <span className="text-xs">{products.length} resultados</span>
-
-        <select
-          className="block w-max p-2.5 rounded text-sm bg-gray-50 border border-gray-300  focus:ring-violet-500 focus:border-violet-500"
-          value={sortOrder}
-          onChange={handleSortOrderChange}
-        >
-          <option value="default">Padrão</option>
-          <option value="low-to-high">Menor preço</option>
-          <option value="high-to-low">Maior preço</option>
-        </select>
-      </div>
 
       <ProductList products={products} />
     </div>
