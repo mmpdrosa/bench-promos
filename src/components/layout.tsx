@@ -11,7 +11,7 @@ export function Layout({ children }: LayoutProps) {
     <>
       <Header />
 
-      <main className="px-8">{children}</main>
+      <main className="px-8 max-sm:px-4">{children}</main>
     </>
   )
 }
