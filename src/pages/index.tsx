@@ -39,19 +39,22 @@ export default function Home({ products }: HomeProps) {
 
   return (
     <div className="max-w-screen-xl flex flex-col gap-8 py-8 mx-auto">
-      <Slider {...settings}>
-        <div className="relative h-[480px] max-sm:h-[512px]">
+      <Slider
+        {...settings}
+        className="h-[480px] max-sm:h-[512px] rounded-2xl overflow-hidden"
+      >
+        <div className="relative h-[480px] max-sm:h-[512px] rounded-2xl overflow-hidden">
           <Image
-            className="object-scale-down"
+            className="object-fill"
             src={windowWidth > 640 ? bannerPromotions : bannerPromotionsMobile}
             alt=""
             fill
           />
         </div>
 
-        <div className="relative h-[480px] max-sm:h-[512px]">
+        <div className="relative h-[480px] max-sm:h-[512px] rounded-2xl overflow-hidden">
           <Image
-            className="object-scale-down"
+            className="object-fill"
             src={windowWidth > 640 ? bannerTelegram : bannerTelegramMobile}
             alt=""
             fill
