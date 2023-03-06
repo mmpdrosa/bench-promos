@@ -1,17 +1,17 @@
 import { faChevronRight, faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 import { ProductList } from '@/components/ProductList'
 import { useCategory } from '@/contexts/CategoryContext'
 import { api } from '@/lib/axios'
-import { Category, Product } from '@/models'
+import { Product } from '@/models'
 
 export default function CategoryProducts({
   products = [],
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { categories } = useCategory()
 
   const paths = usePathname()?.split('/')
@@ -68,7 +68,30 @@ export default function CategoryProducts({
   )
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getServerSideProps: GetServerSideProps<
+  { products: Product[] },
+  { category: string[] }
+> = async ({ params }) => {
+  const [category_id, subcategory_id] = params!.category
+
+  let url = `/products/with-min-price/for-all?category=${category_id}`
+
+  if (subcategory_id) {
+    url = url.concat(`&subcategory=${subcategory_id}`)
+  }
+
+  const response = await api.get(url)
+
+  const products: Product[] = response.data
+
+  return {
+    props: {
+      products,
+    },
+  }
+}
+
+/* export const getStaticPaths: GetStaticPaths = async () => {
   const response = await api.get('/categories')
 
   const categories: Category[] = response.data
@@ -90,7 +113,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const paths = [...subcategoryPaths, ...categoryPaths]
 
-  return { paths, fallback: 'blocking' }
+  return { paths, fallback: true }
 }
 
 export const getStaticProps: GetStaticProps<
@@ -118,3 +141,4 @@ export const getStaticProps: GetStaticProps<
     revalidate: 60, // 1 minute
   }
 }
+ */

@@ -17,17 +17,22 @@ interface ProductListProps {
   products: Product[]
 }
 
+const ITEMS_PER_PAGE = 8
+
 export function ProductList({ products }: ProductListProps) {
   const [sortOrder, setSortOrder] = useState('default')
   const [productOffset, setProductOffset] = useState(0)
 
   useEffect(() => {
     setSortOrder('default')
+    setProductOffset(0)
   }, [products])
 
-  const endOffset = productOffset + 8
+  const currentPage = productOffset / ITEMS_PER_PAGE
+
+  const endOffset = productOffset + ITEMS_PER_PAGE
   const currentProducts = products.slice(productOffset, endOffset)
-  const pageCount = Math.ceil(products.length / 8)
+  const pageCount = Math.ceil(products.length / ITEMS_PER_PAGE)
 
   function handleSortOrderChange(event: ChangeEvent<HTMLSelectElement>) {
     const newSortOrder = event.target.value
@@ -41,7 +46,7 @@ export function ProductList({ products }: ProductListProps) {
   }
 
   const handlePageClick = ({ selected }: { selected: number }) => {
-    const newOffset = (selected * 8) % products.length
+    const newOffset = (selected * ITEMS_PER_PAGE) % products.length
     setProductOffset(newOffset)
 
     window.scrollTo({ top: 0 })
@@ -132,6 +137,7 @@ export function ProductList({ products }: ProductListProps) {
       <div className="flex justify-center">
         <ReactPaginate
           pageCount={pageCount}
+          forcePage={currentPage}
           onPageChange={handlePageClick}
           containerClassName="flex bg-white border rounded-lg shadow-sm mt-6"
           pageClassName="px-3 py-2 rounded-md text-xl font-medium text-zinc-500 hover:text-violet-500"

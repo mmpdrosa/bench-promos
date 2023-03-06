@@ -1,3 +1,4 @@
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import Slider from 'react-slick'
@@ -23,11 +24,9 @@ const settings = {
   autoplaySpeed: 3000, // 3 seconds
 }
 
-interface HomeProps {
-  products: Product[]
-}
-
-export default function Home({ products }: HomeProps) {
+export default function Home({
+  products,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [windowWidth, setWindowWidth] = useState(0)
 
   useEffect(() => {
@@ -39,10 +38,7 @@ export default function Home({ products }: HomeProps) {
 
   return (
     <div className="max-w-screen-xl flex flex-col gap-8 py-8 mx-auto">
-      <Slider
-        {...settings}
-        className="h-[480px] max-sm:h-[512px] rounded-2xl overflow-hidden"
-      >
+      <Slider {...settings}>
         <div className="relative h-[480px] max-sm:h-[512px] rounded-2xl overflow-hidden">
           <Image
             className="object-fill"
@@ -67,7 +63,21 @@ export default function Home({ products }: HomeProps) {
   )
 }
 
-export async function getStaticProps() {
+export const getServerSideProps: GetServerSideProps<{
+  products: Product[]
+}> = async () => {
+  const response = await api.get('/products/with-min-price/for-all')
+
+  const products: Product[] = response.data
+
+  return {
+    props: {
+      products,
+    },
+  }
+}
+
+/* export async function getStaticProps() {
   const response = await api.get('/products/with-min-price/for-all')
 
   const products: Product[] = response.data
@@ -78,4 +88,4 @@ export async function getStaticProps() {
     },
     revalidate: 60, // 1 minute
   }
-}
+} */
