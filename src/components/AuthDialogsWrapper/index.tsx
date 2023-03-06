@@ -1,8 +1,7 @@
-import { faUser } from '@fortawesome/free-regular-svg-icons'
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Dialog, DialogContent } from '@mui/material'
 import { useState } from 'react'
+import { RxChevronRight } from 'react-icons/rx'
+import { HiOutlineUser } from 'react-icons/hi'
 
 import { useAuth } from '@/contexts/AuthContext'
 import { RecoverPasswordDialog } from './RecoverPasswordDialog'
@@ -37,12 +36,12 @@ export function AuthDialogsWrapper() {
           onClick={() => handleSignInOpenChange(true)}
         >
           <div className="w-8 h-8 inline-flex items-center justify-center rounded-full bg-white">
-            <FontAwesomeIcon icon={faUser} />
+            <HiOutlineUser />
           </div>
           <span className="text-sm font-bold group-hover:underline">
             Entrar
           </span>
-          <FontAwesomeIcon icon={faChevronRight} size="sm" />
+          <RxChevronRight />
         </div>
       ) : (
         <UserMenuAvatar />

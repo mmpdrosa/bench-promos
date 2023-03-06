@@ -1,8 +1,8 @@
-import { faChevronRight, faHome } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { HiHome } from 'react-icons/hi'
+import { RxChevronRight } from 'react-icons/rx'
 
 import { ProductList } from '@/components/ProductList'
 import { useCategory } from '@/contexts/CategoryContext'
@@ -33,13 +33,13 @@ export default function CategoryProducts({
               className="flex items-center gap-2 cursor-pointer hover:text-violet-500"
               title="Home"
             >
-              <FontAwesomeIcon icon={faHome} /> Home
+              <HiHome /> Home
             </Link>
           </li>
           {category && (
             <li>
               <div className="flex items-center">
-                <FontAwesomeIcon icon={faChevronRight} />
+                <RxChevronRight />
                 <Link
                   href={`/${category.id}`}
                   className="ml-1 md:ml-2 cursor-pointer hover:text-violet-500"
@@ -53,7 +53,7 @@ export default function CategoryProducts({
           {subcategory && (
             <li aria-current="page">
               <div className="flex items-center">
-                <FontAwesomeIcon icon={faChevronRight} />
+                <RxChevronRight />
                 <span className="ml-1 md:ml-2" title={subcategory.name}>
                   {subcategory.name}
                 </span>

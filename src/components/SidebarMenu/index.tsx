@@ -1,7 +1,6 @@
-import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import { useRef, useState } from 'react'
+import { FaBars } from 'react-icons/fa'
 
 import { useCategory } from '@/contexts/CategoryContext'
 
@@ -18,7 +17,7 @@ export function SidebarMenu() {
   return (
     <>
       <button className="sm:hidden" onClick={handleToggleSidebar}>
-        <FontAwesomeIcon icon={faBars} size="lg" />
+        <FaBars />
       </button>
 
       <div

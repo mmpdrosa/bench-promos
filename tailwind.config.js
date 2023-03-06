@@ -13,7 +13,7 @@ module.exports = {
       },
       spacing: {
         '74': '18.5rem' 
-      }
+      },
     },
   },
   plugins: [

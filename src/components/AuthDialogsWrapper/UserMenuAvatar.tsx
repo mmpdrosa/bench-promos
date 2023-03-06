@@ -1,7 +1,6 @@
-import { faSignOut } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Avatar from '@radix-ui/react-avatar'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import { FaSignOutAlt } from 'react-icons/fa'
 
 import { useAuth } from '../../contexts/AuthContext'
 
@@ -32,7 +31,7 @@ export function UserMenuAvatar() {
             className="h-6 relative flex items-center px-1 pl-6 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600"
           >
             Sair
-            <FontAwesomeIcon className="ml-auto pl-5" icon={faSignOut} />
+            <FaSignOutAlt />
           </DropdownMenu.Item>
 
           <DropdownMenu.Arrow className="fill-white" />

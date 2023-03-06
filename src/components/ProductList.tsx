@@ -1,15 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChangeEvent, useEffect, useState } from 'react'
+import { BsBoxArrowUpRight } from 'react-icons/bs'
+import { RxChevronLeft, RxChevronRight } from 'react-icons/rx'
 import ReactPaginate from 'react-paginate'
 
 import { Product } from '@/models'
-import {
-  faArrowUpRightFromSquare,
-  faChevronLeft,
-  faChevronRight,
-} from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { priceFormatter } from '@/utils/formatter'
 
@@ -99,26 +95,34 @@ export function ProductList({ products }: ProductListProps) {
                     {product.title}
                   </h4>
                 </Link>
-                <h5 className="text-sm font-medium text-zinc-500">
-                  Menor preço via{' '}
-                  <a
-                    target="_blank"
-                    href={product.retailer.html_url}
-                    className="hover:text-violet-500 transition ease-in-out duration-300"
-                    rel="noreferrer"
-                  >
-                    {product.retailer.name}
-                  </a>
-                </h5>
-                <strong className="text-xl font-bold">
-                  {priceFormatter.format(product.price / 100)}
-                </strong>
+                {product.available ? (
+                  <>
+                    <h5 className="text-sm font-medium text-zinc-500">
+                      Menor preço via{' '}
+                      <a
+                        target="_blank"
+                        href={product.retailer.html_url}
+                        className="hover:text-violet-500 transition ease-in-out duration-300"
+                        rel="noreferrer"
+                      >
+                        {product.retailer.name}
+                      </a>
+                    </h5>
+                    <strong className="text-xl font-bold">
+                      {priceFormatter.format(product.price / 100)}
+                    </strong>
 
-                {product.coupon && (
-                  <div className="text-sm text-zinc-700">
-                    Com cupom
-                    <h6 className="font-black">{product.coupon?.code}</h6>
-                  </div>
+                    {product.coupon && (
+                      <div className="text-sm text-zinc-700">
+                        Com cupom
+                        <h6 className="font-black">{product.coupon?.code}</h6>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <strong className="text-xl font-bold text-red-500">
+                    Indisponível
+                  </strong>
                 )}
               </div>
               <a
@@ -128,7 +132,7 @@ export function ProductList({ products }: ProductListProps) {
                 rel="noreferrer"
               >
                 Acessar site
-                <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+                <BsBoxArrowUpRight />
               </a>
             </div>
           )
@@ -144,8 +148,8 @@ export function ProductList({ products }: ProductListProps) {
           activeLinkClassName="font-bold text-violet-700"
           previousClassName="px-3 py-2 rounded-md text-xl font-medium text-zinc-500 hover:text-violet-500"
           nextClassName="px-3 py-2 rounded-md text-xl font-medium text-zinc-500 hover:text-violet-500"
-          previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
-          nextLabel={<FontAwesomeIcon icon={faChevronRight} />}
+          previousLabel={<RxChevronLeft />}
+          nextLabel={<RxChevronRight />}
         />
       </div>
     </>

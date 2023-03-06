@@ -1,12 +1,8 @@
-import {
-  faBars,
-  faCaretRight,
-  faDollar,
-  faPercent,
-} from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as NavigationMenu from '@radix-ui/react-navigation-menu'
 import Link from 'next/link'
+import { AiOutlineCaretRight } from 'react-icons/ai'
+import { FaBars, FaDollarSign } from 'react-icons/fa'
+import { HiCheckBadge, HiOutlineReceiptPercent } from 'react-icons/hi2'
 
 import { useCategory } from '@/contexts/CategoryContext'
 
@@ -17,11 +13,14 @@ export function Menu() {
     <NavigationMenu.Root className="flex justify-center relative z-[2] max-sm:hidden ">
       <NavigationMenu.List className="flex justify-center">
         <NavigationMenu.Item>
-          <NavigationMenu.Trigger className="group flex items-center justify-between gap-3 py-2 px-3 select-none text-sm font-medium rdx-state-open:bg-white">
-            <FontAwesomeIcon icon={faBars} size="lg" />
+          <NavigationMenu.Trigger
+            title="Categorias"
+            className="group flex items-center justify-between gap-3 py-2 px-3 select-none text-xl font-semibold text-white rdx-state-open:text-black rdx-state-open:bg-white"
+          >
+            <FaBars className="text-amber-300 group-rdx-state-open:text-black" />
             Categorias
           </NavigationMenu.Trigger>
-          <NavigationMenu.Content className="p-4 bg-white shadow-xl">
+          <NavigationMenu.Content className="p-4 shadow-xl bg-white">
             <NavigationMenu.Sub>
               <NavigationMenu.List className="flex flex-col gap-4">
                 {categories?.map((category) => (
@@ -32,10 +31,7 @@ export function Menu() {
                         title={category.name}
                       >
                         {category.name}
-                        <FontAwesomeIcon
-                          icon={faCaretRight}
-                          className="text-white group-rdx-state-open:text-black"
-                        />
+                        <AiOutlineCaretRight className="text-xs text-white group-rdx-state-open:text-black" />
                       </NavigationMenu.Trigger>
                     </Link>
                     <NavigationMenu.Content className="h-rdx-navigation-menu-viewport min-w-[296px] px-4 py-2">
@@ -69,16 +65,32 @@ export function Menu() {
         </NavigationMenu.Item>
 
         <NavigationMenu.Item>
-          <NavigationMenu.Link className="flex items-center gap-3 py-2 px-3 select-none text-sm font-medium hover:underline hover:cursor-pointer">
-            <FontAwesomeIcon icon={faDollar} size="lg" />
+          <NavigationMenu.Link
+            title="Promoções"
+            className="flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline hover:cursor-pointer"
+          >
+            <FaDollarSign className="text-amber-300" />
             Promoções
           </NavigationMenu.Link>
         </NavigationMenu.Item>
 
         <NavigationMenu.Item>
-          <NavigationMenu.Link className="flex items-center gap-3 py-2 px-3 select-none text-sm font-medium hover:underline hover:cursor-pointer">
-            <FontAwesomeIcon icon={faPercent} size="lg" />
+          <NavigationMenu.Link
+            title="Cupons"
+            className="flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline hover:cursor-pointer"
+          >
+            <HiOutlineReceiptPercent className="text-amber-300" />
             Cupons
+          </NavigationMenu.Link>
+        </NavigationMenu.Item>
+
+        <NavigationMenu.Item>
+          <NavigationMenu.Link
+            title="Recomendados"
+            className="flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline hover:cursor-pointer"
+          >
+            <HiCheckBadge className="text-amber-300" />
+            Recomendados
           </NavigationMenu.Link>
         </NavigationMenu.Item>
       </NavigationMenu.List>
