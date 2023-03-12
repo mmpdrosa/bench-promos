@@ -21,10 +21,11 @@ export default function ProductPage({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <div className="max-w-screen-xl py-8 mx-auto">
-      <div className="flex flex-col gap-10 px-6 py-8 rounded-xl shadow-md bg-white">
-        <div className="grid grid-cols-2 items-stretch">
-          <div className="flex flex-col items-start gap-6">
-            <h1 className="text-3xl">{product.title}</h1>
+      <div className="flex flex-col gap-10 px-6 max-sm:px-2.5 py-8 rounded-xl shadow-md bg-white">
+        <div className="grid grid-cols-2 max-sm:grid-cols-1 items-stretch">
+          <h1 className="sm:hidden text-xl">{product.title}</h1>
+          <div className="flex flex-col items-start gap-6 max-sm:order-3">
+            <h1 className="text-3xl max-sm:hidden">{product.title}</h1>
 
             <span className="text-lg font-medium text-zinc-500">
               Menor preço via{' '}
@@ -61,18 +62,20 @@ export default function ProductPage({
               <FaExternalLinkAlt /> ACESSAR
             </a>
           </div>
-          <div className="relative w-full h-[512px]">
-            <Image
-              className="object-contain"
-              alt=""
-              src={product.image_url}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              priority
-            />
+          <div className="flex justify-center max-sm:order-2">
+            <div className="relative w-full max-sm:w-80 h-[512px] max-sm:h-80">
+              <Image
+                className="object-contain"
+                alt=""
+                src={product.image_url}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority
+              />
+            </div>
           </div>
         </div>
-        <nav>
+        <nav className="overflow-x-auto">
           <ul className="flex gap-12 py-2 border-b border-zinc-300">
             <li>
               <a

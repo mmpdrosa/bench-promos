@@ -10,7 +10,7 @@ export function Menu() {
   const { categories } = useCategory()
 
   return (
-    <NavigationMenu.Root className="flex justify-center relative z-[2] max-sm:hidden ">
+    <NavigationMenu.Root className="flex justify-center relative z-[2] max-sm:hidden overflow-x-auto">
       <NavigationMenu.List className="flex justify-center">
         <NavigationMenu.Item>
           <NavigationMenu.Trigger
@@ -65,38 +65,35 @@ export function Menu() {
         </NavigationMenu.Item>
 
         <NavigationMenu.Item>
-          <Link href="/" passHref>
-            <NavigationMenu.Link
-              title="Promoções"
-              className="flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
-            >
-              <FaDollarSign className="text-amber-300" />
-              Promoções
-            </NavigationMenu.Link>
+          <Link
+            href="/"
+            title="Promoções"
+            className="flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
+          >
+            <FaDollarSign className="text-amber-300" />
+            Promoções
           </Link>
         </NavigationMenu.Item>
 
         <NavigationMenu.Item>
-          <Link href="/" passHref>
-            <NavigationMenu.Link
-              title="Cupons"
-              className="flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
-            >
-              <HiOutlineReceiptPercent className="text-amber-300" />
-              Cupons
-            </NavigationMenu.Link>
+          <Link
+            href="/"
+            title="Cupons"
+            className="flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
+          >
+            <HiOutlineReceiptPercent className="text-amber-300" />
+            Cupons
           </Link>
         </NavigationMenu.Item>
 
         <NavigationMenu.Item>
-          <Link href="/" passHref>
-            <NavigationMenu.Link
-              title="Recomendados"
-              className="max-md:hidden flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
-            >
-              <HiCheckBadge className="text-amber-300" />
-              Recomendados
-            </NavigationMenu.Link>
+          <Link
+            href="/"
+            title="Recomendados"
+            className="flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
+          >
+            <HiCheckBadge className="text-amber-300" />
+            Recomendados
           </Link>
         </NavigationMenu.Item>
       </NavigationMenu.List>

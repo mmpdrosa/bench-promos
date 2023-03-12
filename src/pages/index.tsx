@@ -1,4 +1,3 @@
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import Slider from 'react-slick'
@@ -9,8 +8,6 @@ import bannerPromotionsMobile from '@/assets/banner-1-mobile.png'
 import bannerPromotions from '@/assets/banner-1.png'
 import bannerTelegramMobile from '@/assets/banner-2-mobile.png'
 import bannerTelegram from '@/assets/banner-2.png'
-import { api } from '@/lib/axios'
-import { Product } from '@/models'
 
 const settings = {
   arrows: false,
@@ -23,9 +20,7 @@ const settings = {
   autoplaySpeed: 5000, // 3 seconds
 }
 
-export default function Home({
-  products,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home() {
   const [windowWidth, setWindowWidth] = useState(0)
 
   useEffect(() => {
@@ -62,7 +57,7 @@ export default function Home({
   )
 }
 
-export const getServerSideProps: GetServerSideProps<{
+/* export const getServerSideProps: GetServerSideProps<{
   products: Product[]
 }> = async () => {
   const response = await api.get('/products/with-min-price/for-all')
@@ -74,7 +69,7 @@ export const getServerSideProps: GetServerSideProps<{
       products,
     },
   }
-}
+} */
 
 /* export async function getStaticProps() {
   const response = await api.get('/products/with-min-price/for-all')
