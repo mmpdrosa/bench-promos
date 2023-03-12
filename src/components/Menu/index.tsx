@@ -10,7 +10,7 @@ export function Menu() {
   const { categories } = useCategory()
 
   return (
-    <NavigationMenu.Root className="flex justify-center relative z-[2] max-sm:hidden overflow-x-auto">
+    <NavigationMenu.Root className="flex justify-center relative z-[2] max-sm:hidden">
       <NavigationMenu.List className="flex justify-center">
         <NavigationMenu.Item>
           <NavigationMenu.Trigger
@@ -90,7 +90,7 @@ export function Menu() {
           <Link
             href="/"
             title="Recomendados"
-            className="flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
+            className="max-md:hidden flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
           >
             <HiCheckBadge className="text-amber-300" />
             Recomendados
