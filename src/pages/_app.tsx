@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <AuthProvider>
           <CategoryProvider>
             <div
-              className={`min-h-full text-black bg-zinc-100 ${montserrat.className}`}
+              className={`min-h-full flex flex-col text-black bg-zinc-100 ${montserrat.className}`}
             >
               <Layout>
                 <Component {...pageProps} />

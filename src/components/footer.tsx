@@ -14,22 +14,22 @@ export function Footer() {
       <div className="max-w-screen-xl grid gap-6 mx-auto">
         <div className="w-max flex flex-col text-lg">
           <span className="text-xl font-bold text-violet-500">Destaques</span>
-          <Link href="/" className="hover:underline">
+          <Link href="/" title="Mouses" className="hover:underline">
             Mouses
           </Link>
-          <Link href="/" className="hover:underline">
+          <Link href="/" title="Categorias" className="hover:underline">
             Categorias
           </Link>
-          <Link href="/" className="hover:underline">
+          <Link href="/" title="Cupons" className="hover:underline">
             Cupons
           </Link>
-          <Link href="/" className="hover:underline">
+          <Link href="/" title="Promoções" className="hover:underline">
             Promoções
           </Link>
-          <Link href="/" className="hover:underline">
+          <Link href="/" title="Recomendados" className="hover:underline">
             Recomendados
           </Link>
-          <Link href="/" className="hover:underline">
+          <Link href="/" title="Notebooks" className="hover:underline">
             Notebooks
           </Link>
         </div>
@@ -38,24 +38,48 @@ export function Footer() {
           Encontre os produtos mais procurados em promoção aqui no Bench Promos
         </div>
 
-        <div className="flex gap-4">
-          <a href="">
-            <FaYoutube className="text-5xl hover:text-6xl" />
+        <div className="flex gap-2">
+          <a
+            href=""
+            title="Youtube"
+            className="p-2 rounded-full transition-colors hover:bg-zinc-600"
+          >
+            <FaYoutube className="text-2xl sm:text-4xl" />
           </a>
-          <a href="">
-            <FaInstagram className="text-5xl hover:text-6xl" />
+          <a
+            href=""
+            title="Instagram"
+            className="p-2 rounded-full transition-colors hover:bg-zinc-600"
+          >
+            <FaInstagram className="text-2xl sm:text-4xl" />
           </a>
-          <a href="">
-            <FaTelegram className="text-5xl hover:text-6xl" />
+          <a
+            href=""
+            title="Telegram"
+            className="p-2 rounded-full transition-colors hover:bg-zinc-600"
+          >
+            <FaTelegram className="text-2xl sm:text-4xl" />
           </a>
-          <a href="">
-            <FaDiscord className="text-5xl hover:text-6xl" />
+          <a
+            href=""
+            title="Discord"
+            className="p-2 rounded-full transition-colors hover:bg-zinc-600"
+          >
+            <FaDiscord className="text-2xl sm:text-4xl" />
           </a>
-          <a href="">
-            <FaTwitch className="text-5xl hover:text-6xl" />
+          <a
+            href=""
+            title="Twitch"
+            className="p-2 rounded-full transition-colors hover:bg-zinc-600"
+          >
+            <FaTwitch className="text-2xl sm:text-4xl" />
           </a>
-          <a href="">
-            <FaTiktok className="text-5xl hover:text-6xl" />
+          <a
+            href=""
+            title="Tiktok"
+            className="p-2 rounded-full transition-colors hover:bg-zinc-600"
+          >
+            <FaTiktok className="text-2xl sm:text-4xl" />
           </a>
         </div>
       </div>

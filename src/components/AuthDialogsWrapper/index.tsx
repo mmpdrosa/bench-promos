@@ -31,7 +31,8 @@ export function AuthDialogsWrapper() {
   return (
     <>
       {!user ? (
-        <div
+        <button
+          title="Entrar"
           className="group flex items-center gap-2 p-2 rounded-full bg-white bg-opacity-50 cursor-pointer"
           onClick={() => handleSignInOpenChange(true)}
         >
@@ -42,7 +43,7 @@ export function AuthDialogsWrapper() {
             Entrar
           </span>
           <RxChevronRight />
-        </div>
+        </button>
       ) : (
         <UserMenuAvatar />
       )}

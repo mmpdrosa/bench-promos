@@ -30,7 +30,7 @@ export default function CategoryProducts({
           <li className="inline-flex items-center">
             <Link
               href="/"
-              className="flex items-center gap-2 cursor-pointer hover:text-violet-500"
+              className="flex items-center gap-2 cursor-pointer transition-colors hover:text-violet-500"
               title="Home"
             >
               <HiHome /> Home
@@ -42,7 +42,7 @@ export default function CategoryProducts({
                 <RxChevronRight />
                 <Link
                   href={`/${category.id}`}
-                  className="ml-1 md:ml-2 cursor-pointer hover:text-violet-500"
+                  className="ml-1 md:ml-2 cursor-pointer transition-colors hover:text-violet-500"
                   title={category.name}
                 >
                   {category.name}

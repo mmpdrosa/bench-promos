@@ -15,7 +15,7 @@ export function Menu() {
         <NavigationMenu.Item>
           <NavigationMenu.Trigger
             title="Categorias"
-            className="group flex items-center justify-between gap-3 py-2 px-3 select-none text-xl font-semibold text-white rdx-state-open:text-black rdx-state-open:bg-white"
+            className="group flex items-center justify-between gap-3 py-2 px-3 select-none text-xl font-semibold text-white rdx-state-open:text-black rdx-state-open:bg-white "
           >
             <FaBars className="text-amber-300 group-rdx-state-open:text-black" />
             Categorias
@@ -27,7 +27,7 @@ export function Menu() {
                   <NavigationMenu.Item key={category.id}>
                     <Link href={`/${category.id}`} passHref>
                       <NavigationMenu.Trigger
-                        className="group w-full flex justify-between items-center gap-2 text-xs rdx-state-open:text-violet-500"
+                        className="group w-full flex justify-between items-center gap-2 text-xs transition-colors rdx-state-open:text-violet-500"
                         title={category.name}
                       >
                         {category.name}
@@ -40,7 +40,7 @@ export function Menu() {
                           <li key={subcategory.id} className="w-max">
                             <Link
                               href={`/${category.id}/${subcategory.id}`}
-                              className="text-xs cursor-pointer hover:text-violet-500"
+                              className="text-xs cursor-pointer transition-colors hover:text-violet-500"
                               title={subcategory.name}
                             >
                               {subcategory.name}
@@ -65,33 +65,39 @@ export function Menu() {
         </NavigationMenu.Item>
 
         <NavigationMenu.Item>
-          <NavigationMenu.Link
-            title="Promoções"
-            className="flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline hover:cursor-pointer"
-          >
-            <FaDollarSign className="text-amber-300" />
-            Promoções
-          </NavigationMenu.Link>
+          <Link href="/" passHref>
+            <NavigationMenu.Link
+              title="Promoções"
+              className="flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
+            >
+              <FaDollarSign className="text-amber-300" />
+              Promoções
+            </NavigationMenu.Link>
+          </Link>
         </NavigationMenu.Item>
 
         <NavigationMenu.Item>
-          <NavigationMenu.Link
-            title="Cupons"
-            className="flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline hover:cursor-pointer"
-          >
-            <HiOutlineReceiptPercent className="text-amber-300" />
-            Cupons
-          </NavigationMenu.Link>
+          <Link href="/" passHref>
+            <NavigationMenu.Link
+              title="Cupons"
+              className="flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
+            >
+              <HiOutlineReceiptPercent className="text-amber-300" />
+              Cupons
+            </NavigationMenu.Link>
+          </Link>
         </NavigationMenu.Item>
 
         <NavigationMenu.Item>
-          <NavigationMenu.Link
-            title="Recomendados"
-            className="flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline hover:cursor-pointer"
-          >
-            <HiCheckBadge className="text-amber-300" />
-            Recomendados
-          </NavigationMenu.Link>
+          <Link href="/" passHref>
+            <NavigationMenu.Link
+              title="Recomendados"
+              className="max-md:hidden flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
+            >
+              <HiCheckBadge className="text-amber-300" />
+              Recomendados
+            </NavigationMenu.Link>
+          </Link>
         </NavigationMenu.Item>
       </NavigationMenu.List>
     </NavigationMenu.Root>

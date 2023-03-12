@@ -9,7 +9,6 @@ import bannerPromotionsMobile from '@/assets/banner-1-mobile.png'
 import bannerPromotions from '@/assets/banner-1.png'
 import bannerTelegramMobile from '@/assets/banner-2-mobile.png'
 import bannerTelegram from '@/assets/banner-2.png'
-import { ProductList } from '@/components/ProductList'
 import { api } from '@/lib/axios'
 import { Product } from '@/models'
 
@@ -21,7 +20,7 @@ const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
   autoplay: true,
-  autoplaySpeed: 3000, // 3 seconds
+  autoplaySpeed: 5000, // 3 seconds
 }
 
 export default function Home({
@@ -58,7 +57,7 @@ export default function Home({
         </div>
       </Slider>
 
-      <ProductList products={products} />
+      {/* <ProductList products={products} /> */}
     </div>
   )
 }

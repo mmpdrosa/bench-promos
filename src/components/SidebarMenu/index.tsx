@@ -37,12 +37,18 @@ export function SidebarMenu() {
           {categories?.map(({ id, name, subcategories }) => (
             <li key={id}>
               {subcategories?.length ? (
-                <Dropdown id={id} name={name} items={subcategories} />
+                <Dropdown
+                  id={id}
+                  name={name}
+                  items={subcategories}
+                  onClick={handleToggleSidebar}
+                />
               ) : (
                 <Link
                   href={id}
                   className="block px-3 py-3.5 leading-none"
                   title={name}
+                  onClick={handleToggleSidebar}
                 >
                   {name}
                 </Link>
@@ -73,9 +79,10 @@ interface DropdownProps {
     id: string
     name: string
   }[]
+  onClick: () => void
 }
 
-function Dropdown({ id, name, items }: DropdownProps) {
+function Dropdown({ id, name, items, onClick }: DropdownProps) {
   const [toggle, setToggle] = useState(false)
 
   return (
@@ -94,6 +101,7 @@ function Dropdown({ id, name, items }: DropdownProps) {
               href={`/${id}/${item.id}`}
               title={item.name}
               className="block px-3 py-3.5 leading-none hover:underline"
+              onClick={onClick}
             >
               {item.name}
             </Link>
