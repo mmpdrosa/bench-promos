@@ -49,7 +49,7 @@ export function Header() {
 
         <div className="w-60 flex items-center justify-end gap-4">
           <Link
-            href="/"
+            href="/alerts"
             title="Alertas"
             className="group flex items-center gap-2 p-1 text-lg text-white"
           >

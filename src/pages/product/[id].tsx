@@ -1,5 +1,6 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Image from 'next/image'
+import { useState } from 'react'
 import {
   FaBell,
   FaChartLine,
@@ -10,47 +11,83 @@ import {
   FaVideo,
 } from 'react-icons/fa'
 import { TbDiscount2 } from 'react-icons/tb'
+import { NumericFormat } from 'react-number-format'
 
+import { PriceChart } from '@/components/PriceChart'
+import { useAuth } from '@/contexts/AuthContext'
 import { api } from '@/lib/axios'
 import { Product } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
-import { PriceChart } from '@/components/PriceChart'
 
 export default function ProductPage({
   product,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const { user } = useAuth()
+
+  const [alertPrice, setAlertPrice] = useState(product.price)
+
+  function incrementAlertPrice() {
+    setAlertPrice((prev) => prev + 5000) // R$ 50
+  }
+
+  function decrementAlertPrice() {
+    setAlertPrice((prev) => prev - 5000) // R$ 50
+  }
+
+  async function handleCreateAlert() {
+    if (!user) return
+
+    const token = await user.getIdToken()
+
+    await api.post(
+      `/users/notify-product/${product.id}`,
+      { price: alertPrice },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    )
+
+    window.alert('Alerta criado!')
+  }
+
   return (
     <div className="max-w-screen-xl py-8 mx-auto">
       <div className="flex flex-col gap-10 px-6 max-sm:px-2.5 py-8 rounded-xl shadow-md bg-white">
-        <div className="grid grid-cols-2 max-sm:grid-cols-1 items-stretch">
+        <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-y-6 items-stretch">
           <h1 className="sm:hidden text-xl">{product.title}</h1>
           <div className="flex flex-col items-start gap-6 max-sm:order-3">
             <h1 className="text-3xl max-sm:hidden">{product.title}</h1>
 
-            <span className="text-lg font-medium text-zinc-500">
-              Menor preço via{' '}
-              <a
-                target="_blank"
-                href={product.retailer.html_url}
-                className="hover:text-violet-500 transition ease-in-out duration-300"
-                rel="noreferrer"
-              >
-                {product.retailer.name}
-              </a>
-            </span>
+            {product.available ? (
+              <>
+                <span className="text-lg font-medium text-zinc-500">
+                  Menor preço via{' '}
+                  <a
+                    target="_blank"
+                    href={product.retailer.html_url}
+                    className="hover:text-violet-500 transition ease-in-out duration-300"
+                    rel="noreferrer"
+                  >
+                    {product.retailer.name}
+                  </a>
+                </span>
 
-            <strong className="text-4xl font-bold">
-              {priceFormatter.format(product.price / 100)}
-            </strong>
+                <strong className="text-4xl font-bold">
+                  {priceFormatter.format(product.price / 100)}
+                </strong>
 
-            {product.coupon && (
-              <div className="text-lg text-zinc-700">
-                Com cupom
-                <div className="flex items-center gap-2 px-4 py-1 rounded-full text-2xl font-semibold bg-amber-200">
-                  <TbDiscount2 className="w-8 h-8 text-violet-500" />
-                  {product.coupon?.code}
-                </div>
-              </div>
+                {product.coupon && (
+                  <div className="text-lg text-zinc-700">
+                    Com cupom
+                    <div className="flex items-center gap-2 px-4 py-1 rounded-full text-2xl font-semibold bg-amber-200">
+                      <TbDiscount2 className="w-8 h-8 text-violet-500" />
+                      {product.coupon?.code}
+                    </div>
+                  </div>
+                )}
+              </>
+            ) : (
+              <strong className="text-4xl text-red-500">Indisponível</strong>
             )}
 
             <a
@@ -118,7 +155,11 @@ export default function ProductPage({
             <div className="col-span-2 max-lg:order-last">
               <PriceChart />
             </div>
-            <div className="flex flex-col items-center gap-5 p-8 border border-zinc-300 rounded-xl shadow-md">
+            <div
+              className={`flex flex-col items-center gap-5 p-8 border border-zinc-300 rounded-xl shadow-md ${
+                !product.available && 'opacity-50 pointer-events-none'
+              }`}
+            >
               <h3 className="flex justify-between items-center gap-4 text-xl font-extrabold">
                 <FaBell /> Crie um alerta de preço
               </h3>
@@ -131,24 +172,44 @@ export default function ProductPage({
               <div className="flex flex-col items-center gap-1.5 text-lg font-bold">
                 <span className="text-violet-500">PREÇO ATUAL</span>
                 <span className="text-2xl">
-                  {priceFormatter.format(982156 / 100)}
+                  {priceFormatter.format(product.price / 100)}
                 </span>
               </div>
               <div className="flex flex-col items-center gap-1.5 text-lg font-bold">
                 <span className="text-violet-500">PREÇO DESEJADO</span>
                 <div className="flex items-center gap-4 text-lg font-medium">
-                  <button className="w-12 h-12 flex justify-center items-center border rounded-full border-zinc-300">
+                  <button
+                    onClick={decrementAlertPrice}
+                    className="w-12 h-12 flex justify-center items-center border rounded-full border-zinc-300"
+                  >
                     <FaMinus />
                   </button>
-                  <span className="h-12 inline-flex items-center px-4 border rounded-2xl text-2xl border-zinc-300">
-                    {priceFormatter.format(982156 / 100)}
-                  </span>
-                  <button className="w-12 h-12 flex justify-center items-center border rounded-full border-zinc-300">
+                  <NumericFormat
+                    displayType="input"
+                    prefix="R$ "
+                    decimalScale={2}
+                    decimalSeparator=","
+                    thousandSeparator="."
+                    fixedDecimalScale={true}
+                    allowNegative={false}
+                    className="w-48 h-12 inline-flex items-center px-4 border rounded-2xl text-2xl border-zinc-300"
+                    value={alertPrice / 100}
+                    onValueChange={({ floatValue }) =>
+                      setAlertPrice(floatValue ? floatValue * 100 : 0)
+                    }
+                  />
+                  <button
+                    onClick={incrementAlertPrice}
+                    className="w-12 h-12 flex justify-center items-center border rounded-full border-zinc-300"
+                  >
                     <FaPlus />
-                  </button>{' '}
+                  </button>
                 </div>
               </div>
-              <button className="px-5 py-3.5 rounded-full text-lg font-semibold bg-amber-200">
+              <button
+                onClick={handleCreateAlert}
+                className="px-5 py-3.5 rounded-full text-lg font-semibold bg-amber-200"
+              >
                 CRIAR ALERTA
               </button>
             </div>
@@ -165,13 +226,21 @@ export const getServerSideProps: GetServerSideProps<
   },
   { id: string }
 > = async ({ params }) => {
-  const response = await api.get(`/products/${params!.id}/with-min-price/`)
+  try {
+    const response = await api.get(`/products/${params!.id}/with-min-price/`)
+    const product: Product = response.data
 
-  const product: Product = response.data
-
-  return {
-    props: {
-      product,
-    },
+    return {
+      props: {
+        product,
+      },
+    }
+  } catch (err) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
   }
 }

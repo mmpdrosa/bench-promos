@@ -28,7 +28,7 @@ export function UserMenuAvatar() {
         >
           <DropdownMenu.Item
             onClick={logOut}
-            className="h-6 relative flex items-center px-1 pl-6 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600"
+            className="h-6 relative flex justify-between items-center px-1 pl-6 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600"
           >
             Sair
             <FaSignOutAlt />

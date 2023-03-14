@@ -45,7 +45,7 @@ export function SidebarMenu() {
                 />
               ) : (
                 <Link
-                  href={id}
+                  href={`/${id}`}
                   className="block px-3 py-3.5 leading-none"
                   title={name}
                   onClick={handleToggleSidebar}

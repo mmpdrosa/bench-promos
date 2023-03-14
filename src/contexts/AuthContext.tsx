@@ -14,6 +14,7 @@ import {
 } from 'react'
 
 import { auth } from '@/lib/firebase'
+import { queryClient } from '@/lib/react-query'
 
 type SignInData = {
   email: string
@@ -51,6 +52,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   async function logOut() {
     await signOut(auth)
+
+    queryClient.removeQueries('product-alerts')
   }
 
   const value = useMemo(() => ({ user, logIn, logOut }), [user])

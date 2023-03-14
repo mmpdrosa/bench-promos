@@ -39,3 +39,13 @@ export type Category = {
     name: string
   }[]
 }
+
+export type ProductAlert = {
+  id: string
+  price: number
+  product: {
+    id: string
+    title: string
+    image_url: string
+  }
+}
