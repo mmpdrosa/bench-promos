@@ -22,8 +22,6 @@ export default function Alerts() {
 
     const productAlerts: ProductAlert[] = response.data
 
-    console.log(productAlerts)
-
     return productAlerts
   })
 

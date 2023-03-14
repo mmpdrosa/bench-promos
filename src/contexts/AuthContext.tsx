@@ -47,6 +47,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, [])
 
   async function logIn({ email, password }: SignInData) {
+    if (Notification.permission === 'default') {
+      Notification.requestPermission()
+    }
+
     await signInWithEmailAndPassword(auth, email, password)
   }
 
