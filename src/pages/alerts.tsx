@@ -1,18 +1,23 @@
 import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect } from 'react'
 import { useQuery } from 'react-query'
 
 import { useAuth } from '@/contexts/AuthContext'
 import { api } from '@/lib/axios'
+import { queryClient } from '@/lib/react-query'
 import { ProductAlert } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
-import { queryClient } from '@/lib/react-query'
-import Link from 'next/link'
 
 export default function Alerts() {
   const { user } = useAuth()
 
-  const { data: productAlerts } = useQuery('product-alerts', async () => {
-    if (!user) return []
+  const {
+    data: productAlerts,
+    isLoading,
+    refetch,
+  } = useQuery('product-alerts', async () => {
+    if (!user) return
 
     const token = await user.getIdToken()
 
@@ -25,6 +30,12 @@ export default function Alerts() {
     return productAlerts
   })
 
+  useEffect(() => {
+    if (user) {
+      refetch()
+    }
+  }, [user])
+
   async function handleProductAlertDelete(product_id: string) {
     const token = await user!.getIdToken()
 
@@ -33,6 +44,14 @@ export default function Alerts() {
     })
 
     queryClient.invalidateQueries('product-alerts')
+  }
+
+  if (isLoading) {
+    return <div>Carregando...</div>
+  }
+
+  if (!productAlerts) {
+    return <strong>Parece que você não tem nenhum alerta...</strong>
   }
 
   return (
@@ -44,9 +63,9 @@ export default function Alerts() {
         <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
       </div>
 
-      {productAlerts?.length ? (
+      {productAlerts.length ? (
         <div className="flex flex-wrap gap-4">
-          {productAlerts?.map((productAlert) => (
+          {productAlerts.map((productAlert) => (
             <div key={productAlert.id} className="rounded-xl overflow-hidden">
               <div className="w-96 grid grid-cols-2 pb-2.5 bg-white">
                 <div className="grid gap-2">

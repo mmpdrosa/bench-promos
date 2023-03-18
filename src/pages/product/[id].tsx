@@ -13,7 +13,7 @@ import {
 import { TbDiscount2 } from 'react-icons/tb'
 import { NumericFormat } from 'react-number-format'
 
-import { PriceChart } from '@/components/PriceChart'
+import { ProductPriceChart } from '@/components/ProductPriceChart'
 import { useAuth } from '@/contexts/AuthContext'
 import { api } from '@/lib/axios'
 import { Product } from '@/models'
@@ -153,7 +153,7 @@ export default function ProductPage({
           </div>
           <div className="grid grid-cols-3 max-lg:grid-cols-1 items-end gap-8 max-lg:gap-x-0">
             <div className="col-span-2 max-lg:order-last">
-              <PriceChart />
+              <ProductPriceChart productId={product.id} />
             </div>
             <div
               className={`flex flex-col items-center gap-5 p-8 border border-zinc-300 rounded-xl shadow-md ${

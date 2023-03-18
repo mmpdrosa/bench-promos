@@ -1,7 +1,7 @@
 import { Dialog, DialogContent } from '@mui/material'
 import { useState } from 'react'
-import { RxChevronRight } from 'react-icons/rx'
 import { HiOutlineUser } from 'react-icons/hi'
+import { RxChevronRight } from 'react-icons/rx'
 
 import { useAuth } from '@/contexts/AuthContext'
 import { RecoverPasswordDialog } from './RecoverPasswordDialog'

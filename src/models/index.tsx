@@ -49,3 +49,12 @@ export type ProductAlert = {
     image_url: string
   }
 }
+
+export type ProductPriceHistoryItem = {
+  id: string
+  was_available: boolean
+  last_availability: boolean
+  lowest_price: number
+  last_price: number
+  date: string
+}
