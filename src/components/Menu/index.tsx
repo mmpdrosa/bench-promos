@@ -2,9 +2,10 @@ import * as NavigationMenu from '@radix-ui/react-navigation-menu'
 import Link from 'next/link'
 import { AiOutlineCaretRight } from 'react-icons/ai'
 import { FaBars, FaDollarSign } from 'react-icons/fa'
-import { HiCheckBadge, HiOutlineReceiptPercent } from 'react-icons/hi2'
+import { HiCheckBadge } from 'react-icons/hi2'
 
 import { useCategory } from '@/contexts/CategoryContext'
+import { TbDiscount2 } from 'react-icons/tb'
 
 export function Menu() {
   const { categories } = useCategory()
@@ -68,7 +69,7 @@ export function Menu() {
           <Link
             href="/"
             title="Promoções"
-            className="flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
+            className="flex items-center gap-2 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
           >
             <FaDollarSign className="text-amber-300" />
             Promoções
@@ -77,11 +78,11 @@ export function Menu() {
 
         <NavigationMenu.Item>
           <Link
-            href="/"
+            href="/coupons"
             title="Cupons"
-            className="flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
+            className="flex items-center gap-2 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
           >
-            <HiOutlineReceiptPercent className="text-amber-300" />
+            <TbDiscount2 className="text-2xl text-amber-300" />
             Cupons
           </Link>
         </NavigationMenu.Item>
@@ -90,9 +91,9 @@ export function Menu() {
           <Link
             href="/"
             title="Recomendados"
-            className="max-md:hidden flex items-center gap-3 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
+            className="max-md:hidden flex items-center gap-2 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
           >
-            <HiCheckBadge className="text-amber-300" />
+            <HiCheckBadge className="text-2xl text-amber-300" />
             Recomendados
           </Link>
         </NavigationMenu.Item>

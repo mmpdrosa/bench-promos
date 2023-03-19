@@ -50,10 +50,6 @@ export default function Alerts() {
     return <div>Carregando...</div>
   }
 
-  if (!productAlerts) {
-    return <strong>Parece que você não tem nenhum alerta...</strong>
-  }
-
   return (
     <div className="max-w-screen-xl flex flex-col gap-8 py-8 mx-auto">
       <div className="w-max">
@@ -63,7 +59,7 @@ export default function Alerts() {
         <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
       </div>
 
-      {productAlerts.length ? (
+      {productAlerts?.length ? (
         <div className="flex flex-wrap gap-4">
           {productAlerts.map((productAlert) => (
             <div key={productAlert.id} className="rounded-xl overflow-hidden">

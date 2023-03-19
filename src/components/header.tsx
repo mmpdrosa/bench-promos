@@ -42,7 +42,7 @@ export function Header() {
             placeholder="Busque aqui"
             {...register('q')}
           />
-          <button className="group p-4 rounded-r-2xl border transition-colors border-zinc-300 bg-amber-300 hover:bg-yellow-400 active:bg-amber-400 focus:outline-none focus:outline-0 focus:border-yellow-800">
+          <button className="group p-4 rounded-r-2xl border transition-colors border-zinc-300 bg-amber-300 hover:bg-yellow-400 focus:outline-none focus:outline-0 focus:border-yellow-800">
             <HiSearch className="text-3xl transition-colors text-zinc-600 group-hover:text-black" />
           </button>
         </form>

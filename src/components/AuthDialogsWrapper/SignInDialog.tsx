@@ -1,7 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import Image from 'next/image'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { FcGoogle } from 'react-icons/fc'
 
+import LogoImg from '@/assets/logo.svg'
 import { useAuth } from '@/contexts/AuthContext'
 
 const signInFormSchema = z.object({
@@ -42,6 +45,8 @@ export function SignInDialog({
       await logIn(data)
 
       reset()
+
+      onSignInOpenChange(false)
     } catch (err: any) {
       let message
 
@@ -71,23 +76,41 @@ export function SignInDialog({
 
   return (
     <>
-      <form className="space-y-6" onSubmit={handleSubmit(handleSignIn)}>
+      <Image src={LogoImg} width={248} alt="Logo" />
+
+      <h1 className="text-lg font-medium tracking-wider text-white">
+        Faça seu login
+      </h1>
+
+      <form className="w-full space-y-6" onSubmit={handleSubmit(handleSignIn)}>
         <fieldset className="flex flex-col justify-start">
-          <label className="block mb-2.5 text-base" htmlFor="email">
+          <label className="block mb-2.5 text-base text-white" htmlFor="email">
             Email
           </label>
           <input
-            className="h-10 px-2.5 rounded text-lg outline-none shadow-[0_0_0_1px] focus:shadow-[0_0_0_2px] focus:shadow-violet-800"
+            className="h-10 px-2.5 text-lg outline-none text-white border-b border-white bg-transparent"
             id="email"
             {...register('email')}
           />
         </fieldset>
         <fieldset className="flex flex-col justify-start">
-          <label className="block mb-2.5 text-base" htmlFor="password">
-            Senha
-          </label>
+          <div className="flex justify-between">
+            <label
+              className="block mb-2.5 text-base text-white"
+              htmlFor="password"
+            >
+              Senha
+            </label>
+            <a
+              className="text-zinc-300 cursor-pointer hover:text-amber-300"
+              onClick={handleRecoverPassword}
+            >
+              Esqueceu sua senha?
+            </a>
+          </div>
+
           <input
-            className="h-10 px-2.5 rounded text-lg outline-none shadow-[0_0_0_1px] focus:shadow-[0_0_0_2px] focus:shadow-violet-800"
+            className="h-10 px-2.5 text-lg outline-none text-white border-b border-white bg-transparent"
             id="password"
             type="password"
             {...register('password')}
@@ -96,25 +119,24 @@ export function SignInDialog({
         <div className="flex justify-between items-center">
           <span className="font-bold text-red-500">{errors.root?.message}</span>
           <button
-            className={`h-10 inline-flex items-center justify-center px-6 rounded font-medium outline-none bg-violet-500 hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-200 ${
+            className={`h-10 inline-flex items-center justify-center px-6 rounded-full font-medium transition-colors bg-amber-300 hover:bg-yellow-400 ${
               isSubmitting && 'cursor-not-allowed'
             }`}
           >
             Entrar
           </button>
         </div>
+
+        <div className="flex justify-center">
+          <button className="p-1 rounded-full bg-white">
+            <FcGoogle className="text-5xl" />
+          </button>
+        </div>
       </form>
 
       <div className="flex justify-between pt-8">
         <button
-          className="font-semibold hover:text-violet-500"
-          onClick={handleRecoverPassword}
-        >
-          Esqueceu sua senha?
-        </button>
-
-        <button
-          className="font-semibold hover:text-violet-500"
+          className="text-white font-semibold hover:text-amber-300"
           onClick={handleSignUpDialogOpen}
         >
           Não possui conta? Cadastrar

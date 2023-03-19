@@ -93,7 +93,7 @@ export default function ProductPage({
             <a
               href={product.html_url}
               target="_blank"
-              className="flex items-center gap-2 px-6 py-4 rounded-full text-xl font-semibold text-white bg-violet-400 cursor-pointer"
+              className="flex items-center gap-2 px-6 py-4 rounded-full text-xl font-semibold transition-colors text-white bg-violet-500 hover:bg-violet-400 cursor-pointer"
               rel="noreferrer"
             >
               <FaExternalLinkAlt /> ACESSAR
@@ -116,8 +116,8 @@ export default function ProductPage({
           <ul className="flex gap-12 py-2 border-b border-zinc-300">
             <li>
               <a
-                href="#historic"
-                className="flex items-center gap-2.5 text-lg font-medium"
+                href="#price-history"
+                className="flex items-center gap-2.5 text-lg font-medium hover:underline"
               >
                 <FaChartLine className="text-amber-400" />
                 Histórico
@@ -126,7 +126,7 @@ export default function ProductPage({
             <li>
               <a
                 href="#"
-                className="flex items-center gap-2.5 text-lg font-medium"
+                className="flex items-center gap-2.5 text-lg font-medium hover:underline"
               >
                 <FaRegListAlt className="text-amber-400" />
                 Especificações
@@ -135,7 +135,7 @@ export default function ProductPage({
             <li>
               <a
                 href="#"
-                className="flex items-center gap-2.5 text-lg font-medium"
+                className="flex items-center gap-2.5 text-lg font-medium hover:underline"
               >
                 <FaVideo className="text-amber-400" />
                 Review
@@ -208,7 +208,7 @@ export default function ProductPage({
               </div>
               <button
                 onClick={handleCreateAlert}
-                className="px-5 py-3.5 rounded-full text-lg font-semibold bg-amber-200"
+                className="px-5 py-3.5 rounded-full text-lg font-semibold transition-colors bg-amber-300 hover:bg-yellow-400"
               >
                 CRIAR ALERTA
               </button>

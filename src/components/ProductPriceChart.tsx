@@ -22,15 +22,8 @@ type TimeRange = '30d' | '3m' | '6m' | '1y'
 
 interface DataItem {
   date: string
-  value: number
-}
-
-const data: DataItem[] = []
-for (let num = 30; num >= 0; num--) {
-  data.push({
-    date: dayjs().subtract(num, 'day').format('YYYY-MM-DD'),
-    value: 1 + Math.random(),
-  })
+  price: number
+  available: boolean
 }
 
 export function ProductPriceChart({ productId }: { productId: string }) {
@@ -52,14 +45,13 @@ export function ProductPriceChart({ productId }: { productId: string }) {
 
       return productPriceHistory
     },
-    { refetchOnWindowFocus: false },
+    { refetchOnWindowFocus: false, staleTime: 1000 * 60 * 60 },
   )
 
   const chartData = useMemo(() => {
     if (!productPriceHistory) return []
 
-    const formattedData: { date: string; price: number; available: boolean }[] =
-      []
+    const formattedData: DataItem[] = []
 
     let currentDate = dayjs(productPriceHistory[0].date).toISOString()
     let currentIndex = 0
@@ -90,40 +82,84 @@ export function ProductPriceChart({ productId }: { productId: string }) {
   }, [productPriceHistory])
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
-      <AreaChart data={chartData}>
-        <defs>
-          <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#2451B7" stopOpacity={0.4} />
-            <stop offset="75%" stopColor="#2451B7" stopOpacity={0.05} />
-          </linearGradient>
-        </defs>
+    <>
+      <ResponsiveContainer width="100%" height={300}>
+        <AreaChart data={chartData}>
+          <defs>
+            <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#2451B7" stopOpacity={0.4} />
+              <stop offset="75%" stopColor="#2451B7" stopOpacity={0.05} />
+            </linearGradient>
+          </defs>
 
-        <Area dataKey="price" stroke="#2451B7" fill="url(#color)" />
+          <Area dataKey="price" stroke="#2451B7" fill="url(#color)" />
 
-        <XAxis
-          dataKey="date"
-          axisLine={false}
-          tickLine={false}
-          tickMargin={16}
-          tickCount={8}
-          tickFormatter={(date: string) => dayjs(date).utc().format('D MMM')}
-        />
+          <XAxis
+            dataKey="date"
+            axisLine={false}
+            tickLine={false}
+            tickMargin={16}
+            tickCount={8}
+            tickFormatter={(date: string) => dayjs(date).utc().format('D MMM')}
+          />
 
-        <YAxis
-          dataKey="price"
-          axisLine={false}
-          tickLine={false}
-          tickMargin={16}
-          tickCount={5}
-          tickFormatter={(price: number) => `${price / 100}`}
-        />
+          <YAxis
+            dataKey="price"
+            axisLine={false}
+            tickLine={false}
+            tickMargin={16}
+            tickCount={5}
+            tickFormatter={(price: number) => `${price / 100}`}
+          />
 
-        <Tooltip content={<CustomTooltip />} />
+          <Tooltip content={<CustomTooltip />} />
 
-        <CartesianGrid opacity={0.1} vertical={false} />
-      </AreaChart>
-    </ResponsiveContainer>
+          <CartesianGrid opacity={0.1} vertical={false} />
+        </AreaChart>
+      </ResponsiveContainer>
+      <div className="whitespace-nowrap mt-4 overflow-x-auto">
+        <button
+          className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors border-zinc-300 ${
+            period === '30d'
+              ? 'bg-violet-500 text-white border-opacity-0 hover:bg-violet-400'
+              : 'hover:bg-zinc-50'
+          }`}
+          onClick={() => setPeriod('30d')}
+        >
+          <span className="mx-1">30 dias</span>
+        </button>
+        <button
+          className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors border-zinc-300 ${
+            period === '3m'
+              ? 'bg-violet-500 text-white border-opacity-0 hover:bg-violet-400'
+              : 'hover:bg-zinc-50'
+          }`}
+          onClick={() => setPeriod('3m')}
+        >
+          <span className="mx-1">3 meses</span>
+        </button>
+        <button
+          className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors border-zinc-300 ${
+            period === '6m'
+              ? 'bg-violet-500 text-white border-opacity-0 hover:bg-violet-400'
+              : 'hover:bg-zinc-50'
+          }`}
+          onClick={() => setPeriod('6m')}
+        >
+          <span className="mx-1">6 meses</span>
+        </button>
+        <button
+          className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors border-zinc-300 ${
+            period === '1y'
+              ? 'bg-violet-500 text-white border-opacity-0 hover:bg-violet-400'
+              : 'hover:bg-zinc-50'
+          }`}
+          onClick={() => setPeriod('1y')}
+        >
+          <span className="mx-1">1 ano</span>
+        </button>
+      </div>
+    </>
   )
 }
 
@@ -136,8 +172,10 @@ interface CustomTooltipProps {
 function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
   if (active && payload && payload.length) {
     return (
-      <div>
-        <h4>{priceFormatter.format(payload[0].value / 100)}</h4>
+      <div className="p-4 rounded-lg border border-zinc-300 bg-white">
+        <h4 className="text-xl font-bold">
+          {priceFormatter.format(payload[0].value / 100)}
+        </h4>
         <p>{dayjs(label).utc().format('D MMM YYYY')}</p>
       </div>
     )

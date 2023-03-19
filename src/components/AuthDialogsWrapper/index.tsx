@@ -54,7 +54,7 @@ export function AuthDialogsWrapper() {
         fullWidth
         maxWidth="sm"
       >
-        <DialogContent>
+        <DialogContent className="flex flex-col items-center gap-6 sm:px-16 py-8 font-sans bg-gradient-to-b from-black to-violet-500">
           <SignInDialog
             onSignInOpenChange={handleSignInOpenChange}
             onSignUpOpenChange={handleSignUpOpenChange}
@@ -63,13 +63,39 @@ export function AuthDialogsWrapper() {
         </DialogContent>
       </Dialog>
 
+      {/* <Modal
+        isOpen={signInOpen}
+        onRequestClose={() => handleSignInOpenChange(false)}
+        style={{
+          content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 5,
+          },
+          overlay: {
+            background: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 5,
+          },
+        }}
+      >
+        <SignInDialog
+          onSignInOpenChange={handleSignInOpenChange}
+          onSignUpOpenChange={handleSignUpOpenChange}
+          onRecoverPasswordOpenChange={handleRecoverPasswordOpenChange}
+        />
+      </Modal> */}
+
       <Dialog
         open={signUpOpen}
         onClose={() => handleSignUpOpenChange(false)}
         fullWidth
         maxWidth="sm"
       >
-        <DialogContent>
+        <DialogContent className="flex flex-col items-center gap-6 sm:px-16 py-8 hover font-sans bg-gradient-to-b from-black to-violet-500">
           <SignUpDialog
             onSignInOpenChange={handleSignInOpenChange}
             onSignUpOpenChange={handleSignUpOpenChange}
@@ -83,7 +109,7 @@ export function AuthDialogsWrapper() {
         fullWidth
         maxWidth="sm"
       >
-        <DialogContent>
+        <DialogContent className="flex flex-col items-center gap-6 sm:px-16 py-8 font-sans bg-gradient-to-b from-black to-violet-500">
           <RecoverPasswordDialog />
         </DialogContent>
       </Dialog>
