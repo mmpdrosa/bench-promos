@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick-theme.css'
 import 'slick-carousel/slick/slick.css'
@@ -8,6 +7,7 @@ import bannerPromotionsMobile from '@/assets/banner-1-mobile.png'
 import bannerPromotions from '@/assets/banner-1.png'
 import bannerTelegramMobile from '@/assets/banner-2-mobile.png'
 import bannerTelegram from '@/assets/banner-2.png'
+import { useMediaQuery } from '@/hooks/use-media-query'
 
 const settings = {
   arrows: false,
@@ -21,14 +21,7 @@ const settings = {
 }
 
 export default function Home() {
-  const [windowWidth, setWindowWidth] = useState(0)
-
-  useEffect(() => {
-    setWindowWidth(window.innerWidth)
-    const handleResize = () => setWindowWidth(window.innerWidth)
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  const isSm = useMediaQuery('(min-width: 640px)')
 
   return (
     <div className="max-w-screen-xl flex flex-col gap-8 py-8 mx-auto">
@@ -36,7 +29,7 @@ export default function Home() {
         <div className="relative h-[480px] max-sm:h-[512px] rounded-2xl overflow-hidden">
           <Image
             className="object-fill"
-            src={windowWidth > 640 ? bannerPromotions : bannerPromotionsMobile}
+            src={isSm ? bannerPromotions : bannerPromotionsMobile}
             alt=""
             fill
           />
@@ -45,7 +38,7 @@ export default function Home() {
         <div className="relative h-[480px] max-sm:h-[512px] rounded-2xl overflow-hidden">
           <Image
             className="object-fill"
-            src={windowWidth > 640 ? bannerTelegram : bannerTelegramMobile}
+            src={isSm ? bannerTelegram : bannerTelegramMobile}
             alt=""
             fill
           />

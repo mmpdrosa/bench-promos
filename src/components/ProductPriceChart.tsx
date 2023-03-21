@@ -71,8 +71,8 @@ export function ProductPriceChart({ productId }: { productId: string }) {
       } else {
         formattedData.push({
           date: currentDate,
-          price: formattedData[formattedData.length - 1].price,
-          available: formattedData[formattedData.length - 1].available,
+          price: productPriceHistory[currentIndex - 1].last_price,
+          available: productPriceHistory[currentIndex - 1].last_availability,
         })
       }
       currentDate = dayjs(currentDate).add(1, 'day').toISOString()

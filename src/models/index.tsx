@@ -11,10 +11,13 @@ export type Retailer = {
 
 export type Coupon = {
   id: string
+  available: boolean
   code: string
   discount: string
   minimum_spend?: string
   description?: string
+  store?: string
+  retailer: Retailer
 }
 
 export type Product = {

@@ -144,7 +144,7 @@ export default function ProductPage({
           </ul>
         </nav>
 
-        <div id="historic" className="space-y-10">
+        <div id="price-history" className="space-y-10">
           <div className="w-max">
             <h2 className="text-2xl font-extrabold text-violet-600">
               HISTÓRICO
