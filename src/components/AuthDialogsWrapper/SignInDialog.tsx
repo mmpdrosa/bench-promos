@@ -25,7 +25,7 @@ export function SignInDialog({
   onSignUpOpenChange,
   onRecoverPasswordOpenChange,
 }: SignInDialogProps) {
-  const { logIn } = useAuth()
+  const { logIn, logInWithGoogle } = useAuth()
 
   const {
     register,
@@ -62,6 +62,12 @@ export function SignInDialog({
 
       setError('root', { message })
     }
+  }
+
+  async function handleSignInWithGoogle() {
+    await logInWithGoogle()
+
+    onSignInOpenChange(false)
   }
 
   function handleRecoverPassword() {
@@ -128,7 +134,10 @@ export function SignInDialog({
         </div>
 
         <div className="flex justify-center">
-          <button className="p-1 rounded-full bg-white">
+          <button
+            className="p-1 rounded-full bg-white"
+            onClick={handleSignInWithGoogle}
+          >
             <FcGoogle className="text-5xl" />
           </button>
         </div>

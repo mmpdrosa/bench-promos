@@ -47,8 +47,6 @@ export default function ProductPage({
         headers: { Authorization: `Bearer ${token}` },
       },
     )
-
-    window.alert('Alerta criado!')
   }
 
   return (

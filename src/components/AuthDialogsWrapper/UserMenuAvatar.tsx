@@ -18,7 +18,8 @@ export function UserMenuAvatar() {
             {user?.displayName
               ?.split(' ')
               .map((word) => word.charAt(0))
-              .join('') || '?'}
+              .join('')
+              .toUpperCase() || '?'}
           </Avatar.Fallback>
         </Avatar.Root>
       </DropdownMenu.Trigger>

@@ -1,6 +1,7 @@
 import * as ToastPrimitive from '@radix-ui/react-toast'
 import { clsx } from 'clsx'
 import React from 'react'
+
 import { useMediaQuery } from '../hooks/use-media-query'
 
 type ToastProps = {

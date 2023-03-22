@@ -3,6 +3,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
   User,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth'
 import {
   createContext,
@@ -24,6 +26,7 @@ type SignInData = {
 type AuthContextType = {
   user: User | null
   logIn: (data: SignInData) => Promise<void>
+  logInWithGoogle: () => Promise<void>
   logOut: () => Promise<void>
 }
 
@@ -54,13 +57,25 @@ export function AuthProvider({ children }: AuthProviderProps) {
     await signInWithEmailAndPassword(auth, email, password)
   }
 
+  async function logInWithGoogle() {
+    if (Notification.permission === 'default') {
+      Notification.requestPermission()
+    }
+
+    const provider = new GoogleAuthProvider()
+    await signInWithPopup(auth, provider)
+  }
+
   async function logOut() {
     await signOut(auth)
 
     queryClient.removeQueries('product-alerts')
   }
 
-  const value = useMemo(() => ({ user, logIn, logOut }), [user])
+  const value = useMemo(
+    () => ({ user, logIn, logOut, logInWithGoogle }),
+    [user],
+  )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

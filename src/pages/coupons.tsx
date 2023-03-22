@@ -63,7 +63,7 @@ export default function Coupons({
                   <h4 className="text-xl font-medium">OFF</h4>
                   <div className="w-fit flex items-center my-6 mx-auto">
                     <span className="w-52 py-2.5 tracking-wider font-bold border border-dashed border-white border-r-0">
-                      {coupon.code}
+                      {coupon.code.toUpperCase()}
                     </span>
                     <Toast
                       title="CÓDIGO COPIADO"
