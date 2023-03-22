@@ -18,6 +18,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import { api } from '@/lib/axios'
 import { Product } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
+import { Toast } from '@/components/Toast'
 
 export default function ProductPage({
   product,
@@ -52,7 +53,7 @@ export default function ProductPage({
 
   return (
     <div className="max-w-screen-xl py-8 mx-auto">
-      <div className="flex flex-col gap-10 px-6 max-sm:px-2.5 py-8 rounded-xl shadow-md bg-white">
+      <div className="flex flex-col gap-14 px-6 max-sm:px-2.5 py-8 rounded-xl shadow-md bg-white">
         <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-y-6 items-stretch">
           <h1 className="sm:hidden text-xl">{product.title}</h1>
           <div className="flex flex-col items-start gap-6 max-sm:order-3">
@@ -125,7 +126,7 @@ export default function ProductPage({
             </li>
             <li>
               <a
-                href="#"
+                href="#specs"
                 className="flex items-center gap-2.5 text-lg font-medium hover:underline"
               >
                 <FaRegListAlt className="text-amber-400" />
@@ -134,7 +135,7 @@ export default function ProductPage({
             </li>
             <li>
               <a
-                href="#"
+                href="#review"
                 className="flex items-center gap-2.5 text-lg font-medium hover:underline"
               >
                 <FaVideo className="text-amber-400" />
@@ -156,7 +157,7 @@ export default function ProductPage({
               <ProductPriceChart productId={product.id} />
             </div>
             <div
-              className={`flex flex-col items-center gap-5 p-8 border border-zinc-300 rounded-xl shadow-md ${
+              className={`flex flex-col items-center gap-5 p-8 border border-zinc-100 rounded-xl shadow-md ${
                 !product.available && 'opacity-50 pointer-events-none'
               }`}
             >
@@ -206,15 +207,70 @@ export default function ProductPage({
                   </button>
                 </div>
               </div>
-              <button
-                onClick={handleCreateAlert}
-                className="px-5 py-3.5 rounded-full text-lg font-semibold transition-colors bg-amber-300 hover:bg-yellow-400"
-              >
-                CRIAR ALERTA
-              </button>
+              <Toast
+                title="ALERTA CRIADO"
+                description={`Você receberá uma notificação quando o preço chegar em ${priceFormatter.format(
+                  alertPrice / 100,
+                )}.`}
+                triggerButton={
+                  <button className="px-5 py-3.5 rounded-full text-lg font-semibold transition-colors bg-amber-300 hover:bg-yellow-400">
+                    <span onClick={handleCreateAlert}>CRIAR ALERTA</span>
+                  </button>
+                }
+              />
             </div>
           </div>
         </div>
+
+        {product.specs && (
+          <div id="specs" className="space-y-10">
+            <div className="w-max">
+              <h2 className="text-2xl font-extrabold text-violet-600">
+                ESPECIFICAÇÕES
+              </h2>
+              <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
+            </div>
+            <div className="border border-zinc-300 rounded-xl overflow-hidden">
+              <table className="w-full border-collapse">
+                <tbody>
+                  {Object.entries(product.specs).map(([key, value]) => (
+                    <tr
+                      key={key}
+                      className="border-b last:border-0 border-zinc-300 even:bg-amber-200"
+                    >
+                      <th className="table-cell w-1/2 py-4 px-4 text-left text-xl font-bold border-r border-zinc-300">
+                        {key}
+                      </th>
+                      <td className="table-cell w-1/2 py-2 px-4 text-xl font-semibold">
+                        {value}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {product.review_url && (
+          <div id="review" className="space-y-10">
+            <div className="w-max">
+              <h2 className="text-2xl font-extrabold text-violet-600">
+                REVIEW
+              </h2>
+              <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
+            </div>
+            <div className="aspect-video">
+              <iframe
+                width="100%"
+                height="100%"
+                src={product.review_url}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
@@ -227,7 +283,7 @@ export const getServerSideProps: GetServerSideProps<
   { id: string }
 > = async ({ params }) => {
   try {
-    const response = await api.get(`/products/${params!.id}/with-min-price/`)
+    const response = await api.get(`/products/${params!.id}/with-min-price`)
     const product: Product = response.data
 
     return {

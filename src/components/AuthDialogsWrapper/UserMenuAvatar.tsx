@@ -5,7 +5,7 @@ import { FaSignOutAlt } from 'react-icons/fa'
 import { useAuth } from '../../contexts/AuthContext'
 
 export function UserMenuAvatar() {
-  const { logOut } = useAuth()
+  const { user, logOut } = useAuth()
 
   return (
     <DropdownMenu.Root>
@@ -15,7 +15,10 @@ export function UserMenuAvatar() {
             className="h-full w-full flex items-center justify-center font-semibold bg-white"
             delayMs={600}
           >
-            MP
+            {user?.displayName
+              ?.split(' ')
+              .map((word) => word.charAt(0))
+              .join('') || '?'}
           </Avatar.Fallback>
         </Avatar.Root>
       </DropdownMenu.Trigger>

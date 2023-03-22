@@ -68,11 +68,10 @@ export default function Coupons({
                     <Toast
                       title="CÓDIGO COPIADO"
                       triggerButton={
-                        <button
-                          className="py-2.5 px-5 font-medium text-black border border-amber-300 bg-amber-300 cursor-pointer"
-                          onClick={() => copyToClipboard(coupon.code)}
-                        >
-                          COPIAR
+                        <button className="py-2.5 px-5 font-medium text-black border border-amber-300 bg-amber-300 cursor-pointer">
+                          <span onClick={() => copyToClipboard(coupon.code)}>
+                            COPIAR
+                          </span>
                         </button>
                       }
                     />

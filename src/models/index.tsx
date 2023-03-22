@@ -32,6 +32,8 @@ export type Product = {
   subcategory?: ProductCategory
   retailer: Retailer
   coupon?: Coupon
+  specs?: Record<string, string>
+  review_url?: string
 }
 
 export type Category = {
