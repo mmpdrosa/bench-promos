@@ -4,46 +4,89 @@ import { useEffect } from 'react'
 import { useQuery } from 'react-query'
 
 import { useAuth } from '@/contexts/AuthContext'
+import { useCategory } from '@/contexts/CategoryContext'
 import { api } from '@/lib/axios'
 import { queryClient } from '@/lib/react-query'
 import { ProductAlert } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
 
+type CategoryAlert = {
+  id: string
+  category: {
+    id: string
+    name: string
+  }
+}
+
 export default function Alerts() {
   const { user } = useAuth()
+  const { categories } = useCategory()
 
   const {
-    data: productAlerts,
+    data: alerts,
     isLoading,
     refetch,
-  } = useQuery('product-alerts', async () => {
-    if (!user) return
+  } = useQuery(
+    'alerts',
+    async () => {
+      if (!user) return
 
-    const token = await user.getIdToken()
+      const token = await user.getIdToken()
 
-    const response = await api.get('/users/product-notifications/for-all', {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+      const productAlertsPromise = api.get(
+        '/users/product-notifications/for-all',
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      )
+      const categoryAlertsPromise = api.get(
+        '/users/category-notifications/for-all',
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      )
 
-    const productAlerts: ProductAlert[] = response.data
+      const [productAlertsResponse, categoryAlertsResponse] = await Promise.all(
+        [productAlertsPromise, categoryAlertsPromise],
+      )
 
-    return productAlerts
-  })
+      const productAlerts: ProductAlert[] = productAlertsResponse.data
+      const categoryAlerts: CategoryAlert[] = categoryAlertsResponse.data
+
+      return { productAlerts, categoryAlerts }
+    },
+    { refetchOnWindowFocus: false },
+  )
+
+  const productAlerts = alerts?.productAlerts
+  const categoryAlerts = alerts?.categoryAlerts
 
   useEffect(() => {
-    if (user) {
-      refetch()
-    }
+    refetch()
   }, [user])
 
-  async function handleProductAlertDelete(product_id: string) {
+  async function handleProductAlertDelete(productId: string) {
     const token = await user!.getIdToken()
 
-    await api.delete(`users/unnotify-product/${product_id}`, {
+    await api.delete(`/users/unnotify-product/${productId}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
 
-    queryClient.invalidateQueries('product-alerts')
+    queryClient.invalidateQueries('alerts')
+  }
+
+  const handleCategoryClick = async (categoryId: string) => {
+    const token = await user!.getIdToken()
+
+    await api.post(
+      `/users/toggle-category-notification/${categoryId}`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    )
+
+    queryClient.invalidateQueries('alerts')
   }
 
   if (isLoading) {
@@ -52,6 +95,25 @@ export default function Alerts() {
 
   return (
     <div className="max-w-screen-xl flex flex-col gap-8 py-8 mx-auto">
+      <div className="space-y-2">
+        {categories.map((category) => (
+          <button
+            key={category.id}
+            disabled={!user}
+            className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors border-zinc-300 disabled:text-black/50 disabled:bg-zinc-50 ${
+              categoryAlerts?.find(
+                (categoryAlert) => categoryAlert.category.id === category.id,
+              )
+                ? 'bg-violet-500 text-white border-opacity-0 hover:bg-violet-400'
+                : 'hover:bg-zinc-50'
+            }`}
+            onClick={() => handleCategoryClick(category.id)}
+          >
+            <span className="mx-1">{category.name}</span>
+          </button>
+        ))}
+      </div>
+
       <div className="w-max">
         <h2 className="text-2xl font-extrabold text-violet-600">
           ALERTAS DE PREÇOS
@@ -75,7 +137,7 @@ export default function Alerts() {
                       priority
                     />
                   </div>
-                  <span className="h-20 block px-1.5 text-center line-clamp-3">
+                  <span className="h-[72px] block px-1.5 text-center line-clamp-3">
                     {productAlert.product.title}
                   </span>
                 </div>

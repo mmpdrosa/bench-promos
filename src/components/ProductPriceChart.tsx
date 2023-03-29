@@ -1,5 +1,4 @@
 import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
 import { useMemo, useState } from 'react'
 import { useQuery } from 'react-query'
 import {
@@ -15,8 +14,6 @@ import {
 import { api } from '@/lib/axios'
 import { ProductPriceHistoryItem } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
-
-dayjs.extend(utc)
 
 type TimeRange = '30d' | '3m' | '6m' | '1y'
 
@@ -56,7 +53,9 @@ export function ProductPriceChart({ productId }: { productId: string }) {
     let currentDate = dayjs(productPriceHistory[0].date).toISOString()
     let currentIndex = 0
 
-    while (dayjs(currentDate).isBefore(dayjs().startOf('day'))) {
+    while (
+      dayjs(currentDate).isBefore(dayjs().startOf('day').add(1, 'millisecond'))
+    ) {
       if (
         productPriceHistory.find(({ date }) =>
           dayjs(date).isSame(currentDate, 'day'),

@@ -16,7 +16,7 @@ export type Coupon = {
   discount: string
   minimum_spend?: string
   description?: string
-  store?: string
+  comments?: string
   retailer: Retailer
 }
 
@@ -24,7 +24,6 @@ export type Product = {
   id: string
   title: string
   price: number
-  store?: string
   html_url: string
   image_url: string
   available: boolean
@@ -62,4 +61,17 @@ export type ProductPriceHistoryItem = {
   lowest_price: number
   last_price: number
   date: string
+}
+
+export type Sale = {
+  id: string
+  title: string
+  image_url: string
+  html_url: string
+  price: number
+  specs: string
+  created_at: Date
+  comments?: string
+  category: Category
+  coupon: Coupon
 }
