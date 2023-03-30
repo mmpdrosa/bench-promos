@@ -21,7 +21,6 @@ import '@/styles/globals.css'
 dayjs.extend(relativeTime)
 dayjs.extend(timezone)
 dayjs.extend(utc)
-
 dayjs.locale('pt-br')
 dayjs.tz.setDefault('America/Sao_Paulo')
 
