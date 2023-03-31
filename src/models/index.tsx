@@ -27,6 +27,7 @@ export type Product = {
   html_url: string
   image_url: string
   available: boolean
+  recommended?: boolean
   category?: ProductCategory
   subcategory?: ProductCategory
   retailer: Retailer

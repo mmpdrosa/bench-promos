@@ -212,9 +212,10 @@ export default function ProductPage({
                 )}.`}
                 triggerButton={
                   <button className="px-5 py-3.5 rounded-full text-lg font-semibold transition-colors bg-amber-300 hover:bg-yellow-400">
-                    <span onClick={handleCreateAlert}>CRIAR ALERTA</span>
+                    <span>CRIAR ALERTA</span>
                   </button>
                 }
+                beforeOpen={handleCreateAlert}
               />
             </div>
           </div>

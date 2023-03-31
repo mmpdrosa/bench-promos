@@ -8,22 +8,31 @@ type ToastProps = {
   title: string
   description?: string
   triggerButton: React.ReactNode
+  beforeOpen?: () => Promise<void>
 }
 
-const Toast = ({ title, description, triggerButton }: ToastProps) => {
+const Toast = ({
+  title,
+  description,
+  triggerButton,
+  beforeOpen,
+}: ToastProps) => {
   const [open, setOpen] = React.useState(false)
   const isMd = useMediaQuery('(min-width: 768px)')
 
   return (
     <ToastPrimitive.Provider swipeDirection={isMd ? 'right' : 'down'}>
       {React.cloneElement(triggerButton as React.ReactElement, {
-        onClick: () => {
+        onClick: async () => {
           if (open) {
             setOpen(false)
             setTimeout(() => {
               setOpen(true)
             }, 400)
           } else {
+            if (beforeOpen) {
+              await beforeOpen()
+            }
             setOpen(true)
           }
         },

@@ -47,6 +47,10 @@ export function SignInDialog({
       reset()
 
       onSignInOpenChange(false)
+
+      if (Notification.permission === 'default') {
+        Notification.requestPermission()
+      }
     } catch (err: any) {
       let message
 
@@ -68,6 +72,10 @@ export function SignInDialog({
     await logInWithGoogle()
 
     onSignInOpenChange(false)
+
+    if (Notification.permission === 'default') {
+      Notification.requestPermission()
+    }
   }
 
   function handleRecoverPassword() {

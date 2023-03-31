@@ -50,18 +50,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, [])
 
   async function logIn({ email, password }: SignInData) {
-    if (Notification.permission === 'default') {
-      Notification.requestPermission()
-    }
-
     await signInWithEmailAndPassword(auth, email, password)
   }
 
   async function logInWithGoogle() {
-    if (Notification.permission === 'default') {
-      Notification.requestPermission()
-    }
-
     const provider = new GoogleAuthProvider()
     await signInWithPopup(auth, provider)
   }

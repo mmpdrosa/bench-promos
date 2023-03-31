@@ -15,6 +15,7 @@ export function Layout({ children }: LayoutProps) {
   useEffect(() => {
     async function registerUserSubscription() {
       if (user && Notification.permission === 'granted') {
+        console.log('Permissão de notificação concedida')
         const registration = await navigator.serviceWorker.ready
 
         let subscription = await registration.pushManager.getSubscription()
@@ -22,9 +23,7 @@ export function Layout({ children }: LayoutProps) {
         const token = await user.getIdToken()
 
         if (!subscription) {
-          const response = await api.get('/subscriptions/public-key', {
-            headers: { Authorization: `Bearer ${token}` },
-          })
+          const response = await api.get('/subscriptions/public-key')
 
           const publickey = response.data
 
@@ -48,6 +47,10 @@ export function Layout({ children }: LayoutProps) {
             },
           )
         } catch {}
+
+        console.log('Inscrição realizada:', subscription)
+      } else {
+        console.log('Permissão de notificação negada')
       }
     }
     registerUserSubscription()

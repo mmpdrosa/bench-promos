@@ -46,7 +46,9 @@ export default function Recommended({
 export const getServerSideProps: GetServerSideProps<{
   products: Product[]
 }> = async () => {
-  const response = await api.get(`/products/with-min-price/for-all`)
+  const response = await api.get(
+    `/products/with-min-price/for-all?search=recommended`,
+  )
 
   const products: Product[] = response.data
 
