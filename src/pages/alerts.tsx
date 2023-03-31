@@ -9,6 +9,7 @@ import { api } from '@/lib/axios'
 import { queryClient } from '@/lib/react-query'
 import { ProductAlert } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
+import { CircularProgress } from '@mui/material'
 
 type CategoryAlert = {
   id: string
@@ -63,6 +64,7 @@ export default function Alerts() {
 
   useEffect(() => {
     refetch()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
   async function handleProductAlertDelete(productId: string) {
@@ -90,7 +92,11 @@ export default function Alerts() {
   }
 
   if (isLoading) {
-    return <div>Carregando...</div>
+    return (
+      <div className="mt-8 text-center">
+        <CircularProgress className="text-violet-500" />
+      </div>
+    )
   }
 
   return (

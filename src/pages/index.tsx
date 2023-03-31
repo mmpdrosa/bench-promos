@@ -8,6 +8,7 @@ import bannerPromotions from '@/assets/banner-1.png'
 import bannerTelegramMobile from '@/assets/banner-2-mobile.png'
 import bannerTelegram from '@/assets/banner-2.png'
 import { useMediaQuery } from '@/hooks/use-media-query'
+import Link from 'next/link'
 
 const settings = {
   arrows: false,
@@ -26,14 +27,17 @@ export default function Home() {
   return (
     <div className="max-w-screen-xl flex flex-col gap-8 py-8 mx-auto">
       <Slider {...settings}>
-        <div className="relative h-[480px] max-sm:h-[512px] rounded-2xl overflow-hidden">
-          <Image
-            className="object-fill"
-            src={isSm ? bannerPromotions : bannerPromotionsMobile}
-            alt=""
-            fill
-          />
-        </div>
+        <Link href="/sales">
+          <div className="relative h-[480px] max-sm:h-[512px] rounded-2xl overflow-hidden">
+            <Image
+              className="object-fill"
+              src={isSm ? bannerPromotions : bannerPromotionsMobile}
+              alt=""
+              fill
+              priority
+            />
+          </div>
+        </Link>
 
         <div className="relative h-[480px] max-sm:h-[512px] rounded-2xl overflow-hidden">
           <Image
@@ -41,6 +45,7 @@ export default function Home() {
             src={isSm ? bannerTelegram : bannerTelegramMobile}
             alt=""
             fill
+            priority
           />
         </div>
       </Slider>

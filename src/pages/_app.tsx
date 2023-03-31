@@ -40,11 +40,8 @@ export default function App({ Component, pageProps }: AppProps) {
       window.addEventListener('load', () => {
         navigator.serviceWorker
           .register('/service-worker.js')
-          .then((registration) => {
-            console.log('Service Worker registrado com sucesso')
-          })
           .catch((error) => {
-            console.log('Falha ao registrar Service Worker:', error)
+            console.error('Falha ao registrar Service Worker:', error)
           })
       })
     }

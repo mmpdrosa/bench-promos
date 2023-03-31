@@ -13,9 +13,8 @@ export function Layout({ children }: LayoutProps) {
   const { user } = useAuth()
 
   useEffect(() => {
-    async function requestNotificationPermission() {
+    async function registerUserSubscription() {
       if (user && Notification.permission === 'granted') {
-        console.log('Permissão de notificação concedida')
         const registration = await navigator.serviceWorker.ready
 
         let subscription = await registration.pushManager.getSubscription()
@@ -49,13 +48,9 @@ export function Layout({ children }: LayoutProps) {
             },
           )
         } catch {}
-
-        console.log('Inscrição realizada:', subscription)
-      } else {
-        console.log('Permissão de notificação negada')
       }
     }
-    requestNotificationPermission()
+    registerUserSubscription()
   }, [user])
 
   return (

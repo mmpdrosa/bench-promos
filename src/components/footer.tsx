@@ -14,23 +14,32 @@ export function Footer() {
       <div className="max-w-screen-xl grid gap-6 mx-auto">
         <div className="w-max flex flex-col text-lg">
           <span className="text-xl font-bold text-violet-500">Destaques</span>
-          <Link href="/" title="Mouses" className="hover:underline">
+          <Link
+            href="/51d96dd7-5a1e-4fc6-83fd-c0de1745af3f"
+            title="Notebooks"
+            className="hover:underline"
+          >
+            Notebooks
+          </Link>
+          <Link
+            href="/e42e0fd9-93c4-49cf-b6ea-5f8f0e9f7543"
+            title="Mouses"
+            className="hover:underline"
+          >
             Mouses
           </Link>
-          <Link href="/" title="Categorias" className="hover:underline">
-            Categorias
-          </Link>
-          <Link href="/" title="Cupons" className="hover:underline">
-            Cupons
-          </Link>
-          <Link href="/" title="Promoções" className="hover:underline">
+          <Link href="/sales" title="Promoções" className="hover:underline">
             Promoções
           </Link>
-          <Link href="/" title="Recomendados" className="hover:underline">
-            Recomendados
+          <Link href="/coupons" title="Cupons" className="hover:underline">
+            Cupons
           </Link>
-          <Link href="/" title="Notebooks" className="hover:underline">
-            Notebooks
+          <Link
+            href="/recommended"
+            title="Recomendados"
+            className="hover:underline"
+          >
+            Recomendados
           </Link>
         </div>
 
@@ -40,9 +49,11 @@ export function Footer() {
 
         <div className="flex gap-2">
           <a
-            href=""
+            href="https://www.youtube.com/@lucasishii"
+            target="_blank"
             title="Youtube"
             className="p-2 rounded-full transition-colors hover:bg-zinc-600"
+            rel="noreferrer"
           >
             <FaYoutube className="text-2xl sm:text-4xl" />
           </a>

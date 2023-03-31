@@ -11,16 +11,25 @@ export function UserMenuAvatar() {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <Avatar.Root className="h-10 w-10 inline-flex select-none items-center justify-center overflow-hidden rounded-full align-middle cursor-pointer">
-          <Avatar.Fallback
-            className="h-full w-full flex items-center justify-center font-semibold bg-white"
-            delayMs={600}
-          >
-            {user?.displayName
-              ?.split(' ')
-              .map((word) => word.charAt(0))
-              .join('')
-              .toUpperCase() || '?'}
-          </Avatar.Fallback>
+          {user?.photoURL ? (
+            <Avatar.Image
+              className="h-full w-full rounded-[inherit] object-cover"
+              src={user.photoURL}
+              referrerPolicy="no-referrer"
+              alt={user.displayName ? user.displayName : 'Avatar'}
+            />
+          ) : (
+            <Avatar.Fallback
+              className="h-full w-full flex items-center justify-center font-semibold bg-white"
+              delayMs={600}
+            >
+              {user?.displayName
+                ?.split(' ')
+                .map((word) => word.charAt(0))
+                .join('')
+                .toUpperCase() || '?'}
+            </Avatar.Fallback>
+          )}
         </Avatar.Root>
       </DropdownMenu.Trigger>
 

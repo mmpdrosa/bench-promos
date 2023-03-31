@@ -6,10 +6,13 @@ export function useMediaQuery(query: string) {
   useEffect(() => {
     const mediaQuery = window.matchMedia(query)
     setMatches(mediaQuery.matches)
+
     const handler = (event: any) => setMatches(event.matches)
     mediaQuery.addEventListener('change', handler)
 
     return () => mediaQuery.removeEventListener('change', handler)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return matches
