@@ -16,6 +16,34 @@ const nextConfig = {
       'cdn.discordapp.com'
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/busca',
+        destination: '/search',
+      },
+      {
+        source: '/alertas',
+        destination: '/alerts',
+      },
+      {
+        source: '/produto/:path*',
+        destination: '/product/:path*',
+      },
+      {
+        source: '/promocoes',
+        destination: '/sales',
+      },
+      {
+        source: '/cupons',
+        destination: '/coupons',
+      },
+      {
+        source: '/recomendados',
+        destination: '/recommended',
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

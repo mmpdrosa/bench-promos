@@ -28,14 +28,14 @@ export function Footer() {
           >
             Mouses
           </Link>
-          <Link href="/sales" title="Promoções" className="hover:underline">
+          <Link href="/promocoes" title="Promoções" className="hover:underline">
             Promoções
           </Link>
-          <Link href="/coupons" title="Cupons" className="hover:underline">
+          <Link href="/cupons" title="Cupons" className="hover:underline">
             Cupons
           </Link>
           <Link
-            href="/recommended"
+            href="/recomendados"
             title="Recomendados"
             className="hover:underline"
           >

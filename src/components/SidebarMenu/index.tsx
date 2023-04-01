@@ -57,18 +57,18 @@ export function SidebarMenu() {
           ))}
 
           <li>
-            <Link href="/sales" className="block px-3 py-3.5 leading-none">
+            <Link href="/promocoes" className="block px-3 py-3.5 leading-none">
               Promoções
             </Link>
           </li>
           <li>
-            <Link href="/coupons" className="block px-3 py-3.5 leading-none">
+            <Link href="/cupons" className="block px-3 py-3.5 leading-none">
               Cupons
             </Link>
           </li>
           <li>
             <Link
-              href="/recommended"
+              href="/recomendados"
               className="block px-3 py-3.5 leading-none"
             >
               Recomendados

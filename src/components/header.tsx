@@ -17,7 +17,7 @@ export function Header() {
 
   async function handleSearch({ q }: { q: string }) {
     if (q) {
-      await router.push(`/search?q=${q}`)
+      await router.push(`/busca?q=${q}`)
 
       reset()
     }
@@ -28,7 +28,7 @@ export function Header() {
       <div className="max-w-screen-xl flex items-center justify-between mx-auto sm:gap-4 max-lg:flex-wrap">
         <SidebarMenu />
 
-        <Link href="/" title="Bench Promo" className="max-sm:hidden w-60">
+        <Link href="/" title="Bench Promos" className="max-sm:hidden w-60">
           <Image src={LogoImg} width={224} alt="Logo" priority />
         </Link>
 
@@ -49,7 +49,7 @@ export function Header() {
 
         <div className="w-60 flex items-center justify-end gap-4">
           <Link
-            href="/alerts"
+            href="/alertas"
             title="Alertas"
             className="group flex items-center gap-2 p-1 text-lg text-white"
           >

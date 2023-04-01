@@ -25,6 +25,7 @@ type SignInData = {
 
 type AuthContextType = {
   user: User | null
+  isAdmin: boolean
   logIn: (data: SignInData) => Promise<void>
   logInWithGoogle: () => Promise<void>
   logOut: () => Promise<void>
@@ -40,10 +41,15 @@ export const useAuth = () => useContext(AuthContext)
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null)
+  const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
-    const subscriber = onAuthStateChanged(auth, (user) => {
+    const subscriber = onAuthStateChanged(auth, async (user) => {
       setUser(user)
+
+      const isAdmin = (await user?.getIdTokenResult())?.claims?.role === 'admin'
+
+      setIsAdmin(isAdmin)
     })
 
     return subscriber
@@ -61,12 +67,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
   async function logOut() {
     await signOut(auth)
 
-    queryClient.removeQueries('product-alerts')
+    queryClient.removeQueries('alerts')
   }
 
   const value = useMemo(
-    () => ({ user, logIn, logOut, logInWithGoogle }),
-    [user],
+    () => ({ user, isAdmin, logIn, logOut, logInWithGoogle }),
+    [user, isAdmin],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

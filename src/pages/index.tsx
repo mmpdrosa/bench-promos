@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <div className="max-w-screen-xl flex flex-col gap-8 py-8 mx-auto">
       <Slider {...settings}>
-        <Link href="/sales">
+        <Link href="/promocoes">
           <div className="relative h-[480px] max-sm:h-[512px] rounded-2xl overflow-hidden">
             <Image
               className="object-fill"

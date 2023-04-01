@@ -1,11 +1,11 @@
 import * as Avatar from '@radix-ui/react-avatar'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
-import { FaSignOutAlt } from 'react-icons/fa'
+import { FaSignOutAlt, FaUserLock } from 'react-icons/fa'
 
 import { useAuth } from '../../contexts/AuthContext'
 
 export function UserMenuAvatar() {
-  const { user, logOut } = useAuth()
+  const { user, isAdmin, logOut } = useAuth()
 
   return (
     <DropdownMenu.Root>
@@ -39,6 +39,13 @@ export function UserMenuAvatar() {
           sideOffset={5}
           align="end"
         >
+          {isAdmin && (
+            <DropdownMenu.Item className="h-6 relative flex justify-between items-center px-1 pl-6 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600">
+              Admin
+              <FaUserLock />
+            </DropdownMenu.Item>
+          )}
+
           <DropdownMenu.Item
             onClick={logOut}
             className="h-6 relative flex justify-between items-center px-1 pl-6 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600"

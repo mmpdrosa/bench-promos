@@ -7,7 +7,7 @@ self.addEventListener('push', function (event) {
   }
 
   event.waitUntil(
-    self.registration.showNotification(title || 'Bench Promo', options),
+    self.registration.showNotification(title || 'Bench Promos', options),
   )
 })
 

@@ -25,7 +25,7 @@ export function ProductCard(product: ProductCardProps) {
     <div className="w-74 min-h-[544px] flex flex-col rounded-lg overflow-hidden bg-white border border-zinc-300 transition ease-in-out duration-300 hover:shadow-xl">
       <Link
         className="w-full h-74 relative"
-        href={`/product/${product.id}`}
+        href={`/produto/${product.id}`}
         rel="noreferrer"
       >
         <Image
@@ -38,7 +38,7 @@ export function ProductCard(product: ProductCardProps) {
         />
       </Link>
       <div className="flex flex-col gap-4 p-4">
-        <Link className="h-10" href={`/product/${product.id}`} rel="noreferrer">
+        <Link className="h-10" href={`/produto/${product.id}`} rel="noreferrer">
           <h4 className="line-clamp-2 text-sm font-medium">{product.title}</h4>
         </Link>
         {product.available ? (

@@ -37,7 +37,7 @@ export default function Sales({
             <h2 className="text-3xl font-medium">{sale.title}</h2>
 
             <div className="flex gap-8 max-md:flex-col-reverse">
-              <div className="flex flex-col items-start gap-8">
+              <div className="md:w-3/5 flex flex-col items-start gap-8">
                 <p className="text-lg">{sale.specs}</p>
 
                 <h3 className="text-4xl font-bold">
@@ -49,7 +49,7 @@ export default function Sales({
                     <span>Com cupom</span>
                     <div className="flex items-center gap-2 px-4 py-1 rounded-full text-2xl font-semibold bg-amber-200">
                       <TbDiscount2 className="w-8 h-8 text-violet-500" />
-                      <span>{sale.coupon.code}</span>
+                      <span>{sale.coupon}</span>
                     </div>
                   </div>
                 )}

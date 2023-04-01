@@ -67,7 +67,7 @@ export function Menu() {
 
         <NavigationMenu.Item>
           <Link
-            href="/sales"
+            href="/promocoes"
             title="Promoções"
             className="flex items-center gap-2 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
           >
@@ -78,7 +78,7 @@ export function Menu() {
 
         <NavigationMenu.Item>
           <Link
-            href="/coupons"
+            href="/cupons"
             title="Cupons"
             className="flex items-center gap-2 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
           >
@@ -89,7 +89,7 @@ export function Menu() {
 
         <NavigationMenu.Item>
           <Link
-            href="/recommended"
+            href="/recomendados"
             title="Recomendados"
             className="max-md:hidden flex items-center gap-2 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
           >
