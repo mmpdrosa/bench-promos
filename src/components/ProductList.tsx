@@ -9,7 +9,7 @@ interface ProductListProps {
   products: Product[]
 }
 
-const ITEMS_PER_PAGE = 8
+const ITEMS_PER_PAGE = 12
 
 export function ProductList({ products }: ProductListProps) {
   const [sortOrder, setSortOrder] = useState('default')

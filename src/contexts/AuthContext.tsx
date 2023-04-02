@@ -1,10 +1,10 @@
 import {
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   User,
-  GoogleAuthProvider,
-  signInWithPopup,
 } from 'firebase/auth'
 import {
   createContext,
@@ -17,6 +17,7 @@ import {
 
 import { auth } from '@/lib/firebase'
 import { queryClient } from '@/lib/react-query'
+import { deleteCookie, setCookie } from 'cookies-next'
 
 type SignInData = {
   email: string
@@ -47,9 +48,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const subscriber = onAuthStateChanged(auth, async (user) => {
       setUser(user)
 
-      const isAdmin = (await user?.getIdTokenResult())?.claims?.role === 'admin'
+      if (user) {
+        const { token, expirationTime, claims } = await user.getIdTokenResult()
 
-      setIsAdmin(isAdmin)
+        const isAdmin = claims?.role === 'admin'
+
+        setIsAdmin(isAdmin)
+
+        setCookie('bench-promos.token', token, {
+          expires: new Date(expirationTime),
+        })
+      } else {
+        deleteCookie('bench-promos.token')
+      }
     })
 
     return subscriber

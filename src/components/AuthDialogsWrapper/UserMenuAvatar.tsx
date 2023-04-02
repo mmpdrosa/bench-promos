@@ -1,11 +1,23 @@
 import * as Avatar from '@radix-ui/react-avatar'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import { useRouter } from 'next/navigation'
 import { FaSignOutAlt, FaUserLock } from 'react-icons/fa'
 
 import { useAuth } from '../../contexts/AuthContext'
 
 export function UserMenuAvatar() {
   const { user, isAdmin, logOut } = useAuth()
+  const router = useRouter()
+
+  function handleAdminClick() {
+    router.push('/admin')
+  }
+
+  async function handleSignOutClick() {
+    await logOut()
+
+    router.push('/')
+  }
 
   return (
     <DropdownMenu.Root>
@@ -40,14 +52,17 @@ export function UserMenuAvatar() {
           align="end"
         >
           {isAdmin && (
-            <DropdownMenu.Item className="h-6 relative flex justify-between items-center px-1 pl-6 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600">
+            <DropdownMenu.Item
+              onClick={handleAdminClick}
+              className="h-6 relative flex justify-between items-center px-1 pl-6 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600"
+            >
               Admin
               <FaUserLock />
             </DropdownMenu.Item>
           )}
 
           <DropdownMenu.Item
-            onClick={logOut}
+            onClick={handleSignOutClick}
             className="h-6 relative flex justify-between items-center px-1 pl-6 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600"
           >
             Sair

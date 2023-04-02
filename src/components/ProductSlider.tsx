@@ -23,6 +23,8 @@ export function ProductSlider({ title, products }: ProductSliderProps) {
   // Function to handle changing the current page
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber)
+
+    document.getElementById(title)?.scrollTo(0, 0)
   }
 
   return (
@@ -53,7 +55,7 @@ export function ProductSlider({ title, products }: ProductSliderProps) {
         </div>
       </div>
 
-      <div className="flex gap-8">
+      <div id={title} className="flex gap-8 overflow-x-auto">
         {currentProducts.map((product) => {
           return <ProductCard key={product.id} {...product} />
         })}

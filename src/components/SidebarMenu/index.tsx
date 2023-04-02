@@ -57,12 +57,20 @@ export function SidebarMenu() {
           ))}
 
           <li>
-            <Link href="/promocoes" className="block px-3 py-3.5 leading-none">
+            <Link
+              href="/promocoes"
+              className="block px-3 py-3.5 leading-none"
+              onClick={handleToggleSidebar}
+            >
               Promoções
             </Link>
           </li>
           <li>
-            <Link href="/cupons" className="block px-3 py-3.5 leading-none">
+            <Link
+              href="/cupons"
+              className="block px-3 py-3.5 leading-none"
+              onClick={handleToggleSidebar}
+            >
               Cupons
             </Link>
           </li>
@@ -70,6 +78,7 @@ export function SidebarMenu() {
             <Link
               href="/recomendados"
               className="block px-3 py-3.5 leading-none"
+              onClick={handleToggleSidebar}
             >
               Recomendados
             </Link>

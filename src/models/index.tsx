@@ -74,5 +74,5 @@ export type Sale = {
   created_at: Date
   comments?: string
   category: Category
-  coupon: String
+  coupon?: String
 }

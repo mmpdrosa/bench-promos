@@ -58,35 +58,35 @@ export function Footer() {
             <FaYoutube className="text-2xl sm:text-4xl" />
           </a>
           <a
-            href=""
+            href="https://www.instagram.com/lucas.ishii/"
             title="Instagram"
             className="p-2 rounded-full transition-colors hover:bg-zinc-600"
           >
             <FaInstagram className="text-2xl sm:text-4xl" />
           </a>
           <a
-            href=""
+            href="https://t.me/BenchPromos"
             title="Telegram"
             className="p-2 rounded-full transition-colors hover:bg-zinc-600"
           >
             <FaTelegram className="text-2xl sm:text-4xl" />
           </a>
           <a
-            href=""
+            href="https://discord.gg/cCD5PEjyjg"
             title="Discord"
             className="p-2 rounded-full transition-colors hover:bg-zinc-600"
           >
             <FaDiscord className="text-2xl sm:text-4xl" />
           </a>
           <a
-            href=""
+            href="https://www.twitch.tv/lucasishii"
             title="Twitch"
             className="p-2 rounded-full transition-colors hover:bg-zinc-600"
           >
             <FaTwitch className="text-2xl sm:text-4xl" />
           </a>
           <a
-            href=""
+            href="https://www.tiktok.com/@lucas_ishii"
             title="Tiktok"
             className="p-2 rounded-full transition-colors hover:bg-zinc-600"
           >
