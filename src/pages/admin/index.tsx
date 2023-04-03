@@ -9,12 +9,12 @@ import { useCategory } from '@/contexts/CategoryContext'
 import { api } from '@/lib/axios'
 
 const newSaleSchema = z.object({
-  title: z.string(),
+  title: z.string().min(1),
   imageUrl: z.string().url(),
   htmlUrl: z.string().url(),
-  price: z.number().int(),
-  specs: z.string(),
+  price: z.number().int().min(1),
   categoryId: z.string(),
+  specs: z.string().optional(),
   comments: z.string().optional(),
   coupon: z.string().optional(),
 })
@@ -29,8 +29,6 @@ export default function CreateSale() {
       imageUrl: '',
       htmlUrl: '',
       price: 0,
-      specs: '',
-      coupon: '',
     },
   })
 
@@ -51,14 +49,10 @@ export default function CreateSale() {
       })
 
       reset()
-    } catch (err) {
-      console.error(err)
-    }
+    } catch (err) {}
   }
 
   const newSale = watch()
-
-  console.log(newSale)
 
   return (
     <div className="max-w-screen-xl space-y-12 py-8 mx-auto">

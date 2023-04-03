@@ -52,6 +52,7 @@ export type ProductAlert = {
     id: string
     title: string
     image_url: string
+    price: number
   }
 }
 
@@ -70,7 +71,7 @@ export type Sale = {
   image_url: string
   html_url: string
   price: number
-  specs: string
+  specs?: string
   created_at: Date
   comments?: string
   category: Category

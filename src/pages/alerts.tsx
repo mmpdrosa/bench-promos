@@ -128,12 +128,12 @@ export default function Alerts() {
       </div>
 
       {productAlerts?.length ? (
-        <div className="flex flex-wrap gap-4">
+        <div className="max-lg:flex flex-col grid grid-cols-2 gap-4">
           {productAlerts.map((productAlert) => (
             <div key={productAlert.id} className="rounded-xl overflow-hidden">
-              <div className="w-96 grid grid-cols-2 pb-2.5 bg-white">
-                <div className="grid gap-2">
-                  <div className="relative w-full h-48 max-sm:h-80">
+              <div className="flex max-sm:flex-col gap-3.5 p-2.5 bg-white">
+                <div className="sm:w-2/5">
+                  <div className="relative w-full max-w-[192px] aspect-square mx-auto">
                     <Image
                       className="object-contain"
                       alt=""
@@ -143,17 +143,27 @@ export default function Alerts() {
                       priority
                     />
                   </div>
-                  <span className="h-[72px] block px-1.5 text-center line-clamp-3">
+                  <span className="max-h-[72px] md:h-[72px] block px-1.5 text-center line-clamp-3">
                     {productAlert.product.title}
                   </span>
                 </div>
-                <div className="flex flex-col justify-center items-center p-1">
-                  <span className="text-lg font-bold text-violet-500">
-                    PREÇO DO ALERTA
-                  </span>
-                  <span className="text-xl font-bold">
-                    {priceFormatter.format(productAlert.price / 100)}
-                  </span>
+                <div className="sm:w-3/5 self-center space-y-4">
+                  <div className="text-center">
+                    <span className="block text-lg font-bold text-violet-500">
+                      PREÇO ATUAL
+                    </span>
+                    <span className="text-xl font-bold">
+                      {priceFormatter.format(productAlert.product.price / 100)}
+                    </span>
+                  </div>
+                  <div className="text-center">
+                    <span className="block text-lg font-bold text-violet-500">
+                      PREÇO DO ALERTA
+                    </span>
+                    <span className="text-xl font-bold">
+                      {priceFormatter.format(productAlert.price / 100)}
+                    </span>
+                  </div>
                 </div>
               </div>
               <div className="flex justify-between items-center px-2.5 py-1.5 text-white bg-violet-400">

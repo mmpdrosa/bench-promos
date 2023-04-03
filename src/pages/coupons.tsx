@@ -1,8 +1,11 @@
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+
 import { Toast } from '@/components/Toast'
 import { api } from '@/lib/axios'
 import { Coupon } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { RxCopy } from 'react-icons/rx'
+import { useMediaQuery } from '@/hooks/use-media-query'
 
 interface RetailersWithCoupons {
   id: string
@@ -13,6 +16,8 @@ interface RetailersWithCoupons {
 export default function Coupons({
   coupons,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const isSm = useMediaQuery('(min-width: 640px)')
+
   const retailersWithCoupons = coupons.reduce<RetailersWithCoupons[]>(
     (acc, { retailer, ...coupon }) => {
       const retailerIndex = acc.findIndex((r) => r.id === retailer.id)
@@ -37,7 +42,7 @@ export default function Coupons({
 
   return (
     <div className="max-w-screen-xl py-8 mx-auto">
-      <div className="px-6 py-8 space-y-12 rounded-xl shadow-md bg-white">
+      <div className="py-8 space-y-12 rounded-xl">
         {retailersWithCoupons.map((retailerWithCoupons) => (
           <div
             key={retailerWithCoupons.id}
@@ -49,11 +54,12 @@ export default function Coupons({
               </h2>
               <div className="w-3/4 h-2 rounded-full bg-violet-600" />
             </div>
-            <div className="w-fit flex justify-between flex-wrap gap-5">
+
+            <div className="sm:w-fit flex max-sm:justify-center flex-wrap gap-11">
               {retailerWithCoupons.coupons.map((coupon) => (
                 <div
                   key={coupon.id}
-                  className="relative px-10 py-6 rounded-2xl text-center shadow-sm text-white bg-gradient-to-br from-violet-600 to-violet-400"
+                  className="relative px-10 py-6 rounded-2xl text-center overflow-hidden text-white bg-gradient-to-br from-violet-600 to-violet-400"
                 >
                   <h3 className="text-2xl font-medium">
                     {coupon.discount.endsWith('%')
@@ -61,23 +67,23 @@ export default function Coupons({
                       : priceFormatter.format(Number(coupon.discount))}
                   </h3>
                   <h4 className="text-xl font-medium">OFF</h4>
-                  <div className="w-fit flex items-center my-6 mx-auto">
-                    <span className="w-52 py-2.5 tracking-wider font-bold border border-dashed border-white border-r-0">
+                  <div className="flex items-center my-6 mx-auto">
+                    <span className="w-52 h-10 flex items-center justify-center tracking-wider font-bold border border-dashed border-white border-r-0">
                       {coupon.code.toUpperCase()}
                     </span>
                     <Toast
                       title="CÓDIGO COPIADO"
                       triggerButton={
-                        <button className="py-2.5 px-5 font-medium text-black border border-amber-300 bg-amber-300 cursor-pointer">
+                        <button className="h-10 px-1.5 sm:px-5 font-medium text-black border border-amber-300 bg-amber-300 cursor-pointer">
                           <span onClick={() => copyToClipboard(coupon.code)}>
-                            COPIAR
+                            {isSm ? 'COPIAR' : <RxCopy />}
                           </span>
                         </button>
                       }
                     />
 
-                    <div className="absolute top-1/2 left-0 -translate-x-2/4 -translate-y-2/4 w-12 h-12 rounded-full bg-white" />
-                    <div className="absolute top-1/2 right-0 translate-x-2/4 -translate-y-2/4 w-12 h-12 rounded-full bg-white" />
+                    <div className="absolute top-1/2 left-0 -translate-x-2/4 -translate-y-2/4 w-12 h-12 rounded-full bg-zinc-100" />
+                    <div className="absolute top-1/2 right-0 translate-x-2/4 -translate-y-2/4 w-12 h-12 rounded-full bg-zinc-100" />
                   </div>
                 </div>
               ))}
@@ -92,7 +98,7 @@ export default function Coupons({
 export const getServerSideProps: GetServerSideProps<{
   coupons: Coupon[]
 }> = async () => {
-  const response = await api.get(`/coupons`)
+  const response = await api.get('/coupons')
   const coupons: Coupon[] = response.data
 
   return {

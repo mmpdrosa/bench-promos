@@ -18,7 +18,7 @@ export function ProductSaleCard(sale: Omit<Sale, 'id'>) {
 
       <div className="flex gap-8 max-md:flex-col-reverse">
         <div className="md:w-3/5 flex flex-col items-start gap-8">
-          <p className="text-lg break-words">{sale.specs}</p>
+          {sale.specs && <p className="text-lg break-words">{sale.specs}</p>}
 
           <h3 className="text-4xl font-bold">
             {priceFormatter.format(sale.price / 100)}
