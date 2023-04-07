@@ -1,15 +1,16 @@
+import { CircularProgress } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { useQuery } from 'react-query'
 
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { useAuth } from '@/contexts/AuthContext'
 import { useCategory } from '@/contexts/CategoryContext'
 import { api } from '@/lib/axios'
 import { queryClient } from '@/lib/react-query'
 import { ProductAlert } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
-import { CircularProgress } from '@mui/material'
 
 type CategoryAlert = {
   id: string
@@ -100,7 +101,9 @@ export default function Alerts() {
   }
 
   return (
-    <div className="max-w-screen-xl flex flex-col gap-8 py-8 mx-auto">
+    <div className="max-w-screen-xl flex flex-col gap-8 py-8 max-xl:px-4 mx-auto">
+      <Breadcrumbs />
+
       <div className="space-y-2">
         {categories.map((category) => (
           <button
@@ -121,7 +124,7 @@ export default function Alerts() {
       </div>
 
       <div className="w-max">
-        <h2 className="text-2xl font-extrabold text-violet-600">
+        <h2 className="text-xl font-extrabold text-violet-600">
           ALERTAS DE PREÇOS
         </h2>
         <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
@@ -168,7 +171,7 @@ export default function Alerts() {
               </div>
               <div className="flex justify-between items-center px-2.5 py-1.5 text-white bg-violet-400">
                 <Link
-                  href={`/product/${productAlert.product.id}`}
+                  href={`/produto/${productAlert.product.id}`}
                   className="hover:underline"
                 >
                   Editar Alerta

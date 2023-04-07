@@ -31,7 +31,7 @@ export function ProductSlider({ title, products }: ProductSliderProps) {
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <div className="w-max">
-          <h2 className="text-2xl uppercase font-extrabold text-violet-600">
+          <h2 className="text-xl uppercase font-extrabold text-violet-600">
             {title}
           </h2>
           <div className="w-3/4 h-2 rounded-full bg-violet-600" />
@@ -55,7 +55,7 @@ export function ProductSlider({ title, products }: ProductSliderProps) {
         </div>
       </div>
 
-      <div id={title} className="flex gap-8 overflow-x-auto">
+      <div id={title} className="flex gap-8 max-xl:overflow-x-auto">
         {currentProducts.map((product) => {
           return <ProductCard key={product.id} {...product} />
         })}

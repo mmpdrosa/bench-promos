@@ -29,7 +29,7 @@ export default function Home() {
   const isSm = useMediaQuery('(min-width: 640px)')
 
   return (
-    <div className="max-w-screen-xl flex flex-col gap-16 py-8 mx-auto">
+    <div className="max-w-screen-xl flex flex-col gap-16 py-8 max-xl:px-4 mx-auto">
       <Slider {...settings}>
         <Link href="/promocoes">
           <div className="relative h-[480px] max-sm:h-[512px] rounded-2xl overflow-hidden">

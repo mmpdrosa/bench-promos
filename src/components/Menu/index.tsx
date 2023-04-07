@@ -15,11 +15,11 @@ export function Menu() {
       <NavigationMenu.List className="flex justify-center">
         <NavigationMenu.Item>
           <NavigationMenu.Trigger
-            title="Categorias"
+            title="Produtos"
             className="group flex items-center justify-between gap-3 py-2 px-3 select-none text-xl font-semibold text-white rdx-state-open:text-black rdx-state-open:bg-white "
           >
             <FaBars className="text-amber-300 group-rdx-state-open:text-black" />
-            Categorias
+            Produtos
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="p-4 shadow-xl bg-white">
             <NavigationMenu.Sub>

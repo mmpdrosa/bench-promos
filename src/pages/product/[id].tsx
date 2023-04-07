@@ -13,12 +13,13 @@ import {
 import { TbDiscount2 } from 'react-icons/tb'
 import { NumericFormat } from 'react-number-format'
 
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { ProductPriceChart } from '@/components/ProductPriceChart'
+import { Toast } from '@/components/Toast'
 import { useAuth } from '@/contexts/AuthContext'
 import { api } from '@/lib/axios'
 import { Product } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
-import { Toast } from '@/components/Toast'
 
 export default function ProductPage({
   product,
@@ -50,16 +51,22 @@ export default function ProductPage({
   }
 
   return (
-    <div className="max-w-screen-xl py-8 mx-auto">
-      <div className="flex flex-col gap-14 px-6 max-sm:px-2.5 py-8 rounded-xl shadow-md bg-white">
+    <div className="max-w-screen-xl py-8 mx-auto space-y-8">
+      <div className="flex flex-col gap-8 max-xl:px-4">
+        <Breadcrumbs />
+
         <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-y-6 items-stretch">
-          <h1 className="sm:hidden text-xl">{product.title}</h1>
-          <div className="flex flex-col items-start gap-6 max-sm:order-3">
-            <h1 className="text-3xl max-sm:hidden">{product.title}</h1>
+          <h1 className="sm:hidden text-lg mb-6 font-semibold">
+            {product.title}
+          </h1>
+          <div className="flex flex-col items-start max-sm:order-3">
+            <h1 className="text-xl mb-6 font-semibold max-sm:hidden">
+              {product.title}
+            </h1>
 
             {product.available ? (
               <>
-                <span className="text-lg font-medium text-zinc-500">
+                <span className="text-sm mb-2 font-medium text-zinc-500">
                   Menor preço via{' '}
                   <a
                     target="_blank"
@@ -76,9 +83,9 @@ export default function ProductPage({
                 </strong>
 
                 {product.coupon && (
-                  <div className="text-lg text-zinc-700">
+                  <div className="text-sm mt-2 text-zinc-700">
                     Com cupom
-                    <div className="flex items-center gap-2 px-4 py-1 rounded-full text-2xl font-semibold bg-amber-200">
+                    <div className="flex items-center gap-2 px-4 py-1 rounded-full text-lg font-semibold tracking-wider bg-amber-200">
                       <TbDiscount2 className="w-8 h-8 text-violet-500" />
                       {product.coupon?.code}
                     </div>
@@ -92,10 +99,10 @@ export default function ProductPage({
             <a
               href={product.html_url}
               target="_blank"
-              className="flex items-center gap-2 px-6 py-4 rounded-full text-xl font-semibold transition-colors text-white bg-violet-500 hover:bg-violet-400 cursor-pointer"
+              className="max-sm:w-full flex items-center justify-center gap-2 mt-6 px-6 py-4 rounded-full text-xl font-semibold transition-colors text-white bg-violet-500 hover:bg-violet-400 cursor-pointer"
               rel="noreferrer"
             >
-              <FaExternalLinkAlt /> ACESSAR
+              ACESSAR <FaExternalLinkAlt />
             </a>
           </div>
           <div className="flex justify-center max-sm:order-2">
@@ -111,12 +118,13 @@ export default function ProductPage({
             </div>
           </div>
         </div>
+
         <nav className="overflow-x-auto">
-          <ul className="flex gap-12 py-2 border-b border-zinc-300">
+          <ul className="flex gap-12 py-2 border-b text-sm font-medium border-zinc-300">
             <li>
               <a
                 href="#price-history"
-                className="flex items-center gap-2.5 text-lg font-medium hover:underline"
+                className="flex items-center gap-2.5 hover:underline"
               >
                 <FaChartLine className="text-amber-400" />
                 Histórico
@@ -125,7 +133,7 @@ export default function ProductPage({
             <li>
               <a
                 href="#specs"
-                className="flex items-center gap-2.5 text-lg font-medium hover:underline"
+                className="flex items-center gap-2.5 hover:underline"
               >
                 <FaRegListAlt className="text-amber-400" />
                 Especificações
@@ -134,7 +142,7 @@ export default function ProductPage({
             <li>
               <a
                 href="#review"
-                className="flex items-center gap-2.5 text-lg font-medium hover:underline"
+                className="flex items-center gap-2.5 hover:underline"
               >
                 <FaVideo className="text-amber-400" />
                 Review
@@ -145,7 +153,7 @@ export default function ProductPage({
 
         <div id="price-history" className="space-y-10">
           <div className="w-max">
-            <h2 className="text-2xl font-extrabold text-violet-600">
+            <h2 className="text-xl font-extrabold text-violet-600">
               HISTÓRICO
             </h2>
             <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
@@ -155,26 +163,26 @@ export default function ProductPage({
               <ProductPriceChart productId={product.id} />
             </div>
             <div
-              className={`flex flex-col items-center gap-5 p-8 border border-zinc-100 rounded-xl shadow-md ${
+              className={`flex flex-col items-center gap-5 p-8 border border-zinc-300 rounded-xl ${
                 !product.available && 'opacity-50 pointer-events-none'
               }`}
             >
-              <h3 className="flex justify-between items-center gap-4 text-xl font-extrabold">
+              <h3 className="flex justify-between items-center gap-4 text-lg font-extrabold">
                 <FaBell /> Crie um alerta de preço
               </h3>
-              <div className="flex flex-col items-center gap-1.5 text-lg font-bold">
+              <div className="flex flex-col items-center gap-1.5 font-bold">
                 <span className="text-violet-500">MENOR PREÇO NO PERÍODO</span>
                 <span className="text-2xl">
                   {priceFormatter.format(982156 / 100)}
                 </span>
               </div>
-              <div className="flex flex-col items-center gap-1.5 text-lg font-bold">
+              <div className="flex flex-col items-center gap-1.5 font-bold">
                 <span className="text-violet-500">PREÇO ATUAL</span>
                 <span className="text-2xl">
                   {priceFormatter.format(product.price / 100)}
                 </span>
               </div>
-              <div className="flex flex-col items-center gap-1.5 text-lg font-bold">
+              <div className="flex flex-col items-center gap-1.5 font-bold">
                 <span className="text-violet-500">PREÇO DESEJADO</span>
                 <div className="flex items-center gap-4 text-lg font-medium">
                   <button
@@ -224,23 +232,23 @@ export default function ProductPage({
         {product.specs && (
           <div id="specs" className="space-y-10">
             <div className="w-max">
-              <h2 className="text-2xl font-extrabold text-violet-600">
+              <h2 className="text-xl font-extrabold text-violet-600">
                 ESPECIFICAÇÕES
               </h2>
               <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
             </div>
             <div className="border border-zinc-300 rounded-xl overflow-hidden">
-              <table className="w-full border-collapse">
+              <table className="w-full border-collapse break-all">
                 <tbody>
                   {Object.entries(product.specs).map(([key, value]) => (
                     <tr
                       key={key}
                       className="border-b last:border-0 border-zinc-300 even:bg-amber-200"
                     >
-                      <th className="table-cell w-1/2 py-4 px-4 text-left text-xl font-bold border-r border-zinc-300">
+                      <th className="table-cell w-1/2 py-4 px-4 text-left text-lg font-bold border-r border-zinc-300">
                         {key}
                       </th>
-                      <td className="table-cell w-1/2 py-2 px-4 text-xl font-semibold">
+                      <td className="table-cell w-1/2 py-2 px-4 text-lg font-semibold">
                         {value}
                       </td>
                     </tr>
@@ -254,9 +262,7 @@ export default function ProductPage({
         {product.review_url && (
           <div id="review" className="space-y-10">
             <div className="w-max">
-              <h2 className="text-2xl font-extrabold text-violet-600">
-                REVIEW
-              </h2>
+              <h2 className="text-xl font-extrabold text-violet-600">REVIEW</h2>
               <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
             </div>
             <div className="aspect-video">

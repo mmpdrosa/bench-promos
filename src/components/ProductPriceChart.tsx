@@ -116,7 +116,8 @@ export function ProductPriceChart({ productId }: { productId: string }) {
           <CartesianGrid opacity={0.1} vertical={false} />
         </AreaChart>
       </ResponsiveContainer>
-      <div className="whitespace-nowrap mt-4 overflow-x-auto">
+
+      <div className="whitespace-nowrap mt-6 overflow-x-auto">
         <button
           className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors border-zinc-300 ${
             period === '30d'

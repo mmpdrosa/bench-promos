@@ -24,7 +24,7 @@ export function Header() {
   }
 
   return (
-    <header className="px-8 pt-2 max-sm:px-4 bg-violet-500">
+    <header className="px-4 max-sm:pt-2 bg-violet-500">
       <div className="max-w-screen-xl flex items-center justify-between mx-auto sm:gap-4 max-lg:flex-wrap">
         <SidebarMenu />
 
@@ -37,13 +37,13 @@ export function Header() {
           className="w-full inline-flex justify-center lg:flex-1 max-lg:order-last max-lg:py-4"
         >
           <input
-            className="h-16 w-4/5 max-lg:w-full px-4 outline-none text-xl rounded-l-2xl border border-zinc-300 focus:outline-none focus:border-violet-800"
+            className="h-14 max-sm:h-10 w-4/5 max-lg:w-full px-4 outline-none text-sm rounded-l-xl focus:outline-none"
             type="text"
-            placeholder="Busque aqui"
+            placeholder="Digite sua busca..."
             {...register('q')}
           />
-          <button className="group p-4 rounded-r-2xl border transition-colors border-zinc-300 bg-amber-300 hover:bg-yellow-400 focus:outline-none focus:outline-0 focus:border-yellow-800">
-            <HiSearch className="text-3xl transition-colors text-zinc-600 group-hover:text-black" />
+          <button className="group w-14 flex items-center justify-center rounded-r-xl transition-colors bg-amber-300 hover:bg-yellow-400 focus:outline-none">
+            <HiSearch className="text-2xl transition-colors text-zinc-600 group-hover:text-black" />
           </button>
         </form>
 

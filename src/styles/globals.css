@@ -6,8 +6,10 @@
   @apply scroll-smooth antialiased;
 }
 
-html,
-body,
-#__next {
-  @apply h-full;
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  @apply text-black bg-white;
 }

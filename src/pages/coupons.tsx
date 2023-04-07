@@ -1,11 +1,12 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { RxCopy } from 'react-icons/rx'
 
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { Toast } from '@/components/Toast'
+import { useMediaQuery } from '@/hooks/use-media-query'
 import { api } from '@/lib/axios'
 import { Coupon } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
-import { RxCopy } from 'react-icons/rx'
-import { useMediaQuery } from '@/hooks/use-media-query'
 
 interface RetailersWithCoupons {
   id: string
@@ -41,15 +42,17 @@ export default function Coupons({
   }
 
   return (
-    <div className="max-w-screen-xl py-8 mx-auto">
-      <div className="py-8 space-y-12 rounded-xl">
+    <div className="max-w-screen-xl py-8 max-xl:px-4 mx-auto space-y-8">
+      <Breadcrumbs />
+
+      <div className="space-y-12 rounded-xl">
         {retailersWithCoupons.map((retailerWithCoupons) => (
           <div
             key={retailerWithCoupons.id}
             className="pb-12 space-y-8 border-b last:border-0 border-zinc-300"
           >
             <div className="w-max">
-              <h2 className="text-2xl uppercase font-extrabold text-violet-600">
+              <h2 className="text-xl uppercase font-extrabold text-violet-600">
                 {retailerWithCoupons.name}
               </h2>
               <div className="w-3/4 h-2 rounded-full bg-violet-600" />
@@ -82,8 +85,8 @@ export default function Coupons({
                       }
                     />
 
-                    <div className="absolute top-1/2 left-0 -translate-x-2/4 -translate-y-2/4 w-12 h-12 rounded-full bg-zinc-100" />
-                    <div className="absolute top-1/2 right-0 translate-x-2/4 -translate-y-2/4 w-12 h-12 rounded-full bg-zinc-100" />
+                    <div className="absolute top-1/2 left-0 -translate-x-2/4 -translate-y-2/4 w-12 h-12 rounded-full bg-white" />
+                    <div className="absolute top-1/2 right-0 translate-x-2/4 -translate-y-2/4 w-12 h-12 rounded-full bg-white" />
                   </div>
                 </div>
               ))}

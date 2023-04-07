@@ -1,6 +1,7 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useState } from 'react'
 
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { ProductSaleCard } from '@/components/ProductSaleCard'
 import { api } from '@/lib/axios'
 import { Sale } from '@/models'
@@ -21,7 +22,9 @@ export default function Sales({
   }
 
   return (
-    <div className="max-w-screen-xl py-8 space-y-8 mx-auto">
+    <div className="max-w-screen-xl py-8 max-xl:px-4 mx-auto space-y-8">
+      <Breadcrumbs />
+
       <div className="flex flex-col gap-8">
         {loadedSales.map((sale) => (
           <ProductSaleCard key={sale.id} {...sale} />

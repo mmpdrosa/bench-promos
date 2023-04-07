@@ -1,5 +1,6 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { ProductSlider } from '@/components/ProductSlider'
 import { api } from '@/lib/axios'
 import { Product } from '@/models'
@@ -31,7 +32,9 @@ export default function Recommended({
   }, [])
 
   return (
-    <div className="max-w-screen-xl flex flex-col gap-8 py-8 mx-auto">
+    <div className="max-w-screen-xl flex flex-col gap-8 py-8 max-xl:px-4 mx-auto">
+      <Breadcrumbs />
+
       {recommendedProductsByCategory.map(({ products, ...category }) => (
         <ProductSlider
           key={category.id}

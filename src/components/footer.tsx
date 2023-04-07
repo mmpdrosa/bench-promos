@@ -10,10 +10,10 @@ import {
 
 export function Footer() {
   return (
-    <footer className="px-8 p-8 max-sm:px-4 text-white bg-zinc-800">
-      <div className="max-w-screen-xl grid gap-6 mx-auto">
-        <div className="w-max flex flex-col text-lg">
-          <span className="text-xl font-bold text-violet-500">Destaques</span>
+    <footer className="text-white bg-black">
+      <div className="max-w-screen-xl mx-auto">
+        <div className="w-max flex flex-col gap-1 pt-8 mb-4 max-xl:px-6 text-sm">
+          <span className="text-sm font-bold text-violet-500">Destaques</span>
           <Link
             href="/51d96dd7-5a1e-4fc6-83fd-c0de1745af3f"
             title="Notebooks"
@@ -43,11 +43,11 @@ export function Footer() {
           </Link>
         </div>
 
-        <div className="border-y py-4 text-xl font-semibold border-white text-center">
+        <div className="border-y p-6 text-sm font-semibold border-white/50 text-center">
           Encontre os produtos mais procurados em promoção aqui no Bench Promos
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex max-sm:justify-between gap-2 py-6 max-xl:px-6">
           <a
             href="https://www.youtube.com/@lucasishii"
             target="_blank"
@@ -55,42 +55,52 @@ export function Footer() {
             className="p-2 rounded-full transition-colors hover:bg-zinc-600"
             rel="noreferrer"
           >
-            <FaYoutube className="text-2xl sm:text-4xl" />
+            <FaYoutube className="text-2xl" />
           </a>
           <a
             href="https://www.instagram.com/lucas.ishii/"
             title="Instagram"
+            target="_blank"
             className="p-2 rounded-full transition-colors hover:bg-zinc-600"
+            rel="noreferrer"
           >
-            <FaInstagram className="text-2xl sm:text-4xl" />
+            <FaInstagram className="text-2xl" />
           </a>
           <a
             href="https://t.me/BenchPromos"
             title="Telegram"
+            target="_blank"
             className="p-2 rounded-full transition-colors hover:bg-zinc-600"
+            rel="noreferrer"
           >
-            <FaTelegram className="text-2xl sm:text-4xl" />
+            <FaTelegram className="text-2xl" />
           </a>
           <a
             href="https://discord.gg/cCD5PEjyjg"
             title="Discord"
+            target="_blank"
             className="p-2 rounded-full transition-colors hover:bg-zinc-600"
+            rel="noreferrer"
           >
-            <FaDiscord className="text-2xl sm:text-4xl" />
+            <FaDiscord className="text-2xl" />
           </a>
           <a
             href="https://www.twitch.tv/lucasishii"
             title="Twitch"
+            target="_blank"
             className="p-2 rounded-full transition-colors hover:bg-zinc-600"
+            rel="noreferrer"
           >
-            <FaTwitch className="text-2xl sm:text-4xl" />
+            <FaTwitch className="text-2xl" />
           </a>
           <a
             href="https://www.tiktok.com/@lucas_ishii"
             title="Tiktok"
+            target="_blank"
             className="p-2 rounded-full transition-colors hover:bg-zinc-600"
+            rel="noreferrer"
           >
-            <FaTiktok className="text-2xl sm:text-4xl" />
+            <FaTiktok className="text-2xl" />
           </a>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useSearchParams } from 'next/navigation'
 
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { ProductList } from '@/components/ProductList'
 import { api } from '@/lib/axios'
 import { Product } from '@/models'
@@ -13,7 +14,9 @@ export default function Search({
   const search = searchParams.get('q')
 
   return (
-    <div className="max-w-screen-xl flex flex-col gap-8 py-8 mx-auto">
+    <div className="max-w-screen-xl flex flex-col gap-8 py-8 max-xl:px-4 mx-auto">
+      <Breadcrumbs />
+
       <span>Você pesquisou por: {search}</span>
 
       <ProductList products={products} />

@@ -34,6 +34,34 @@ export function SidebarMenu() {
         }`}
       >
         <ul className="h-full">
+          <li>
+            <Link
+              href="/promocoes"
+              className="block px-3 py-3.5 leading-none font-bold"
+              onClick={handleToggleSidebar}
+            >
+              Promoções
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/cupons"
+              className="block px-3 py-3.5 leading-none font-bold"
+              onClick={handleToggleSidebar}
+            >
+              Cupons
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/recomendados"
+              className="block px-3 py-3.5 leading-none font-bold"
+              onClick={handleToggleSidebar}
+            >
+              Recomendados
+            </Link>
+          </li>
+
           {categories?.map(({ id, name, subcategories }) => (
             <li key={id}>
               {subcategories?.length ? (
@@ -55,34 +83,6 @@ export function SidebarMenu() {
               )}
             </li>
           ))}
-
-          <li>
-            <Link
-              href="/promocoes"
-              className="block px-3 py-3.5 leading-none"
-              onClick={handleToggleSidebar}
-            >
-              Promoções
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/cupons"
-              className="block px-3 py-3.5 leading-none"
-              onClick={handleToggleSidebar}
-            >
-              Cupons
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/recomendados"
-              className="block px-3 py-3.5 leading-none"
-              onClick={handleToggleSidebar}
-            >
-              Recomendados
-            </Link>
-          </li>
         </ul>
       </aside>
     </>

@@ -58,13 +58,9 @@ export default function App({ Component, pageProps }: AppProps) {
           <TooltipProvider>
             <AuthProvider>
               <CategoryProvider>
-                <div
-                  className={`min-h-full flex flex-col text-black bg-zinc-100 ${montserrat.className}`}
-                >
-                  <Layout>
-                    <Component {...pageProps} />
-                  </Layout>
-                </div>
+                <Layout {...montserrat}>
+                  <Component {...pageProps} />
+                </Layout>
               </CategoryProvider>
             </AuthProvider>
           </TooltipProvider>
