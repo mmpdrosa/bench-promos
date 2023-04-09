@@ -46,7 +46,7 @@ export function CompactProductSaleCard(sale: CompactProductSaleCardProps) {
         <Image
           className="object-contain"
           alt=""
-          src="https://m.media-amazon.com/images/I/61tegGxILZL._AC_SL1280_.jpg"
+          src={sale.image_url}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority

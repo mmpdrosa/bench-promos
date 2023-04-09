@@ -36,7 +36,7 @@ export default function Home({
     queryKey: ['sales', 'home'],
     queryFn: async () => {
       const response = await api.get('/sales?skip=0&take=4')
-      const sales: Sale[] = response.data.sales
+      const sales: Sale[] = response.data
 
       return sales
     },
@@ -113,7 +113,7 @@ export const getServerSideProps: GetServerSideProps<{
   sales: Sale[]
 }> = async () => {
   const response = await api.get('/sales?skip=0&take=4')
-  const sales: Sale[] = response.data.sales
+  const sales: Sale[] = response.data
 
   return {
     props: {

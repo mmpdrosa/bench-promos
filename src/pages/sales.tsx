@@ -26,7 +26,7 @@ export default function Sales({
       const response = await api.get(
         `/sales?skip=${pageParam * ITEMS_PER_LOAD}&take=${ITEMS_PER_LOAD}`,
       )
-      const sales: Sale[] = response.data.sales
+      const sales: Sale[] = response.data
 
       return sales
     },
@@ -83,7 +83,7 @@ export const getServerSideProps: GetServerSideProps<{
   sales: Sale[]
 }> = async () => {
   const response = await api.get(`/sales?skip=0&take=${ITEMS_PER_LOAD}`)
-  const sales: Sale[] = response.data.sales
+  const sales: Sale[] = response.data
 
   return {
     props: {
