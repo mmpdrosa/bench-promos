@@ -89,7 +89,7 @@ export default function Home({
         </div>
 
         <div className="grid grid-cols-fill justify-center gap-8">
-          {sales!.map((sale) => (
+          {sales?.map((sale) => (
             <CompactProductSaleCard
               key={sale.id}
               id={sale.id}

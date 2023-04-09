@@ -64,6 +64,7 @@ export default function CreateSale() {
       </div>
 
       <ExpandedProductSaleCard
+        id="admin"
         title={newSale.title}
         image_url={newSale.imageUrl}
         html_url={newSale.htmlUrl}

@@ -34,7 +34,7 @@ export default function Sales({
       getNextPageParam: (lastPage, allPages) => {
         const nextPage = allPages.length
 
-        return lastPage.length !== 0 ? nextPage : undefined
+        return lastPage && lastPage.length !== 0 ? nextPage : undefined
       },
       initialData: { pages: [initialSales], pageParams: [0] },
       refetchOnWindowFocus: false,
@@ -53,9 +53,12 @@ export default function Sales({
       <Breadcrumbs />
 
       <div className="flex flex-col gap-8">
-        {sales!.pages.flat().map((sale) => (
-          <ExpandedProductSaleCard key={sale.id} {...sale} />
-        ))}
+        {sales!.pages
+          .filter(Boolean)
+          .flat()
+          .map((sale) => (
+            <ExpandedProductSaleCard key={sale.id} {...sale} />
+          ))}
       </div>
 
       <div>

@@ -68,7 +68,7 @@ export function ExpandedProductSaleCard(sale: Sale) {
               </span>
             </div>
           )}
-          <div className="mt-6">
+          <div hidden={sale.id === 'admin'} className="mt-6">
             <SaleReactions saleId={sale.id} reactions={sale.reactions} />
           </div>
         </div>
