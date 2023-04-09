@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { ProductSaleCard } from '@/components/ProductSaleCard'
+import { ExpandedProductSaleCard } from '@/components/ExpandedProductSaleCard'
 import { useCategory } from '@/contexts/CategoryContext'
 import { api } from '@/lib/axios'
 
@@ -63,7 +63,7 @@ export default function CreateSale() {
         <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
       </div>
 
-      <ProductSaleCard
+      <ExpandedProductSaleCard
         title={newSale.title}
         image_url={newSale.imageUrl}
         html_url={newSale.htmlUrl}

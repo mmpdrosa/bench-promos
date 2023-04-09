@@ -72,7 +72,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   async function logInWithGoogle() {
     const provider = new GoogleAuthProvider()
-    await signInWithPopup(auth, provider)
+    try {
+      await signInWithPopup(auth, provider)
+    } catch {}
   }
 
   async function logOut() {

@@ -133,8 +133,8 @@ export default function Alerts() {
       {productAlerts?.length ? (
         <div className="max-lg:flex flex-col grid grid-cols-2 gap-4">
           {productAlerts.map((productAlert) => (
-            <div key={productAlert.id} className="rounded-xl overflow-hidden">
-              <div className="flex max-sm:flex-col gap-3.5 p-2.5 bg-white">
+            <div key={productAlert.id}>
+              <div className="flex max-sm:flex-col gap-3.5 p-2.5 rounded-t-xl border border-b-0 border-zinc-300 bg-white">
                 <div className="sm:w-2/5">
                   <div className="relative w-full max-w-[192px] aspect-square mx-auto">
                     <Image
@@ -169,7 +169,7 @@ export default function Alerts() {
                   </div>
                 </div>
               </div>
-              <div className="flex justify-between items-center px-2.5 py-1.5 text-white bg-violet-400">
+              <div className="flex justify-between items-center px-2.5 py-1.5 rounded-b-xl text-white bg-violet-400">
                 <Link
                   href={`/produto/${productAlert.product.id}`}
                   className="hover:underline"

@@ -1,12 +1,19 @@
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import { FaExternalLinkAlt, FaInfoCircle } from 'react-icons/fa'
+import { RxCopy } from 'react-icons/rx'
 import { TbDiscount2 } from 'react-icons/tb'
 
 import { Sale } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
+import { SaleReactions } from './SaleReactions'
+import { Toast } from './Toast'
 
-export function ProductSaleCard(sale: Omit<Sale, 'id'>) {
+export function ExpandedProductSaleCard(sale: Sale) {
+  function copyToClipboard(text: string) {
+    navigator.clipboard.writeText(text)
+  }
+
   return (
     <div className="px-12 max-md:px-3.5 py-8 space-y-8 rounded-xl border border-zinc-300 shadow-sm bg-white">
       <div className="flex justify-between items-center">
@@ -29,9 +36,17 @@ export function ProductSaleCard(sale: Omit<Sale, 'id'>) {
           {sale.coupon && (
             <div className="mt-2 text-sm text-zinc-700">
               <span>Com cupom</span>
-              <div className="flex items-center gap-2 px-4 py-1 rounded-full text-lg font-semibold tracking-wider bg-amber-200">
+              <div className="flex items-center gap-2 px-4 py-1 rounded-full text-lg font-semibold tracking-wider border border-dashed border-black bg-amber-200">
                 <TbDiscount2 className="w-8 h-8 text-violet-500" />
                 <span>{sale.coupon}</span>
+                <Toast
+                  title="CÓDIGO COPIADO"
+                  triggerButton={
+                    <button onClick={() => copyToClipboard(sale.coupon!)}>
+                      <RxCopy className="text-lg" />
+                    </button>
+                  }
+                />
               </div>
             </div>
           )}
@@ -48,11 +63,14 @@ export function ProductSaleCard(sale: Omit<Sale, 'id'>) {
           {sale.comments && (
             <div className="flex items-center mt-8 gap-4">
               <FaInfoCircle className="not-sr-only text-2xl text-violet-500" />
-              <span className="text-sm font-bold break-words whitespace-pre-line text-black/75">
+              <span className="text-xs font-bold break-words whitespace-pre-line text-black/75">
                 {sale.comments}
               </span>
             </div>
           )}
+          <div className="mt-6">
+            <SaleReactions saleId={sale.id} reactions={sale.reactions} />
+          </div>
         </div>
         <div className="relative md:w-2/5 aspect-square">
           {sale.image_url && (

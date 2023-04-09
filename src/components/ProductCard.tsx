@@ -43,7 +43,7 @@ export function ProductCard(product: ProductCardProps) {
         </Link>
         {product.available ? (
           <>
-            <h5 className="text-sm font-medium text-zinc-500">
+            <h4 className="text-sm font-medium text-zinc-500">
               Menor preço via{' '}
               <a
                 target="_blank"
@@ -53,7 +53,7 @@ export function ProductCard(product: ProductCardProps) {
               >
                 {product.retailer.name}
               </a>
-            </h5>
+            </h4>
             <strong className="text-xl font-bold">
               {priceFormatter.format(product.price / 100)}
             </strong>
