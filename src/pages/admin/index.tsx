@@ -55,7 +55,7 @@ export default function CreateSale() {
   const newSale = watch()
 
   return (
-    <div className="max-w-screen-xl space-y-12 py-8 mx-auto">
+    <div className="max-w-screen-xl space-y-12 py-8 max-xl:px-4 mx-auto">
       <div className="w-max">
         <h2 className="text-2xl font-extrabold text-violet-600">
           ADICIONAR PROMOÇÃO

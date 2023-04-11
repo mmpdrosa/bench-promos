@@ -61,7 +61,7 @@ export function Layout({ children }: LayoutProps) {
       <Header />
       <div className="w-full h-1.5 bg-gradient-to-r from-violet-500 via-amber-200 to-violet-500"></div>
 
-      <main>{children}</main>
+      <main className="flex-1">{children}</main>
 
       <Footer />
     </>

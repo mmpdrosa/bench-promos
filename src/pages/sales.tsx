@@ -2,6 +2,7 @@ import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useInfiniteQuery } from 'react-query'
+import { useSearchParams } from 'next/navigation'
 
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { ExpandedProductSaleCard } from '@/components/ExpandedProductSaleCard'
@@ -14,17 +15,23 @@ export default function Sales({
   sales: initialSales,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { ref, inView } = useInView()
+  const searchParams = useSearchParams()
+
+  const search = searchParams.get('q') ?? ''
 
   const {
     data: sales,
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
+    refetch,
   } = useInfiniteQuery(
     ['sales'],
     async ({ pageParam = 0 }) => {
       const response = await api.get(
-        `/sales?skip=${pageParam * ITEMS_PER_LOAD}&take=${ITEMS_PER_LOAD}`,
+        `/sales?search=${search}&skip=${
+          pageParam * ITEMS_PER_LOAD
+        }&take=${ITEMS_PER_LOAD}`,
       )
       const sales: Sale[] = response.data
 
@@ -42,6 +49,11 @@ export default function Sales({
   )
 
   useEffect(() => {
+    refetch()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search])
+
+  useEffect(() => {
     if (inView) {
       fetchNextPage()
     }
@@ -51,6 +63,12 @@ export default function Sales({
   return (
     <div className="max-w-screen-xl py-8 max-xl:px-4 mx-auto space-y-8">
       <Breadcrumbs />
+
+      {search && (
+        <div>
+          <span>Você pesquisou por: {search}</span>
+        </div>
+      )}
 
       <div className="flex flex-col gap-8">
         {sales!.pages
@@ -81,8 +99,12 @@ export default function Sales({
 
 export const getServerSideProps: GetServerSideProps<{
   sales: Sale[]
-}> = async () => {
-  const response = await api.get(`/sales?skip=0&take=${ITEMS_PER_LOAD}`)
+}> = async (context) => {
+  const { q } = context.query
+
+  const response = await api.get(
+    `/sales?search=${q}&skip=0&take=${ITEMS_PER_LOAD}`,
+  )
   const sales: Sale[] = response.data
 
   return {

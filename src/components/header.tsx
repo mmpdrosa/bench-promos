@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { FaBell } from 'react-icons/fa'
-import { HiSearch } from 'react-icons/hi'
+import { HiOutlineSwitchVertical, HiSearch } from 'react-icons/hi'
 
 import LogoImg from '@/assets/logo.svg'
 import { AuthDialogsWrapper } from './AuthDialogsWrapper'
@@ -12,14 +13,29 @@ import { SidebarMenu } from './SidebarMenu'
 
 export function Header() {
   const router = useRouter()
+  const [searchLocation, setSearchLocation] = useState<'sales' | 'products'>(
+    'sales',
+  )
 
   const { register, handleSubmit, reset } = useForm<{ q: string }>()
 
   async function handleSearch({ q }: { q: string }) {
-    if (q) {
-      await router.push(`/busca?q=${q}`)
+    if (!q) return
 
-      reset()
+    if (searchLocation === 'products') {
+      await router.push(`/busca?q=${q}`)
+    } else {
+      await router.push(`/promocoes?q=${q}`)
+    }
+
+    reset()
+  }
+
+  const handleSwitchSearch = () => {
+    if (searchLocation === 'sales') {
+      setSearchLocation('products')
+    } else {
+      setSearchLocation('sales')
     }
   }
 
@@ -34,16 +50,31 @@ export function Header() {
 
         <form
           onSubmit={handleSubmit(handleSearch)}
-          className="w-full inline-flex justify-center lg:flex-1 max-lg:order-last max-lg:py-4"
+          className="w-full inline-flex justify-center lg:flex-1 max-lg:order-12 max-lg:py-4"
         >
+          <div
+            onClick={handleSwitchSearch}
+            className="flex items-center justify-center gap-2 max-sm:gap-1 px-4 max-sm:px-2.5 rounded-l-xl bg-white cursor-pointer"
+          >
+            <span className="w-24 max-sm:w-20 text-sm max-sm:text-xs font-bold select-none">
+              {searchLocation === 'sales' ? 'Promoções' : 'Produtos'}
+            </span>
+
+            <HiOutlineSwitchVertical className="max-sm:text-sm" />
+          </div>
+
+          <div className="py-4 max-sm:py-2.5 bg-white">
+            <div className="w-px h-full bg-zinc-300"></div>
+          </div>
+
           <input
-            className="h-14 max-sm:h-10 w-4/5 max-lg:w-full px-4 outline-none text-sm rounded-l-xl focus:outline-none"
+            className="w-3/5 h-14 max-sm:h-10 max-lg:w-full px-4 max-sm:px-2.5 outline-none text-sm focus:outline-none"
             type="text"
             placeholder="Digite sua busca..."
             {...register('q')}
           />
           <button className="group w-14 flex items-center justify-center rounded-r-xl transition-colors bg-amber-300 hover:bg-yellow-400 focus:outline-none">
-            <HiSearch className="text-2xl transition-colors text-zinc-600 group-hover:text-black" />
+            <HiSearch className="text-2xl max-sm:text-lg transition-colors text-zinc-600 group-hover:text-black" />
           </button>
         </form>
 

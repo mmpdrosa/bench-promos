@@ -10,7 +10,7 @@ import {
 
 export function Footer() {
   return (
-    <footer className="mt-auto text-white bg-black">
+    <footer className="text-white bg-black">
       <div className="max-w-screen-xl mx-auto">
         <div className="w-max flex flex-col gap-1 pt-8 mb-4 max-xl:px-6 text-sm">
           <span className="text-sm font-bold text-violet-500">Destaques</span>

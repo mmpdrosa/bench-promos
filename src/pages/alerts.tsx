@@ -169,7 +169,7 @@ export default function Alerts() {
                   </div>
                 </div>
               </div>
-              <div className="flex justify-between items-center px-2.5 py-1.5 rounded-b-xl text-white bg-violet-400">
+              <div className="flex justify-between items-center px-2.5 py-1.5 rounded-b-xl font-medium text-white bg-violet-500">
                 <Link
                   href={`/produto/${productAlert.product.id}`}
                   className="hover:underline"

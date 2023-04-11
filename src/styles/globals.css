@@ -10,6 +10,14 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
+html, body, #__next {
+  @apply h-full
+}
+
+#__next {
+  @apply flex flex-col
+}
+
 body {
   @apply text-black bg-white;
 }
