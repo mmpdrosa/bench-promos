@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -21,12 +22,23 @@ import { api } from '@/lib/axios'
 import { Product } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
 
+type Sale = {
+  id: string
+  price: number
+  image_url: string
+  html_url: string
+  coupon?: string
+  created_at: string
+}
+
 export default function ProductPage({
   product,
+  sales,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { user } = useAuth()
 
   const [alertPrice, setAlertPrice] = useState(product.price)
+  const [periodLowestPrice, setPeriodLowestPrice] = useState(0)
 
   function incrementAlertPrice() {
     setAlertPrice((prev) => prev + 5000) // R$ 50
@@ -48,6 +60,10 @@ export default function ProductPage({
         headers: { Authorization: `Bearer ${token}` },
       },
     )
+  }
+
+  function changeLowestPrice(price: number) {
+    setPeriodLowestPrice(price)
   }
 
   return (
@@ -132,6 +148,15 @@ export default function ProductPage({
             </li>
             <li>
               <a
+                href="#last-sales"
+                className="flex items-center gap-2.5 hover:underline"
+              >
+                <TbDiscount2 className="text-lg text-amber-400" />
+                Últimas Promoções
+              </a>
+            </li>
+            <li>
+              <a
                 href="#specs"
                 className="flex items-center gap-2.5 hover:underline"
               >
@@ -160,7 +185,10 @@ export default function ProductPage({
           </div>
           <div className="grid grid-cols-3 max-lg:grid-cols-1 items-end gap-8 max-lg:gap-x-0">
             <div className="col-span-2 max-lg:order-last">
-              <ProductPriceChart productId={product.id} />
+              <ProductPriceChart
+                productId={product.id}
+                onInsertLowestPrice={changeLowestPrice}
+              />
             </div>
             <div
               className={`flex flex-col items-center gap-5 p-8 border border-zinc-300 rounded-xl ${
@@ -173,7 +201,7 @@ export default function ProductPage({
               <div className="flex flex-col items-center gap-1.5 font-bold">
                 <span className="text-violet-500">MENOR PREÇO NO PERÍODO</span>
                 <span className="text-2xl">
-                  {priceFormatter.format(982156 / 100)}
+                  {priceFormatter.format(periodLowestPrice / 100)}
                 </span>
               </div>
               <div className="flex flex-col items-center gap-1.5 font-bold">
@@ -228,6 +256,79 @@ export default function ProductPage({
             </div>
           </div>
         </div>
+
+        {sales.length > 0 && (
+          <div id="last-sales" className="space-y-10">
+            <div className="w-max">
+              <h2 className="text-xl font-extrabold text-violet-600">
+                ÚLTIMAS PROMOÇÕES
+              </h2>
+              <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
+            </div>
+            <div className="max-h-[724px] border rounded-xl border-zinc-300 overflow-y-auto scrollbar scrollbar-w-2 scrollbar-thumb-rounded-full scrollbar-thumb-zinc-300">
+              <ul>
+                {sales.map((sale) => (
+                  <li
+                    key={sale.id}
+                    className="border-b last:border-0 border-zinc-300"
+                  >
+                    <div className="p-6 max-sm:p-4">
+                      <div className="mb-2 text-end">
+                        <span className="text-sm">
+                          {dayjs(sale.created_at).fromNow()}
+                        </span>
+                      </div>
+                      <div className="flex justify-center gap-8 mr-auto max-sm:flex-wrap">
+                        <div className="relative h-40 aspect-square">
+                          <Image
+                            className="object-contain"
+                            alt=""
+                            src={sale.image_url}
+                            fill
+                            sizes="33vw"
+                            priority
+                          />
+                        </div>
+                        <div className="w-full flex gap-x-8 gap-y-4 justify-between max-md:flex-col">
+                          <div className="w-full flex items-center gap-x-8 flex-wrap">
+                            <div>
+                              <span className="block text-sm">Preço</span>
+                              <strong className="text-2xl font-bold">
+                                {priceFormatter.format(sale.price / 100)}
+                              </strong>
+                            </div>
+
+                            {sale.coupon && (
+                              <div className="text-sm text-zinc-700">
+                                <span>Com cupom</span>
+                                <div className="h-8 flex items-center gap-1 py-1 px-2.5 border border-dashed border-black rounded-full bg-amber-200">
+                                  <TbDiscount2 className="text-2xl text-violet-500" />
+                                  <span className="mr-auto font-semibold tracking-wider">
+                                    {sale.coupon}
+                                  </span>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex items-center">
+                            <a
+                              href={sale.html_url}
+                              target="_blank"
+                              className="flex items-center justify-center gap-2 px-6 py-4 rounded-full font-semibold transition-colors text-white bg-violet-500 hover:bg-violet-400 cursor-pointer"
+                              rel="noreferrer"
+                            >
+                              ACESSAR <FaExternalLinkAlt />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
 
         {product.specs && (
           <div id="specs" className="space-y-10">
@@ -284,16 +385,23 @@ export default function ProductPage({
 export const getServerSideProps: GetServerSideProps<
   {
     product: Product
+    sales: Sale[]
   },
   { id: string }
 > = async ({ params }) => {
   try {
-    const response = await api.get(`/products/${params!.id}/with-min-price`)
-    const product: Product = response.data
+    const [productResponse, salesResponse] = await Promise.all([
+      api.get(`/products/${params!.id}/with-min-price`),
+      api.get(`/products/${params!.id}/sales`),
+    ])
+
+    const product: Product = productResponse.data
+    const sales: Sale[] = salesResponse.data
 
     return {
       props: {
         product,
+        sales,
       },
     }
   } catch (err) {

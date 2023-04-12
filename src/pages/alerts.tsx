@@ -2,6 +2,7 @@ import { CircularProgress } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect } from 'react'
+import { FaEdit, FaTrash } from 'react-icons/fa'
 import { useQuery } from 'react-query'
 
 import { Breadcrumbs } from '@/components/Breadcrumbs'
@@ -171,18 +172,20 @@ export default function Alerts() {
               </div>
               <div className="flex justify-between items-center px-2.5 py-1.5 rounded-b-xl font-medium text-white bg-violet-500">
                 <Link
-                  href={`/produto/${productAlert.product.id}`}
-                  className="hover:underline"
+                  href={`/produto/${productAlert.product.id}#price-history`}
+                  className="flex items-center gap-2 hover:underline"
                 >
+                  <FaEdit />
                   Editar Alerta
                 </Link>
                 <a
                   onClick={() =>
                     handleProductAlertDelete(productAlert.product.id)
                   }
-                  className="cursor-pointer hover:underline"
+                  className="flex items-center gap-2 cursor-pointer hover:underline"
                 >
                   Excluir
+                  <FaTrash />
                 </a>
               </div>
             </div>

@@ -55,6 +55,7 @@ module.exports = {
     require('@tailwindcss/line-clamp'),
     require("tailwindcss-radix")({
       variantPrefix: "rdx",
-    })
+    }),
+    require('tailwind-scrollbar')({ nocompatible: true }),
   ],
 }

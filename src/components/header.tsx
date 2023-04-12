@@ -17,7 +17,7 @@ export function Header() {
     'sales',
   )
 
-  const { register, handleSubmit, reset } = useForm<{ q: string }>()
+  const { register, handleSubmit } = useForm<{ q: string }>()
 
   async function handleSearch({ q }: { q: string }) {
     if (!q) return
@@ -27,8 +27,6 @@ export function Header() {
     } else {
       await router.push(`/promocoes?q=${q}`)
     }
-
-    reset()
   }
 
   const handleSwitchSearch = () => {

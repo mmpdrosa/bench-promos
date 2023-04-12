@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useQuery } from 'react-query'
 import {
   Area,
@@ -23,7 +23,15 @@ interface DataItem {
   available: boolean
 }
 
-export function ProductPriceChart({ productId }: { productId: string }) {
+interface ProductPriceChartProps {
+  productId: string
+  onInsertLowestPrice: (price: number) => void
+}
+
+export function ProductPriceChart({
+  productId,
+  onInsertLowestPrice,
+}: ProductPriceChartProps) {
   const [period, setPeriod] = useState<TimeRange>('30d')
 
   const { data: productPriceHistory } = useQuery(
@@ -44,6 +52,20 @@ export function ProductPriceChart({ productId }: { productId: string }) {
     },
     { refetchOnWindowFocus: false, staleTime: 1000 * 60 * 60 },
   )
+
+  console.log(productPriceHistory)
+
+  const findLowestPrice = (data: DataItem[]) => {
+    if (data.length < 1) return 0
+
+    return data.reduce((lowestPrice, item) => {
+      if (item.price < lowestPrice) {
+        return item.price
+      } else {
+        return lowestPrice
+      }
+    }, data[0].price)
+  }
 
   const chartData = useMemo(() => {
     if (!productPriceHistory) return []
@@ -79,6 +101,11 @@ export function ProductPriceChart({ productId }: { productId: string }) {
 
     return formattedData
   }, [productPriceHistory])
+
+  useEffect(() => {
+    const lowestPrice = findLowestPrice(chartData)
+    onInsertLowestPrice(lowestPrice)
+  }, [chartData, onInsertLowestPrice])
 
   return (
     <>
