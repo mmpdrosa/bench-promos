@@ -53,8 +53,6 @@ export function ProductPriceChart({
     { refetchOnWindowFocus: false, staleTime: 1000 * 60 * 60 },
   )
 
-  console.log(productPriceHistory)
-
   const findLowestPrice = (data: DataItem[]) => {
     if (data.length < 1) return 0
 
