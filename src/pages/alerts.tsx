@@ -72,9 +72,11 @@ export default function Alerts() {
   async function handleProductAlertDelete(productId: string) {
     const token = await user!.getIdToken()
 
-    await api.delete(`/users/unnotify-product/${productId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    try {
+      await api.delete(`/users/unnotify-product/${productId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+    } catch (err) {}
 
     queryClient.invalidateQueries('alerts')
   }
@@ -82,13 +84,15 @@ export default function Alerts() {
   const handleCategoryClick = async (categoryId: string) => {
     const token = await user!.getIdToken()
 
-    await api.post(
-      `/users/toggle-category-notification/${categoryId}`,
-      {},
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      },
-    )
+    try {
+      await api.post(
+        `/users/toggle-category-notification/${categoryId}`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      )
+    } catch (err) {}
 
     queryClient.invalidateQueries('alerts')
   }

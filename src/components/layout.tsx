@@ -15,7 +15,6 @@ export function Layout({ children }: LayoutProps) {
   useEffect(() => {
     async function registerUserSubscription() {
       if (user && Notification.permission === 'granted') {
-        console.log('Permissão de notificação concedida')
         const registration = await navigator.serviceWorker.ready
 
         let subscription = await registration.pushManager.getSubscription()
@@ -31,26 +30,22 @@ export function Layout({ children }: LayoutProps) {
             userVisibleOnly: true,
             applicationServerKey: publickey,
           })
+
+          try {
+            const keys = subscription.toJSON().keys
+
+            await api.post(
+              '/subscriptions',
+              {
+                endpoint: subscription.endpoint,
+                keys,
+              },
+              {
+                headers: { Authorization: `Bearer ${token}` },
+              },
+            )
+          } catch {}
         }
-
-        try {
-          const keys = subscription.toJSON().keys
-
-          await api.post(
-            '/subscriptions',
-            {
-              endpoint: subscription.endpoint,
-              keys,
-            },
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            },
-          )
-        } catch {}
-
-        console.log('Inscrição realizada:', subscription)
-      } else {
-        console.log('Permissão de notificação negada')
       }
     }
     registerUserSubscription()

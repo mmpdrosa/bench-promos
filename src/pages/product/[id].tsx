@@ -136,11 +136,11 @@ export default function ProductPage({
         </div>
 
         <nav className="overflow-x-auto">
-          <ul className="flex gap-12 py-2 border-b text-sm font-medium border-zinc-300">
+          <ul className="flex whitespace-nowrap border-b text-sm font-medium border-zinc-300">
             <li>
               <a
                 href="#price-history"
-                className="flex items-center gap-2.5 hover:underline"
+                className="flex items-center py-2 px-4 gap-2.5 hover:underline"
               >
                 <FaChartLine className="text-amber-400" />
                 Histórico
@@ -149,7 +149,7 @@ export default function ProductPage({
             <li>
               <a
                 href="#last-sales"
-                className="flex items-center gap-2.5 hover:underline"
+                className="flex items-center py-2 px-4 gap-2.5 hover:underline"
               >
                 <TbDiscount2 className="text-lg text-amber-400" />
                 Últimas Promoções
@@ -158,7 +158,7 @@ export default function ProductPage({
             <li>
               <a
                 href="#specs"
-                className="flex items-center gap-2.5 hover:underline"
+                className="flex items-center py-2 px-4 gap-2.5 hover:underline"
               >
                 <FaRegListAlt className="text-amber-400" />
                 Especificações
@@ -167,7 +167,7 @@ export default function ProductPage({
             <li>
               <a
                 href="#review"
-                className="flex items-center gap-2.5 hover:underline"
+                className="flex items-center py-2 px-4 gap-2.5 hover:underline"
               >
                 <FaVideo className="text-amber-400" />
                 Review

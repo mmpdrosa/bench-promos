@@ -45,8 +45,6 @@ export function SignUpDialog({
     onSignInOpenChange(true)
   }
 
-  console.log(errors)
-
   return (
     <>
       <Image src={LogoImg} width={248} alt="Logo" />
