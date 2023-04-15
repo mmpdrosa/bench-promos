@@ -1,8 +1,9 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import Head from 'next/head'
+import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useInfiniteQuery } from 'react-query'
-import { useSearchParams } from 'next/navigation'
 
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { ExpandedProductSaleCard } from '@/components/ExpandedProductSaleCard'
@@ -61,39 +62,44 @@ export default function Sales({
   }, [inView])
 
   return (
-    <div className="max-w-screen-xl py-8 max-xl:px-4 mx-auto space-y-8">
-      <Breadcrumbs />
+    <>
+      <Head>
+        <title>Promoções | Bench Promos</title>
+      </Head>
+      <div className="max-w-screen-xl py-8 max-xl:px-4 mx-auto space-y-8">
+        <Breadcrumbs />
 
-      {search && (
-        <div>
-          <span>Você pesquisou por: {search}</span>
+        {search && (
+          <div>
+            <span>Você pesquisou por: {search}</span>
+          </div>
+        )}
+
+        <div className="flex flex-col gap-8">
+          {sales!.pages
+            .filter(Boolean)
+            .flat()
+            .map((sale) => (
+              <ExpandedProductSaleCard key={sale.id} {...sale} />
+            ))}
         </div>
-      )}
 
-      <div className="flex flex-col gap-8">
-        {sales!.pages
-          .filter(Boolean)
-          .flat()
-          .map((sale) => (
-            <ExpandedProductSaleCard key={sale.id} {...sale} />
-          ))}
+        <div>
+          <button
+            ref={ref}
+            onClick={() => fetchNextPage()}
+            disabled={!hasNextPage || isFetchingNextPage}
+            hidden={!hasNextPage}
+          >
+            {isFetchingNextPage
+              ? 'Loading more...'
+              : hasNextPage
+              ? 'Load Newer'
+              : 'Nothing more to load'}
+          </button>
+        </div>
       </div>
-
-      <div>
-        <button
-          ref={ref}
-          onClick={() => fetchNextPage()}
-          disabled={!hasNextPage || isFetchingNextPage}
-          hidden={!hasNextPage}
-        >
-          {isFetchingNextPage
-            ? 'Loading more...'
-            : hasNextPage
-            ? 'Load Newer'
-            : 'Nothing more to load'}
-        </button>
-      </div>
-    </div>
+    </>
   )
 }
 

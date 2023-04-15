@@ -1,4 +1,5 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import Head from 'next/head'
 import { usePathname } from 'next/navigation'
 
 import { Breadcrumbs } from '@/components/Breadcrumbs'
@@ -33,11 +34,16 @@ export default function CategoryProducts({
   }
 
   return (
-    <div className="max-w-screen-xl flex flex-col gap-8 py-8 max-xl:px-4 mx-auto">
-      <Breadcrumbs locations={breadcrumbsLocations} />
+    <>
+      <Head>
+        <title>{category?.name} | Bench Promos</title>
+      </Head>
+      <div className="max-w-screen-xl flex flex-col gap-8 py-8 max-xl:px-4 mx-auto">
+        <Breadcrumbs locations={breadcrumbsLocations} />
 
-      <ProductList products={products} />
-    </div>
+        <ProductList products={products} />
+      </div>
+    </>
   )
 }
 

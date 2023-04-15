@@ -46,6 +46,10 @@ export function Header() {
           <Image src={LogoImg} width={224} alt="Logo" priority />
         </Link>
 
+        <Link href="/" title="Bench Promos" className="sm:hidden h-10">
+          <Image src={LogoImg} height={40} alt="Logo" priority />
+        </Link>
+
         <form
           onSubmit={handleSubmit(handleSearch)}
           className="w-full inline-flex justify-center lg:flex-1 max-lg:order-12 max-lg:py-4"

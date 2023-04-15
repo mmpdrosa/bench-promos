@@ -1,4 +1,5 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import Head from 'next/head'
 
 import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { ProductSlider } from '@/components/ProductSlider'
@@ -32,17 +33,22 @@ export default function Recommended({
   }, [])
 
   return (
-    <div className="max-w-screen-xl flex flex-col gap-8 py-8 max-xl:px-4 mx-auto">
-      <Breadcrumbs />
+    <>
+      <Head>
+        <title>Recomendados | Bench Promos</title>
+      </Head>
+      <div className="max-w-screen-xl flex flex-col gap-8 py-8 max-xl:px-4 mx-auto">
+        <Breadcrumbs />
 
-      {recommendedProductsByCategory.map(({ products, ...category }) => (
-        <ProductSlider
-          key={category.id}
-          title={category.name}
-          products={products}
-        />
-      ))}
-    </div>
+        {recommendedProductsByCategory.map(({ products, ...category }) => (
+          <ProductSlider
+            key={category.id}
+            title={category.name}
+            products={products}
+          />
+        ))}
+      </div>
+    </>
   )
 }
 

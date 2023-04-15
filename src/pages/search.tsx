@@ -1,4 +1,5 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import Head from 'next/head'
 import { useSearchParams } from 'next/navigation'
 
 import { Breadcrumbs } from '@/components/Breadcrumbs'
@@ -14,13 +15,18 @@ export default function Search({
   const search = searchParams.get('q')
 
   return (
-    <div className="max-w-screen-xl flex flex-col gap-8 py-8 max-xl:px-4 mx-auto">
-      <Breadcrumbs />
+    <>
+      <Head>
+        <title>{search} | Bench Promos</title>
+      </Head>
+      <div className="max-w-screen-xl flex flex-col gap-8 py-8 max-xl:px-4 mx-auto">
+        <Breadcrumbs />
 
-      <span>Você pesquisou por: {search}</span>
+        <span>Você pesquisou por: {search}</span>
 
-      <ProductList products={products} />
-    </div>
+        <ProductList products={products} />
+      </div>
+    </>
   )
 }
 

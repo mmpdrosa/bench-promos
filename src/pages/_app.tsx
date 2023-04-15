@@ -1,6 +1,6 @@
 import { CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { Montserrat } from '@next/font/google'
+import { Montserrat } from 'next/font/google'
 import { TooltipProvider } from '@radix-ui/react-tooltip'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'

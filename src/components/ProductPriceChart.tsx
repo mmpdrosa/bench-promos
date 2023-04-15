@@ -131,7 +131,6 @@ export function ProductPriceChart({
             dataKey="price"
             axisLine={false}
             tickLine={false}
-            tickMargin={16}
             tickCount={5}
             tickFormatter={(price: number) => `${price / 100}`}
           />
