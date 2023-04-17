@@ -15,14 +15,14 @@ export function Footer() {
         <div className="w-max flex flex-col gap-1 pt-8 mb-4 max-xl:px-6 text-sm">
           <span className="text-sm font-bold text-violet-500">Destaques</span>
           <Link
-            href="/51d96dd7-5a1e-4fc6-83fd-c0de1745af3f"
+            href="/52e0e282-ba6f-4b33-8399-a40bd5969f85"
             title="Notebooks"
             className="hover:underline"
           >
             Notebooks
           </Link>
           <Link
-            href="/e42e0fd9-93c4-49cf-b6ea-5f8f0e9f7543"
+            href="/bb09f4e5-20b6-473f-99de-f7de29f44394"
             title="Mouses"
             className="hover:underline"
           >

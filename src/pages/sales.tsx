@@ -1,3 +1,4 @@
+import { CircularProgress } from '@mui/material'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
 import { useSearchParams } from 'next/navigation'
@@ -10,7 +11,7 @@ import { ExpandedProductSaleCard } from '@/components/ExpandedProductSaleCard'
 import { api } from '@/lib/axios'
 import { Sale } from '@/models'
 
-const ITEMS_PER_LOAD = 2
+const ITEMS_PER_LOAD = 8
 
 export default function Sales({
   sales: initialSales,
@@ -84,18 +85,16 @@ export default function Sales({
             ))}
         </div>
 
-        <div>
+        <div className="text-center">
           <button
             ref={ref}
             onClick={() => fetchNextPage()}
             disabled={!hasNextPage || isFetchingNextPage}
             hidden={!hasNextPage}
           >
-            {isFetchingNextPage
-              ? 'Loading more...'
-              : hasNextPage
-              ? 'Load Newer'
-              : 'Nothing more to load'}
+            {isFetchingNextPage && (
+              <CircularProgress className="text-violet-500" />
+            )}
           </button>
         </div>
       </div>

@@ -28,11 +28,11 @@ export function Menu() {
                   <NavigationMenu.Item key={category.id}>
                     <Link href={`/${category.id}`} passHref>
                       <NavigationMenu.Trigger
-                        className="group w-full flex justify-between items-center gap-2 text-xs transition-colors rdx-state-open:text-violet-500"
+                        className="group w-full flex justify-between items-center gap-2 text-sm transition-colors rdx-state-open:text-violet-500"
                         title={category.name}
                       >
                         {category.name}
-                        <AiOutlineCaretRight className="text-xs text-white group-rdx-state-open:text-black" />
+                        <AiOutlineCaretRight className="text-sm text-white group-rdx-state-open:text-black" />
                       </NavigationMenu.Trigger>
                     </Link>
                     <NavigationMenu.Content className="h-rdx-navigation-menu-viewport min-w-[296px] px-4 py-2">
@@ -41,7 +41,7 @@ export function Menu() {
                           <li key={subcategory.id} className="w-max">
                             <Link
                               href={`/${category.id}/${subcategory.id}`}
-                              className="text-xs cursor-pointer transition-colors hover:text-violet-500"
+                              className="text-sm cursor-pointer transition-colors hover:text-violet-500"
                               title={subcategory.name}
                             >
                               {subcategory.name}
