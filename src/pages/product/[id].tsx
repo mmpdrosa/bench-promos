@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from 'react'
 import {
@@ -21,7 +22,6 @@ import { useAuth } from '@/contexts/AuthContext'
 import { api } from '@/lib/axios'
 import { Product } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
-import Head from 'next/head'
 
 type Sale = {
   id: string

@@ -1,8 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Autocomplete, Box, TextField } from '@mui/material'
 import { getCookie } from 'cookies-next'
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
-import { useForm } from 'react-hook-form'
+import Image from 'next/image'
+import { Controller, useForm } from 'react-hook-form'
+import { NumericFormat } from 'react-number-format'
 import { z } from 'zod'
 
 import { ExpandedProductSaleCard } from '@/components/ExpandedProductSaleCard'
@@ -18,20 +21,32 @@ const newSaleSchema = z.object({
   specs: z.string().optional(),
   comments: z.string().optional(),
   coupon: z.string().optional(),
+  productId: z.string().optional(),
 })
 
 type NewSaleFormInput = z.infer<typeof newSaleSchema>
 
-export default function CreateSale() {
-  const { register, handleSubmit, watch, reset } = useForm<NewSaleFormInput>({
-    resolver: zodResolver(newSaleSchema),
-    defaultValues: {
-      title: '',
-      imageUrl: '',
-      htmlUrl: '',
-      price: 0,
-    },
+export default function CreateSale({
+  products,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const productOptions = products.map((product) => {
+    return {
+      id: product.id,
+      img: product.image_url,
+      label: product.title,
+    }
   })
+
+  const { register, control, handleSubmit, watch, reset } =
+    useForm<NewSaleFormInput>({
+      resolver: zodResolver(newSaleSchema),
+      defaultValues: {
+        title: '',
+        imageUrl: '',
+        htmlUrl: '',
+        price: 0,
+      },
+    })
 
   const { categories } = useCategory()
 
@@ -39,15 +54,25 @@ export default function CreateSale() {
     imageUrl,
     htmlUrl,
     categoryId,
+    productId,
     ...rest
   }: NewSaleFormInput) {
     try {
-      await api.post('/sales', {
-        image_url: imageUrl,
-        html_url: htmlUrl,
-        category_id: categoryId,
-        ...rest,
-      })
+      await api.post(
+        '/sales',
+        {
+          image_url: imageUrl,
+          html_url: htmlUrl,
+          category_id: categoryId,
+          product_id: productId,
+          ...rest,
+        },
+        {
+          headers: {
+            'api-key': process.env.NEXT_PUBLIC_API_KEY,
+          },
+        },
+      )
 
       reset()
     } catch (err) {}
@@ -90,6 +115,58 @@ export default function CreateSale() {
           className="max-md:flex flex-col grid grid-cols-2 gap-8"
           onSubmit={handleSubmit(handleNewSale)}
         >
+          <fieldset className="flex flex-col justify-start col-span-2">
+            <label
+              className="block mb-1.5 text-xl font-medium tracking-wider"
+              htmlFor="price"
+            >
+              Produto
+            </label>
+            <Controller
+              name="productId"
+              control={control}
+              render={({ field: { onChange, ...field } }) => (
+                <Autocomplete
+                  fullWidth
+                  id="product"
+                  options={productOptions}
+                  autoHighlight
+                  onChange={(_, value) =>
+                    onChange(value ? value.id : undefined)
+                  }
+                  isOptionEqualToValue={(option, value) =>
+                    option.id === value.id
+                  }
+                  renderOption={(props, option) => (
+                    <Box
+                      component="li"
+                      sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
+                      {...props}
+                    >
+                      <Image
+                        className="h-auto w-auto"
+                        width={40}
+                        height={1}
+                        src={option.img}
+                        alt=""
+                      />
+                      {option.label}
+                    </Box>
+                  )}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      {...field}
+                      inputProps={{
+                        ...params.inputProps,
+                      }}
+                    />
+                  )}
+                />
+              )}
+            />
+          </fieldset>
+
           <InputField label="Título" name="title" register={register} />
 
           <fieldset className="flex flex-col justify-start">
@@ -129,10 +206,31 @@ export default function CreateSale() {
             >
               Preço
             </label>
-            <input
-              className="h-16 px-3.5 text-lg outline-none border border-black/20 rounded-full shadow-md focus:ring-violet-500 focus:border-violet-500"
-              id="price"
-              {...register('price', { valueAsNumber: true })}
+            <Controller
+              name="price"
+              control={control}
+              render={({ field: { value, onChange } }) => (
+                <NumericFormat
+                  id="price"
+                  displayType="input"
+                  prefix="R$ "
+                  decimalScale={2}
+                  decimalSeparator=","
+                  thousandSeparator="."
+                  fixedDecimalScale={true}
+                  allowNegative={false}
+                  value={value / 100}
+                  className="h-16 px-3.5 text-lg outline-none border border-black/20 rounded-full shadow-md focus:ring-violet-500 focus:border-violet-500"
+                  onValueChange={({ floatValue }) => {
+                    onChange({
+                      target: {
+                        name: 'price',
+                        value: floatValue ? floatValue * 100 : 0,
+                      },
+                    })
+                  }}
+                />
+              )}
             />
           </fieldset>
 
@@ -195,7 +293,9 @@ function InputField({
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps<{
+  products: { id: string; title: string; image_url: string }[]
+}> = async (ctx) => {
   const token = getCookie('bench-promos.token', ctx)
 
   if (!token) {
@@ -222,7 +322,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
   }
 
+  const res = await api.get('/products')
+
+  const products: { id: string; title: string; image_url: string }[] = res.data
+
   return {
-    props: {},
+    props: {
+      products,
+    },
   }
 }

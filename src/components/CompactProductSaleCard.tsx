@@ -4,6 +4,7 @@ import { Suspense } from 'react'
 import { BsBoxArrowUpRight } from 'react-icons/bs'
 import { RxCopy, RxShare1 } from 'react-icons/rx'
 import { TbDiscount2 } from 'react-icons/tb'
+import Link from 'next/link'
 
 import { priceFormatter } from '@/utils/formatter'
 import { SaleReactions } from './SaleReactions'
@@ -19,12 +20,13 @@ interface CompactProductSaleCardProps {
   created_at: Date
   coupon?: string
   reactions?: { [key: string]: number }
+  product_id?: string
 }
 
 export function CompactProductSaleCard(sale: CompactProductSaleCardProps) {
   const handleShare = async () => {
     await navigator.share({
-      title: window.document.title,
+      title: sale.title,
       url: window.location.href,
     })
   }
@@ -34,7 +36,7 @@ export function CompactProductSaleCard(sale: CompactProductSaleCardProps) {
   }
 
   return (
-    <div className="flex flex-col w-74 max-w-[296px] rounded-lg overflow-hidden border border-zinc-300">
+    <div className="flex flex-col w-74 max-w-[296px] rounded-lg overflow-hidden border border-zinc-300 transition ease-in-out duration-300 hover:shadow-xl">
       <div className="flex justify-between items-center py-2 px-4 text-sm">
         <span>{dayjs(sale.created_at).fromNow()}</span>
         <button onClick={handleShare}>
@@ -42,7 +44,10 @@ export function CompactProductSaleCard(sale: CompactProductSaleCardProps) {
         </button>
       </div>
 
-      <div className="relative w-full aspect-square">
+      <Link
+        href={sale.product_id ? `/produto/${sale.product_id}` : '/'}
+        className="relative w-full aspect-square"
+      >
         <Image
           className="object-contain"
           alt=""
@@ -51,10 +56,12 @@ export function CompactProductSaleCard(sale: CompactProductSaleCardProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority
         />
-      </div>
+      </Link>
 
       <div className="pt-2 pb-6 px-4 mb-auto">
-        <h4 className="font-medium line-clamp-2">{sale.title}</h4>
+        <Link href={sale.product_id ? `/produto/${sale.product_id}` : '/'}>
+          <h4 className="font-medium line-clamp-2">{sale.title}</h4>
+        </Link>
 
         {sale.specs && (
           <Suspense>

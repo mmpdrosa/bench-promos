@@ -48,6 +48,7 @@ export default function Home({
               specs={sale.specs}
               created_at={sale.created_at}
               reactions={sale.reactions}
+              product_id={sale.product_id}
             />
           ))}
         </div>

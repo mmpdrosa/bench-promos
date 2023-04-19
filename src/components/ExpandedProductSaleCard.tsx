@@ -8,6 +8,7 @@ import { Sale } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
 import { SaleReactions } from './SaleReactions'
 import { Toast } from './Toast'
+import Link from 'next/link'
 
 export function ExpandedProductSaleCard(sale: Sale) {
   function copyToClipboard(text: string) {
@@ -21,9 +22,14 @@ export function ExpandedProductSaleCard(sale: Sale) {
         <span className="text-xs">{dayjs(sale.created_at).fromNow()}</span>
       </div>
 
-      <h2 className="text-xl max-sm:text-lg font-medium break-words">
-        {sale.title}
-      </h2>
+      <Link
+        className="block"
+        href={sale.product_id ? `/produto/${sale.product_id}` : '/promocoes'}
+      >
+        <h2 className="text-xl max-sm:text-lg font-medium break-words">
+          {sale.title}
+        </h2>
+      </Link>
 
       <div className="flex gap-8 max-md:flex-col-reverse">
         <div className="md:w-3/5 flex flex-col items-start">
@@ -72,7 +78,10 @@ export function ExpandedProductSaleCard(sale: Sale) {
             <SaleReactions saleId={sale.id} reactions={sale.reactions} />
           </div>
         </div>
-        <div className="relative md:w-2/5 aspect-square">
+        <Link
+          href={sale.product_id ? `/produto/${sale.product_id}` : '/promocoes'}
+          className="relative md:w-2/5 aspect-square"
+        >
           {sale.image_url && (
             <Image
               className="object-contain"
@@ -82,7 +91,7 @@ export function ExpandedProductSaleCard(sale: Sale) {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           )}
-        </div>
+        </Link>
       </div>
     </div>
   )

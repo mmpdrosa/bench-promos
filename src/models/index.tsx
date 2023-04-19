@@ -77,4 +77,5 @@ export type Sale = {
   category: Category
   coupon?: string
   reactions?: { [key: string]: number }
+  product_id?: string
 }

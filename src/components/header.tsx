@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form'
 import { FaBell } from 'react-icons/fa'
 import { HiOutlineSwitchVertical, HiSearch } from 'react-icons/hi'
 
-import LogoImg from '@/assets/logo.svg'
 import { AuthDialogsWrapper } from './AuthDialogsWrapper'
 import { Menu } from './Menu'
 import { SidebarMenu } from './SidebarMenu'
@@ -43,11 +42,25 @@ export function Header() {
         <SidebarMenu />
 
         <Link href="/" title="Bench Promos" className="max-sm:hidden w-60">
-          <Image src={LogoImg} width={224} alt="Logo" priority />
+          <Image
+            src="https://media.discordapp.net/attachments/826681789677436950/1097633179264876564/Logo_atualizada.png?width=550&height=253"
+            width={224}
+            height={1}
+            alt="Logo"
+            priority
+            className="h-auto w-auto"
+          />
         </Link>
 
         <Link href="/" title="Bench Promos" className="sm:hidden h-10">
-          <Image src={LogoImg} height={40} alt="Logo" priority />
+          <Image
+            src="https://media.discordapp.net/attachments/826681789677436950/1097652886294499409/removal.ai_tmp-643dc88e9dff3-PhotoRoom.png-PhotoRoom.png"
+            width={50}
+            height={1}
+            alt="Logo"
+            priority
+            className="h-auto w-auto"
+          />
         </Link>
 
         <form
@@ -71,7 +84,7 @@ export function Header() {
 
           <input
             className="w-3/5 h-14 max-sm:h-10 max-lg:w-full px-4 max-sm:px-2.5 outline-none text-sm focus:outline-none"
-            type="text"
+            type="search"
             placeholder="Digite sua busca..."
             {...register('q')}
           />
