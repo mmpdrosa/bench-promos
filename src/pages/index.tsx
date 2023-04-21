@@ -1,11 +1,11 @@
 import { GetServerSideProps, InferGetServerSidePropsType, Metadata } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 import { useQuery } from 'react-query'
 
 import { CompactProductSaleCard } from '@/components/CompactProductSaleCard'
 import { api } from '@/lib/axios'
 import { Sale } from '@/models'
-import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -34,7 +34,7 @@ export default function Home({
       <Head>
         <title>Bench Promos</title>
       </Head>
-      <div className="max-w-screen-xl flex flex-col gap-16 py-8 max-xl:px-4 mx-auto">
+      <div className="max-w-screen-xl flex flex-col gap-10 py-8 max-xl:px-4 mx-auto">
         <div className="grid grid-cols-fill justify-center gap-8">
           {sales?.map((sale) => (
             <CompactProductSaleCard

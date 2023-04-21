@@ -30,7 +30,7 @@ export default function Coupons({
           name: retailer.name,
           coupons: [coupon],
         })
-      } else {
+      } else if (coupon.available) {
         acc[retailerIndex].coupons.push(coupon)
       }
       return acc

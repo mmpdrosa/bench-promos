@@ -4,6 +4,7 @@ self.addEventListener('push', function (event) {
   const options = {
     body,
     data,
+    icon: './favicon.ico',
   }
 
   event.waitUntil(

@@ -12,35 +12,49 @@ export function Footer() {
   return (
     <footer className="text-white bg-black">
       <div className="max-w-screen-xl mx-auto">
-        <div className="w-max flex flex-col gap-1 pt-8 mb-4 max-xl:px-6 text-sm">
-          <span className="text-sm font-bold text-violet-500">Destaques</span>
-          <Link
-            href="/52e0e282-ba6f-4b33-8399-a40bd5969f85"
-            title="Notebooks"
-            className="hover:underline"
-          >
-            Notebooks
-          </Link>
-          <Link
-            href="/bb09f4e5-20b6-473f-99de-f7de29f44394"
-            title="Mouses"
-            className="hover:underline"
-          >
-            Mouses
-          </Link>
-          <Link href="/promocoes" title="Promoções" className="hover:underline">
-            Promoções
-          </Link>
-          <Link href="/cupons" title="Cupons" className="hover:underline">
-            Cupons
-          </Link>
-          <Link
-            href="/recomendados"
-            title="Recomendados"
-            className="hover:underline"
-          >
-            Recomendados
-          </Link>
+        <div className="grid grid-cols-2 gap-4 pt-12 mb-4 max-xl:px-6">
+          <div className="flex flex-col gap-1 text-sm">
+            <span className="text-sm font-bold text-violet-500">Destaques</span>
+            <Link
+              href="/52e0e282-ba6f-4b33-8399-a40bd5969f85"
+              title="Notebooks"
+              className="hover:underline"
+            >
+              Notebooks
+            </Link>
+            <Link
+              href="/bb09f4e5-20b6-473f-99de-f7de29f44394"
+              title="Mouses"
+              className="hover:underline"
+            >
+              Mouses
+            </Link>
+            <Link
+              href="/promocoes"
+              title="Promoções"
+              className="hover:underline"
+            >
+              Promoções
+            </Link>
+            <Link href="/cupons" title="Cupons" className="hover:underline">
+              Cupons
+            </Link>
+            <Link
+              href="/recomendados"
+              title="Recomendados"
+              className="hover:underline"
+            >
+              Recomendados
+            </Link>
+          </div>
+          <div className="flex flex-col gap-1 text-sm">
+            <span className="text-sm font-bold text-violet-500">
+              O Bench Promos
+            </span>
+            <Link href="/politica-de-privacidade" className="hover:underline">
+              Política de Privacidade
+            </Link>
+          </div>
         </div>
 
         <div className="border-y p-6 text-sm font-semibold border-white/50 text-center">

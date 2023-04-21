@@ -108,7 +108,7 @@ export const getServerSideProps: GetServerSideProps<{
   const { q } = context.query
 
   const response = await api.get(
-    `/sales?search=${q}&skip=0&take=${ITEMS_PER_LOAD}`,
+    `/sales?search=${q ?? ''}&skip=0&take=${ITEMS_PER_LOAD}`,
   )
   const sales: Sale[] = response.data
 

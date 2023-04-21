@@ -1,25 +1,34 @@
+import { deleteCookie, setCookie } from 'cookies-next'
 import {
   GoogleAuthProvider,
+  User,
   onAuthStateChanged,
+  sendEmailVerification,
+  signInWithCustomToken,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  User,
 } from 'firebase/auth'
 import {
-  createContext,
   ReactNode,
+  createContext,
   useContext,
   useEffect,
   useMemo,
   useState,
 } from 'react'
 
+import { api } from '@/lib/axios'
 import { auth } from '@/lib/firebase'
 import { queryClient } from '@/lib/react-query'
-import { deleteCookie, setCookie } from 'cookies-next'
 
 type SignInData = {
+  email: string
+  password: string
+}
+
+type SignUpData = {
+  username: string
   email: string
   password: string
 }
@@ -27,8 +36,9 @@ type SignInData = {
 type AuthContextType = {
   user: User | null
   isAdmin: boolean
-  logIn: (data: SignInData) => Promise<void>
+  logIn: (data: SignInData) => Promise<string>
   logInWithGoogle: () => Promise<void>
+  signUp: (data: SignUpData) => Promise<string>
   logOut: () => Promise<void>
 }
 
@@ -46,9 +56,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     const subscriber = onAuthStateChanged(auth, async (user) => {
-      setUser(user)
-
       if (user) {
+        if (!user.emailVerified) return
+
         const { token, expirationTime, claims } = await user.getIdTokenResult()
 
         const isAdmin = claims?.role === 'admin'
@@ -61,13 +71,26 @@ export function AuthProvider({ children }: AuthProviderProps) {
       } else {
         deleteCookie('bench-promos.token')
       }
+
+      setUser(user)
     })
 
     return subscriber
   }, [])
 
   async function logIn({ email, password }: SignInData) {
-    await signInWithEmailAndPassword(auth, email, password)
+    try {
+      const { user } = await signInWithEmailAndPassword(auth, email, password)
+
+      if (!user.emailVerified) {
+        await signOut(auth)
+        return 'auth/email-not-verified'
+      }
+
+      return 'auth/success'
+    } catch (err: any) {
+      return err.code
+    }
   }
 
   async function logInWithGoogle() {
@@ -77,6 +100,27 @@ export function AuthProvider({ children }: AuthProviderProps) {
     } catch {}
   }
 
+  async function signUp(signUpData: SignUpData) {
+    try {
+      const response = await api.post('/users', signUpData)
+
+      const token: string = response.data
+
+      const { user } = await signInWithCustomToken(auth, token)
+
+      await sendEmailVerification(user)
+
+      await signOut(auth)
+
+      return 'auth/success'
+    } catch (err: any) {
+      if (err.response.data.code === 'auth/email-already-exists')
+        return 'auth/email-already-exists'
+
+      return 'auth/internal-error'
+    }
+  }
+
   async function logOut() {
     await signOut(auth)
 
@@ -84,7 +128,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   const value = useMemo(
-    () => ({ user, isAdmin, logIn, logOut, logInWithGoogle }),
+    () => ({ user, isAdmin, logIn, logOut, logInWithGoogle, signUp }),
     [user, isAdmin],
   )
 

@@ -1,15 +1,14 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 import { FcGoogle } from 'react-icons/fc'
+import { z } from 'zod'
 
-import LogoImg from '@/assets/logo.svg'
 import { useAuth } from '@/contexts/AuthContext'
 
 const signInFormSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(8),
+  password: z.string().min(8, 'A senha deve ter no mínimo 8 caracteres'),
 })
 
 type SignInFormInput = z.infer<typeof signInFormSchema>
@@ -41,9 +40,9 @@ export function SignInDialog({
   async function handleSignIn(data: SignInFormInput) {
     clearErrors()
 
-    try {
-      await logIn(data)
+    const code = await logIn(data)
 
+    if (code === 'auth/success') {
       reset()
 
       onSignInOpenChange(false)
@@ -51,20 +50,22 @@ export function SignInDialog({
       if (Notification.permission === 'default') {
         Notification.requestPermission()
       }
-    } catch (err: any) {
-      let message
-
-      if (err.code === 'auth/user-not-found') {
-        message = 'Email não encontrado.'
-      } else if (err.code === 'auth/wrong-password') {
-        message = 'Email ou senha incorretos.'
-      } else if (err.code === 'auth/too-many-requests') {
-        message = 'Muitas tentativas. Por favor, tente novamente mais tarde.'
+    } else {
+      if (code === 'auth/email-not-verified') {
+        setError('email', { message: 'E-mail não verificado' })
+      } else if (code === 'auth/user-not-found') {
+        setError('email', { message: 'E-mail ou senha incorretos' })
+      } else if (code === 'auth/wrong-password') {
+        setError('email', { message: 'E-mail ou senha incorretos' })
+      } else if (code === 'auth/too-many-requests') {
+        setError('root', {
+          message: 'Muitas tentativas. Por favor, tente novamente mais tarde',
+        })
       } else {
-        message = 'Algo deu errado. Por favor, tente novamente mais tarde.'
+        setError('root', {
+          message: 'Algo deu errado. Por favor, tente novamente mais tarde',
+        })
       }
-
-      setError('root', { message })
     }
   }
 
@@ -90,7 +91,12 @@ export function SignInDialog({
 
   return (
     <>
-      <Image src={LogoImg} width={248} alt="Logo" />
+      <Image
+        src="https://media.discordapp.net/attachments/826681789677436950/1097633179264876564/Logo_atualizada.png?width=550&height=253"
+        width={248}
+        height={1}
+        alt="Logo"
+      />
 
       <h1 className="text-lg font-medium tracking-wider text-white">
         Faça seu login
@@ -99,13 +105,20 @@ export function SignInDialog({
       <form className="w-full space-y-6" onSubmit={handleSubmit(handleSignIn)}>
         <fieldset className="flex flex-col justify-start">
           <label className="block mb-2.5 text-base text-white" htmlFor="email">
-            Email
+            E-mail
           </label>
           <input
             className="h-10 px-2.5 text-lg outline-none text-white border-b border-white bg-transparent"
             id="email"
             {...register('email')}
           />
+          {errors.email && (
+            <div className="mt-1">
+              <span className="font-bold text-red-500">
+                {errors.email?.message}
+              </span>
+            </div>
+          )}
         </fieldset>
         <fieldset className="flex flex-col justify-start">
           <div className="flex justify-between">
@@ -122,20 +135,25 @@ export function SignInDialog({
               Esqueceu sua senha?
             </a>
           </div>
-
           <input
             className="h-10 px-2.5 text-lg outline-none text-white border-b border-white bg-transparent"
             id="password"
             type="password"
             {...register('password')}
           />
+          {errors.password && (
+            <div className="mt-1">
+              <span className="font-bold text-red-500">
+                {errors.password?.message}
+              </span>
+            </div>
+          )}
         </fieldset>
         <div className="flex justify-between items-center">
           <span className="font-bold text-red-500">{errors.root?.message}</span>
           <button
-            className={`h-10 inline-flex items-center justify-center px-6 rounded-full font-medium transition-colors bg-amber-300 hover:bg-yellow-400 ${
-              isSubmitting && 'cursor-not-allowed'
-            }`}
+            className="h-10 inline-flex items-center justify-center px-6 rounded-full font-medium transition-colors bg-amber-300 hover:bg-yellow-400 disabled:cursor-not-allowed"
+            disabled={isSubmitting}
           >
             Entrar
           </button>
@@ -143,6 +161,7 @@ export function SignInDialog({
 
         <div className="flex justify-center">
           <button
+            type="button"
             className="p-1 rounded-full bg-white"
             onClick={handleSignInWithGoogle}
           >

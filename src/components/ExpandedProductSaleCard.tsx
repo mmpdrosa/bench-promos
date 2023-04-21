@@ -16,7 +16,10 @@ export function ExpandedProductSaleCard(sale: Sale) {
   }
 
   return (
-    <div className="px-12 max-md:px-3.5 py-8 space-y-8 rounded-xl border border-zinc-300 shadow-sm bg-white">
+    <div
+      id={sale.id}
+      className="px-12 max-md:px-3.5 py-8 space-y-8 rounded-xl border border-zinc-300 shadow-sm bg-white"
+    >
       <div className="flex justify-between items-center">
         <span className="text-sm tracking-wider">{sale.category.name}</span>
         <span className="text-xs">{dayjs(sale.created_at).fromNow()}</span>

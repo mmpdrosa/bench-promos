@@ -1,20 +1,21 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import LogoImg from '@/assets/logo.svg'
+import { useAuth } from '@/contexts/AuthContext'
 
 const signUpFormSchema = z
   .object({
-    username: z.string().min(1),
-    email: z.string().email(),
-    password: z.string().min(8),
-    confirm: z.string().min(8),
+    username: z.string().min(4, 'O nome deve ter no mínimo 4 caracteres'),
+    email: z.string().email('O e-mail deve ser válido'),
+    password: z.string().min(8, 'A senha deve ter no mínimo 8 caracteres'),
+    confirm: z.string().min(8, 'A senha deve ter no mínimo 8 caracteres'),
   })
   .refine(({ password, confirm }) => password === confirm, {
-    message: 'As senhas não são iguais.',
-    path: ['confirm'],
+    message: 'A confirmação de senha e a senha devem ser iguais',
+    path: ['password'],
   })
 
 type SignUpFormInput = z.infer<typeof signUpFormSchema>
@@ -31,13 +32,33 @@ export function SignUpDialog({
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { isSubmitting, errors },
+    setError,
+    clearErrors,
+    reset,
   } = useForm<SignUpFormInput>({
     resolver: zodResolver(signUpFormSchema),
   })
 
-  async function handleSignUp(data: SignUpFormInput) {
-    console.log(data)
+  const { signUp } = useAuth()
+  const [hasSignUp, setHasSignUp] = useState(false)
+
+  async function handleSignUp({ confirm, ...data }: SignUpFormInput) {
+    clearErrors()
+
+    const code = await signUp(data)
+
+    if (code === 'auth/success') {
+      setHasSignUp(true)
+
+      reset()
+    } else if (code === 'auth/email-already-exists') {
+      setError('email', { message: 'Este e-mail já está em uso' })
+    } else {
+      setError('root', {
+        message: 'Algo deu errado. Por favor, tente novamente mais tarde',
+      })
+    }
   }
 
   function handleSignInDialogOpen() {
@@ -47,7 +68,12 @@ export function SignUpDialog({
 
   return (
     <>
-      <Image src={LogoImg} width={248} alt="Logo" />
+      <Image
+        src="https://media.discordapp.net/attachments/826681789677436950/1097633179264876564/Logo_atualizada.png?width=550&height=253"
+        width={248}
+        height={1}
+        alt="Logo"
+      />
 
       <h1 className="text-lg font-medium tracking-wider text-white">
         Crie uma conta
@@ -66,16 +92,30 @@ export function SignUpDialog({
             id="username"
             {...register('username')}
           />
+          {errors.username && (
+            <div className="mt-1">
+              <span className="font-bold text-red-500">
+                {errors.username?.message}
+              </span>
+            </div>
+          )}
         </fieldset>
         <fieldset className="flex flex-col justify-start">
           <label className="block mb-2.5 text-base text-white" htmlFor="email">
-            Email
+            E-mail
           </label>
           <input
             className="h-10 px-2.5 text-lg outline-none text-white border-b border-white bg-transparent"
             id="email"
             {...register('email')}
           />
+          {errors.email && (
+            <div className="mt-1">
+              <span className="font-bold text-red-500">
+                {errors.email?.message}
+              </span>
+            </div>
+          )}
         </fieldset>
         <fieldset className="flex flex-col justify-start">
           <label
@@ -90,6 +130,13 @@ export function SignUpDialog({
             type="password"
             {...register('password')}
           />
+          {errors.password && (
+            <div className="mt-1">
+              <span className="font-bold text-red-500">
+                {errors.password?.message}
+              </span>
+            </div>
+          )}
         </fieldset>
         <fieldset className="flex flex-col justify-start">
           <label
@@ -105,11 +152,22 @@ export function SignUpDialog({
             {...register('confirm')}
           />
         </fieldset>
-        <div className="flex justify-between items-center">
-          <span className="font-bold text-red-500">
-            {errors.confirm?.message}
-          </span>
-          <button className="h-10 inline-flex items-center justify-center px-6 rounded-full font-medium transition-colors bg-amber-300 hover:bg-yellow-400">
+        <div className="flex justify-between items-center gap-4">
+          {errors.root && (
+            <span className="font-bold text-red-500">
+              {errors.root?.message}
+            </span>
+          )}
+          {hasSignUp && (
+            <span className="font-bold text-green-400">
+              Um link de confirmação foi enviado para o seu e-mail
+            </span>
+          )}
+
+          <button
+            className="h-10 inline-flex items-center justify-center px-6 ml-auto rounded-full font-medium transition-colors bg-amber-300 hover:bg-yellow-400 disabled:cursor-not-allowed"
+            disabled={isSubmitting}
+          >
             Cadastrar
           </button>
         </div>

@@ -42,6 +42,10 @@ const nextConfig = {
         source: '/recomendados',
         destination: '/recommended',
       },
+      {
+        source: '/politica-de-privacidade',
+        destination: '/privacy-policy',
+      },
     ]
   },
   output: 'standalone',

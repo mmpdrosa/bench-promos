@@ -195,11 +195,7 @@ export default function ProductPage({
                   onInsertLowestPrice={changeLowestPrice}
                 />
               </div>
-              <div
-                className={`flex flex-col items-center gap-5 p-8 border border-zinc-300 rounded-xl ${
-                  !product.available && 'opacity-50 pointer-events-none'
-                }`}
-              >
+              <div className="flex flex-col items-center gap-5 p-8 border border-zinc-300 rounded-xl">
                 <h3 className="flex justify-between items-center gap-4 text-lg font-extrabold">
                   <FaBell /> Crie um alerta de preço
                 </h3>
@@ -254,7 +250,10 @@ export default function ProductPage({
                     alertPrice / 100,
                   )}.`}
                   triggerButton={
-                    <button className="px-5 py-3.5 rounded-full text-lg font-semibold transition-colors bg-amber-300 hover:bg-yellow-400">
+                    <button
+                      className="px-5 py-3.5 rounded-full text-lg font-semibold transition-colors bg-amber-300 hover:bg-yellow-400"
+                      disabled={!user}
+                    >
                       <span>CRIAR ALERTA</span>
                     </button>
                   }

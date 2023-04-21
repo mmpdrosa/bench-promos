@@ -37,16 +37,22 @@ export default function CreateSale({
     }
   })
 
-  const { register, control, handleSubmit, watch, reset } =
-    useForm<NewSaleFormInput>({
-      resolver: zodResolver(newSaleSchema),
-      defaultValues: {
-        title: '',
-        imageUrl: '',
-        htmlUrl: '',
-        price: 0,
-      },
-    })
+  const {
+    register,
+    control,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { isSubmitting },
+  } = useForm<NewSaleFormInput>({
+    resolver: zodResolver(newSaleSchema),
+    defaultValues: {
+      title: '',
+      imageUrl: '',
+      htmlUrl: '',
+      price: 0,
+    },
+  })
 
   const { categories } = useCategory()
 
@@ -253,7 +259,8 @@ export default function CreateSale({
           <InputField label="Cupom" name="coupon" register={register} />
 
           <button
-            className="col-span-2 mx-auto px-4 py-2.5 text-xl rounded-full text-white transition-colors bg-violet-500 hover:bg-violet-400"
+            className="col-span-2 mx-auto px-4 py-2.5 text-xl rounded-full text-white transition-colors bg-violet-500 hover:bg-violet-400 disabled:cursor-not-allowed"
+            disabled={isSubmitting}
             type="submit"
           >
             Adicionar

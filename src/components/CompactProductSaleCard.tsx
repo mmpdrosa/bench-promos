@@ -1,10 +1,10 @@
 import dayjs from 'dayjs'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Suspense } from 'react'
-import { BsBoxArrowUpRight } from 'react-icons/bs'
+import { BsBoxArrowInUpRight } from 'react-icons/bs'
 import { RxCopy, RxShare1 } from 'react-icons/rx'
 import { TbDiscount2 } from 'react-icons/tb'
-import Link from 'next/link'
 
 import { priceFormatter } from '@/utils/formatter'
 import { SaleReactions } from './SaleReactions'
@@ -103,15 +103,13 @@ export function CompactProductSaleCard(sale: CompactProductSaleCardProps) {
       <SaleReactions saleId={sale.id} reactions={sale.reactions} />
 
       <div className="mt-4">
-        <a
-          href={sale.html_url}
-          target="_blank"
+        <Link
+          href={`/promocoes#${sale.id}`}
           className="flex justify-between items-center px-4 py-2 text-sm font-medium cursor-pointer bg-zinc-100 hover:bg-zinc-200 transition ease-in-out duration-300"
-          rel="noreferrer"
         >
-          Acessar site
-          <BsBoxArrowUpRight />
-        </a>
+          Ver detalhes
+          <BsBoxArrowInUpRight />
+        </Link>
       </div>
     </div>
   )
