@@ -1,5 +1,5 @@
 import { CircularProgress } from '@mui/material'
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { GetServerSideProps, InferGetServerSidePropsType, Metadata } from 'next'
 import Head from 'next/head'
 import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
@@ -10,6 +10,10 @@ import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { ExpandedProductSaleCard } from '@/components/ExpandedProductSaleCard'
 import { api } from '@/lib/axios'
 import { Sale } from '@/models'
+
+export const metadata: Metadata = {
+  title: 'Últimas Promoções - Bench Promos',
+}
 
 const ITEMS_PER_LOAD = 8
 
@@ -47,11 +51,16 @@ export default function Sales({
       },
       initialData: { pages: [initialSales], pageParams: [0] },
       refetchOnWindowFocus: false,
+      keepPreviousData: true,
+      cacheTime: 0,
+      staleTime: 1000 * 60, // 1 minute
     },
   )
 
   useEffect(() => {
-    refetch()
+    if (search) {
+      refetch()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search])
 

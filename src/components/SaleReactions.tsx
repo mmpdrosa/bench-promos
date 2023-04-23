@@ -1,5 +1,5 @@
 import * as Popover from '@radix-ui/react-popover'
-import { Suspense, useEffect } from 'react'
+import { useEffect } from 'react'
 import { MdAddReaction } from 'react-icons/md'
 import { useQuery } from 'react-query'
 
@@ -97,6 +97,7 @@ export function SaleReactions({ saleId, reactions }: SaleReactionsProps) {
     },
     refetchOnWindowFocus: false,
     refetchOnMount: false,
+    suspense: true,
   })
 
   useEffect(() => {
@@ -131,35 +132,33 @@ export function SaleReactions({ saleId, reactions }: SaleReactionsProps) {
         </div>
       ))}
 
-      <Suspense>
-        {Object.entries(reactions ?? {}).length !==
-          Object.entries(emojiMapping).length && (
-          <Popover.Root>
-            <Popover.Trigger asChild>
-              <button className="w-8 aspect-square flex justify-center items-center text-center rounded-full border border-bg-violet-100 transition-colors bg-violet-100 hover:border-violet-400">
-                <MdAddReaction className="text-2xl" />
-              </button>
-            </Popover.Trigger>
-            <Popover.Portal>
-              <Popover.Content className="h-8 rounded shadow bg-white">
-                <div className="flex">
-                  {Object.entries(emojiMapping).map(([key, emoji]) => (
-                    <button
-                      key={key}
-                      onClick={() => handleAddReaction(key)}
-                      className="w-8 aspect-square flex items-center justify-center hover:text-xl"
-                    >
-                      {emoji}
-                    </button>
-                  ))}
-                </div>
-                <Popover.Close />
-                <Popover.Arrow />
-              </Popover.Content>
-            </Popover.Portal>
-          </Popover.Root>
-        )}
-      </Suspense>
+      {Object.entries(reactions ?? {}).length !==
+        Object.entries(emojiMapping).length && (
+        <Popover.Root>
+          <Popover.Trigger asChild>
+            <button className="w-8 aspect-square flex justify-center items-center text-center rounded-full border border-bg-violet-100 transition-colors bg-violet-100 hover:border-violet-400">
+              <MdAddReaction className="text-2xl" />
+            </button>
+          </Popover.Trigger>
+          <Popover.Portal>
+            <Popover.Content className="h-8 rounded shadow bg-white">
+              <div className="flex">
+                {Object.entries(emojiMapping).map(([key, emoji]) => (
+                  <button
+                    key={key}
+                    onClick={() => handleAddReaction(key)}
+                    className="w-8 aspect-square flex items-center justify-center hover:text-xl"
+                  >
+                    {emoji}
+                  </button>
+                ))}
+              </div>
+              <Popover.Close />
+              <Popover.Arrow />
+            </Popover.Content>
+          </Popover.Portal>
+        </Popover.Root>
+      )}
     </div>
   )
 }

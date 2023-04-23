@@ -43,7 +43,7 @@ export function Header() {
 
         <Link href="/" title="Bench Promos" className="max-sm:hidden w-60">
           <Image
-            src="https://media.discordapp.net/attachments/826681789677436950/1097633179264876564/Logo_atualizada.png?width=550&height=253"
+            src="https://media.discordapp.net/attachments/826681789677436950/1097633179264876564/Logo_atualizada.png"
             width={224}
             height={1}
             alt="Logo"

@@ -8,8 +8,9 @@ import { api } from '@/lib/axios'
 import { Sale } from '@/models'
 
 export const metadata: Metadata = {
-  title: 'Home',
-  description: '',
+  title: 'Bench Promos: As Melhores Ofertas e Promoções',
+  description:
+    'Encontre os melhores os descontos, ofertas, cupons e promoções em uma comunidade especializada em tecnologia.',
 }
 
 const ITEMS_PER_LOAD = 8
@@ -27,6 +28,8 @@ export default function Home({
     },
     initialData: initialSales,
     refetchOnWindowFocus: false,
+    cacheTime: 0,
+    staleTime: 1000 * 60, // 1 minute
   })
 
   return (

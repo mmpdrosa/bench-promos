@@ -51,8 +51,10 @@ export function ExpandedProductSaleCard(sale: Sale) {
                 <Toast
                   title="CÓDIGO COPIADO"
                   triggerButton={
-                    <button onClick={() => copyToClipboard(sale.coupon!)}>
-                      <RxCopy className="text-lg" />
+                    <button>
+                      <span onClick={() => copyToClipboard(sale.coupon!)}>
+                        <RxCopy className="text-lg" />
+                      </span>
                     </button>
                   }
                 />

@@ -1,7 +1,6 @@
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Suspense } from 'react'
 import { BsBoxArrowInUpRight } from 'react-icons/bs'
 import { RxCopy, RxShare1 } from 'react-icons/rx'
 import { TbDiscount2 } from 'react-icons/tb'
@@ -64,11 +63,9 @@ export function CompactProductSaleCard(sale: CompactProductSaleCardProps) {
         </Link>
 
         {sale.specs && (
-          <Suspense>
-            <p className="mt-2.5 text-sm line-clamp-3 text-zinc-600">
-              {sale.specs}
-            </p>
-          </Suspense>
+          <p className="mt-2.5 text-sm line-clamp-3 text-zinc-600">
+            {sale.specs}
+          </p>
         )}
 
         <div className="mt-4">
@@ -78,25 +75,25 @@ export function CompactProductSaleCard(sale: CompactProductSaleCardProps) {
         </div>
 
         {sale.coupon && (
-          <Suspense>
-            <div className="mt-2 text-sm text-zinc-700">
-              <span>Com cupom</span>
-              <div className="h-8 flex items-center gap-1 py-1 px-4 border border-dashed border-black rounded-full bg-amber-200">
-                <TbDiscount2 className="text-2xl text-violet-500" />
-                <span className="mr-auto font-semibold tracking-wider">
-                  {sale.coupon}
-                </span>
-                <Toast
-                  title="CÓDIGO COPIADO"
-                  triggerButton={
-                    <button onClick={() => copyToClipboard(sale.coupon!)}>
+          <div className="mt-2 text-sm text-zinc-700">
+            <span>Com cupom</span>
+            <div className="h-8 flex items-center gap-1 py-1 px-4 border border-dashed border-black rounded-full bg-amber-200">
+              <TbDiscount2 className="text-2xl text-violet-500" />
+              <span className="mr-auto font-semibold tracking-wider">
+                {sale.coupon}
+              </span>
+              <Toast
+                title="CÓDIGO COPIADO"
+                triggerButton={
+                  <button>
+                    <span onClick={() => copyToClipboard(sale.coupon!)}>
                       <RxCopy className="text-lg" />
-                    </button>
-                  }
-                />
-              </div>
+                    </span>
+                  </button>
+                }
+              />
             </div>
-          </Suspense>
+          </div>
         )}
       </div>
 

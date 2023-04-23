@@ -69,7 +69,7 @@ export function SignUpDialog({
   return (
     <>
       <Image
-        src="https://media.discordapp.net/attachments/826681789677436950/1097633179264876564/Logo_atualizada.png?width=550&height=253"
+        src="https://media.discordapp.net/attachments/826681789677436950/1097633179264876564/Logo_atualizada.png"
         width={248}
         height={1}
         alt="Logo"

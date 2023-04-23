@@ -22,6 +22,8 @@ export default function Coupons({
 
   const retailersWithCoupons = coupons.reduce<RetailersWithCoupons[]>(
     (acc, { retailer, ...coupon }) => {
+      if (!coupon.available) return acc
+
       const retailerIndex = acc.findIndex((r) => r.id === retailer.id)
 
       if (retailerIndex === -1) {
@@ -30,7 +32,7 @@ export default function Coupons({
           name: retailer.name,
           coupons: [coupon],
         })
-      } else if (coupon.available) {
+      } else {
         acc[retailerIndex].coupons.push(coupon)
       }
       return acc
