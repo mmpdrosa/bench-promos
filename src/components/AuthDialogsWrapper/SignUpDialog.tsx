@@ -68,12 +68,14 @@ export function SignUpDialog({
 
   return (
     <>
-      <Image
-        src="https://media.discordapp.net/attachments/826681789677436950/1097633179264876564/Logo_atualizada.png"
-        width={248}
-        height={1}
-        alt="Logo"
-      />
+      <div className="relative w-60 h-28 shrink-0">
+        <Image
+          className="object-contain"
+          src="https://media.discordapp.net/attachments/826681789677436950/1097633179264876564/Logo_atualizada.png"
+          fill
+          alt="Logo"
+        />
+      </div>
 
       <h1 className="text-lg font-medium tracking-wider text-white">
         Crie uma conta

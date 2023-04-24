@@ -38,28 +38,34 @@ export function Header() {
 
   return (
     <header className="px-4 max-sm:pt-2 bg-violet-500">
-      <div className="max-w-screen-xl flex items-center justify-between mx-auto sm:gap-4 max-lg:flex-wrap">
+      <div className="max-w-screen-xl flex items-center justify-between mx-auto gap-x-4 max-lg:flex-wrap max-lg:justify-start">
         <SidebarMenu />
 
-        <Link href="/" title="Bench Promos" className="max-sm:hidden w-60">
+        <Link
+          href="/"
+          title="Bench Promos"
+          className="relative max-sm:hidden w-60 h-28"
+        >
           <Image
+            className="object-contain"
             src="https://media.discordapp.net/attachments/826681789677436950/1097633179264876564/Logo_atualizada.png"
-            width={224}
-            height={1}
+            fill
             alt="Logo"
             priority
-            className="h-auto w-auto"
           />
         </Link>
 
-        <Link href="/" title="Bench Promos" className="sm:hidden h-10">
+        <Link
+          href="/"
+          title="Bench Promos"
+          className="relative sm:hidden w-10 h-10"
+        >
           <Image
+            className="object-contain"
             src="https://media.discordapp.net/attachments/826681789677436950/1097652886294499409/removal.ai_tmp-643dc88e9dff3-PhotoRoom.png-PhotoRoom.png"
-            width={50}
-            height={1}
+            fill
             alt="Logo"
             priority
-            className="h-auto w-auto"
           />
         </Link>
 
@@ -93,7 +99,7 @@ export function Header() {
           </button>
         </form>
 
-        <div className="w-60 flex items-center justify-end gap-4">
+        <div className="w-60 flex items-center justify-end gap-4 max-lg:ml-auto">
           <Link
             href="/alertas"
             title="Alertas"

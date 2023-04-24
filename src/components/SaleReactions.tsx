@@ -97,7 +97,6 @@ export function SaleReactions({ saleId, reactions }: SaleReactionsProps) {
     },
     refetchOnWindowFocus: false,
     refetchOnMount: false,
-    suspense: true,
   })
 
   useEffect(() => {

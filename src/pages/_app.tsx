@@ -1,6 +1,5 @@
 import { CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { Montserrat } from 'next/font/google'
 import { TooltipProvider } from '@radix-ui/react-tooltip'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
@@ -8,6 +7,8 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import timezone from 'dayjs/plugin/timezone'
 import utc from 'dayjs/plugin/utc'
 import type { AppProps } from 'next/app'
+import { Montserrat } from 'next/font/google'
+import { GoogleAnalytics } from 'nextjs-google-analytics'
 import { useEffect } from 'react'
 import { IconContext } from 'react-icons'
 import { QueryClientProvider } from 'react-query'
@@ -46,21 +47,24 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <IconContext.Provider value={{}}>
-        <QueryClientProvider client={queryClient}>
-          <TooltipProvider>
-            <AuthProvider>
-              <CategoryProvider>
-                <Layout {...montserrat}>
-                  <Component {...pageProps} />
-                </Layout>
-              </CategoryProvider>
-            </AuthProvider>
-          </TooltipProvider>
-        </QueryClientProvider>
-      </IconContext.Provider>
-    </ThemeProvider>
+    <>
+      <GoogleAnalytics trackPageViews />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <IconContext.Provider value={{}}>
+          <QueryClientProvider client={queryClient}>
+            <TooltipProvider>
+              <AuthProvider>
+                <CategoryProvider>
+                  <Layout {...montserrat}>
+                    <Component {...pageProps} />
+                  </Layout>
+                </CategoryProvider>
+              </AuthProvider>
+            </TooltipProvider>
+          </QueryClientProvider>
+        </IconContext.Provider>
+      </ThemeProvider>
+    </>
   )
 }
