@@ -13,7 +13,7 @@ import { useEffect } from 'react'
 import { IconContext } from 'react-icons'
 import { QueryClientProvider } from 'react-query'
 
-import { Layout } from '@/components/layout'
+import { MainLayout } from '@/components/layouts/main'
 import { AuthProvider } from '@/contexts/AuthContext'
 import { CategoryProvider } from '@/contexts/CategoryContext'
 import { queryClient } from '@/lib/react-query'
@@ -56,9 +56,9 @@ export default function App({ Component, pageProps }: AppProps) {
             <TooltipProvider>
               <AuthProvider>
                 <CategoryProvider>
-                  <Layout {...montserrat}>
+                  <MainLayout {...montserrat}>
                     <Component {...pageProps} />
-                  </Layout>
+                  </MainLayout>
                 </CategoryProvider>
               </AuthProvider>
             </TooltipProvider>

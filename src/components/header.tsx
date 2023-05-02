@@ -58,7 +58,7 @@ export function Header() {
         <Link
           href="/"
           title="Bench Promos"
-          className="relative sm:hidden w-10 h-10"
+          className="relative sm:hidden w-20 h-14"
         >
           <Image
             className="object-contain"
@@ -99,7 +99,7 @@ export function Header() {
           </button>
         </form>
 
-        <div className="w-60 flex items-center justify-end gap-4 max-lg:ml-auto">
+        <div className="lg:w-60 flex items-center justify-end gap-4 max-lg:ml-auto">
           <Link
             href="/alertas"
             title="Alertas"

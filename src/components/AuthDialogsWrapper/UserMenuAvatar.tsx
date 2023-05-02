@@ -10,7 +10,7 @@ export function UserMenuAvatar() {
   const router = useRouter()
 
   function handleAdminClick() {
-    router.push('/admin')
+    router.push('/admin/sales')
   }
 
   async function handleSignOutClick() {

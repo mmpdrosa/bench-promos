@@ -9,6 +9,7 @@ import { NumericFormat } from 'react-number-format'
 import { z } from 'zod'
 
 import { ExpandedProductSaleCard } from '@/components/ExpandedProductSaleCard'
+import { AdminLayout } from '@/components/layouts/admin'
 import { useCategory } from '@/contexts/CategoryContext'
 import { api } from '@/lib/axios'
 
@@ -26,7 +27,7 @@ const newSaleSchema = z.object({
 
 type NewSaleFormInput = z.infer<typeof newSaleSchema>
 
-export default function CreateSale({
+export default function SalesDashboard({
   products,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const productOptions = products.map((product) => {
@@ -89,9 +90,9 @@ export default function CreateSale({
   return (
     <>
       <Head>
-        <title>Admin | Bench Promos</title>
+        <title>Gerenciador de Produtos | Bench Promos</title>
       </Head>
-      <div className="max-w-screen-xl space-y-12 py-8 max-xl:px-4 mx-auto">
+      <AdminLayout>
         <div className="w-max">
           <h2 className="text-2xl font-extrabold text-violet-600">
             ADICIONAR PROMOÇÃO
@@ -231,7 +232,7 @@ export default function CreateSale({
                     onChange({
                       target: {
                         name: 'price',
-                        value: floatValue ? floatValue * 100 : 0,
+                        value: floatValue ? Math.round(floatValue * 100) : 0,
                       },
                     })
                   }}
@@ -266,7 +267,7 @@ export default function CreateSale({
             Adicionar
           </button>
         </form>
-      </div>
+      </AdminLayout>
     </>
   )
 }
