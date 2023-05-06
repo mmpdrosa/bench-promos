@@ -8,7 +8,6 @@ import { Controller, useForm } from 'react-hook-form'
 import { NumericFormat } from 'react-number-format'
 import { z } from 'zod'
 
-import { ExpandedProductSaleCard } from '@/components/ExpandedProductSaleCard'
 import { AdminLayout } from '@/components/layouts/admin'
 import { useCategory } from '@/contexts/CategoryContext'
 import { api } from '@/lib/axios'
@@ -42,7 +41,6 @@ export default function SalesDashboard({
     register,
     control,
     handleSubmit,
-    watch,
     reset,
     formState: { isSubmitting },
   } = useForm<NewSaleFormInput>({
@@ -85,8 +83,6 @@ export default function SalesDashboard({
     } catch (err) {}
   }
 
-  const newSale = watch()
-
   return (
     <>
       <Head>
@@ -99,24 +95,6 @@ export default function SalesDashboard({
           </h2>
           <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
         </div>
-
-        <ExpandedProductSaleCard
-          id="admin"
-          title={newSale.title}
-          image_url={newSale.imageUrl}
-          html_url={newSale.htmlUrl}
-          price={newSale.price}
-          specs={newSale.specs}
-          comments={newSale.comments}
-          coupon={newSale.coupon}
-          category={{
-            id: newSale.categoryId,
-            name:
-              categories.find(({ id }) => id === newSale.categoryId)?.name ??
-              '',
-          }}
-          created_at={new Date()}
-        />
 
         <form
           className="max-md:flex flex-col grid grid-cols-2 gap-8"

@@ -1,7 +1,7 @@
 import * as NavigationMenu from '@radix-ui/react-navigation-menu'
 import Link from 'next/link'
 import { AiOutlineCaretRight } from 'react-icons/ai'
-import { FaBars, FaDollarSign } from 'react-icons/fa'
+import { FaBars } from 'react-icons/fa'
 import { HiCheckBadge } from 'react-icons/hi2'
 
 import { useCategory } from '@/contexts/CategoryContext'
@@ -63,17 +63,6 @@ export function Menu() {
           <div className="absolute left-0 top-full">
             <NavigationMenu.Viewport />
           </div>
-        </NavigationMenu.Item>
-
-        <NavigationMenu.Item>
-          <Link
-            href="/promocoes"
-            title="Promoções"
-            className="flex items-center gap-2 py-2 px-3 select-none text-xl font-semibold text-white hover:underline cursor-pointer"
-          >
-            <FaDollarSign className="text-amber-300" />
-            Promoções
-          </Link>
         </NavigationMenu.Item>
 
         <NavigationMenu.Item>

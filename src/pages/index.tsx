@@ -1,9 +1,12 @@
+import { CircularProgress } from '@mui/material'
 import { GetServerSideProps, InferGetServerSidePropsType, Metadata } from 'next'
 import Head from 'next/head'
-import Link from 'next/link'
-import { useQuery } from 'react-query'
+import { useSearchParams } from 'next/navigation'
+import { useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
+import { useInfiniteQuery } from 'react-query'
 
-import { CompactProductSaleCard } from '@/components/CompactProductSaleCard'
+import { ProductSaleCard } from '@/components/ProductSaleCard'
 import { api } from '@/lib/axios'
 import { Sale } from '@/models'
 
@@ -13,56 +16,103 @@ export const metadata: Metadata = {
     'Encontre os melhores os descontos, ofertas, cupons e promoções em uma comunidade especializada em tecnologia.',
 }
 
-const ITEMS_PER_LOAD = 8
+const ITEMS_PER_LOAD = 12
 
 export default function Home({
   sales: initialSales,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { data: sales } = useQuery({
-    queryKey: ['sales', 'home'],
-    queryFn: async () => {
-      const response = await api.get(`/sales?skip=0&take=${ITEMS_PER_LOAD}`)
+  const { ref, inView } = useInView()
+  const searchParams = useSearchParams()
+
+  const search = searchParams.get('q') ?? ''
+
+  const {
+    data: sales,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+    refetch,
+  } = useInfiniteQuery(
+    ['sales'],
+    async ({ pageParam = 0 }) => {
+      const response = await api.get(
+        `/sales?search=${search}&skip=${
+          pageParam * ITEMS_PER_LOAD
+        }&take=${ITEMS_PER_LOAD}`,
+      )
       const sales: Sale[] = response.data
 
       return sales
     },
-    initialData: initialSales,
-    refetchOnWindowFocus: false,
-    cacheTime: 0,
-    staleTime: 1000 * 60, // 1 minute
-  })
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        const nextPage = allPages.length
+
+        return lastPage && lastPage.length !== 0 ? nextPage : undefined
+      },
+      initialData: { pages: [initialSales], pageParams: [0] },
+      refetchOnWindowFocus: false,
+      cacheTime: 1000 * 60 * 1, // 1 minute
+    },
+  )
+
+  useEffect(() => {
+    refetch()
+  }, [refetch, search])
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView])
 
   return (
     <>
       <Head>
-        <title>Bench Promos</title>
+        <title>Promoções | Bench Promos</title>
       </Head>
-      <div className="max-w-screen-xl flex flex-col gap-10 py-8 max-xl:px-4 mx-auto">
-        <div className="grid grid-cols-fill justify-center gap-8">
-          {sales?.map((sale) => (
-            <CompactProductSaleCard
-              key={sale.id}
-              id={sale.id}
-              title={sale.title}
-              html_url={sale.html_url}
-              image_url={sale.image_url}
-              price={sale.price}
-              coupon={sale.coupon}
-              specs={sale.specs}
-              created_at={sale.created_at}
-              reactions={sale.reactions}
-              product_id={sale.product_id}
-            />
-          ))}
+      <div className="max-w-screen-xl py-8 max-xl:px-4 mx-auto space-y-8">
+        {search && (
+          <div>
+            <span>Você pesquisou por: {search}</span>
+          </div>
+        )}
+
+        <div className="flex justify-center flex-wrap gap-7">
+          {sales!.pages
+            .filter(Boolean)
+            .flat()
+            .map((sale) => (
+              <ProductSaleCard
+                key={sale.id}
+                id={sale.id}
+                title={sale.title}
+                html_url={sale.html_url}
+                image_url={sale.image_url}
+                category={sale.category.name}
+                price={sale.price}
+                coupon={sale.coupon}
+                specs={sale.specs}
+                created_at={sale.created_at}
+                reactions={sale.reactions}
+                product_id={sale.product_id}
+                comments={sale.comments}
+              />
+            ))}
         </div>
 
         <div className="text-center">
-          <Link
-            href="/promocoes"
-            className="inline-flex items-center justify-center px-4 py-2.5 rounded-full text-sm font-semibold transition-colors text-white bg-violet-500 hover:bg-violet-400 cursor-pointer"
+          <button
+            ref={ref}
+            onClick={() => fetchNextPage()}
+            disabled={!hasNextPage || isFetchingNextPage}
+            hidden={!hasNextPage}
           >
-            ACESSAR MAIS
-          </Link>
+            {isFetchingNextPage && (
+              <CircularProgress className="text-violet-500" />
+            )}
+          </button>
         </div>
       </div>
     </>
@@ -71,8 +121,12 @@ export default function Home({
 
 export const getServerSideProps: GetServerSideProps<{
   sales: Sale[]
-}> = async () => {
-  const response = await api.get(`/sales?skip=0&take=${ITEMS_PER_LOAD}`)
+}> = async (context) => {
+  const { q } = context.query
+
+  const response = await api.get(
+    `/sales?search=${q ?? ''}&skip=0&take=${ITEMS_PER_LOAD}`,
+  )
   const sales: Sale[] = response.data
 
   return {

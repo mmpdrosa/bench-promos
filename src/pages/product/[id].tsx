@@ -208,7 +208,9 @@ export default function ProductPage({
                   </span>
                 </div>
                 <div className="flex flex-col items-center gap-1.5 font-bold">
-                  <span className="text-violet-500">PREÇO ATUAL</span>
+                  <span className="text-violet-500">
+                    {product.available ? 'PREÇO ATUAL' : 'ÚLTIMO PREÇO'}
+                  </span>
                   <span className="text-2xl">
                     {priceFormatter.format(product.price / 100)}
                   </span>

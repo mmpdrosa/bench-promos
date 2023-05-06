@@ -52,7 +52,7 @@ const productHandlerSchema = z.object({
   title: z.string().min(1, 'Insira algum título.'),
   imageUrl: z.string().url().min(1, 'Insira alguma imagem.'),
   categoryId: z.string().min(1, 'Categoria deve existir.'),
-  subcategoryId: z.string() || null,
+  subcategoryId: z.string(),
   specs: z
     .array(
       z.object({
@@ -161,9 +161,7 @@ export default function ProductsDashboard({
       setValue('categoryId', product.category.id)
       try {
         setValue('subcategoryId', product.subcategory.id)
-      } catch (err) {
-        setValue('subcategoryId', '')
-      }
+      } catch {}
       setValue('title', product.title)
       setValue('imageUrl', product.image_url)
       specsFields.map(() => specsRemove(-1))

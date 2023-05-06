@@ -24,7 +24,7 @@ export function Header() {
     if (searchLocation === 'products') {
       await router.push(`/busca?q=${q}`)
     } else {
-      await router.push(`/promocoes?q=${q}`)
+      await router.push(`/?q=${q}`)
     }
   }
 
@@ -58,7 +58,7 @@ export function Header() {
         <Link
           href="/"
           title="Bench Promos"
-          className="relative sm:hidden w-20 h-14"
+          className="relative sm:hidden w-20 h-12"
         >
           <Image
             className="object-contain"

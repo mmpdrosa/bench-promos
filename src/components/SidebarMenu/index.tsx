@@ -36,15 +36,6 @@ export function SidebarMenu() {
         <ul className="h-full">
           <li>
             <Link
-              href="/promocoes"
-              className="block px-3 py-3.5 leading-none font-bold"
-              onClick={handleToggleSidebar}
-            >
-              Promoções
-            </Link>
-          </li>
-          <li>
-            <Link
               href="/cupons"
               className="block px-3 py-3.5 leading-none font-bold"
               onClick={handleToggleSidebar}

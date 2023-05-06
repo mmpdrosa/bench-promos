@@ -29,13 +29,6 @@ export function Footer() {
             >
               Mouses
             </Link>
-            <Link
-              href="/promocoes"
-              title="Promoções"
-              className="hover:underline"
-            >
-              Promoções
-            </Link>
             <Link href="/cupons" title="Cupons" className="hover:underline">
               Cupons
             </Link>
