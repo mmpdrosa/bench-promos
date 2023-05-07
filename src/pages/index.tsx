@@ -70,7 +70,7 @@ export default function Home({
   return (
     <>
       <Head>
-        <title>Promoções | Bench Promos</title>
+        <title>Bench Promos: As Melhores Ofertas e Promoções</title>
       </Head>
       <div className="max-w-screen-xl py-8 max-xl:px-4 mx-auto space-y-8">
         {search && (

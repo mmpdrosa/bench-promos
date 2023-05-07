@@ -168,11 +168,12 @@ export default function ProductsDashboard({
       specsKeysFinder(product.id).forEach((key) => {
         addNewSpec(key, product.specs[key])
       })
-      setValue('reviewUrl', product.review_url ? product.review_url : ' ')
+      setValue('reviewUrl', product.review_url ? product.review_url : '')
       setValue('referencePrice', product.reference_price)
       setValue('recommended', product.recommended)
       setProductRetailers(product.id)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productIdInput, setValue])
 
   const { categories } = useCategory()
