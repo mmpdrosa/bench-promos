@@ -53,7 +53,10 @@ export function ProductSaleCard({
   }
 
   return (
-    <div className="w-[408px] max-w-[408px] inline-flex flex-col rounded-lg overflow-hidden border border-zinc-300 transition ease-in-out duration-300 hover:shadow-xl">
+    <div
+      id={id}
+      className="w-[408px] max-w-[408px] inline-flex flex-col rounded-lg overflow-hidden border border-zinc-300 transition ease-in-out duration-300 hover:shadow-xl"
+    >
       <div className="flex justify-between items-center py-2 px-4 text-sm">
         <span className="text-sm tracking-wider">{category}</span>
         <span className="text-xs">{dayjs(created_at).fromNow()}</span>

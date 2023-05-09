@@ -44,7 +44,13 @@ const couponSchema = z.object({
       return discount.replace(' ', '')
     })
     .nullable(),
-  minimum_spend: z.number().optional().nullable(),
+  minimum_spend: z
+    .number()
+    .optional()
+    .nullable()
+    .transform((value) => {
+      if (value) return Math.round(value / 100)
+    }),
   comments: z.string().optional().nullable(),
   available: z.boolean(),
   category: z.array(

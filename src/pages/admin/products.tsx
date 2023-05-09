@@ -453,6 +453,7 @@ export default function ProductsDashboard({
               id="subcategory"
               {...register('subcategoryId')}
             >
+              <option value=""></option>
               {categories
                 .find((category) => category.id === productInput.categoryId)
                 ?.subcategories?.map((subcategory) => (
@@ -658,7 +659,7 @@ export default function ProductsDashboard({
 
                 <div className="flex flex-col">
                   <div className="flex justify-between">
-                    <label>SKU </label>
+                    <label>SKU</label>
                     <label className="text-base text-red-700">
                       *(Aliexpress, Casas Bahia, Ponto Frio, Fastshop)
                     </label>

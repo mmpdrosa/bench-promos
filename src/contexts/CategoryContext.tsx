@@ -26,6 +26,8 @@ export function CategoryProvider({ children }: CategoryProviderProps) {
       return categories
     },
     refetchOnWindowFocus: false,
+    cacheTime: 1000 * 60 * 60 * 1, // 1 hour
+    refetchOnMount: false,
   })
 
   return (

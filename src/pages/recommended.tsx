@@ -5,6 +5,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs'
 import { ProductSlider } from '@/components/ProductSlider'
 import { api } from '@/lib/axios'
 import { Product } from '@/models'
+import { useCategory } from '@/contexts/CategoryContext'
 
 interface RecommendedProductsByCategory {
   id: string
@@ -15,22 +16,31 @@ interface RecommendedProductsByCategory {
 export default function Recommended({
   products,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const recommendedProductsByCategory = products.reduce<
-    RecommendedProductsByCategory[]
-  >((acc, { category, ...product }) => {
-    const categoryIndex = acc.findIndex((c) => c.id === category?.id)
+  const { categories } = useCategory()
 
-    if (categoryIndex === -1) {
-      acc.push({
-        id: category!.id,
-        name: category!.name,
-        products: [product],
-      })
-    } else {
-      acc[categoryIndex].products.push(product)
-    }
-    return acc
-  }, [])
+  const recommendedProductsByCategory = products
+    .reduce<RecommendedProductsByCategory[]>(
+      (acc, { category, ...product }) => {
+        const categoryIndex = acc.findIndex((c) => c.id === category?.id)
+
+        if (categoryIndex === -1) {
+          acc.push({
+            id: category!.id,
+            name: category!.name,
+            products: [product],
+          })
+        } else {
+          acc[categoryIndex].products.push(product)
+        }
+        return acc
+      },
+      [],
+    )
+    .sort(
+      (a, b) =>
+        categories.findIndex((category) => category.id === a.id) -
+        categories.findIndex((category) => category.id === b.id),
+    )
 
   return (
     <>
