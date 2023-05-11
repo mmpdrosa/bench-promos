@@ -13,7 +13,7 @@ import { SidebarMenu } from './SidebarMenu'
 export function Header() {
   const router = useRouter()
   const [searchLocation, setSearchLocation] = useState<'sales' | 'products'>(
-    'sales',
+    'products',
   )
 
   const { register, handleSubmit } = useForm<{ q: string }>()
