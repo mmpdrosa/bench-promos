@@ -14,6 +14,10 @@ module.exports = {
       spacing: {
         '74': '18.5rem' 
       },
+      colors:{
+        bluediscord: "#5865F2",
+        bluetelegram: "#34A9E5"
+      },
     },
     keyframes: {
       // Toast

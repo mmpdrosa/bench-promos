@@ -62,6 +62,26 @@ export function SidebarMenu() {
             </Link>
           </li>
 
+          <li>
+            <a
+              href="https://t.me/BenchPromos"
+              target="_blank"
+              className="block px-3 py-3.5 leading-none font-bold"
+            >
+              Telegram
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://discord.gg/cCD5PEjyjg"
+              target="_blank"
+              className="block px-3 py-3.5 leading-none font-bold"
+            >
+              Discord
+            </a>
+          </li>
+
           {categories?.map(({ id, name, subcategories }) => (
             <li key={id}>
               {subcategories?.length ? (
