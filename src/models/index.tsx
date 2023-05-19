@@ -34,6 +34,11 @@ export type Product = {
   coupon?: Coupon
   specs?: Record<string, string>
   review_url?: string
+  cashback?: {
+    name: string
+    affiliatedLink: string
+    value: number
+  }
 }
 
 export type Category = {

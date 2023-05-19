@@ -22,6 +22,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import { api } from '@/lib/axios'
 import { Product } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
+import { MdSell } from 'react-icons/md'
 
 type Sale = {
   id: string
@@ -106,9 +107,30 @@ export default function ProductPage({
                   {product.coupon && (
                     <div className="text-sm mt-2 text-zinc-700">
                       Com cupom
-                      <div className="flex items-center gap-2 px-4 py-1 rounded-full text-lg font-semibold tracking-wider bg-amber-200">
-                        <TbDiscount2 className="w-8 h-8 text-violet-500" />
+                      <div className="flex items-center gap-2 px-4 py-1 rounded-full text-lg font-semibold tracking-wider bg-amber-200 uppercase">
+                        <MdSell className="w-7 h-7 text-violet-500" />
                         {product.coupon?.code}
+                      </div>
+                    </div>
+                  )}
+
+                  {product.cashback?.value && (
+                    <div className="text-sm mt-2 text-zinc-700">
+                      Com cashback de
+                      <div className="flex">
+                        <div className="flex items-center gap-2 px-4 py-1 rounded-l-full text-lg font-semibold tracking-wider bg-amber-200">
+                          <TbDiscount2 className="w-8 h-8 text-violet-500" />
+                          {product.cashback?.value}%
+                        </div>
+                        <div className="flex items-center gap-2 px-4 py-1 rounded-r-full text-lg font-semibold tracking-wider bg-violet-500 text-white hover:bg-violet-400 cursor-pointer transition-colors">
+                          <a
+                            href={product.cashback.affiliatedLink}
+                            target="_blank"
+                          >
+                            {product.cashback.name}
+                          </a>
+                          <FaExternalLinkAlt />
+                        </div>
                       </div>
                     </div>
                   )}

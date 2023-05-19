@@ -8,6 +8,7 @@ import { useMediaQuery } from '@/hooks/use-media-query'
 import { api } from '@/lib/axios'
 import { Coupon } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
+import CouponPopover from '@/components/CouponPopover'
 
 interface RetailersWithCoupons {
   id: string
@@ -39,6 +40,15 @@ export default function Coupons({
     },
     [],
   )
+  const discountsLabel = (couponDiscount: string) => {
+    const discountArray = couponDiscount.split(' + ')
+    const formatedDiscountArray = discountArray.map((discount) =>
+      discount.includes('%')
+        ? discount
+        : priceFormatter.format(Number(discount)),
+    )
+    return formatedDiscountArray.join(' + ')
+  }
 
   function copyToClipboard(text: string) {
     navigator.clipboard.writeText(text)
@@ -72,19 +82,20 @@ export default function Coupons({
                     className="relative px-10 py-6 rounded-2xl text-center overflow-hidden text-white bg-gradient-to-br from-violet-600 to-violet-400"
                   >
                     <h3 className="text-2xl font-medium">
-                      {coupon.discount.endsWith('%')
-                        ? coupon.discount
-                        : priceFormatter.format(Number(coupon.discount))}
+                      {discountsLabel(coupon.discount)}
                     </h3>
+                    {coupon.comments && (
+                      <CouponPopover comments={coupon.comments} />
+                    )}
                     <h4 className="text-xl font-medium">OFF</h4>
                     <div className="flex items-center my-6 mx-auto">
-                      <span className="w-52 h-10 flex items-center justify-center tracking-wider font-bold border border-dashed border-white border-r-0">
+                      <span className="w-52 h-12 flex items-center justify-center rounded-l-sm tracking-wider font-bold border border-dashed border-white border-r-0">
                         {coupon.code.toUpperCase()}
                       </span>
                       <Toast
                         title="CÓDIGO COPIADO"
                         triggerButton={
-                          <button className="h-10 px-1.5 sm:px-5 font-medium text-black border border-amber-300 bg-amber-300 cursor-pointer">
+                          <button className="h-12 px-1.5 sm:px-5 font-medium text-black border border-amber-300 bg-amber-300 cursor-pointer hover:bg-white hover:border-white transition-colors">
                             <span onClick={() => copyToClipboard(coupon.code)}>
                               {isSm ? 'COPIAR' : <RxCopy />}
                             </span>

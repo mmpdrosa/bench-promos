@@ -2,13 +2,13 @@ import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
 import { RxCopy } from 'react-icons/rx'
-import { TbDiscount2 } from 'react-icons/tb'
 
 import { priceFormatter } from '@/utils/formatter'
 import { useState } from 'react'
 import { FaExternalLinkAlt, FaInfoCircle } from 'react-icons/fa'
 import { SaleReactions } from './SaleReactions'
 import { Toast } from './Toast'
+import { MdSell } from 'react-icons/md'
 
 interface ProductSaleCardProps {
   id: string
@@ -100,8 +100,8 @@ export function ProductSaleCard({
             <div className="mt-2 text-sm text-zinc-700">
               <span>Com cupom</span>
               <div className="h-8 flex items-center gap-1 py-1 px-4 border border-dashed border-black rounded-full bg-amber-200">
-                <TbDiscount2 className="text-2xl text-violet-500" />
-                <span className="mr-auto font-semibold tracking-wider">
+                <MdSell className="text-2xl text-violet-500" />
+                <span className="mr-auto font-semibold tracking-wider max-md:text-xs">
                   {coupon}
                 </span>
                 <Toast
