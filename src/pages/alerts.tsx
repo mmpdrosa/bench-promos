@@ -119,12 +119,12 @@ export default function Alerts() {
             <button
               key={category.id}
               disabled={!user}
-              className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors border-zinc-300 disabled:text-black/50 disabled:bg-zinc-50 ${
+              className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors dark:border-zinc-700 border-zinc-300 disabled:text-black/50 disabled:bg-zinc-50 ${
                 categoryAlerts?.find(
                   (categoryAlert) => categoryAlert.category.id === category.id,
                 )
                   ? 'bg-violet-500 text-white border-opacity-0 hover:bg-violet-400'
-                  : 'hover:bg-zinc-50'
+                  : 'hover:bg-zinc-50 dark:hover:bg-zinc-700'
               }`}
               onClick={() => handleCategoryClick(category.id)}
             >
@@ -144,7 +144,7 @@ export default function Alerts() {
           <div className="max-lg:flex flex-col grid grid-cols-2 gap-4">
             {productAlerts.map((productAlert) => (
               <div key={productAlert.id}>
-                <div className="flex max-sm:flex-col gap-3.5 p-2.5 rounded-t-xl border border-b-0 border-zinc-300 bg-white">
+                <div className="flex max-sm:flex-col gap-3.5 p-2.5 rounded-t-xl border border-b-0 border-zinc-300 bg-white dark:bg-zinc-800 dark:border-zinc-700">
                   <div className="sm:w-2/5">
                     <div className="relative w-full max-w-[192px] aspect-square mx-auto">
                       <Image
