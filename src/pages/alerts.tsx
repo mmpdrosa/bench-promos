@@ -77,7 +77,7 @@ export default function Alerts() {
       await api.delete(`/users/unnotify-product/${productId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-    } catch (err) { }
+    } catch (err) {}
 
     queryClient.invalidateQueries('alerts')
   }
@@ -93,7 +93,7 @@ export default function Alerts() {
           headers: { Authorization: `Bearer ${token}` },
         },
       )
-    } catch (err) { }
+    } catch (err) {}
 
     queryClient.invalidateQueries('alerts')
   }
@@ -119,12 +119,13 @@ export default function Alerts() {
             <button
               key={category.id}
               disabled={!user}
-              className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors border-zinc-300 disabled:text-black/50 disabled:bg-zinc-50 ${categoryAlerts?.find(
-                (categoryAlert) => categoryAlert.category.id === category.id,
-              )
+              className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors border-zinc-300 disabled:text-black/50 disabled:bg-zinc-50 ${
+                categoryAlerts?.find(
+                  (categoryAlert) => categoryAlert.category.id === category.id,
+                )
                   ? 'bg-violet-500 text-white border-opacity-0 hover:bg-violet-400'
                   : 'hover:bg-zinc-50'
-                }`}
+              }`}
               onClick={() => handleCategoryClick(category.id)}
             >
               <span className="mx-1">{category.name}</span>
