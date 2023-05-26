@@ -124,6 +124,7 @@ export function ProductPriceChart({
             tickLine={false}
             tickMargin={16}
             tickCount={8}
+            tick={{ fill: '#A1A1AA' }}
             tickFormatter={(date: string) => dayjs(date).utc().format('D MMM')}
           />
 
@@ -132,6 +133,7 @@ export function ProductPriceChart({
             axisLine={false}
             tickLine={false}
             tickCount={5}
+            tick={{ fill: '#A1A1AA' }}
             tickFormatter={(price: number) => `${price / 100}`}
           />
 
@@ -146,7 +148,7 @@ export function ProductPriceChart({
           className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors border-zinc-300 ${
             period === '30d'
               ? 'bg-violet-500 text-white border-opacity-0 hover:bg-violet-400'
-              : 'hover:bg-zinc-50'
+              : 'hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:border-zinc-700'
           }`}
           onClick={() => setPeriod('30d')}
         >
@@ -156,7 +158,7 @@ export function ProductPriceChart({
           className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors border-zinc-300 ${
             period === '3m'
               ? 'bg-violet-500 text-white border-opacity-0 hover:bg-violet-400'
-              : 'hover:bg-zinc-50'
+              : 'hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:border-zinc-700'
           }`}
           onClick={() => setPeriod('3m')}
         >
@@ -166,7 +168,7 @@ export function ProductPriceChart({
           className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors border-zinc-300 ${
             period === '6m'
               ? 'bg-violet-500 text-white border-opacity-0 hover:bg-violet-400'
-              : 'hover:bg-zinc-50'
+              : 'hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:border-zinc-700'
           }`}
           onClick={() => setPeriod('6m')}
         >
@@ -176,7 +178,7 @@ export function ProductPriceChart({
           className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors border-zinc-300 ${
             period === '1y'
               ? 'bg-violet-500 text-white border-opacity-0 hover:bg-violet-400'
-              : 'hover:bg-zinc-50'
+              : 'hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:border-zinc-700'
           }`}
           onClick={() => setPeriod('1y')}
         >

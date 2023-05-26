@@ -22,7 +22,7 @@ interface ProductCardProps {
 
 export function ProductCard(product: ProductCardProps) {
   return (
-    <div className="min-w-[296px] w-74 min-h-[544px] flex flex-col rounded-lg overflow-hidden bg-white border border-zinc-300 transition ease-in-out duration-300 hover:shadow-xl">
+    <div className="min-w-[296px] w-74 min-h-[544px] flex flex-col rounded-lg overflow-hidden bg-white border dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:border-zinc-700 dark:transition-none border-zinc-300 transition ease-in-out duration-300 hover:shadow-xl">
       <Link
         className="w-full h-74 relative"
         href={`/produto/${product.id}`}
@@ -43,7 +43,7 @@ export function ProductCard(product: ProductCardProps) {
         </Link>
         {product.available ? (
           <>
-            <h4 className="text-sm font-medium text-zinc-500">
+            <h4 className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
               Menor preço via{' '}
               <a
                 target="_blank"
@@ -59,9 +59,11 @@ export function ProductCard(product: ProductCardProps) {
             </strong>
 
             {product.coupon && (
-              <div className="text-sm text-zinc-700">
+              <div className="text-sm text-zinc-700 dark:text-zinc-400">
                 Com cupom
-                <h6 className="font-black">{product.coupon.code}</h6>
+                <h6 className="font-black dark:text-zinc-200">
+                  {product.coupon.code}
+                </h6>
               </div>
             )}
           </>
@@ -74,7 +76,7 @@ export function ProductCard(product: ProductCardProps) {
       <a
         href={product.html_url}
         target="_blank"
-        className="inline-flex justify-between items-center mt-auto px-4 py-2 text-sm font-medium cursor-pointer bg-zinc-100 hover:bg-zinc-200 transition ease-in-out duration-300"
+        className="inline-flex justify-between items-center mt-auto px-4 py-2 text-sm font-medium cursor-pointer bg-zinc-100 dark:bg-zinc-700 dark:hover:bg-zinc-500 hover:bg-zinc-200 transition ease-in-out duration-300"
         rel="noreferrer"
       >
         Acessar site

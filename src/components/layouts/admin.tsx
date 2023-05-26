@@ -7,7 +7,7 @@ interface LayoutProps {
 
 export function AdminLayout({ children }: LayoutProps) {
   return (
-    <div className="max-w-screen-xl space-y-12 py-8 max-xl:px-4 mx-auto">
+    <div className="max-w-screen-xl space-y-12 py-8 max-xl:px-4 mx-auto dark:bg-white dark:text-black dark:rounded-lg">
       <div className="max-w-sm flex items-center justify-between mx-auto font-medium">
         <Link
           href={'/admin/products'}

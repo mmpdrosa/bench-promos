@@ -9,6 +9,7 @@ import { HiOutlineSwitchVertical, HiSearch } from 'react-icons/hi'
 import { AuthDialogsWrapper } from './AuthDialogsWrapper'
 import { Menu } from './Menu'
 import { SidebarMenu } from './SidebarMenu'
+import ThemeToggleButton from './ThemeToggle'
 
 export function Header() {
   const router = useRouter()
@@ -37,7 +38,7 @@ export function Header() {
   }
 
   return (
-    <header className="px-4 max-sm:pt-2 bg-violet-500">
+    <header className="px-4 max-sm:pt-2 bg-violet-500 dark:bg-zinc-900">
       <div className="max-w-screen-xl flex items-center justify-between mx-auto gap-x-4 max-lg:flex-wrap max-lg:justify-start">
         <SidebarMenu />
 
@@ -75,7 +76,7 @@ export function Header() {
         >
           <div
             onClick={handleSwitchSearch}
-            className="flex items-center justify-center gap-2 max-sm:gap-1 px-4 max-sm:px-2.5 rounded-l-xl bg-white cursor-pointer"
+            className="flex items-center justify-center gap-2 max-sm:gap-1 px-4 max-sm:px-2.5 rounded-l-xl bg-white dark:bg-zinc-800 dark:text-zinc-200 cursor-pointer"
           >
             <span className="w-24 max-sm:w-20 text-sm max-sm:text-xs font-bold select-none">
               {searchLocation === 'sales' ? 'Promoções' : 'Produtos'}
@@ -84,12 +85,12 @@ export function Header() {
             <HiOutlineSwitchVertical className="max-sm:text-sm" />
           </div>
 
-          <div className="py-4 max-sm:py-2.5 bg-white">
-            <div className="w-px h-full bg-zinc-300"></div>
+          <div className="py-4 max-sm:py-2.5 bg-white dark:bg-zinc-800">
+            <div className="w-px h-full bg-zinc-300 dark:bg-zinc-600"></div>
           </div>
 
           <input
-            className="w-3/5 h-14 max-sm:h-10 max-lg:w-full px-4 max-sm:px-2.5 outline-none text-sm focus:outline-none"
+            className="w-3/5 h-14 max-sm:h-10 max-lg:w-full px-4 max-sm:px-2.5 outline-none text-sm dark:bg-zinc-800 focus:outline-none dark:text-zinc-200"
             type="search"
             placeholder="Digite sua busca..."
             {...register('q')}
@@ -100,6 +101,9 @@ export function Header() {
         </form>
 
         <div className="lg:w-60 flex items-center justify-end gap-4 max-lg:ml-auto">
+          <div className="lg:hidden scale-75 mr-0 ml-0">
+            <ThemeToggleButton />
+          </div>
           <Link
             href="/alertas"
             title="Alertas"

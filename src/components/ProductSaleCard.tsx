@@ -55,9 +55,9 @@ export function ProductSaleCard({
   return (
     <div
       id={id}
-      className="w-[408px] max-w-[408px] inline-flex flex-col rounded-lg overflow-hidden border border-zinc-300 transition ease-in-out duration-300 hover:shadow-xl"
+      className="w-[408px] max-w-[408px] inline-flex flex-col rounded-lg overflow-hidden border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition dark:transition-none ease-in-out duration-300 hover:shadow-xl"
     >
-      <div className="flex justify-between items-center py-2 px-4 text-sm">
+      <div className="flex justify-between items-center py-2 px-4 text-sm dark:text-zinc-300">
         <span className="text-sm tracking-wider">{category}</span>
         <span className="text-xs">{dayjs(created_at).fromNow()}</span>
       </div>
@@ -74,7 +74,7 @@ export function ProductSaleCard({
           className="relative w-8/12 mx-auto aspect-square"
         >
           <Image
-            className="object-contain"
+            className="object-contain rounded-lg"
             alt=""
             src={image_url}
             fill
@@ -86,7 +86,9 @@ export function ProductSaleCard({
         <div className="mt-4">
           {specs && (
             <div className="mb-2.5">
-              <p className="text-sm line-clamp-3 text-zinc-600">{specs}</p>
+              <p className="text-sm line-clamp-3 text-zinc-600 dark:text-zinc-300">
+                {specs}
+              </p>
             </div>
           )}
 
@@ -97,10 +99,10 @@ export function ProductSaleCard({
           </div>
 
           {coupon && (
-            <div className="mt-2 text-sm text-zinc-700">
+            <div className="mt-2 text-sm text-zinc-700 dark:text-zinc-200">
               <span>Com cupom</span>
-              <div className="h-8 flex items-center gap-1 py-1 px-4 border border-dashed border-black rounded-full bg-amber-200">
-                <MdSell className="text-2xl text-violet-500" />
+              <div className="h-8 flex items-center gap-1 py-1 px-4 border border-dashed dark:border-zinc-500 border-black rounded-full bg-amber-200 dark:text-zinc-900">
+                <MdSell className="text-2xl text-violet-400" />
                 <span className="mr-auto font-semibold tracking-wider max-md:text-xs">
                   {coupon}
                 </span>
@@ -133,12 +135,12 @@ export function ProductSaleCard({
               className="group flex items-center mt-4 gap-4 cursor-pointer"
             >
               <FaInfoCircle
-                className={`group-hover:text-violet-500 not-sr-only text-2xl transition-colors ${
+                className={`group-hover:text-violet-500 rounded-ful not-sr-only text-2xl transition-colors ${
                   openComments && 'text-violet-500'
                 }`}
               />
               <span
-                className={`text-xs font-bold whitespace-pre-line text-black/75 select-none ${
+                className={`text-xs font-bold whitespace-pre-line text-black/75 select-none dark:text-zinc-300 ${
                   !openComments && 'line-clamp-1'
                 }`}
               >

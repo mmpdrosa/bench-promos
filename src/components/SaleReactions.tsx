@@ -116,10 +116,10 @@ export function SaleReactions({ saleId, reactions }: SaleReactionsProps) {
         <div
           key={key}
           onClick={() => handleToggleReaction(key)}
-          className={`w-8 aspect-square text-center rounded-full cursor-pointer transition-colors bg-violet-100 ${
+          className={`w-8 aspect-square text-center rounded-full cursor-pointer transition-colors bg-violet-400 ${
             userReacted(saleId, key)
               ? 'text-white bg-violet-400 hover:bg-violet-400/80'
-              : 'hover:bg-zinc-300'
+              : 'hover:bg-zinc-300 dark:hover:bg-zinc-500 dark:bg-zinc-600'
           }`}
         >
           <span className="block text-lg leading-none">
@@ -135,12 +135,12 @@ export function SaleReactions({ saleId, reactions }: SaleReactionsProps) {
         Object.entries(emojiMapping).length && (
         <Popover.Root>
           <Popover.Trigger asChild>
-            <button className="w-8 aspect-square flex justify-center items-center text-center rounded-full border border-bg-violet-100 transition-colors bg-violet-100 hover:border-violet-400">
-              <MdAddReaction className="text-2xl" />
+            <button className="w-8 aspect-square flex justify-center items-center text-center rounded-full border border-bg-violet-100 transition-colors bg-violet-100 dark:bg-zinc-700 dark:border-zinc-500 hover:border-violet-400 dark:hover:bg-zinc-600">
+              <MdAddReaction className="text-2xl hover:text-[26px]" />
             </button>
           </Popover.Trigger>
           <Popover.Portal>
-            <Popover.Content className="h-8 rounded shadow bg-white">
+            <Popover.Content className="h-8 rounded shadow bg-white dark:bg-zinc-600">
               <div className="flex">
                 {Object.entries(emojiMapping).map(([key, emoji]) => (
                   <button
@@ -153,7 +153,11 @@ export function SaleReactions({ saleId, reactions }: SaleReactionsProps) {
                 ))}
               </div>
               <Popover.Close />
-              <Popover.Arrow />
+              <Popover.Arrow
+                height={8}
+                width={16}
+                className="dark:fill-zinc-600 fill-white shadow-sm"
+              />
             </Popover.Content>
           </Popover.Portal>
         </Popover.Root>

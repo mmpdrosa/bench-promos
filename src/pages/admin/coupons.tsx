@@ -117,7 +117,7 @@ export default function CouponsDashboard({
       setValue('code', coupon.code)
       setValue('retailerId', coupon.retailer.id)
       setValue('discount', coupon.discount)
-      setValue('minimum_spend', coupon.minimum_spend)
+      setValue('minimum_spend', coupon.minimum_spend * 100)
       setValue('comments', coupon.comments)
       setValue('available', coupon.available)
       setValue('category', restrictionsTypeConversion(coupon.description))

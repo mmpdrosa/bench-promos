@@ -1,5 +1,5 @@
 import { CssBaseline } from '@mui/material'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { createTheme, ThemeProvider as MUITheme } from '@mui/material/styles'
 import { TooltipProvider } from '@radix-ui/react-tooltip'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
@@ -18,6 +18,8 @@ import { AuthProvider } from '@/contexts/AuthContext'
 import { CategoryProvider } from '@/contexts/CategoryContext'
 import { queryClient } from '@/lib/react-query'
 import '@/styles/globals.css'
+
+import { ThemeProvider } from 'next-themes'
 
 dayjs.extend(relativeTime)
 dayjs.extend(timezone)
@@ -48,22 +50,24 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <GoogleAnalytics trackPageViews />
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <IconContext.Provider value={{}}>
-          <QueryClientProvider client={queryClient}>
-            <TooltipProvider>
-              <AuthProvider>
-                <CategoryProvider>
-                  <MainLayout {...montserrat}>
-                    <Component {...pageProps} />
-                  </MainLayout>
-                </CategoryProvider>
-              </AuthProvider>
-            </TooltipProvider>
-          </QueryClientProvider>
-        </IconContext.Provider>
+      <ThemeProvider attribute="class">
+        <GoogleAnalytics trackPageViews />
+        <MUITheme theme={theme}>
+          <CssBaseline />
+          <IconContext.Provider value={{}}>
+            <QueryClientProvider client={queryClient}>
+              <TooltipProvider>
+                <AuthProvider>
+                  <CategoryProvider>
+                    <MainLayout {...montserrat}>
+                      <Component {...pageProps} />
+                    </MainLayout>
+                  </CategoryProvider>
+                </AuthProvider>
+              </TooltipProvider>
+            </QueryClientProvider>
+          </IconContext.Provider>
+        </MUITheme>
       </ThemeProvider>
     </>
   )

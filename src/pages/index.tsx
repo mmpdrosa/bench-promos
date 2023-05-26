@@ -36,8 +36,7 @@ export default function Home({
     ['sales'],
     async ({ pageParam = 0 }) => {
       const response = await api.get(
-        `/sales?search=${search}&skip=${
-          pageParam * ITEMS_PER_LOAD
+        `/sales?search=${search}&skip=${pageParam * ITEMS_PER_LOAD
         }&take=${ITEMS_PER_LOAD}`,
       )
       const sales: Sale[] = response.data

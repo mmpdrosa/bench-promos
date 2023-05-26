@@ -3,18 +3,19 @@ module.exports = {
   content: [
     './src/**/*.{js,ts,jsx,tsx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
         sans: ['var(--font-montserrat)']
       },
       gridTemplateColumns: {
-        'fill': 'repeat(auto-fill, 296px)'      
+        'fill': 'repeat(auto-fill, 296px)'
       },
       spacing: {
-        '74': '18.5rem' 
+        '74': '18.5rem'
       },
-      colors:{
+      colors: {
         bluediscord: "#5865F2",
         bluetelegram: "#34A9E5"
       },
@@ -64,7 +65,7 @@ module.exports = {
       },
     },
     animation: {
-       // Toast
+      // Toast
       "toast-hide": "toast-hide 100ms ease-in forwards",
       "toast-slide-in-right":
         "toast-slide-in-right 150ms cubic-bezier(0.16, 1, 0.3, 1)",
@@ -87,13 +88,14 @@ module.exports = {
       variantPrefix: "rdx",
     }),
     require('tailwind-scrollbar')({ nocompatible: true }),
-    require('tailwindcss/plugin')(function ({addBase}) {
+    require('tailwindcss/plugin')(function ({ addBase }) {
       addBase({
-        '[type="search"]::-webkit-search-decoration': {display: 'none'},
-        '[type="search"]::-webkit-search-cancel-button': {display: 'none'},
-        '[type="search"]::-webkit-search-results-button': {display: 'none'},
-        '[type="search"]::-webkit-search-results-decoration': {display: 'none'},
+        '[type="search"]::-webkit-search-decoration': { display: 'none' },
+        '[type="search"]::-webkit-search-cancel-button': { display: 'none' },
+        '[type="search"]::-webkit-search-results-button': { display: 'none' },
+        '[type="search"]::-webkit-search-results-decoration': { display: 'none' },
       })
     }),
   ],
+  
 }

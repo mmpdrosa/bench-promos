@@ -47,7 +47,7 @@ export function UserMenuAvatar() {
 
       <DropdownMenu.Portal>
         <DropdownMenu.Content
-          className="w-40 p-[3px] rounded-md shadow-md bg-white"
+          className="w-40 p-[3px] rounded-md shadow-md bg-white dark:bg-zinc-800 dark:text-zinc-200"
           sideOffset={5}
           align="end"
         >

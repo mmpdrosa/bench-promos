@@ -88,7 +88,7 @@ export default function ProductPage({
 
               {product.available ? (
                 <>
-                  <span className="text-sm mb-2 font-medium text-zinc-500">
+                  <span className="text-sm mb-2 font-medium text-zinc-500 dark:text-zinc-400">
                     Menor preço via{' '}
                     <a
                       target="_blank"
@@ -105,9 +105,9 @@ export default function ProductPage({
                   </strong>
 
                   {product.coupon && (
-                    <div className="text-sm mt-2 text-zinc-700">
+                    <div className="text-sm mt-2 text-zinc-700 dark:text-zinc-200">
                       Com cupom
-                      <div className="flex items-center gap-2 px-4 py-1 rounded-full text-lg font-semibold tracking-wider bg-amber-200 uppercase">
+                      <div className="flex items-center gap-2 px-4 py-1 rounded-full dark:text-zinc-900 text-lg font-semibold tracking-wider bg-amber-200 uppercase">
                         <MdSell className="w-7 h-7 text-violet-500" />
                         {product.coupon?.code}
                       </div>
@@ -115,10 +115,10 @@ export default function ProductPage({
                   )}
 
                   {product.cashback?.value && (
-                    <div className="text-sm mt-2 text-zinc-700">
+                    <div className="text-sm mt-2 text-zinc-700 dark:text-zinc-200">
                       Com cashback de
                       <div className="flex">
-                        <div className="flex items-center gap-2 px-4 py-1 rounded-l-full text-lg font-semibold tracking-wider bg-amber-200">
+                        <div className="flex items-center gap-2 px-4 py-1 rounded-l-full text-lg font-semibold tracking-wider dark:text-zinc-900 bg-amber-200">
                           <TbDiscount2 className="w-8 h-8 text-violet-500" />
                           {product.cashback?.value}%
                         </div>
@@ -163,7 +163,7 @@ export default function ProductPage({
           </div>
 
           <nav className="overflow-x-auto">
-            <ul className="flex whitespace-nowrap border-b text-sm font-medium border-zinc-300">
+            <ul className="flex whitespace-nowrap border-b text-sm font-medium border-zinc-300 dark:border-zinc-600">
               <li>
                 <a
                   href="#price-history"
@@ -217,9 +217,9 @@ export default function ProductPage({
                   onInsertLowestPrice={changeLowestPrice}
                 />
               </div>
-              <div className="flex flex-col items-center gap-5 p-8 border border-zinc-300 rounded-xl">
+              <div className="flex flex-col items-center gap-5 p-8 border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-800 rounded-xl">
                 <h3 className="flex justify-between items-center gap-4 text-lg font-extrabold">
-                  <FaBell /> Crie um alerta de preço
+                  <FaBell className="text-amber-300" /> Crie um alerta de preço
                 </h3>
                 <div className="flex flex-col items-center gap-1.5 font-bold">
                   <span className="text-violet-500">
@@ -242,7 +242,7 @@ export default function ProductPage({
                   <div className="flex items-center gap-4 text-lg font-medium">
                     <button
                       onClick={decrementAlertPrice}
-                      className="w-12 h-12 flex justify-center items-center border rounded-full border-zinc-300"
+                      className="w-12 h-12 flex justify-center items-center border rounded-full dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:border-zinc-600 border-zinc-300"
                     >
                       <FaMinus />
                     </button>
@@ -254,7 +254,7 @@ export default function ProductPage({
                       thousandSeparator="."
                       fixedDecimalScale={true}
                       allowNegative={false}
-                      className="w-48 h-12 inline-flex items-center px-4 border rounded-2xl text-2xl border-zinc-300"
+                      className="w-48 h-12 inline-flex items-center px-4 border rounded-2xl text-2xl border-zinc-300 dark:bg-zinc-900  dark:border-zinc-600"
                       value={alertPrice / 100}
                       onValueChange={({ floatValue }) =>
                         setAlertPrice(floatValue ? floatValue * 100 : 0)
@@ -262,7 +262,7 @@ export default function ProductPage({
                     />
                     <button
                       onClick={incrementAlertPrice}
-                      className="w-12 h-12 flex justify-center items-center border rounded-full border-zinc-300"
+                      className="w-12 h-12 flex justify-center items-center border rounded-full dark:bg-zinc-900 dark:border-zinc-600 dark:hover:bg-zinc-800 border-zinc-300"
                     >
                       <FaPlus />
                     </button>
@@ -275,7 +275,7 @@ export default function ProductPage({
                   )}.`}
                   triggerButton={
                     <button
-                      className="px-5 py-3.5 rounded-full text-lg font-semibold transition-colors bg-amber-300 hover:bg-yellow-400"
+                      className="px-5 py-3.5 rounded-full text-lg font-semibold transition-colors bg-amber-300 dark:bg-violet-500 dark:hover:bg-violet-400 dark:text-zinc-200 hover:bg-yellow-400"
                       disabled={!user}
                     >
                       <span>CRIAR ALERTA</span>
@@ -295,12 +295,12 @@ export default function ProductPage({
                 </h2>
                 <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
               </div>
-              <div className="max-h-[724px] border rounded-xl border-zinc-300 overflow-y-auto scrollbar scrollbar-w-2 scrollbar-thumb-rounded-full scrollbar-thumb-zinc-300">
+              <div className="max-h-[724px] border rounded-xl dark:border-zinc-700 dark:scrollbar-thumb-zinc-700 border-zinc-300 overflow-y-auto scrollbar scrollbar-w-2 scrollbar-thumb-rounded-full scrollbar-thumb-zinc-300">
                 <ul>
                   {sales.map((sale) => (
                     <li
                       key={sale.id}
-                      className="border-b last:border-0 border-zinc-300"
+                      className="border-b last:border-0 border-zinc-300 dark:border-zinc-700"
                     >
                       <div className="p-6 max-sm:p-4">
                         <div className="mb-2 text-end">
@@ -311,7 +311,7 @@ export default function ProductPage({
                         <div className="flex justify-center gap-8 mr-auto max-sm:flex-wrap">
                           <div className="relative h-40 aspect-square">
                             <Image
-                              className="object-contain"
+                              className="object-contain rounded-lg"
                               alt=""
                               src={sale.image_url}
                               fill
@@ -329,8 +329,10 @@ export default function ProductPage({
                               </div>
 
                               {sale.coupon && (
-                                <div className="text-sm text-zinc-700">
-                                  <span>Com cupom</span>
+                                <div className="text-sm text-zinc-700 dark:text-zinc-900">
+                                  <span className="dark:text-zinc-300">
+                                    Com cupom
+                                  </span>
                                   <div className="h-8 flex items-center gap-1 py-1 px-2.5 border border-dashed border-black rounded-full bg-amber-200">
                                     <TbDiscount2 className="text-2xl text-violet-500" />
                                     <span className="mr-auto font-semibold tracking-wider">
@@ -368,18 +370,18 @@ export default function ProductPage({
                 </h2>
                 <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
               </div>
-              <div className="border border-zinc-300 rounded-xl overflow-hidden">
+              <div className="border border-zinc-300 dark:border-zinc-700  rounded-xl overflow-hidden">
                 <table className="w-full border-collapse break-all">
                   <tbody>
                     {Object.entries(product.specs).map(([key, value]) => (
                       <tr
                         key={key}
-                        className="border-b last:border-0 border-zinc-300 even:bg-amber-200"
+                        className="border-b last:border-0 border-zinc-300 dark:even:bg-violet-500  even:bg-amber-200  dark:border-zinc-700"
                       >
-                        <th className="table-cell w-1/2 py-4 px-4 text-left text-lg font-bold border-r border-zinc-300">
+                        <th className="table-cell w-1/2 py-4 px-4 text-left text-lg font-bold border-r border-zinc-300 dark:border-zinc-700">
                           {key}
                         </th>
-                        <td className="table-cell w-1/2 py-2 px-4 text-lg font-semibold">
+                        <td className="table-cell w-1/2 py-2 px-4 text-lg font-bold">
                           {value}
                         </td>
                       </tr>

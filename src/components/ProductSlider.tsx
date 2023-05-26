@@ -40,17 +40,17 @@ export function ProductSlider({ title, products }: ProductSliderProps) {
           <button
             disabled={currentPage === 1}
             onClick={() => handlePageChange(currentPage - 1)}
-            className="group w-8 h-8 aspect-square flex justify-center items-center border border-zinc-300 disabled:border-zinc-300/40 rounded-full transition-colors bg-white hover:bg-zinc-50 disabled:bg-white/60"
+            className="group w-8 h-8 aspect-square flex justify-center items-center borde dark:bg-zinc-700 dark:border dark:border-zinc-600 dark:hover:bg-zinc-800 dark:disabled:bg-zinc-900 dark:disabled:border dark:disabled:border-zinc-700 dark:disabled:hover:bg-zinc-900 border-zinc-300 disabled:border-zinc-300/40 rounded-full transition-colors bg-white hover:bg-zinc-50 disabled:bg-white/60"
           >
-            <RxCaretLeft className="group-disabled:text-black/20 text-2xl" />
+            <RxCaretLeft className="group-disabled:text-black/20 text-2xl dark:group-disabled:text-zinc-300" />
           </button>
 
           <button
             disabled={indexOfLastProduct >= products.length}
             onClick={() => handlePageChange(currentPage + 1)}
-            className="group w-8 h-8 aspect-square flex justify-center items-center border border-zinc-300 disabled:border-zinc-300/40 rounded-full transition-colors bg-white hover:bg-zinc-50 disabled:bg-white/60"
+            className="group w-8 h-8 aspect-square flex justify-center items-center border dark:bg-zinc-700 dark:border dark:border-zinc-600 dark:hover:bg-zinc-800 dark:disabled:bg-zinc-900 dark:disabled:border dark:disabled:border-zinc-700 dark:disabled:hover:bg-zinc-900 border-zinc-300 disabled:border-zinc-300/40 rounded-full transition-colors bg-white hover:bg-zinc-50 disabled:bg-white/60"
           >
-            <RxCaretRight className="group-disabled:text-black/20 text-2xl" />
+            <RxCaretRight className="group-disabled:text-black/20 text-2xl dark:group-disabled:text-zinc-300" />
           </button>
         </div>
       </div>

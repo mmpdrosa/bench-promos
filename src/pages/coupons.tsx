@@ -103,8 +103,8 @@ export default function Coupons({
                         }
                       />
 
-                      <div className="absolute top-1/2 left-0 -translate-x-2/4 -translate-y-2/4 w-12 h-12 rounded-full bg-white" />
-                      <div className="absolute top-1/2 right-0 translate-x-2/4 -translate-y-2/4 w-12 h-12 rounded-full bg-white" />
+                      <div className="absolute top-1/2 left-0 -translate-x-2/4 -translate-y-2/4 w-12 h-12 rounded-full bg-white dark:bg-zinc-900" />
+                      <div className="absolute top-1/2 right-0 translate-x-2/4 -translate-y-2/4 w-12 h-12 rounded-full bg-white dark:bg-zinc-900" />
                     </div>
                   </div>
                 ))}

@@ -50,7 +50,7 @@ export function ProductList({ products }: ProductListProps) {
         <span className="text-xs">{products.length} resultados</span>
 
         <select
-          className="block w-max p-2.5 rounded text-sm cursor-pointer bg-gray-50 border border-gray-300  focus:ring-violet-500 focus:border-violet-500"
+          className="block w-max p-2.5 rounded text-sm cursor-pointer bg-gray-50 border dark:bg-zinc-800 dark:border-zinc-700 border-gray-300 focus:ring-violet-500 focus:border-violet-500"
           value={sortOrder}
           onChange={handleSortOrderChange}
         >
@@ -76,11 +76,11 @@ export function ProductList({ products }: ProductListProps) {
           breakLabel={<RxDotsHorizontal />}
           previousLabel={<RxChevronLeft />}
           nextLabel={<RxChevronRight />}
-          containerClassName="flex bg-white border rounded-lg shadow-sm mt-6"
-          pageClassName="px-3 py-2 rounded-md text-xl font-medium text-zinc-500 transition-colors hover:text-violet-500"
-          activeLinkClassName="font-bold text-violet-700"
-          previousClassName="flex justify-center items-center px-3 py-2 rounded-md text-xl font-medium text-zinc-500 transition-colors hover:text-violet-500"
-          nextClassName="flex justify-center items-center px-3 py-2 rounded-md text-xl font-medium text-zinc-500 transition-colors hover:text-violet-500"
+          containerClassName="flex bg-white border rounded-lg shadow-sm mt-6 dark:bg-zinc-800 dark:border-zinc-700"
+          pageClassName="px-3 py-2 rounded-md text-xl font-medium text-zinc-500 dark:text-zinc-300 transition-colors hover:text-violet-500"
+          activeLinkClassName="font-bold text-violet-700 dark:text-violet-500"
+          previousClassName="flex justify-center items-center px-3 py-2 rounded-md text-xl font-medium text-zinc-500 transition-colors hover:text-violet-500 dark:text-zinc-300 dark:hover:text-violet-500"
+          nextClassName="flex justify-center items-center px-3 py-2 rounded-md text-xl font-medium text-zinc-500 transition-colors hover:text-violet-500 dark:text-zinc-300 dark:hover:text-violet-500"
         />
       </div>
     </>
