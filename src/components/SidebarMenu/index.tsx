@@ -16,7 +16,10 @@ export function SidebarMenu() {
 
   return (
     <>
-      <button className="sm:hidden" onClick={handleToggleSidebar}>
+      <button
+        className="sm:hidden dark:text-zinc-700"
+        onClick={handleToggleSidebar}
+      >
         <FaBars />
       </button>
 
@@ -29,7 +32,7 @@ export function SidebarMenu() {
 
       <aside
         ref={sidebarRef}
-        className={`fixed top-0 left-0 z-[4] w-64 h-screen ease-in-out duration-300 overflow-y-auto bg-zinc-50 ${
+        className={`fixed top-0 left-0 z-[4] w-64 h-screen ease-in-out duration-300 overflow-y-auto bg-zinc-50 dark:bg-zinc-900 dark:text-zinc-200 ${
           toggleSidebar ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

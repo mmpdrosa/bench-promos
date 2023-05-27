@@ -17,7 +17,10 @@ export default function PrivacyPolicy() {
           <p>
             Nosso compromisso é respeitar sua privacidade e garantir o sigilo de
             todas as informações que você nos fornece, através de nosso site{' '}
-            <Link href="/" className="dark:text-violet-500">
+            <Link
+              href="/"
+              className="dark:text-violet-500 dark:hover:text-violet-400"
+            >
               https://www.benchpromos.com
             </Link>
             . Por isso, com o objetivo de fornecer informações claras e precisas
@@ -68,9 +71,12 @@ export default function PrivacyPolicy() {
           </p>
           <p>
             3.2. Os links de nossos e-mails levam diretamente para o{' '}
-            <Link href="/" className="dark:text-violet-500">
+            <Link
+              href="/"
+              className="dark:text-violet-500 dark:hover:text-violet-400"
+            >
               https://www.benchpromos.com
-            </Link>
+            </Link>{' '}
             ou para nossas redes sociais.
           </p>
         </div>
@@ -104,7 +110,10 @@ export default function PrivacyPolicy() {
           </p>
           <p>
             4.4. Após o seu cadastro, o{' '}
-            <Link href="/" className="dark:text-violet-500">
+            <Link
+              href="/"
+              className="dark:text-violet-500 dark:hover:text-violet-400"
+            >
               https://www.benchpromos.com
             </Link>{' '}
             envia um e-mail solicitando a confirmação da sua inscrição, e nunca
@@ -194,7 +203,7 @@ export default function PrivacyPolicy() {
             endereço{' '}
             <Link
               href="/politica-de-privacidade"
-              className="dark:text-violet-500"
+              className="dark:text-violet-500 dark:hover:text-violet-400"
             >
               https://www.benchpromos.com/politica-de-privacidade
             </Link>
