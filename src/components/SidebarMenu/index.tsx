@@ -134,7 +134,11 @@ function Dropdown({ id, name, items, onClick }: DropdownProps) {
       >
         {name}
       </button>
-      <ul className={`pl-9 py-2.5 bg-white ${toggle ? 'block' : 'hidden'}`}>
+      <ul
+        className={`pl-9 py-2.5 bg-white dark:bg-zinc-800 dark:bg-zinc-800 ${
+          toggle ? 'block' : 'hidden'
+        }`}
+      >
         {items?.map((item) => (
           <li key={item.id}>
             <Link
