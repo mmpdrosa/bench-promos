@@ -198,7 +198,7 @@ interface CustomTooltipProps {
 function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
   if (active && payload && payload.length) {
     return (
-      <div className="p-4 rounded-lg border border-zinc-300 bg-white">
+      <div className="p-4 rounded-lg border border-zinc-300 bg-white dark:bg-zinc-900 dark:border-zinc-700">
         <h4 className="text-xl font-bold">
           {priceFormatter.format(payload[0].value / 100)}
         </h4>
