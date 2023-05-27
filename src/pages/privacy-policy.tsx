@@ -8,20 +8,24 @@ export default function PrivacyPolicy() {
       <Head>
         <title>Política de Privacidade | Bench Promos</title>
       </Head>
-      <div className="max-w-screen-xl py-8 max-xl:px-4 mx-auto prose ">
-        <h1>Política de Privacidade Bench Promos</h1>
+      <div className="max-w-screen-xl py-8 max-xl:px-4 mx-auto prose dark:text-zinc-200">
+        <h1 className="dark:text-zinc-200">
+          Política de Privacidade Bench Promos
+        </h1>
 
         <div>
           <p>
             Nosso compromisso é respeitar sua privacidade e garantir o sigilo de
             todas as informações que você nos fornece, através de nosso site{' '}
-            <Link href="/">https://www.benchpromos.com</Link>. Por isso, com o
-            objetivo de fornecer informações claras e precisas aos Titulares
-            acerca do tratamento de dados pessoais, apresentamos nossa política
-            de privacidade (“Política de Privacidade”).
+            <Link href="/" className="dark:text-violet-500">
+              https://www.benchpromos.com
+            </Link>
+            . Por isso, com o objetivo de fornecer informações claras e precisas
+            aos Titulares acerca do tratamento de dados pessoais, apresentamos
+            nossa política de privacidade (“Política de Privacidade”).
           </p>
           <p>
-            <strong>
+            <strong className="dark:text-zinc-200">
               A NAVEGAÇÃO E USO DESTE SITE SIGNIFICA QUE O USUÁRIO ESTÁ CIENTE
               DOS TERMOS E SERVIÇOS OFERECIDOS NESTA POLÍTICA DE PRIVACIDADE.
             </strong>
@@ -29,11 +33,11 @@ export default function PrivacyPolicy() {
         </div>
 
         <div>
-          <h2>Tratamento dos dados pessoais</h2>
+          <h2 className="dark:text-zinc-200">Tratamento dos dados pessoais</h2>
         </div>
 
         <div>
-          <h3>1. Coleta e Uso</h3>
+          <h3 className="dark:text-zinc-200">1. Coleta e Uso</h3>
           <p>
             1.1. Para seu cadastro, solicitamos informações como nome e e-mail.
           </p>
@@ -46,7 +50,7 @@ export default function PrivacyPolicy() {
         </div>
 
         <div>
-          <h3>2. Cookies</h3>
+          <h3 className="dark:text-zinc-200">2. Cookies</h3>
           <p>
             2.1. No Bench Promos, o uso de cookies é feito apenas para
             reconhecer um visitante constante e melhorar a experiência de
@@ -56,7 +60,7 @@ export default function PrivacyPolicy() {
         </div>
 
         <div>
-          <h3>3. Envio de e-mails</h3>
+          <h3 className="dark:text-zinc-200">3. Envio de e-mails</h3>
           <p>
             3.1. Nossos e-mails com promoções têm como remetente o
             bench@benchpromos.com e são enviados apenas no momento do cadastro.
@@ -64,13 +68,15 @@ export default function PrivacyPolicy() {
           </p>
           <p>
             3.2. Os links de nossos e-mails levam diretamente para o{' '}
-            <Link href="/">https://www.benchpromos.com</Link> ou para nossas
-            redes sociais.
+            <Link href="/" className="dark:text-violet-500">
+              https://www.benchpromos.com
+            </Link>
+            ou para nossas redes sociais.
           </p>
         </div>
 
         <div>
-          <h3>4. Segurança da Informação</h3>
+          <h3 className="dark:text-zinc-200">4. Segurança da Informação</h3>
           <p>
             4.1. Tomamos medidas de segurança técnicas e organizacionais
             adequadas para protegermos seus dados pessoais contra acesso,
@@ -98,10 +104,12 @@ export default function PrivacyPolicy() {
           </p>
           <p>
             4.4. Após o seu cadastro, o{' '}
-            <Link href="/">https://www.benchpromos.com</Link> envia um e-mail
-            solicitando a confirmação da sua inscrição, e nunca envia e-mails
-            com anexos executáveis (extensão exe, com, scr, bat) e links para
-            download.
+            <Link href="/" className="dark:text-violet-500">
+              https://www.benchpromos.com
+            </Link>{' '}
+            envia um e-mail solicitando a confirmação da sua inscrição, e nunca
+            envia e-mails com anexos executáveis (extensão exe, com, scr, bat) e
+            links para download.
           </p>
           <p>
             4.5. Nunca forneça a senha de seu cadastro a terceiros e, no caso de
@@ -111,7 +119,9 @@ export default function PrivacyPolicy() {
         </div>
 
         <div>
-          <h3>5. Retenção e Término de Dados Pessoais</h3>
+          <h3 className="dark:text-zinc-200">
+            5. Retenção e Término de Dados Pessoais
+          </h3>
           <p>
             5.1. O Bench Promos armazena seus dados pessoais pelo tempo exigido
             por lei ou pelo tempo que for necessário para cumprir com sua
@@ -128,7 +138,9 @@ export default function PrivacyPolicy() {
         </div>
 
         <div>
-          <h3>6. Direitos dos Titulares dos Dados Pessoais</h3>
+          <h3 className="dark:text-zinc-200">
+            6. Direitos dos Titulares dos Dados Pessoais
+          </h3>
           <p>
             6.1 A lei de proteção de dados prevê aos Titulares direitos em
             relação aos seus dados pessoais, quais sejam:
@@ -175,12 +187,15 @@ export default function PrivacyPolicy() {
         </div>
 
         <div>
-          <h3>7. Disposições Gerais</h3>
+          <h3 className="dark:text-zinc-200">7. Disposições Gerais</h3>
           <p>
             7.1. Esta Política de Privacidade pode ser alterada periodicamente.
             Publicaremos todas as alterações da Política de Privacidade no
             endereço{' '}
-            <Link href="/politica-de-privacidade">
+            <Link
+              href="/politica-de-privacidade"
+              className="dark:text-violet-500"
+            >
               https://www.benchpromos.com/politica-de-privacidade
             </Link>
             , se as alterações forem significativas, colocaremos um aviso com
