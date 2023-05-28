@@ -116,7 +116,7 @@ export function SaleReactions({ saleId, reactions }: SaleReactionsProps) {
         <div
           key={key}
           onClick={() => handleToggleReaction(key)}
-          className={`w-8 aspect-square text-center rounded-full cursor-pointer transition-colors bg-violet-400 ${
+          className={`w-8 aspect-square text-center rounded-full cursor-pointer transition-colors bg-violet-100 ${
             userReacted(saleId, key)
               ? 'text-white bg-violet-400 hover:bg-violet-400/80'
               : 'hover:bg-zinc-300 dark:hover:bg-zinc-500 dark:bg-zinc-600'
