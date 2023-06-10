@@ -4,14 +4,11 @@ import { useRouter } from 'next/navigation'
 import { FaSignOutAlt, FaUserLock } from 'react-icons/fa'
 
 import { useAuth } from '../../contexts/AuthContext'
+import Link from 'next/link'
 
 export function UserMenuAvatar() {
   const { user, isAdmin, logOut } = useAuth()
   const router = useRouter()
-
-  function handleAdminClick() {
-    router.push('/admin/sales')
-  }
 
   async function handleSignOutClick() {
     await logOut()
@@ -47,23 +44,60 @@ export function UserMenuAvatar() {
 
       <DropdownMenu.Portal>
         <DropdownMenu.Content
-          className="w-40 p-[3px] rounded-md shadow-md bg-white dark:bg-zinc-800 dark:text-zinc-200"
+          className="w-44 p-[4px] rounded-md shadow-md bg-white dark:bg-zinc-800 dark:text-zinc-200"
           sideOffset={5}
           align="end"
         >
           {isAdmin && (
-            <DropdownMenu.Item
-              onClick={handleAdminClick}
-              className="h-6 relative flex justify-between items-center px-1 pl-6 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600"
-            >
-              Admin
-              <FaUserLock />
-            </DropdownMenu.Item>
+            <>
+              <Link href="/admin/sales">
+                <DropdownMenu.Item className="h-6 relative flex justify-between items-center px-1 pl-6 py-4 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600">
+                  Promoções
+                  <FaUserLock />
+                </DropdownMenu.Item>
+              </Link>
+              <Link href="/admin/products">
+                <DropdownMenu.Item className="h-6 relative flex justify-between items-center px-1 pl-6 py-4 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600">
+                  Produtos
+                  <FaUserLock />
+                </DropdownMenu.Item>
+              </Link>
+              <Link href="/admin/product-retailers">
+                <DropdownMenu.Item className="h-6 relative flex justify-between items-center px-1 pl-6 py-4 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600">
+                  Anúncios
+                  <FaUserLock />
+                </DropdownMenu.Item>
+              </Link>
+              <Link href="/admin/retailers">
+                <DropdownMenu.Item className="h-6 relative flex justify-between items-center px-1 pl-6 py-4 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600">
+                  Anunciantes
+                  <FaUserLock />
+                </DropdownMenu.Item>
+              </Link>
+              <Link href="/admin/coupons">
+                <DropdownMenu.Item className="h-6 relative flex justify-between items-center px-1 pl-6 py-4 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600">
+                  Cupons
+                  <FaUserLock />
+                </DropdownMenu.Item>
+              </Link>
+              <Link href="/admin/categories">
+                <DropdownMenu.Item className="h-6 relative flex justify-between items-center px-1 pl-6 py-4 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600">
+                  Categorias
+                  <FaUserLock />
+                </DropdownMenu.Item>
+              </Link>
+              <Link href="/admin/subcategories">
+                <DropdownMenu.Item className="h-6 relative flex justify-between items-center px-1 pl-6 py-4 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600">
+                  Subcategorias
+                  <FaUserLock />
+                </DropdownMenu.Item>
+              </Link>
+            </>
           )}
 
           <DropdownMenu.Item
             onClick={handleSignOutClick}
-            className="h-6 relative flex justify-between items-center px-1 pl-6 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600"
+            className="h-6 relative flex justify-between items-center px-1 pl-6 py-4 rounded text-sm font-medium leading-none select-none outline-none cursor-pointer rdx-highlighted:text-violet-50 rdx-highlighted:bg-violet-600"
           >
             Sair
             <FaSignOutAlt />

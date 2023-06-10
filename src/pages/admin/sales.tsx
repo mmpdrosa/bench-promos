@@ -1,286 +1,253 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Autocomplete, Box, TextField } from '@mui/material'
+import SalesForm from '@/components/Admin/SalesForm'
+import { AdminLayout } from '@/components/layouts/admin'
+import { api } from '@/lib/axios'
 import { getCookie } from 'cookies-next'
+import dayjs from 'dayjs'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { Controller, useForm } from 'react-hook-form'
-import { NumericFormat } from 'react-number-format'
-import { z } from 'zod'
+import { ChangeEvent, useState } from 'react'
+import { BsX } from 'react-icons/bs'
 
-import { AdminLayout } from '@/components/layouts/admin'
-import { useCategory } from '@/contexts/CategoryContext'
-import { api } from '@/lib/axios'
+interface Product {
+  id: string
+  title: string
+  image_url: string
+  category: { id: string; name: string }
+  subcategory: { id: string; name: string; category: string }
+  recommended: boolean
+  review_url: string
+  specs: { title: string; value: string }[]
+  reference_price: number
+}
 
-const newSaleSchema = z.object({
-  title: z.string().min(1),
-  imageUrl: z.string().url(),
-  htmlUrl: z.string().url(),
-  price: z.number().int().min(1),
-  categoryId: z.string(),
-  specs: z.string().optional(),
-  comments: z.string().optional(),
-  coupon: z.string().optional(),
-  productId: z.string().optional(),
-})
+interface Sale {
+  id: string
+  product_id: string
+  title: string
+  image_url: string
+  html_url: string
+  category: { id: string; name: string }
+  specs: string
+  price: number
+  comments: string
+  coupon: string
+  created_at: Date
+}
 
-type NewSaleFormInput = z.infer<typeof newSaleSchema>
-
-export default function SalesDashboard({
+export default function ProductsAdmin({
   products,
+  sales,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const productOptions = products.map((product) => {
-    return {
-      id: product.id,
-      img: product.image_url,
-      label: product.title,
-    }
-  })
+  const [targetProduct, setTargetProduct] = useState<Product | undefined>(
+    undefined,
+  )
+  const [targetSale, setTargetSale] = useState<Sale | undefined>(undefined)
+  const [searchMatchedProducts, setSearchMatchedProducts] = useState<
+    Product[] | undefined
+  >(products)
+  const [searchMatchedSales, setSearchMatchedSales] = useState<
+    Sale[] | undefined
+  >(sales)
+  const [switchProductOrSales, setSwitchProductOrSales] =
+    useState<string>('products')
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    reset,
-    formState: { isSubmitting },
-  } = useForm<NewSaleFormInput>({
-    resolver: zodResolver(newSaleSchema),
-    defaultValues: {
-      title: '',
-      imageUrl: '',
-      htmlUrl: '',
-      price: 0,
-    },
-  })
+  function handleProductSearch(event: ChangeEvent<HTMLInputElement>) {
+    const searchStringsArray = event.currentTarget.value.split(' ')
+    setSearchMatchedProducts(
+      products.filter((product) => {
+        return searchStringsArray.every((searchString) =>
+          product.title.toLowerCase().includes(searchString.toLowerCase()),
+        )
+      }),
+    )
+  }
 
-  const { categories } = useCategory()
-
-  async function handleNewSale({
-    imageUrl,
-    htmlUrl,
-    categoryId,
-    productId,
-    ...rest
-  }: NewSaleFormInput) {
-    try {
-      await api.post(
-        '/sales',
-        {
-          image_url: imageUrl,
-          html_url: htmlUrl,
-          category_id: categoryId,
-          product_id: productId,
-          ...rest,
-        },
-        {
-          headers: {
-            'api-key': process.env.NEXT_PUBLIC_API_KEY,
-          },
-        },
-      )
-
-      reset()
-    } catch (err) {}
+  function handleSaleSearch(event: ChangeEvent<HTMLInputElement>) {
+    const searchStringsArray = event.currentTarget.value.split(' ')
+    setSearchMatchedSales(
+      sales.filter((sale) => {
+        return searchStringsArray.every((searchString) =>
+          sale.title.toLowerCase().includes(searchString.toLowerCase()),
+        )
+      }),
+    )
   }
 
   return (
-    <>
+    <AdminLayout>
       <Head>
-        <title>Gerenciador de Produtos | Bench Promos</title>
+        <title>Promoções | Bench Promos Admin</title>
       </Head>
-      <AdminLayout>
-        <div className="w-max">
-          <h2 className="text-2xl font-extrabold text-violet-600">
-            ADICIONAR PROMOÇÃO
-          </h2>
-          <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
-        </div>
+      <div className="flex flex-1 max-sm:flex-col">
+        <SalesForm targetSale={targetSale} targetProduct={targetProduct} />
+        {switchProductOrSales === 'products' ? (
+          <div className="flex flex-1 flex-col max-h-[calc(100vh-172px)] sm:pl-8 sm:pr-2 py-6">
+            <div className="flex justify-center items-center gap-6 pb-4">
+              <button className="text-violet-500 border-b-2 border-violet-500 font-semibold">
+                Produtos
+              </button>
+              <button
+                className="hover:text-violet-500"
+                onClick={() => setSwitchProductOrSales('sales')}
+              >
+                Promoções
+              </button>
+            </div>
+            {targetProduct ? (
+              <>
+                <label>Produto selecionado</label>
+                <div className="flex items-center gap-4 py-6 px-2 rounded-lg bg-violet-500/80 text-white mb-8 relative">
+                  <button
+                    className="absolute p-1 top-2 right-2 bg-red-500 rounded-lg hover:bg-red-400"
+                    onClick={() => setTargetProduct(undefined)}
+                  >
+                    <BsX />
+                  </button>
+                  <Image
+                    src={targetProduct.image_url}
+                    alt="product-image"
+                    width={70}
+                    height={1}
+                  />
+                  {targetProduct.title}
+                </div>
+              </>
+            ) : null}
+            <fieldset className="flex flex-col">
+              <label>Selecionar um produto</label>
+              <input
+                type="text"
+                name="productsSearch"
+                onChange={(event) => handleProductSearch(event)}
+                className="p-2 mb-4 text-lg outline-none border border-black/20 rounded-lg focus:ring-violet-500 focus:border-violet-500 dark:bg-zinc-900 dark:border-zinc-800 placeholder:italic"
+                placeholder="Insira o nome do produto"
+              />
+            </fieldset>
 
-        <form
-          className="max-md:flex flex-col grid grid-cols-2 gap-8"
-          onSubmit={handleSubmit(handleNewSale)}
-        >
-          <fieldset className="flex flex-col justify-start col-span-2">
-            <label
-              className="block mb-1.5 text-xl font-medium tracking-wider"
-              htmlFor="price"
-            >
-              Produto
-            </label>
-            <Controller
-              name="productId"
-              control={control}
-              render={({ field: { onChange, ...field } }) => (
-                <Autocomplete
-                  fullWidth
-                  id="product"
-                  options={productOptions}
-                  autoHighlight
-                  onChange={(_, value) =>
-                    onChange(value ? value.id : undefined)
-                  }
-                  isOptionEqualToValue={(option, value) =>
-                    option.id === value.id
-                  }
-                  renderOption={(props, option) => (
-                    <Box
-                      component="li"
-                      sx={{ '& > img': { mr: 2, flexShrink: 0 } }}
-                      {...props}
-                    >
-                      <Image
-                        className="h-auto w-auto"
-                        width={40}
-                        height={1}
-                        src={option.img}
-                        alt=""
-                      />
-                      {option.label}
-                    </Box>
-                  )}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      {...field}
-                      inputProps={{
-                        ...params.inputProps,
-                      }}
-                    />
-                  )}
-                />
-              )}
-            />
-          </fieldset>
-
-          <InputField label="Título" name="title" register={register} />
-
-          <fieldset className="flex flex-col justify-start">
-            <label
-              className="block mb-1.5 text-xl font-medium tracking-wider"
-              htmlFor="category"
-            >
-              Categoria
-            </label>
-            <select
-              className="h-16 px-3.5 text-lg outline-none border border-black/20 rounded-full shadow-md focus:ring-violet-500 focus:border-violet-500"
-              id="category"
-              {...register('categoryId')}
-            >
-              <option value=""></option>
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
+            <div className="overflow-y-scroll sm:overscroll-none">
+              {searchMatchedProducts?.map((product) => (
+                <div
+                  key={product.id}
+                  onClick={() => setTargetProduct(product)}
+                  className="flex items-center justify-start gap-4 py-6 px-2 cursor-pointer rounded-lg hover:bg-violet-500/80 hover:text-white"
+                >
+                  <Image
+                    src={product.image_url}
+                    alt="product-image"
+                    width={70}
+                    height={1}
+                  />
+                  {product.title}
+                </div>
               ))}
-            </select>
-          </fieldset>
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-1 flex-col max-h-[calc(100vh-172px)] py-6 sm:pl-8 sm:pr-2">
+            <div className="flex justify-center items-center gap-6 pb-4">
+              <button
+                className="hover:text-violet-500"
+                onClick={() => setSwitchProductOrSales('products')}
+              >
+                Produtos
+              </button>
+              <button className="text-violet-500 border-b-2 border-violet-500 font-semibold">
+                Promoções
+              </button>
+            </div>
+            {targetSale ? (
+              <>
+                <label>Promoção selecionada</label>
+                <div className="flex items-center gap-4 py-6 px-2 rounded-lg bg-violet-500/80 text-white mb-8 relative">
+                  <button
+                    className="absolute p-1 top-2 right-2 bg-red-500 rounded-lg hover:bg-red-400"
+                    onClick={() => {
+                      setTargetSale(undefined)
+                      setTargetProduct(undefined)
+                    }}
+                  >
+                    <BsX />
+                  </button>
+                  <span className="text-xs absolute top-2 right-10">
+                    {dayjs(targetSale.created_at).fromNow()}
+                  </span>
+                  <Image
+                    src={targetSale.image_url}
+                    alt="product-image"
+                    width={70}
+                    height={1}
+                  />
+                  <div className="flex flex-col gap-4">
+                    <span>{targetSale.title}</span>
+                    <span className="font-semibold">
+                      R$ {(targetSale.price / 100).toString().replace('.', ',')}
+                    </span>
+                  </div>
+                </div>
+              </>
+            ) : null}
 
-          <InputField
-            label="Link da Imagem"
-            name="imageUrl"
-            register={register}
-            type="url"
-          />
+            <fieldset className="flex flex-col">
+              <label>Selecionar uma promoção</label>
+              <input
+                type="text"
+                name="salesSearch"
+                onChange={(event) => handleSaleSearch(event)}
+                className="p-2 mb-4 text-lg outline-none border border-black/20 rounded-lg focus:ring-violet-500 focus:border-violet-500 dark:bg-zinc-900 dark:border-zinc-800 placeholder:italic"
+                placeholder="Insira o título de uma promoção"
+              />
+            </fieldset>
 
-          <InputField label="Link do Site" name="htmlUrl" register={register} />
-
-          <fieldset className="flex flex-col justify-start">
-            <label
-              className="block mb-1.5 text-xl font-medium tracking-wider"
-              htmlFor="price"
-            >
-              Preço
-            </label>
-            <Controller
-              name="price"
-              control={control}
-              render={({ field: { value, onChange } }) => (
-                <NumericFormat
-                  id="price"
-                  displayType="input"
-                  prefix="R$ "
-                  decimalScale={2}
-                  decimalSeparator=","
-                  thousandSeparator="."
-                  fixedDecimalScale={true}
-                  allowNegative={false}
-                  value={value / 100}
-                  className="h-16 px-3.5 text-lg outline-none border border-black/20 rounded-full shadow-md focus:ring-violet-500 focus:border-violet-500"
-                  onValueChange={({ floatValue }) => {
-                    onChange({
-                      target: {
-                        name: 'price',
-                        value: floatValue ? Math.round(floatValue * 100) : 0,
-                      },
-                    })
-                  }}
-                />
-              )}
-            />
-          </fieldset>
-
-          <InputField label="Especificações" name="specs" register={register} />
-
-          <fieldset className="flex flex-col justify-start">
-            <label
-              className="block mb-1.5 text-xl font-medium tracking-wider"
-              htmlFor="comments"
-            >
-              Comentários
-            </label>
-            <textarea
-              className="h-16 p-3.5 text-lg outline-none border border-black/20 shadow-md focus:ring-violet-500 focus:border-violet-500"
-              id="comments"
-              {...register('comments')}
-            />
-          </fieldset>
-
-          <InputField label="Cupom" name="coupon" register={register} />
-
-          <button
-            className="col-span-2 mx-auto px-4 py-2.5 text-xl rounded-full text-white transition-colors bg-violet-500 hover:bg-violet-400 disabled:cursor-not-allowed"
-            disabled={isSubmitting}
-            type="submit"
-          >
-            Adicionar
-          </button>
-        </form>
-      </AdminLayout>
-    </>
-  )
-}
-
-function InputField({
-  label,
-  name,
-  register,
-  ...rest
-}: {
-  label: string
-  name: keyof NewSaleFormInput
-  register: any
-  [key: string]: any
-}) {
-  return (
-    <fieldset className="flex flex-col justify-start">
-      <label
-        className="block mb-1.5 text-xl font-medium tracking-wider"
-        htmlFor={name}
-      >
-        {label}
-      </label>
-      <input
-        className="h-16 px-3.5 text-lg outline-none border border-black/20 rounded-full shadow-md focus:ring-violet-500 focus:border-violet-500"
-        id={name}
-        {...register(name)}
-        {...rest}
-      />
-    </fieldset>
+            <div className="overflow-y-scroll sm:overscroll-none">
+              {searchMatchedSales?.map((sale) => {
+                if (
+                  (targetProduct && sale.product_id === targetProduct.id) ||
+                  !targetProduct
+                )
+                  return (
+                    <div
+                      key={sale.id}
+                      onClick={() => {
+                        setTargetSale(sale)
+                        setTargetProduct(
+                          products.find(
+                            (product) => product.id === sale.product_id,
+                          ),
+                        )
+                      }}
+                      className="relative flex items-center justify-start gap-4 py-6 px-2 cursor-pointer rounded-lg hover:bg-violet-500/80 hover:text-white"
+                    >
+                      <span className="text-xs absolute top-2 right-2">
+                        {dayjs(sale.created_at).fromNow()}
+                      </span>
+                      <Image
+                        src={sale.image_url}
+                        alt={`${sale.id}`}
+                        width={70}
+                        height={1}
+                      />
+                      <div className="flex flex-col gap-4">
+                        <span>{sale.title}</span>
+                        <span className="font-semibold">
+                          R$ {(sale.price / 100).toString().replace('.', ',')}
+                        </span>
+                      </div>
+                    </div>
+                  )
+                return null
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+    </AdminLayout>
   )
 }
 
 export const getServerSideProps: GetServerSideProps<{
-  products: { id: string; title: string; image_url: string }[]
+  products: Product[]
+  sales: Sale[]
 }> = async (ctx) => {
   const token = getCookie('bench-promos.token', ctx)
 
@@ -293,11 +260,11 @@ export const getServerSideProps: GetServerSideProps<{
     }
   }
 
-  const response = await api.get('/users/role/admin', {
+  const adminResponse = await api.get('/users/role/admin', {
     headers: { Authorization: `Bearer ${token}` },
   })
 
-  const isAdmin = response.data
+  const isAdmin = adminResponse.data
 
   if (!isAdmin) {
     return {
@@ -308,13 +275,17 @@ export const getServerSideProps: GetServerSideProps<{
     }
   }
 
-  const res = await api.get('/products')
+  const productsResponse = await api.get('/products')
+  const salesResponse = await api.get('/sales', {
+    params: { take: 1000, skip: 0 },
+  })
 
-  const products: { id: string; title: string; image_url: string }[] = res.data
-
+  const products: Product[] = productsResponse.data.reverse()
+  const sales: Sale[] = salesResponse.data
   return {
     props: {
       products,
+      sales,
     },
   }
 }

@@ -32,7 +32,7 @@ export type Product = {
   subcategory?: ProductCategory
   retailer: Retailer
   coupon?: Coupon
-  specs?: Record<string, string>
+  specs?: { title: string; value: string }[]
   review_url?: string
   cashback?: {
     name: string

@@ -38,7 +38,7 @@ export default function ProductPage({
   sales,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { user } = useAuth()
-
+  console.log(product.specs)
   const [alertPrice, setAlertPrice] = useState(product.price)
   const [periodLowestPrice, setPeriodLowestPrice] = useState(0)
 
@@ -373,16 +373,16 @@ export default function ProductPage({
               <div className="border border-zinc-300 dark:border-zinc-700  rounded-xl overflow-hidden">
                 <table className="w-full border-collapse break-all">
                   <tbody>
-                    {Object.entries(product.specs).map(([key, value]) => (
+                    {product.specs.map((spec, index) => (
                       <tr
-                        key={key}
+                        key={index}
                         className="border-b last:border-0 border-zinc-300 dark:even:bg-violet-500  even:bg-amber-200  dark:border-zinc-700"
                       >
                         <th className="table-cell w-1/2 py-4 px-4 text-left text-lg font-bold border-r border-zinc-300 dark:border-zinc-700">
-                          {key}
+                          {spec.title}
                         </th>
                         <td className="table-cell w-1/2 py-2 px-4 text-lg font-bold">
-                          {value}
+                          {spec.value}
                         </td>
                       </tr>
                     ))}

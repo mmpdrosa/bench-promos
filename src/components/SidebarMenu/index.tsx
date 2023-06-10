@@ -32,7 +32,7 @@ export function SidebarMenu() {
 
       <aside
         ref={sidebarRef}
-        className={`fixed top-0 left-0 z-[4] w-64 h-screen ease-in-out duration-300 overflow-y-auto bg-zinc-50 dark:bg-zinc-900 dark:text-zinc-200 ${
+        className={`fixed top-0 left-0 z-[4] w-64 h-screen ease-in-out duration-300 overflow-y-auto overscroll-none bg-zinc-50 dark:bg-zinc-900 dark:text-zinc-200 ${
           toggleSidebar ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -135,7 +135,7 @@ function Dropdown({ id, name, items, onClick }: DropdownProps) {
         {name}
       </button>
       <ul
-        className={`pl-9 py-2.5 bg-white dark:bg-zinc-800 dark:bg-zinc-800 ${
+        className={`pl-9 py-2.5 bg-white dark:bg-zinc-800 ${
           toggle ? 'block' : 'hidden'
         }`}
       >
