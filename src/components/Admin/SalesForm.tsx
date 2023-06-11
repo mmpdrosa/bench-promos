@@ -82,6 +82,7 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
     setValue('html_url', targetSale?.html_url || '')
     setValue('coupon', targetSale?.coupon || '')
     setValue('comments', targetSale?.comments || '')
+    setValue('specs', targetSale?.specs || '')
   }, [targetSale, setValue])
 
   async function submit(data: SaleData) {
@@ -206,6 +207,18 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
         />
         {errors.html_url && (
           <span className="text-red-500">{errors.html_url.message}</span>
+        )}
+      </fieldset>
+
+      <fieldset className="flex flex-col">
+        <label>Especificações</label>
+        <input
+          type="text"
+          className="p-2 text-lg outline-none border border-black/20 rounded-lg focus:ring-violet-500 focus:border-violet-500 dark:bg-zinc-900 dark:border-zinc-800"
+          {...register('specs')}
+        />
+        {errors.specs && (
+          <span className="text-red-500">{errors.specs.message}</span>
         )}
       </fieldset>
 
