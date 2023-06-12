@@ -99,7 +99,7 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
     /* eslint-disable */
     const message = `🔥 ${saleData.title} 🔥\n ${saleData.specs && `\n🔴 ${saleData.specs} 🔴\n`
       } ${saleData.coupon && `\n🎟 Cupom: ${saleData.coupon}`
-      } \n💸 ${priceFormatter.format(targetSale!.price / 100)}\n  \n🔗 ${saleData.html_url
+      } \n💸 ${priceFormatter.format(saleData.price / 100)}\n  \n🔗 ${saleData.html_url
       }\n ${saleData.comments &&
       `\n${saleData.comments
         .split('\n\n')
@@ -114,23 +114,22 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
     switch (submitOption) {
       case 'create':
         setIsSubmiting(true)
-        await api.post(
-          '/sales',
-          { ...data, product_id: targetProduct?.id },
-          {
-            headers: {
-              'api-key': process.env.NEXT_PUBLIC_API_KEY,
-            },
-          },
-        )
-
-        await telegramApi.post('/sendPhoto', {
+        telegramApi.post('/sendPhoto', {
           photo: data.image_url,
           caption: telegramMessageFoward(data),
           chat_id: process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID,
         })
-
-        router.refresh()
+        await api
+          .post(
+            '/sales',
+            { ...data, product_id: targetProduct?.id },
+            {
+              headers: {
+                'api-key': process.env.NEXT_PUBLIC_API_KEY,
+              },
+            },
+          )
+          .then(() => router.refresh())
         break
       case 'edit':
         await api
