@@ -119,17 +119,16 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
           caption: telegramMessageFoward(data),
           chat_id: process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID,
         })
-        await api
-          .post(
-            '/sales',
-            { ...data, product_id: targetProduct?.id },
-            {
-              headers: {
-                'api-key': process.env.NEXT_PUBLIC_API_KEY,
-              },
+        await api.post(
+          '/sales',
+          { ...data, product_id: targetProduct?.id },
+          {
+            headers: {
+              'api-key': process.env.NEXT_PUBLIC_API_KEY,
             },
-          )
-          .then(() => router.refresh())
+          },
+        )
+
         break
       case 'edit':
         await api
