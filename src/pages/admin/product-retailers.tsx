@@ -103,7 +103,7 @@ export default function ProductRetailersPage({
                 Anúncios
               </button>
             </div>
-            {targetProductRetailer && targetProduct ? (
+            {targetProductRetailer && targetProduct && (
               <>
                 <label>Anúncio selecionado</label>
                 <div className="flex items-start flex-col py-4 px-2 rounded-lg bg-violet-500/80 text-white mb-8 relative">
@@ -120,12 +120,13 @@ export default function ProductRetailersPage({
                   <span className="flex text-lg font-semibold">
                     R${' '}
                     {(targetProductRetailer.price / 100)
+                      .toFixed(2)
                       .toString()
                       .replace('.', ',')}
                   </span>
                 </div>
               </>
-            ) : null}
+            )}
             <span>Selecione um anúncio</span>
             <div className="overflow-y-scroll sm:overscroll-none">
               {targetProduct &&
@@ -141,7 +142,11 @@ export default function ProductRetailersPage({
                       {retailer.retailer.name}
                     </h1>
                     <span className="flex text-lg font-semibold">
-                      R$ {(retailer.price / 100).toString().replace('.', ',')}
+                      R${' '}
+                      {(retailer.price / 100)
+                        .toFixed(2)
+                        .toString()
+                        .replace('.', ',')}
                     </span>
                   </div>
                 ))}

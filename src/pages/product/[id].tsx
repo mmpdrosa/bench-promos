@@ -38,7 +38,6 @@ export default function ProductPage({
   sales,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const { user } = useAuth()
-  console.log(product.specs)
   const [alertPrice, setAlertPrice] = useState(product.price)
   const [periodLowestPrice, setPeriodLowestPrice] = useState(0)
 

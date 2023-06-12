@@ -181,7 +181,11 @@ export default function ProductsAdmin({
                   <div className="flex flex-col gap-4">
                     <span>{targetSale.title}</span>
                     <span className="font-semibold">
-                      R$ {(targetSale.price / 100).toString().replace('.', ',')}
+                      R${' '}
+                      {(targetSale.price / 100)
+                        .toFixed(2)
+                        .toString()
+                        .replace('.', ',')}
                     </span>
                   </div>
                 </div>
@@ -230,7 +234,11 @@ export default function ProductsAdmin({
                       <div className="flex flex-col gap-4">
                         <span>{sale.title}</span>
                         <span className="font-semibold">
-                          R$ {(sale.price / 100).toString().replace('.', ',')}
+                          R${' '}
+                          {(sale.price / 100)
+                            .toFixed(2)
+                            .toString()
+                            .replace('.', ',')}
                         </span>
                       </div>
                     </div>

@@ -5,9 +5,10 @@ import { z } from 'zod'
 import NumericPriceInput from './NumericPriceInput'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { api } from '@/lib/axios'
+import { api, telegramApi } from '@/lib/axios'
 import { MdWarningAmber } from 'react-icons/md'
 import { BsCheck } from 'react-icons/bs'
+import { priceFormatter } from '@/utils/formatter'
 
 interface Sale {
   id: string
@@ -51,8 +52,16 @@ const saleSchema = z.object({
   category_id: z
     .string()
     .min(1, 'A promoção deve possuir uma categoria válida.'),
-  specs: z.string().optional(),
-  comments: z.string().optional(),
+  /*eslint-disable*/
+  specs: z
+    .string()
+    .transform((specsString) => specsString.replace(/[^\x00-\x7F]/g, ''))
+    .optional(),
+  comments: z
+    .string()
+    .transform((specsString) => specsString.replace(/[^\x00-\x7F]/g, ''))
+    .optional(),
+  /*eslint-disable*/
   coupon: z.string().optional(),
 })
 
@@ -85,26 +94,46 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
     setValue('specs', targetSale?.specs || '')
   }, [targetSale, setValue])
 
+  function telegramMessageFoward(saleData: SaleData) {
+    /* eslint-disable */
+    const message = `🔥 ${saleData.title} 🔥\n ${saleData.specs && `\n🔴 ${saleData.specs} 🔴\n`
+      } ${saleData.coupon && `\n🎟 Cupom: ${saleData.coupon}`
+      } \n💸 ${priceFormatter.format(targetSale!.price / 100)}\n  \n🔗 ${saleData.html_url
+      }\n ${saleData.comments &&
+      `\n${saleData.comments
+        .split('\n\n')
+        .map((comment) => `🔸 ${comment}`)
+        .join('\n\n')}`
+      }`
+    /* eslint-enable */
+    return message
+  }
+
   async function submit(data: SaleData) {
-    console.log(targetProduct?.id)
     switch (submitOption) {
       case 'create':
-        await api
-          .post(
-            '/sales',
-            { ...data, product_id: targetProduct?.id },
-            {
-              headers: {
-                'api-key': process.env.NEXT_PUBLIC_API_KEY,
-              },
+        await api.post(
+          '/sales',
+          { ...data, product_id: targetProduct?.id },
+          {
+            headers: {
+              'api-key': process.env.NEXT_PUBLIC_API_KEY,
             },
-          )
-          .then(() => router.refresh())
+          },
+        )
+
+        await telegramApi.post('/sendPhoto', {
+          photo: data.image_url,
+          caption: telegramMessageFoward(data),
+          chat_id: process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID,
+        })
+
+        router.refresh()
         break
       case 'edit':
         await api
           .patch(
-            `/sales/${targetSale?.id}`,
+            `/ sales / ${targetSale?.id} `,
             { ...data, product_id: targetProduct?.id },
             {
               headers: {
@@ -117,7 +146,7 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
         break
       case 'delete':
         await api
-          .delete(`/sales/${targetSale?.id}`, {
+          .delete(`/ sales / ${targetSale?.id} `, {
             headers: {
               'api-key': process.env.NEXT_PUBLIC_API_KEY,
             },

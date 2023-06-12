@@ -109,7 +109,8 @@ export default function ProductRetailerForm({
       <fieldset className="flex flex-col">
         <label>Anunciante *</label>
         <select
-          className="p-2 h-12 text-lg outline-none border border-black/20 rounded-lg focus:ring-violet-500 focus:border-violet-500 dark:bg-zinc-900 dark:border-zinc-800"
+          disabled={!!targetProductRetailer}
+          className="p-2 h-12 text-lg disabled:cursor-not-allowed outline-none border border-black/20 rounded-lg focus:ring-violet-500 focus:border-violet-500 dark:bg-zinc-900 dark:border-zinc-800"
           {...register('retailer_id')}
         >
           <option value=""></option>
