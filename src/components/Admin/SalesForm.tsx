@@ -133,7 +133,7 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
       case 'edit':
         await api
           .patch(
-            `/ sales / ${targetSale?.id} `,
+            `/sales/${targetSale?.id}`,
             { ...data, product_id: targetProduct?.id },
             {
               headers: {
@@ -146,7 +146,7 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
         break
       case 'delete':
         await api
-          .delete(`/ sales / ${targetSale?.id} `, {
+          .delete(`/sales/${targetSale?.id}`, {
             headers: {
               'api-key': process.env.NEXT_PUBLIC_API_KEY,
             },
