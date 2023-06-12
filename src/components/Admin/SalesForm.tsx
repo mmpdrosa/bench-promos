@@ -107,6 +107,7 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
         .join('\n\n')}`
       }`
     /* eslint-enable */
+    console.log(message)
     return message
   }
 
@@ -114,11 +115,16 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
     switch (submitOption) {
       case 'create':
         setIsSubmiting(true)
-        telegramApi.post('/sendPhoto', {
-          photo: data.image_url,
-          caption: telegramMessageFoward(data),
-          chat_id: process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID,
-        })
+        try {
+          await telegramApi.post('/sendPhoto', {
+            photo: data.image_url,
+            caption: telegramMessageFoward(data),
+            chat_id: process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID,
+          })
+        } catch (err) {
+          console.log(err)
+        }
+
         await api.post(
           '/sales',
           { ...data, product_id: targetProduct?.id },
@@ -128,7 +134,6 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
             },
           },
         )
-
         break
       case 'edit':
         await api
