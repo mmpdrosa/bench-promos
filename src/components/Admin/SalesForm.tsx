@@ -55,11 +55,11 @@ const saleSchema = z.object({
   /*eslint-disable*/
   specs: z
     .string()
-    .transform((specsString) => specsString.replace(/[^\x00-\x7F]/g, ''))
+    .transform((specsString) => specsString.replace(/[^\x00-\xFF]/g, ''))
     .optional(),
   comments: z
     .string()
-    .transform((specsString) => specsString.replace(/[^\x00-\x7F]/g, ''))
+    .transform((specsString) => specsString.replace(/[^\x00-\xFF]/g, ''))
     .optional(),
   /*eslint-disable*/
   coupon: z.string().optional(),
@@ -82,7 +82,8 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
     resolver: zodResolver(saleSchema),
   })
   const router = useRouter()
-
+  const [isSubmiting, setIsSubmiting] = useState<boolean>(false)
+  console.log()
   useEffect(() => {
     setValue('title', targetSale?.title || '')
     setValue('image_url', targetSale?.image_url || '')
@@ -112,6 +113,7 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
   async function submit(data: SaleData) {
     switch (submitOption) {
       case 'create':
+        setIsSubmiting(true)
         await api.post(
           '/sales',
           { ...data, product_id: targetProduct?.id },
@@ -277,8 +279,9 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
       <div className="flex items-center gap-2">
         <button
           type="submit"
+          disabled={isSubmiting}
           onClick={() => setSubmitOption('create')}
-          className="flex-1 px-4  mt-3 py-2.5 text-xl rounded-full text-white transition-colors bg-violet-500 hover:bg-violet-400"
+          className="flex-1 px-4 disabled:cursor-not-allowed mt-3 py-2.5 text-xl rounded-full text-white transition-colors bg-violet-500 hover:bg-violet-400"
         >
           Postar
         </button>
