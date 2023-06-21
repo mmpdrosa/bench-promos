@@ -46,11 +46,11 @@ export function ProductList({ products }: ProductListProps) {
 
   return (
     <>
-      <div id="products" className="flex justify-between items-center">
+      <div id="products" className="flex items-center justify-between">
         <span className="text-xs">{products.length} resultados</span>
 
         <select
-          className="block w-max p-2.5 rounded text-sm cursor-pointer bg-gray-50 border dark:bg-zinc-800 dark:border-zinc-700 border-gray-300 focus:ring-violet-500 focus:border-violet-500"
+          className="block w-max cursor-pointer rounded border border-gray-300 bg-gray-50 p-2.5 text-sm focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-700 dark:bg-zinc-800"
           value={sortOrder}
           onChange={handleSortOrderChange}
         >

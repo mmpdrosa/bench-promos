@@ -72,27 +72,27 @@ export default function ProductPage({
       <Head>
         <title>{product.title} | Bench Promos</title>
       </Head>
-      <div className="max-w-screen-xl py-8 mx-auto space-y-8">
+      <div className="mx-auto max-w-screen-xl space-y-8 py-8">
         <div className="flex flex-col gap-8 max-xl:px-4">
           <Breadcrumbs />
 
-          <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-y-6 items-stretch">
-            <h1 className="sm:hidden text-lg mb-6 font-semibold">
+          <div className="grid grid-cols-2 items-stretch gap-y-6 max-sm:grid-cols-1">
+            <h1 className="mb-6 text-lg font-semibold sm:hidden">
               {product.title}
             </h1>
             <div className="flex flex-col items-start max-sm:order-3">
-              <h1 className="text-xl mb-6 font-semibold max-sm:hidden">
+              <h1 className="mb-6 text-xl font-semibold max-sm:hidden">
                 {product.title}
               </h1>
 
               {product.available ? (
                 <>
-                  <span className="text-sm mb-2 font-medium text-zinc-500 dark:text-zinc-400">
+                  <span className="mb-2 text-sm font-medium text-zinc-500 dark:text-zinc-400">
                     Menor preço via{' '}
                     <a
                       target="_blank"
                       href={product.retailer.html_url}
-                      className="hover:text-violet-500 transition ease-in-out duration-300"
+                      className="transition duration-300 ease-in-out hover:text-violet-500"
                       rel="noreferrer"
                     >
                       {product.retailer.name}
@@ -104,24 +104,24 @@ export default function ProductPage({
                   </strong>
 
                   {product.coupon && (
-                    <div className="text-sm mt-2 text-zinc-700 dark:text-zinc-200">
+                    <div className="mt-2 text-sm text-zinc-700 dark:text-zinc-200">
                       Com cupom
-                      <div className="flex items-center gap-2 px-4 py-1 rounded-full dark:text-zinc-900 text-lg font-semibold tracking-wider bg-amber-200 uppercase">
-                        <MdSell className="w-7 h-7 text-violet-500" />
+                      <div className="flex items-center gap-2 rounded-full bg-amber-200 px-4 py-1 text-lg font-semibold uppercase tracking-wider dark:text-zinc-900">
+                        <MdSell className="h-7 w-7 text-violet-500" />
                         {product.coupon?.code}
                       </div>
                     </div>
                   )}
 
                   {product.cashback?.value && (
-                    <div className="text-sm mt-2 text-zinc-700 dark:text-zinc-200">
+                    <div className="mt-2 text-sm text-zinc-700 dark:text-zinc-200">
                       Com cashback de
                       <div className="flex">
-                        <div className="flex items-center gap-2 px-4 py-1 rounded-l-full text-lg font-semibold tracking-wider dark:text-zinc-900 bg-amber-200">
-                          <TbDiscount2 className="w-8 h-8 text-violet-500" />
+                        <div className="flex items-center gap-2 rounded-l-full bg-amber-200 px-4 py-1 text-lg font-semibold tracking-wider dark:text-zinc-900">
+                          <TbDiscount2 className="h-8 w-8 text-violet-500" />
                           {product.cashback?.value}%
                         </div>
-                        <div className="flex items-center gap-2 px-4 py-1 rounded-r-full text-lg font-semibold tracking-wider bg-violet-500 text-white hover:bg-violet-400 cursor-pointer transition-colors">
+                        <div className="flex cursor-pointer items-center gap-2 rounded-r-full bg-violet-500 px-4 py-1 text-lg font-semibold tracking-wider text-white transition-colors hover:bg-violet-400">
                           <a
                             href={product.cashback.affiliatedLink}
                             target="_blank"
@@ -141,14 +141,14 @@ export default function ProductPage({
               <a
                 href={product.html_url}
                 target="_blank"
-                className="max-sm:w-full flex items-center justify-center gap-2 mt-6 px-6 py-4 rounded-full text-xl font-semibold transition-colors text-white bg-violet-500 hover:bg-violet-400 cursor-pointer"
+                className="mt-6 flex cursor-pointer items-center justify-center gap-2 rounded-full bg-violet-500 px-6 py-4 text-xl font-semibold text-white transition-colors hover:bg-violet-400 max-sm:w-full"
                 rel="noreferrer"
               >
                 ACESSAR <FaExternalLinkAlt />
               </a>
             </div>
             <div className="flex justify-center max-sm:order-2">
-              <div className="relative w-full max-sm:w-80 h-[512px] max-sm:h-80">
+              <div className="relative h-[512px] w-full max-sm:h-80 max-sm:w-80">
                 <Image
                   className="object-contain"
                   alt=""
@@ -162,11 +162,11 @@ export default function ProductPage({
           </div>
 
           <nav className="overflow-x-auto">
-            <ul className="flex whitespace-nowrap border-b text-sm font-medium border-zinc-300 dark:border-zinc-600">
+            <ul className="flex whitespace-nowrap border-b border-zinc-300 text-sm font-medium dark:border-zinc-600">
               <li>
                 <a
                   href="#price-history"
-                  className="flex items-center py-2 px-4 gap-2.5 hover:underline"
+                  className="flex items-center gap-2.5 px-4 py-2 hover:underline"
                 >
                   <FaChartLine className="text-amber-400" />
                   Histórico
@@ -175,7 +175,7 @@ export default function ProductPage({
               <li>
                 <a
                   href="#last-sales"
-                  className="flex items-center py-2 px-4 gap-2.5 hover:underline"
+                  className="flex items-center gap-2.5 px-4 py-2 hover:underline"
                 >
                   <TbDiscount2 className="text-lg text-amber-400" />
                   Últimas Promoções
@@ -184,7 +184,7 @@ export default function ProductPage({
               <li>
                 <a
                   href="#specs"
-                  className="flex items-center py-2 px-4 gap-2.5 hover:underline"
+                  className="flex items-center gap-2.5 px-4 py-2 hover:underline"
                 >
                   <FaRegListAlt className="text-amber-400" />
                   Especificações
@@ -193,7 +193,7 @@ export default function ProductPage({
               <li>
                 <a
                   href="#review"
-                  className="flex items-center py-2 px-4 gap-2.5 hover:underline"
+                  className="flex items-center gap-2.5 px-4 py-2 hover:underline"
                 >
                   <FaVideo className="text-amber-400" />
                   Review
@@ -207,17 +207,17 @@ export default function ProductPage({
               <h2 className="text-xl font-extrabold text-violet-600">
                 HISTÓRICO
               </h2>
-              <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
+              <div className="h-2 w-3/4 rounded-full bg-violet-600"></div>
             </div>
-            <div className="grid grid-cols-3 max-lg:grid-cols-1 items-end gap-8 max-lg:gap-x-0">
+            <div className="grid grid-cols-3 items-end gap-8 max-lg:grid-cols-1 max-lg:gap-x-0">
               <div className="col-span-2 max-lg:order-last">
                 <ProductPriceChart
                   productId={product.id}
                   onInsertLowestPrice={changeLowestPrice}
                 />
               </div>
-              <div className="flex flex-col items-center gap-5 p-8 border border-zinc-300 dark:border-zinc-700 dark:bg-zinc-800 rounded-xl">
-                <h3 className="flex justify-between items-center gap-4 text-lg font-extrabold">
+              <div className="flex flex-col items-center gap-5 rounded-xl border border-zinc-300 p-8 dark:border-zinc-700 dark:bg-zinc-800">
+                <h3 className="flex items-center justify-between gap-4 text-lg font-extrabold">
                   <FaBell className="text-amber-300" /> Crie um alerta de preço
                 </h3>
                 <div className="flex flex-col items-center gap-1.5 font-bold">
@@ -241,7 +241,7 @@ export default function ProductPage({
                   <div className="flex items-center gap-4 text-lg font-medium">
                     <button
                       onClick={decrementAlertPrice}
-                      className="w-12 h-12 flex justify-center items-center border rounded-full dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:border-zinc-600 border-zinc-300"
+                      className="flex h-12 w-12 items-center justify-center rounded-full border border-zinc-300 dark:border-zinc-600 dark:bg-zinc-900 dark:hover:bg-zinc-800"
                     >
                       <FaMinus />
                     </button>
@@ -253,7 +253,7 @@ export default function ProductPage({
                       thousandSeparator="."
                       fixedDecimalScale={true}
                       allowNegative={false}
-                      className="w-48 h-12 inline-flex items-center px-4 border rounded-2xl text-2xl border-zinc-300 dark:bg-zinc-900  dark:border-zinc-600"
+                      className="inline-flex h-12 w-48 items-center rounded-2xl border border-zinc-300 px-4 text-2xl dark:border-zinc-600  dark:bg-zinc-900"
                       value={alertPrice / 100}
                       onValueChange={({ floatValue }) =>
                         setAlertPrice(floatValue ? floatValue * 100 : 0)
@@ -261,7 +261,7 @@ export default function ProductPage({
                     />
                     <button
                       onClick={incrementAlertPrice}
-                      className="w-12 h-12 flex justify-center items-center border rounded-full dark:bg-zinc-900 dark:border-zinc-600 dark:hover:bg-zinc-800 border-zinc-300"
+                      className="flex h-12 w-12 items-center justify-center rounded-full border border-zinc-300 dark:border-zinc-600 dark:bg-zinc-900 dark:hover:bg-zinc-800"
                     >
                       <FaPlus />
                     </button>
@@ -274,7 +274,7 @@ export default function ProductPage({
                   )}.`}
                   triggerButton={
                     <button
-                      className="px-5 py-3.5 rounded-full text-lg font-semibold transition-colors bg-amber-300 dark:bg-violet-500 dark:hover:bg-violet-400 dark:text-zinc-200 hover:bg-yellow-400"
+                      className="rounded-full bg-amber-300 px-5 py-3.5 text-lg font-semibold transition-colors hover:bg-yellow-400 dark:bg-violet-500 dark:text-zinc-200 dark:hover:bg-violet-400"
                       disabled={!user}
                     >
                       <span>CRIAR ALERTA</span>
@@ -292,14 +292,14 @@ export default function ProductPage({
                 <h2 className="text-xl font-extrabold text-violet-600">
                   ÚLTIMAS PROMOÇÕES
                 </h2>
-                <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
+                <div className="h-2 w-3/4 rounded-full bg-violet-600"></div>
               </div>
-              <div className="max-h-[724px] border rounded-xl dark:border-zinc-700 dark:scrollbar-thumb-zinc-700 border-zinc-300 overflow-y-auto scrollbar scrollbar-w-2 scrollbar-thumb-rounded-full scrollbar-thumb-zinc-300">
+              <div className="max-h-[724px] overflow-y-auto rounded-xl border border-zinc-300 scrollbar scrollbar-thumb-zinc-300 scrollbar-thumb-rounded-full scrollbar-w-2 dark:border-zinc-700 dark:scrollbar-thumb-zinc-700">
                 <ul>
                   {sales.map((sale) => (
                     <li
                       key={sale.id}
-                      className="border-b last:border-0 border-zinc-300 dark:border-zinc-700"
+                      className="border-b border-zinc-300 last:border-0 dark:border-zinc-700"
                     >
                       <div className="p-6 max-sm:p-4">
                         <div className="mb-2 text-end">
@@ -307,10 +307,10 @@ export default function ProductPage({
                             {dayjs(sale.created_at).fromNow()}
                           </span>
                         </div>
-                        <div className="flex justify-center gap-8 mr-auto max-sm:flex-wrap">
-                          <div className="relative h-40 aspect-square">
+                        <div className="mr-auto flex justify-center gap-8 max-sm:flex-wrap">
+                          <div className="relative aspect-square h-40">
                             <Image
-                              className="object-contain rounded-lg"
+                              className="rounded-lg object-contain"
                               alt=""
                               src={sale.image_url}
                               fill
@@ -318,8 +318,8 @@ export default function ProductPage({
                               priority
                             />
                           </div>
-                          <div className="w-full flex gap-x-8 gap-y-4 justify-between max-md:flex-col">
-                            <div className="w-full flex items-center gap-x-8 flex-wrap">
+                          <div className="flex w-full justify-between gap-x-8 gap-y-4 max-md:flex-col">
+                            <div className="flex w-full flex-wrap items-center gap-x-8">
                               <div>
                                 <span className="block text-sm">Preço</span>
                                 <strong className="text-2xl font-bold">
@@ -332,7 +332,7 @@ export default function ProductPage({
                                   <span className="dark:text-zinc-300">
                                     Com cupom
                                   </span>
-                                  <div className="h-8 flex items-center gap-1 py-1 px-2.5 border border-dashed border-black rounded-full bg-amber-200">
+                                  <div className="flex h-8 items-center gap-1 rounded-full border border-dashed border-black bg-amber-200 px-2.5 py-1">
                                     <TbDiscount2 className="text-2xl text-violet-500" />
                                     <span className="mr-auto font-semibold tracking-wider">
                                       {sale.coupon}
@@ -345,7 +345,7 @@ export default function ProductPage({
                               <a
                                 href={sale.html_url}
                                 target="_blank"
-                                className="flex items-center justify-center gap-2 px-6 py-4 rounded-full font-semibold transition-colors text-white bg-violet-500 hover:bg-violet-400 cursor-pointer"
+                                className="flex cursor-pointer items-center justify-center gap-2 rounded-full bg-violet-500 px-6 py-4 font-semibold text-white transition-colors hover:bg-violet-400"
                                 rel="noreferrer"
                               >
                                 ACESSAR <FaExternalLinkAlt />
@@ -367,20 +367,20 @@ export default function ProductPage({
                 <h2 className="text-xl font-extrabold text-violet-600">
                   ESPECIFICAÇÕES
                 </h2>
-                <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
+                <div className="h-2 w-3/4 rounded-full bg-violet-600"></div>
               </div>
-              <div className="border border-zinc-300 dark:border-zinc-700  rounded-xl overflow-hidden">
+              <div className="overflow-hidden rounded-xl border  border-zinc-300 dark:border-zinc-700">
                 <table className="w-full border-collapse break-all">
                   <tbody>
                     {product.specs.map((spec, index) => (
                       <tr
                         key={index}
-                        className="border-b last:border-0 border-zinc-300 dark:even:bg-violet-500  even:bg-amber-200  dark:border-zinc-700"
+                        className="border-b border-zinc-300 last:border-0 even:bg-amber-200  dark:border-zinc-700  dark:even:bg-violet-500"
                       >
-                        <th className="table-cell w-1/2 py-4 px-4 text-left text-lg font-bold border-r border-zinc-300 dark:border-zinc-700">
+                        <th className="table-cell w-1/2 border-r border-zinc-300 px-4 py-4 text-left text-lg font-bold dark:border-zinc-700">
                           {spec.title}
                         </th>
-                        <td className="table-cell w-1/2 py-2 px-4 text-lg font-bold">
+                        <td className="table-cell w-1/2 px-4 py-2 text-lg font-bold">
                           {spec.value}
                         </td>
                       </tr>
@@ -397,7 +397,7 @@ export default function ProductPage({
                 <h2 className="text-xl font-extrabold text-violet-600">
                   REVIEW
                 </h2>
-                <div className="w-3/4 h-2 rounded-full bg-violet-600"></div>
+                <div className="h-2 w-3/4 rounded-full bg-violet-600"></div>
               </div>
               <div className="aspect-video">
                 <iframe

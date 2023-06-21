@@ -68,7 +68,7 @@ export function SignUpDialog({
 
   return (
     <>
-      <div className="relative w-60 h-28 shrink-0">
+      <div className="relative h-28 w-60 shrink-0">
         <Image
           className="object-contain"
           src="https://media.discordapp.net/attachments/826681789677436950/1097633179264876564/Logo_atualizada.png"
@@ -84,13 +84,13 @@ export function SignUpDialog({
       <form className="w-full space-y-6" onSubmit={handleSubmit(handleSignUp)}>
         <fieldset className="flex flex-col justify-start">
           <label
-            className="block mb-2.5 text-base text-white"
+            className="mb-2.5 block text-base text-white"
             htmlFor="username"
           >
             Nome
           </label>
           <input
-            className="h-10 px-2.5 text-lg outline-none text-white border-b border-white bg-transparent"
+            className="h-10 border-b border-white bg-transparent px-2.5 text-lg text-white outline-none"
             id="username"
             {...register('username')}
           />
@@ -103,11 +103,11 @@ export function SignUpDialog({
           )}
         </fieldset>
         <fieldset className="flex flex-col justify-start">
-          <label className="block mb-2.5 text-base text-white" htmlFor="email">
+          <label className="mb-2.5 block text-base text-white" htmlFor="email">
             E-mail
           </label>
           <input
-            className="h-10 px-2.5 text-lg outline-none text-white border-b border-white bg-transparent"
+            className="h-10 border-b border-white bg-transparent px-2.5 text-lg text-white outline-none"
             id="email"
             {...register('email')}
           />
@@ -121,13 +121,13 @@ export function SignUpDialog({
         </fieldset>
         <fieldset className="flex flex-col justify-start">
           <label
-            className="block mb-2.5 text-base text-white"
+            className="mb-2.5 block text-base text-white"
             htmlFor="password"
           >
             Senha
           </label>
           <input
-            className="h-10 px-2.5 text-lg outline-none text-white border-b border-white bg-transparent"
+            className="h-10 border-b border-white bg-transparent px-2.5 text-lg text-white outline-none"
             id="password"
             type="password"
             {...register('password')}
@@ -142,19 +142,19 @@ export function SignUpDialog({
         </fieldset>
         <fieldset className="flex flex-col justify-start">
           <label
-            className="block mb-2.5 text-base text-white"
+            className="mb-2.5 block text-base text-white"
             htmlFor="confirm"
           >
             Confirmar senha
           </label>
           <input
-            className="h-10 px-2.5 text-lg outline-none text-white border-b border-white bg-transparent"
+            className="h-10 border-b border-white bg-transparent px-2.5 text-lg text-white outline-none"
             id="confirm"
             type="password"
             {...register('confirm')}
           />
         </fieldset>
-        <div className="flex justify-between items-center gap-4">
+        <div className="flex items-center justify-between gap-4">
           {errors.root && (
             <span className="font-bold text-red-500">
               {errors.root?.message}
@@ -167,7 +167,7 @@ export function SignUpDialog({
           )}
 
           <button
-            className="h-10 inline-flex items-center justify-center px-6 ml-auto rounded-full font-medium transition-colors bg-amber-300 hover:bg-yellow-400 disabled:cursor-not-allowed"
+            className="ml-auto inline-flex h-10 items-center justify-center rounded-full bg-amber-300 px-6 font-medium transition-colors disabled:cursor-not-allowed hover:bg-yellow-400"
             disabled={isSubmitting}
           >
             Cadastrar

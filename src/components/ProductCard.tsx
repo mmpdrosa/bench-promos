@@ -22,9 +22,9 @@ interface ProductCardProps {
 
 export function ProductCard(product: ProductCardProps) {
   return (
-    <div className="min-w-[296px] w-74 min-h-[544px] flex flex-col rounded-lg overflow-hidden bg-white border dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:border-zinc-700 dark:transition-none border-zinc-300 transition ease-in-out duration-300 hover:shadow-xl">
+    <div className="flex min-h-[544px] w-74 min-w-[296px] flex-col overflow-hidden rounded-lg border border-zinc-300 bg-white transition duration-300 ease-in-out hover:shadow-xl dark:border-zinc-700 dark:bg-zinc-800 dark:transition-none dark:hover:bg-zinc-700">
       <Link
-        className="w-full h-74 relative"
+        className="relative h-74 w-full"
         href={`/produto/${product.id}`}
         rel="noreferrer"
       >
@@ -48,7 +48,7 @@ export function ProductCard(product: ProductCardProps) {
               <a
                 target="_blank"
                 href={product.retailer.html_url}
-                className="hover:text-violet-500 transition ease-in-out duration-300"
+                className="transition duration-300 ease-in-out hover:text-violet-500"
                 rel="noreferrer"
               >
                 {product.retailer.name}
@@ -76,7 +76,7 @@ export function ProductCard(product: ProductCardProps) {
       <a
         href={product.html_url}
         target="_blank"
-        className="inline-flex justify-between items-center mt-auto px-4 py-2 text-sm font-medium cursor-pointer bg-zinc-100 dark:bg-zinc-700 dark:hover:bg-zinc-500 hover:bg-zinc-200 transition ease-in-out duration-300"
+        className="mt-auto inline-flex cursor-pointer items-center justify-between bg-zinc-100 px-4 py-2 text-sm font-medium transition duration-300 ease-in-out hover:bg-zinc-200 dark:bg-zinc-700 dark:hover:bg-zinc-500"
         rel="noreferrer"
       >
         Acessar site

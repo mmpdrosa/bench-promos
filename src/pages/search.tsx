@@ -19,7 +19,7 @@ export default function Search({
       <Head>
         <title>{search} | Bench Promos</title>
       </Head>
-      <div className="max-w-screen-xl flex flex-col gap-8 py-8 max-xl:px-4 mx-auto">
+      <div className="mx-auto flex max-w-screen-xl flex-col gap-8 py-8 max-xl:px-4">
         <Breadcrumbs />
 
         <span>Você pesquisou por: {search}</span>

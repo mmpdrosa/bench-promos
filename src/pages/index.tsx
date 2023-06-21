@@ -72,14 +72,14 @@ export default function Home({
       <Head>
         <title>Bench Promos: As Melhores Ofertas e Promoções</title>
       </Head>
-      <div className="max-w-screen-xl py-8 max-xl:px-4 mx-auto space-y-8">
+      <div className="mx-auto max-w-screen-xl space-y-8 py-8 max-xl:px-4">
         {search && (
           <div>
             <span>Você pesquisou por: {search}</span>
           </div>
         )}
 
-        <div className="flex justify-center flex-wrap gap-7">
+        <div className="flex flex-wrap justify-center gap-7">
           {sales!.pages
             .filter(Boolean)
             .flat()

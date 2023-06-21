@@ -33,7 +33,7 @@ export default function ProductsAdmin({
       </Head>
       <div className="flex flex-1 max-sm:flex-col">
         <ProductForm targetProduct={targetProduct} />
-        <div className="flex flex-1 flex-col max-h-[calc(100vh-172px)] py-6 sm:pl-8 sm:pr-2">
+        <div className="flex max-h-[calc(100vh-172px)] flex-1 flex-col py-6 sm:pl-8 sm:pr-2">
           <ProductsList
             products={products}
             targetProduct={targetProduct}

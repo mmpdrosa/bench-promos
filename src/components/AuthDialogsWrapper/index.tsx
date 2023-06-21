@@ -33,10 +33,10 @@ export function AuthDialogsWrapper() {
       {!user ? (
         <button
           title="Entrar"
-          className="group flex items-center gap-2 p-2 rounded-full bg-white dark:text-zinc-200 dark:bg-zinc-800 bg-opacity-50 cursor-pointer"
+          className="group flex cursor-pointer items-center gap-2 rounded-full bg-white bg-opacity-50 p-2 dark:bg-zinc-800 dark:text-zinc-200"
           onClick={() => handleSignInOpenChange(true)}
         >
-          <div className="w-8 h-8 inline-flex items-center justify-center rounded-full bg-white dark:bg-zinc-900">
+          <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white dark:bg-zinc-900">
             <HiOutlineUser className="dark:text-zinc-200" />
           </div>
           <span className="text-sm font-bold group-hover:underline max-sm:hidden">
@@ -54,7 +54,7 @@ export function AuthDialogsWrapper() {
         fullWidth
         maxWidth="sm"
       >
-        <DialogContent className="flex flex-col items-center gap-6 sm:px-16 py-8 font-sans bg-gradient-to-b from-black to-violet-500">
+        <DialogContent className="flex flex-col items-center gap-6 bg-gradient-to-b from-black to-violet-500 py-8 font-sans sm:px-16">
           <SignInDialog
             onSignInOpenChange={handleSignInOpenChange}
             onSignUpOpenChange={handleSignUpOpenChange}
@@ -95,7 +95,7 @@ export function AuthDialogsWrapper() {
         fullWidth
         maxWidth="sm"
       >
-        <DialogContent className="flex flex-col items-center gap-6 sm:px-16 py-8 hover font-sans bg-gradient-to-b from-black to-violet-500">
+        <DialogContent className="hover flex flex-col items-center gap-6 bg-gradient-to-b from-black to-violet-500 py-8 font-sans sm:px-16">
           <SignUpDialog
             onSignInOpenChange={handleSignInOpenChange}
             onSignUpOpenChange={handleSignUpOpenChange}
@@ -109,7 +109,7 @@ export function AuthDialogsWrapper() {
         fullWidth
         maxWidth="sm"
       >
-        <DialogContent className="flex flex-col items-center gap-6 sm:px-16 py-8 font-sans bg-gradient-to-b from-black to-violet-500">
+        <DialogContent className="flex flex-col items-center gap-6 bg-gradient-to-b from-black to-violet-500 py-8 font-sans sm:px-16">
           <RecoverPasswordDialog />
         </DialogContent>
       </Dialog>

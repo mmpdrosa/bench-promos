@@ -82,9 +82,9 @@ export default function ProductsAdmin({
       <div className="flex flex-1 max-sm:flex-col">
         <SalesForm targetSale={targetSale} targetProduct={targetProduct} />
         {switchProductOrSales === 'products' ? (
-          <div className="flex flex-1 flex-col max-h-[calc(100vh-172px)] sm:pl-8 sm:pr-2 py-6">
-            <div className="flex justify-center items-center gap-6 pb-4">
-              <button className="text-violet-500 border-b-2 border-violet-500 font-semibold">
+          <div className="flex max-h-[calc(100vh-172px)] flex-1 flex-col py-6 sm:pl-8 sm:pr-2">
+            <div className="flex items-center justify-center gap-6 pb-4">
+              <button className="border-b-2 border-violet-500 font-semibold text-violet-500">
                 Produtos
               </button>
               <button
@@ -97,9 +97,9 @@ export default function ProductsAdmin({
             {targetProduct ? (
               <>
                 <label>Produto selecionado</label>
-                <div className="flex items-center gap-4 py-6 px-2 rounded-lg bg-violet-500/80 text-white mb-8 relative">
+                <div className="relative mb-8 flex items-center gap-4 rounded-lg bg-violet-500/80 px-2 py-6 text-white">
                   <button
-                    className="absolute p-1 top-2 right-2 bg-red-500 rounded-lg hover:bg-red-400"
+                    className="absolute right-2 top-2 rounded-lg bg-red-500 p-1 hover:bg-red-400"
                     onClick={() => setTargetProduct(undefined)}
                   >
                     <BsX />
@@ -120,7 +120,7 @@ export default function ProductsAdmin({
                 type="text"
                 name="productsSearch"
                 onChange={(event) => handleProductSearch(event)}
-                className="p-2 mb-4 text-lg outline-none border border-black/20 rounded-lg focus:ring-violet-500 focus:border-violet-500 dark:bg-zinc-900 dark:border-zinc-800 placeholder:italic"
+                className="mb-4 rounded-lg border border-black/20 p-2 text-lg outline-none placeholder:italic focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-800 dark:bg-zinc-900"
                 placeholder="Insira o nome do produto"
               />
             </fieldset>
@@ -130,7 +130,7 @@ export default function ProductsAdmin({
                 <div
                   key={product.id}
                   onClick={() => setTargetProduct(product)}
-                  className="flex items-center justify-start gap-4 py-6 px-2 cursor-pointer rounded-lg hover:bg-violet-500/80 hover:text-white"
+                  className="flex cursor-pointer items-center justify-start gap-4 rounded-lg px-2 py-6 hover:bg-violet-500/80 hover:text-white"
                 >
                   <Image
                     src={product.image_url}
@@ -144,24 +144,24 @@ export default function ProductsAdmin({
             </div>
           </div>
         ) : (
-          <div className="flex flex-1 flex-col max-h-[calc(100vh-172px)] py-6 sm:pl-8 sm:pr-2">
-            <div className="flex justify-center items-center gap-6 pb-4">
+          <div className="flex max-h-[calc(100vh-172px)] flex-1 flex-col py-6 sm:pl-8 sm:pr-2">
+            <div className="flex items-center justify-center gap-6 pb-4">
               <button
                 className="hover:text-violet-500"
                 onClick={() => setSwitchProductOrSales('products')}
               >
                 Produtos
               </button>
-              <button className="text-violet-500 border-b-2 border-violet-500 font-semibold">
+              <button className="border-b-2 border-violet-500 font-semibold text-violet-500">
                 Promoções
               </button>
             </div>
             {targetSale ? (
               <>
                 <label>Promoção selecionada</label>
-                <div className="flex items-center gap-4 py-6 px-2 rounded-lg bg-violet-500/80 text-white mb-8 relative">
+                <div className="relative mb-8 flex items-center gap-4 rounded-lg bg-violet-500/80 px-2 py-6 text-white">
                   <button
-                    className="absolute p-1 top-2 right-2 bg-red-500 rounded-lg hover:bg-red-400"
+                    className="absolute right-2 top-2 rounded-lg bg-red-500 p-1 hover:bg-red-400"
                     onClick={() => {
                       setTargetSale(undefined)
                       setTargetProduct(undefined)
@@ -169,7 +169,7 @@ export default function ProductsAdmin({
                   >
                     <BsX />
                   </button>
-                  <span className="text-xs absolute top-2 right-10">
+                  <span className="absolute right-10 top-2 text-xs">
                     {dayjs(targetSale.created_at).fromNow()}
                   </span>
                   <Image
@@ -198,7 +198,7 @@ export default function ProductsAdmin({
                 type="text"
                 name="salesSearch"
                 onChange={(event) => handleSaleSearch(event)}
-                className="p-2 mb-4 text-lg outline-none border border-black/20 rounded-lg focus:ring-violet-500 focus:border-violet-500 dark:bg-zinc-900 dark:border-zinc-800 placeholder:italic"
+                className="mb-4 rounded-lg border border-black/20 p-2 text-lg outline-none placeholder:italic focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-800 dark:bg-zinc-900"
                 placeholder="Insira o título de uma promoção"
               />
             </fieldset>
@@ -220,9 +220,9 @@ export default function ProductsAdmin({
                           ),
                         )
                       }}
-                      className="relative flex items-center justify-start gap-4 py-6 px-2 cursor-pointer rounded-lg hover:bg-violet-500/80 hover:text-white"
+                      className="relative flex cursor-pointer items-center justify-start gap-4 rounded-lg px-2 py-6 hover:bg-violet-500/80 hover:text-white"
                     >
-                      <span className="text-xs absolute top-2 right-2">
+                      <span className="absolute right-2 top-2 text-xs">
                         {dayjs(sale.created_at).fromNow()}
                       </span>
                       <Image

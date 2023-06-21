@@ -17,7 +17,7 @@ export function SidebarMenu() {
   return (
     <>
       <button
-        className="sm:hidden dark:text-zinc-700"
+        className="dark:text-zinc-700 sm:hidden"
         onClick={handleToggleSidebar}
       >
         <FaBars />
@@ -25,14 +25,14 @@ export function SidebarMenu() {
 
       <div
         onClick={handleToggleSidebar}
-        className={`fixed top-0 left-0 z-[3] w-full h-full bg-black bg-opacity-50 ${
+        className={`fixed left-0 top-0 z-[3] h-full w-full bg-black bg-opacity-50 ${
           !toggleSidebar && 'hidden'
         }`}
       />
 
       <aside
         ref={sidebarRef}
-        className={`fixed top-0 left-0 z-[4] w-64 h-screen ease-in-out duration-300 overflow-y-auto overscroll-none bg-zinc-50 dark:bg-zinc-900 dark:text-zinc-200 ${
+        className={`fixed left-0 top-0 z-[4] h-screen w-64 overflow-y-auto overscroll-none bg-zinc-50 duration-300 ease-in-out dark:bg-zinc-900 dark:text-zinc-200 ${
           toggleSidebar ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -40,7 +40,7 @@ export function SidebarMenu() {
           <li>
             <Link
               href="/"
-              className="block px-3 py-3.5 leading-none font-bold"
+              className="block px-3 py-3.5 font-bold leading-none"
               onClick={handleToggleSidebar}
             >
               Promoções
@@ -49,7 +49,7 @@ export function SidebarMenu() {
           <li>
             <Link
               href="/cupons"
-              className="block px-3 py-3.5 leading-none font-bold"
+              className="block px-3 py-3.5 font-bold leading-none"
               onClick={handleToggleSidebar}
             >
               Cupons
@@ -58,7 +58,7 @@ export function SidebarMenu() {
           <li>
             <Link
               href="/recomendados"
-              className="block px-3 py-3.5 leading-none font-bold"
+              className="block px-3 py-3.5 font-bold leading-none"
               onClick={handleToggleSidebar}
             >
               Recomendados
@@ -69,7 +69,7 @@ export function SidebarMenu() {
             <a
               href="https://t.me/BenchPromos"
               target="_blank"
-              className="block px-3 py-3.5 leading-none font-bold"
+              className="block px-3 py-3.5 font-bold leading-none"
             >
               Telegram
             </a>
@@ -79,7 +79,7 @@ export function SidebarMenu() {
             <a
               href="https://discord.gg/cCD5PEjyjg"
               target="_blank"
-              className="block px-3 py-3.5 leading-none font-bold"
+              className="block px-3 py-3.5 font-bold leading-none"
             >
               Discord
             </a>
@@ -129,13 +129,13 @@ function Dropdown({ id, name, items, onClick }: DropdownProps) {
     <>
       <button
         title={name}
-        className="w-full inline-flex justify-between px-3 py-3.5 leading-none"
+        className="inline-flex w-full justify-between px-3 py-3.5 leading-none"
         onClick={() => setToggle((prev) => !prev)}
       >
         {name}
       </button>
       <ul
-        className={`pl-9 py-2.5 bg-white dark:bg-zinc-800 ${
+        className={`bg-white py-2.5 pl-9 dark:bg-zinc-800 ${
           toggle ? 'block' : 'hidden'
         }`}
       >

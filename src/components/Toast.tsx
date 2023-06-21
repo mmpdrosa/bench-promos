@@ -41,7 +41,7 @@ const Toast = ({
         open={open}
         onOpenChange={setOpen}
         className={clsx(
-          'z-50 fixed bottom-4 inset-x-4 w-auto md:top-4 md:right-4 md:left-auto md:bottom-auto md:w-full md:max-w-sm shadow-lg rounded-lg',
+          'fixed inset-x-4 bottom-4 z-50 w-auto rounded-lg shadow-lg md:bottom-auto md:left-auto md:right-4 md:top-4 md:w-full md:max-w-sm',
           'bg-white',
           'dark:bg-zinc-800',
           'rdx-state-open:animate-toast-slide-in-bottom md:rdx-state-open:animate-toast-slide-in-right',
@@ -55,7 +55,7 @@ const Toast = ({
         )}
       >
         <div className="flex">
-          <div className="w-0 flex-1 flex items-center pl-5 py-4">
+          <div className="flex w-0 flex-1 items-center py-4 pl-5">
             <div className="w-full">
               <ToastPrimitive.Title className="text-sm font-medium text-gray-900 dark:text-zinc-200">
                 {title}
@@ -66,9 +66,9 @@ const Toast = ({
             </div>
           </div>
           <div className="flex">
-            <div className="flex flex-col px-3 py-2 space-y-1">
-              <div className="h-0 flex-1 flex">
-                <ToastPrimitive.Close className="w-full border dark:text-zinc-300 border-transparent rounded-lg px-3 py-2 flex items-center justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 dark:hover:bg-zinc-700 focus:z-10 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+            <div className="flex flex-col space-y-1 px-3 py-2">
+              <div className="flex h-0 flex-1">
+                <ToastPrimitive.Close className="flex w-full items-center justify-center rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75 hover:bg-gray-50 dark:text-zinc-300 dark:hover:bg-zinc-700">
                   Fechar
                 </ToastPrimitive.Close>
               </div>

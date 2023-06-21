@@ -12,40 +12,40 @@ export function Menu() {
   const { categories } = useCategory()
 
   return (
-    <div className="flex justify-between max-lg:justify-center items-center max-w-screen-xl mx-auto pb-2">
+    <div className="mx-auto flex max-w-screen-xl items-center justify-between pb-2 max-lg:justify-center">
       <div className="w-64 max-lg:hidden"></div>
-      <NavigationMenu.Root className="flex justify-center relative z-[2] max-sm:hidden">
+      <NavigationMenu.Root className="relative z-[2] flex justify-center max-sm:hidden">
         <NavigationMenu.List className="flex justify-center">
           <NavigationMenu.Item>
             <NavigationMenu.Trigger
               title="Produtos"
-              className="group flex items-center justify-between gap-3 py-2 px-3 select-none text-xl font-semibold text-white dark:text-zinc-200 rdx-state-open:text-black rdx-state-open:bg-white 
-              dark:rdx-state-open:text-white dark:rdx-state-open:bg-zinc-800 "
+              className="group flex select-none items-center justify-between gap-3 px-3 py-2 text-xl font-semibold text-white rdx-state-open:bg-white rdx-state-open:text-black dark:text-zinc-200 
+              dark:rdx-state-open:bg-zinc-800 dark:rdx-state-open:text-white "
             >
               <FaBars className="text-amber-300 group-rdx-state-open:text-black dark:group-rdx-state-open:text-amber-300/75" />
               Produtos
             </NavigationMenu.Trigger>
-            <NavigationMenu.Content className="p-4 shadow-xl bg-white dark:bg-zinc-800 dark:text-zinc-300 animate-slide-right-fade">
+            <NavigationMenu.Content className="animate-slide-right-fade bg-white p-4 shadow-xl dark:bg-zinc-800 dark:text-zinc-300">
               <NavigationMenu.Sub>
                 <NavigationMenu.List className="flex flex-col gap-4">
                   {categories?.map((category) => (
                     <NavigationMenu.Item key={category.id}>
                       <Link href={`/${category.id}`} passHref>
                         <NavigationMenu.Trigger
-                          className="group w-full flex justify-between items-center gap-2 text-sm transition-colors rdx-state-open:text-violet-500"
+                          className="group flex w-full items-center justify-between gap-2 text-sm transition-colors rdx-state-open:text-violet-500"
                           title={category.name}
                         >
                           {category.name}
-                          <AiOutlineCaretRight className="text-sm text-white group-rdx-state-open:text-black dark:group-rdx-state-open:text-violet-500 dark:text-zinc-400" />
+                          <AiOutlineCaretRight className="text-sm text-white group-rdx-state-open:text-black dark:text-zinc-400 dark:group-rdx-state-open:text-violet-500" />
                         </NavigationMenu.Trigger>
                       </Link>
-                      <NavigationMenu.Content className="h-rdx-navigation-menu-viewport min-w-[296px] px-4 py-2">
-                        <ul className="h-full flex flex-col flex-wrap gap-x-6">
+                      <NavigationMenu.Content className="min-w-[296px] px-4 py-2 h-rdx-navigation-menu-viewport">
+                        <ul className="flex h-full flex-col flex-wrap gap-x-6">
                           {category.subcategories?.map((subcategory) => (
                             <li key={subcategory.id} className="w-max">
                               <Link
                                 href={`/${category.id}/${subcategory.id}`}
-                                className="text-sm cursor-pointer transition-colors hover:text-violet-500"
+                                className="cursor-pointer text-sm transition-colors hover:text-violet-500"
                                 title={subcategory.name}
                               >
                                 {subcategory.name}
@@ -58,7 +58,7 @@ export function Menu() {
                   ))}
                 </NavigationMenu.List>
 
-                <div className="min-w-max h-full absolute top-0 left-full border-l rounded-r border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-800 border">
+                <div className="absolute left-full top-0 h-full min-w-max rounded-r border border-l border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-800">
                   <NavigationMenu.Viewport className="max-h-full" />
                 </div>
               </NavigationMenu.Sub>
@@ -73,7 +73,7 @@ export function Menu() {
             <Link
               href="/"
               title="Promoções"
-              className="flex items-center gap-2 py-2 px-3 select-none text-xl font-semibold text-white dark:text-zinc-200 hover:underline cursor-pointer"
+              className="flex cursor-pointer select-none items-center gap-2 px-3 py-2 text-xl font-semibold text-white hover:underline dark:text-zinc-200"
             >
               <FaDollarSign className="text-amber-300" />
               Promoções
@@ -84,7 +84,7 @@ export function Menu() {
             <Link
               href="/cupons"
               title="Cupons"
-              className="flex items-center gap-2 py-2 px-3 select-none text-xl font-semibold text-white dark:text-zinc-200 hover:underline cursor-pointer"
+              className="flex cursor-pointer select-none items-center gap-2 px-3 py-2 text-xl font-semibold text-white hover:underline dark:text-zinc-200"
             >
               <TbDiscount2 className="text-2xl text-amber-300" />
               Cupons
@@ -95,7 +95,7 @@ export function Menu() {
             <Link
               href="/recomendados"
               title="Recomendados"
-              className="max-md:hidden flex items-center gap-2 py-2 px-3 select-none text-xl font-semibold text-white dark:text-zinc-200 hover:underline cursor-pointer"
+              className="flex cursor-pointer select-none items-center gap-2 px-3 py-2 text-xl font-semibold text-white hover:underline dark:text-zinc-200 max-md:hidden"
             >
               <HiCheckBadge className="text-2xl text-amber-300" />
               Recomendados
@@ -103,19 +103,19 @@ export function Menu() {
           </NavigationMenu.Item>
         </NavigationMenu.List>
       </NavigationMenu.Root>
-      <div className="max-lg:hidden px-2">
+      <div className="px-2 max-lg:hidden">
         <ThemeToggleButton />
       </div>
       <div className="flex flex-col">
-        <div className="flex gap-1 items-center max-lg:hidden">
-          <h1 className="text-white dark:text-zinc-200 text-lg font-semibold">
+        <div className="flex items-center gap-1 max-lg:hidden">
+          <h1 className="text-lg font-semibold text-white dark:text-zinc-200">
             Grupos
           </h1>
           <a
             href="https://t.me/BenchPromos"
             title="Telegram"
             target="_blank"
-            className="p-2 rounded-full hover:bg-bluetelegram group"
+            className="group rounded-full p-2 hover:bg-bluetelegram"
             rel="noreferrer"
           >
             <FaTelegram className="text-3xl text-amber-300 group-hover:text-white" />
@@ -124,7 +124,7 @@ export function Menu() {
             href="https://discord.gg/cCD5PEjyjg"
             title="Discord"
             target="_blank"
-            className="p-2 rounded-full hover:bg-bluediscord group"
+            className="group rounded-full p-2 hover:bg-bluediscord"
             rel="noreferrer"
           >
             <FaDiscord className="text-3xl text-amber-300 group-hover:text-white" />

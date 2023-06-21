@@ -54,7 +54,7 @@ export function MainLayout({ children }: LayoutProps) {
   return (
     <>
       <Header />
-      <div className="w-full min-h-[6px] bg-gradient-to-r from-violet-500 via-amber-200 to-violet-500 dark:from-zinc-900 dark:via-violet-500 dark:to-zinc-900" />
+      <div className="min-h-[6px] w-full bg-gradient-to-r from-violet-500 via-amber-200 to-violet-500 dark:from-zinc-900 dark:via-violet-500 dark:to-zinc-900" />
       <main className="flex-1 dark:bg-zinc-900 dark:text-zinc-200">
         {children}
       </main>

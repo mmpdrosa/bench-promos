@@ -47,7 +47,7 @@ export default function Recommended({
       <Head>
         <title>Recomendados | Bench Promos</title>
       </Head>
-      <div className="max-w-screen-xl flex flex-col gap-8 py-8 max-xl:px-4 mx-auto">
+      <div className="mx-auto flex max-w-screen-xl flex-col gap-8 py-8 max-xl:px-4">
         <Breadcrumbs />
 
         {recommendedProductsByCategory.map(({ products, ...category }) => (

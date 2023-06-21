@@ -44,9 +44,9 @@ export default function ProductsList({
       {targetProduct ? (
         <>
           <label>Produto selecionado</label>
-          <div className="flex items-center gap-4 py-6 px-2 rounded-lg bg-violet-500/80 text-white mb-8 relative">
+          <div className="relative mb-8 flex items-center gap-4 rounded-lg bg-violet-500/80 px-2 py-6 text-white">
             <button
-              className="absolute p-1 top-2 right-2 bg-red-500 rounded-lg hover:bg-red-400"
+              className="absolute right-2 top-2 rounded-lg bg-red-500 p-1 hover:bg-red-400"
               onClick={() => setTargetProduct(undefined)}
             >
               <BsX />
@@ -67,7 +67,7 @@ export default function ProductsList({
         <input
           type="text"
           onChange={(event) => handleProductSearch(event)}
-          className="p-2 mb-4 text-lg outline-none border border-black/20 rounded-lg focus:ring-violet-500 focus:border-violet-500 dark:bg-zinc-900 dark:border-zinc-800 placeholder:italic"
+          className="mb-4 rounded-lg border border-black/20 p-2 text-lg outline-none placeholder:italic focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-800 dark:bg-zinc-900"
           placeholder="Insira o nome do produto"
         />
       </fieldset>
@@ -76,7 +76,7 @@ export default function ProductsList({
           <div
             key={product.id}
             onClick={() => setTargetProduct(product)}
-            className="flex items-center justify-start gap-4 py-6 px-2 cursor-pointer rounded-lg hover:bg-violet-500/80 hover:text-white"
+            className="flex cursor-pointer items-center justify-start gap-4 rounded-lg px-2 py-6 hover:bg-violet-500/80 hover:text-white"
           >
             <Image
               src={product.image_url}

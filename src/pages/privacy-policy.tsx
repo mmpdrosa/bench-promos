@@ -8,7 +8,7 @@ export default function PrivacyPolicy() {
       <Head>
         <title>Política de Privacidade | Bench Promos</title>
       </Head>
-      <div className="max-w-screen-xl py-8 max-xl:px-4 mx-auto prose dark:text-zinc-200">
+      <div className="prose mx-auto max-w-screen-xl py-8 dark:text-zinc-200 max-xl:px-4">
         <h1 className="dark:text-zinc-200">
           Política de Privacidade Bench Promos
         </h1>

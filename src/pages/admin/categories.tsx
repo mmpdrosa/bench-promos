@@ -20,19 +20,19 @@ export default function CategoriesAdmin() {
       </Head>
       <div className="flex flex-1 max-sm:flex-col">
         <CategoriesForm targetCategory={targetCategory} />
-        <div className="flex flex-1 flex-col max-h-[calc(100vh-172px)] py-6 sm:pl-8 sm:pr-2">
+        <div className="flex max-h-[calc(100vh-172px)] flex-1 flex-col py-6 sm:pl-8 sm:pr-2">
           {targetCategory ? (
             <>
               <label>Categoria selecionada</label>
-              <div className="flex flex-col py-4 px-2 rounded-lg bg-violet-500/80 text-white mb-8 relative">
+              <div className="relative mb-8 flex flex-col rounded-lg bg-violet-500/80 px-2 py-4 text-white">
                 <button
-                  className="absolute p-1 top-2 right-2 bg-red-500 rounded-lg hover:bg-red-400"
+                  className="absolute right-2 top-2 rounded-lg bg-red-500 p-1 hover:bg-red-400"
                   onClick={() => setTargetCategory(undefined)}
                 >
                   <BsX />
                 </button>
 
-                <h1 className="text-white font-semibold">
+                <h1 className="font-semibold text-white">
                   {targetCategory?.name}
                 </h1>
               </div>
@@ -46,9 +46,9 @@ export default function CategoriesAdmin() {
                 onClick={() => {
                   setTargetCategory(category)
                 }}
-                className="relative group flex flex-col py-4 px-2 cursor-pointer rounded-lg hover:bg-violet-500/80 hover:text-white"
+                className="group relative flex cursor-pointer flex-col rounded-lg px-2 py-4 hover:bg-violet-500/80 hover:text-white"
               >
-                <h1 className="text-violet-600 group-hover:text-white font-semibold">
+                <h1 className="font-semibold text-violet-600 group-hover:text-white">
                   {category.name}
                 </h1>
               </div>

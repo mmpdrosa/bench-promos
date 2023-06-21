@@ -38,14 +38,14 @@ export function Header() {
   }
 
   return (
-    <header className="px-4 max-sm:pt-2 bg-violet-500 dark:bg-zinc-900">
-      <div className="max-w-screen-xl flex items-center justify-between mx-auto gap-x-4 max-lg:flex-wrap max-lg:justify-start">
+    <header className="bg-violet-500 px-4 dark:bg-zinc-900 max-sm:pt-2">
+      <div className="mx-auto flex max-w-screen-xl items-center justify-between gap-x-4 max-lg:flex-wrap max-lg:justify-start">
         <SidebarMenu />
 
         <Link
           href="/"
           title="Bench Promos"
-          className="relative max-sm:hidden w-60 h-28"
+          className="relative h-28 w-60 max-sm:hidden"
         >
           <Image
             className="object-contain"
@@ -59,7 +59,7 @@ export function Header() {
         <Link
           href="/"
           title="Bench Promos"
-          className="relative sm:hidden w-20 h-12"
+          className="relative h-12 w-20 sm:hidden"
         >
           <Image
             className="object-contain"
@@ -72,36 +72,36 @@ export function Header() {
 
         <form
           onSubmit={handleSubmit(handleSearch)}
-          className="w-full inline-flex justify-center lg:flex-1 max-lg:order-12 max-lg:py-4"
+          className="inline-flex w-full justify-center max-lg:order-12 max-lg:py-4 lg:flex-1"
         >
           <div
             onClick={handleSwitchSearch}
-            className="flex items-center justify-center gap-2 max-sm:gap-1 px-4 max-sm:px-2.5 rounded-l-xl bg-white dark:bg-zinc-800 dark:text-zinc-200 cursor-pointer"
+            className="flex cursor-pointer items-center justify-center gap-2 rounded-l-xl bg-white px-4 dark:bg-zinc-800 dark:text-zinc-200 max-sm:gap-1 max-sm:px-2.5"
           >
-            <span className="w-24 max-sm:w-20 text-sm max-sm:text-xs font-bold select-none">
+            <span className="w-24 select-none text-sm font-bold max-sm:w-20 max-sm:text-xs">
               {searchLocation === 'sales' ? 'Promoções' : 'Produtos'}
             </span>
 
             <HiOutlineSwitchVertical className="max-sm:text-sm" />
           </div>
 
-          <div className="py-4 max-sm:py-2.5 bg-white dark:bg-zinc-800">
-            <div className="w-px h-full bg-zinc-300 dark:bg-zinc-600"></div>
+          <div className="bg-white py-4 dark:bg-zinc-800 max-sm:py-2.5">
+            <div className="h-full w-px bg-zinc-300 dark:bg-zinc-600"></div>
           </div>
 
           <input
-            className="w-3/5 h-14 max-sm:h-10 max-lg:w-full px-4 max-sm:px-2.5 outline-none text-sm dark:bg-zinc-800 focus:outline-none dark:text-zinc-200"
+            className="h-14 w-3/5 px-4 text-sm outline-none focus:outline-none dark:bg-zinc-800 dark:text-zinc-200 max-lg:w-full max-sm:h-10 max-sm:px-2.5"
             type="search"
             placeholder="Digite sua busca..."
             {...register('q')}
           />
-          <button className="group w-14 flex items-center justify-center rounded-r-xl transition-colors bg-amber-300 hover:bg-yellow-400 focus:outline-none">
-            <HiSearch className="text-2xl max-sm:text-lg transition-colors text-zinc-600 group-hover:text-black" />
+          <button className="group flex w-14 items-center justify-center rounded-r-xl bg-amber-300 transition-colors focus:outline-none hover:bg-yellow-400">
+            <HiSearch className="text-2xl text-zinc-600 transition-colors group-hover:text-black max-sm:text-lg" />
           </button>
         </form>
 
-        <div className="lg:w-60 flex items-center justify-end gap-4 max-lg:ml-auto">
-          <div className="lg:hidden scale-75 mr-0 ml-0">
+        <div className="flex items-center justify-end gap-4 max-lg:ml-auto lg:w-60">
+          <div className="ml-0 mr-0 scale-75 lg:hidden">
             <ThemeToggleButton />
           </div>
           <Link
@@ -110,7 +110,7 @@ export function Header() {
             className="group flex items-center gap-2 p-1 text-lg text-white"
           >
             <FaBell className="text-amber-300" />
-            <span className="max-sm:hidden group-hover:underline">Alertas</span>
+            <span className="group-hover:underline max-sm:hidden">Alertas</span>
           </Link>
 
           <AuthDialogsWrapper />

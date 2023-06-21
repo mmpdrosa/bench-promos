@@ -91,7 +91,7 @@ export function SignInDialog({
 
   return (
     <>
-      <div className="relative w-60 h-28 shrink-0">
+      <div className="relative h-28 w-60 shrink-0">
         <Image
           className="object-contain"
           src="https://media.discordapp.net/attachments/826681789677436950/1097633179264876564/Logo_atualizada.png"
@@ -106,11 +106,11 @@ export function SignInDialog({
 
       <form className="w-full space-y-6" onSubmit={handleSubmit(handleSignIn)}>
         <fieldset className="flex flex-col justify-start">
-          <label className="block mb-2.5 text-base text-white" htmlFor="email">
+          <label className="mb-2.5 block text-base text-white" htmlFor="email">
             E-mail
           </label>
           <input
-            className="h-10 px-2.5 text-lg outline-none text-white border-b border-white bg-transparent"
+            className="h-10 border-b border-white bg-transparent px-2.5 text-lg text-white outline-none"
             id="email"
             {...register('email')}
           />
@@ -125,20 +125,20 @@ export function SignInDialog({
         <fieldset className="flex flex-col justify-start">
           <div className="flex justify-between">
             <label
-              className="block mb-2.5 text-base text-white"
+              className="mb-2.5 block text-base text-white"
               htmlFor="password"
             >
               Senha
             </label>
             <a
-              className="text-zinc-300 cursor-pointer hover:text-amber-300"
+              className="cursor-pointer text-zinc-300 hover:text-amber-300"
               onClick={handleRecoverPassword}
             >
               Esqueceu sua senha?
             </a>
           </div>
           <input
-            className="h-10 px-2.5 text-lg outline-none text-white border-b border-white bg-transparent"
+            className="h-10 border-b border-white bg-transparent px-2.5 text-lg text-white outline-none"
             id="password"
             type="password"
             {...register('password')}
@@ -151,10 +151,10 @@ export function SignInDialog({
             </div>
           )}
         </fieldset>
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <span className="font-bold text-red-500">{errors.root?.message}</span>
           <button
-            className="h-10 inline-flex items-center justify-center px-6 rounded-full font-medium transition-colors bg-amber-300 hover:bg-yellow-400 disabled:cursor-not-allowed"
+            className="inline-flex h-10 items-center justify-center rounded-full bg-amber-300 px-6 font-medium transition-colors disabled:cursor-not-allowed hover:bg-yellow-400"
             disabled={isSubmitting}
           >
             Entrar
@@ -164,7 +164,7 @@ export function SignInDialog({
         <div className="flex justify-center">
           <button
             type="button"
-            className="p-1 rounded-full bg-white"
+            className="rounded-full bg-white p-1"
             onClick={handleSignInWithGoogle}
           >
             <FcGoogle className="text-5xl" />
@@ -174,7 +174,7 @@ export function SignInDialog({
 
       <div className="flex justify-between pt-8">
         <button
-          className="text-white font-semibold hover:text-amber-300"
+          className="font-semibold text-white hover:text-amber-300"
           onClick={handleSignUpDialogOpen}
         >
           Não possui conta? Cadastrar

@@ -73,13 +73,13 @@ export default function CategoriesForm({
   return (
     <form
       onSubmit={handleSubmit(submit)}
-      className="sm:pr-8 py-6 flex-1 space-y-8 max-w-[810px] sm:border-r dark:border-zinc-800"
+      className="max-w-[810px] flex-1 space-y-8 py-6 dark:border-zinc-800 sm:border-r sm:pr-8"
     >
       <fieldset className="flex flex-col">
         <label>Nome *</label>
         <input
           type="text"
-          className="p-2 text-lg outline-none border border-black/20 rounded-lg focus:ring-violet-500 focus:border-violet-500 dark:bg-zinc-900 dark:border-zinc-800"
+          className="rounded-lg border border-black/20 p-2 text-lg outline-none focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-800 dark:bg-zinc-900"
           {...register('name')}
         />
         {errors.name && (
@@ -91,7 +91,7 @@ export default function CategoriesForm({
         <button
           type="submit"
           onClick={() => setSubmitOption('create')}
-          className="flex-1 px-4  mt-3 py-2.5 text-xl rounded-full text-white transition-colors bg-violet-500 hover:bg-violet-400"
+          className="mt-3 flex-1  rounded-full bg-violet-500 px-4 py-2.5 text-xl text-white transition-colors hover:bg-violet-400"
         >
           Criar
         </button>
@@ -101,13 +101,13 @@ export default function CategoriesForm({
             <button
               type="submit"
               onClick={() => setSubmitOption('edit')}
-              className="flex-1 px-4  mt-3 py-2.5 text-xl rounded-full text-white transition-colors bg-violet-500 hover:bg-violet-400"
+              className="mt-3 flex-1  rounded-full bg-violet-500 px-4 py-2.5 text-xl text-white transition-colors hover:bg-violet-400"
             >
               Editar
             </button>
             <button
               onClick={() => setSubmitOption('delete')}
-              className="flex-1 px-4  mt-3 py-2.5 text-xl rounded-full text-white transition-colors bg-red-500 hover:bg-red-400"
+              className="mt-3 flex-1  rounded-full bg-red-500 px-4 py-2.5 text-xl text-white transition-colors hover:bg-red-400"
             >
               Excluir
             </button>
@@ -115,7 +115,7 @@ export default function CategoriesForm({
         ) : null}
       </div>
 
-      <input name="retailer" className="hidden w-0 h-0" />
+      <input name="retailer" className="hidden h-0 w-0" />
     </form>
   )
 }

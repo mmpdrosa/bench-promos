@@ -12,21 +12,21 @@ const ThemeToggleButton = () => {
   if (!mounted) return null
   return (
     <button
-      className="w-12 h-6 rounded-full bg-white flex items-center dark:bg-zinc-800"
+      className="flex h-6 w-12 items-center rounded-full bg-white dark:bg-zinc-800"
       onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
       aria-label="Toggle Dark Mode"
     >
       {theme === 'light' ? (
         <div
           id="switch-toggle"
-          className="w-8 h-8 rounded-full bg-amber-300 p-1 transition"
+          className="h-8 w-8 rounded-full bg-amber-300 p-1 transition"
         >
           <TbSunHigh size={24} />
         </div>
       ) : (
         <div
           id="switch-toggle"
-          className="w-8 h-8 rounded-full bg-amber-300 p-1 translate-x-5 transition"
+          className="h-8 w-8 translate-x-5 rounded-full bg-amber-300 p-1 transition"
         >
           <FaMoon size={24} />
         </div>

@@ -127,14 +127,14 @@ export default function ProductForm({ targetProduct }: Props) {
 
   return (
     <form
-      className="sm:pr-8 py-6 flex-1 space-y-8 max-w-[810px] sm:border-r dark:border-zinc-800"
+      className="max-w-[810px] flex-1 space-y-8 py-6 dark:border-zinc-800 sm:border-r sm:pr-8"
       onSubmit={handleSubmit(submit)}
     >
       <fieldset className="flex flex-col">
         <label>Nome do produto *</label>
         <input
           type="text"
-          className="p-2 text-lg outline-none border border-black/20 rounded-lg focus:ring-violet-500 focus:border-violet-500 dark:bg-zinc-900 dark:border-zinc-800"
+          className="rounded-lg border border-black/20 p-2 text-lg outline-none focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-800 dark:bg-zinc-900"
           {...register('title')}
         />
         {errors.title && (
@@ -146,7 +146,7 @@ export default function ProductForm({ targetProduct }: Props) {
         <label>Imagem *</label>
         <input
           type="text"
-          className="p-2 text-lg outline-none border border-black/20 rounded-lg focus:ring-violet-500 focus:border-violet-500 dark:bg-zinc-900 dark:border-zinc-800"
+          className="rounded-lg border border-black/20 p-2 text-lg outline-none focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-800 dark:bg-zinc-900"
           {...register('image_url')}
         />
         {errors.image_url && (
@@ -157,8 +157,9 @@ export default function ProductForm({ targetProduct }: Props) {
       <fieldset className="flex flex-col justify-between">
         <label>Categoria *</label>
         <select
-          className="p-2 h-12 text-lg outline-none border border-black/20 rounded-lg focus:ring-violet-500 focus:border-violet-500 dark:bg-zinc-900 dark:border-zinc-800"
+          className="h-12 rounded-lg border border-black/20 p-2 text-lg outline-none focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-800 dark:bg-zinc-900"
           {...register('category_id')}
+          onChange={() => setValue('subcategory_id', '')}
         >
           <option value=""></option>
           {categories.map((category) => {
@@ -176,7 +177,7 @@ export default function ProductForm({ targetProduct }: Props) {
       <fieldset className="flex flex-col justify-between">
         <label>Subcategoria *</label>
         <select
-          className="p-2 h-12 text-lg outline-none border border-black/20 rounded-lg focus:ring-violet-500 focus:border-violet-500 dark:bg-zinc-900 dark:border-zinc-800"
+          className="h-12 rounded-lg border border-black/20 p-2 text-lg outline-none focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-800 dark:bg-zinc-900"
           {...register('subcategory_id')}
         >
           <option value=""></option>
@@ -216,7 +217,7 @@ export default function ProductForm({ targetProduct }: Props) {
         <label>Link do review (opcional)</label>
         <input
           type="text"
-          className="p-2 text-lg outline-none border border-black/20 rounded-lg focus:ring-violet-500 focus:border-violet-500 dark:bg-zinc-900 dark:border-zinc-800"
+          className="rounded-lg border border-black/20 p-2 text-lg outline-none focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-800 dark:bg-zinc-900"
           {...register('review_url')}
         />
         {errors.review_url && (
@@ -228,7 +229,7 @@ export default function ProductForm({ targetProduct }: Props) {
         <label>Recomendação (opcional)</label>
         <input
           type="checkbox"
-          className="w-6 h-6 cursor-pointer"
+          className="h-6 w-6 cursor-pointer"
           {...register('recommended')}
         />
         {errors.recommended && (
@@ -243,7 +244,7 @@ export default function ProductForm({ targetProduct }: Props) {
             <button
               type="button"
               onClick={() => specsAppend({ title: '', value: '' })}
-              className="w-6 h-6 bg-violet-500 cursor-pointer hover:bg-violet-400 flex items-center justify-center rounded-lg"
+              className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-lg bg-violet-500 hover:bg-violet-400"
             >
               <BsPlus />
             </button>
@@ -252,7 +253,7 @@ export default function ProductForm({ targetProduct }: Props) {
               onClick={() => {
                 if (specsFields.length > 1) specsRemove(-1)
               }}
-              className="w-6 h-6 bg-red-500 cursor-pointer hover:bg-red-400 flex items-center justify-center rounded-lg"
+              className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-lg bg-red-500 hover:bg-red-400"
             >
               <FaMinus size={10} />
             </button>
@@ -267,12 +268,12 @@ export default function ProductForm({ targetProduct }: Props) {
             <div key={spec.id} className="grid grid-cols-2 gap-2">
               <input
                 type="text"
-                className="p-2 text-sm outline-none border border-black/20 rounded-lg focus:ring-violet-500 focus:border-violet-500 dark:bg-zinc-900 dark:border-zinc-800"
+                className="rounded-lg border border-black/20 p-2 text-sm outline-none focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-800 dark:bg-zinc-900"
                 {...register(`specs.${index}.title`)}
               />
               <input
                 type="text"
-                className="p-2 py-3 text-sm outline-none border border-black/20 rounded-lg focus:ring-violet-500 focus:border-violet-500 dark:bg-zinc-900 dark:border-zinc-800"
+                className="rounded-lg border border-black/20 p-2 py-3 text-sm outline-none focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-800 dark:bg-zinc-900"
                 {...register(`specs.${index}.value`)}
               />
               {errors.specs?.[index]?.title && (
@@ -296,7 +297,7 @@ export default function ProductForm({ targetProduct }: Props) {
         <button
           type="submit"
           onClick={() => setSubmitOption('create')}
-          className="flex-1 px-4  mt-3 py-2.5 text-xl rounded-full text-white transition-colors bg-violet-500 hover:bg-violet-400"
+          className="mt-3 flex-1  rounded-full bg-violet-500 px-4 py-2.5 text-xl text-white transition-colors hover:bg-violet-400"
         >
           Criar
         </button>
@@ -306,21 +307,21 @@ export default function ProductForm({ targetProduct }: Props) {
             <button
               type="submit"
               onClick={() => setSubmitOption('edit')}
-              className="flex-1 px-4  mt-3 py-2.5 text-xl rounded-full text-white transition-colors bg-violet-500 hover:bg-violet-400"
+              className="mt-3 flex-1  rounded-full bg-violet-500 px-4 py-2.5 text-xl text-white transition-colors hover:bg-violet-400"
             >
               Editar
             </button>
             <button
               onClick={() => setSubmitOption('delete')}
               type="submit"
-              className="flex-1 px-4  mt-3 py-2.5 text-xl rounded-full text-white transition-colors bg-red-500 hover:bg-red-400"
+              className="mt-3 flex-1  rounded-full bg-red-500 px-4 py-2.5 text-xl text-white transition-colors hover:bg-red-400"
             >
               Excluir
             </button>
           </>
         ) : null}
       </div>
-      <input className="hidden w-0 h-0" {...register('productId')} />
+      <input className="hidden h-0 w-0" {...register('productId')} />
     </form>
   )
 }

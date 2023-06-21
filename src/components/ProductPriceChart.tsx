@@ -143,42 +143,42 @@ export function ProductPriceChart({
         </AreaChart>
       </ResponsiveContainer>
 
-      <div className="whitespace-nowrap mt-6 overflow-x-auto">
+      <div className="mt-6 overflow-x-auto whitespace-nowrap">
         <button
-          className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors border-zinc-300 ${
+          className={`mr-2 h-8 rounded-full border border-zinc-300 px-4 py-1 text-sm font-medium transition-colors ${
             period === '30d'
-              ? 'bg-violet-500 text-white border-opacity-0 hover:bg-violet-400'
-              : 'hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:border-zinc-700'
+              ? 'border-opacity-0 bg-violet-500 text-white hover:bg-violet-400'
+              : 'hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700'
           }`}
           onClick={() => setPeriod('30d')}
         >
           <span className="mx-1">30 dias</span>
         </button>
         <button
-          className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors border-zinc-300 ${
+          className={`mr-2 h-8 rounded-full border border-zinc-300 px-4 py-1 text-sm font-medium transition-colors ${
             period === '3m'
-              ? 'bg-violet-500 text-white border-opacity-0 hover:bg-violet-400'
-              : 'hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:border-zinc-700'
+              ? 'border-opacity-0 bg-violet-500 text-white hover:bg-violet-400'
+              : 'hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700'
           }`}
           onClick={() => setPeriod('3m')}
         >
           <span className="mx-1">3 meses</span>
         </button>
         <button
-          className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors border-zinc-300 ${
+          className={`mr-2 h-8 rounded-full border border-zinc-300 px-4 py-1 text-sm font-medium transition-colors ${
             period === '6m'
-              ? 'bg-violet-500 text-white border-opacity-0 hover:bg-violet-400'
-              : 'hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:border-zinc-700'
+              ? 'border-opacity-0 bg-violet-500 text-white hover:bg-violet-400'
+              : 'hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700'
           }`}
           onClick={() => setPeriod('6m')}
         >
           <span className="mx-1">6 meses</span>
         </button>
         <button
-          className={`h-8 py-1 px-4 mr-2 border rounded-full text-sm font-medium transition-colors border-zinc-300 ${
+          className={`mr-2 h-8 rounded-full border border-zinc-300 px-4 py-1 text-sm font-medium transition-colors ${
             period === '1y'
-              ? 'bg-violet-500 text-white border-opacity-0 hover:bg-violet-400'
-              : 'hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:border-zinc-700'
+              ? 'border-opacity-0 bg-violet-500 text-white hover:bg-violet-400'
+              : 'hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700'
           }`}
           onClick={() => setPeriod('1y')}
         >
@@ -198,7 +198,7 @@ interface CustomTooltipProps {
 function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
   if (active && payload && payload.length) {
     return (
-      <div className="p-4 rounded-lg border border-zinc-300 bg-white dark:bg-zinc-900 dark:border-zinc-700">
+      <div className="rounded-lg border border-zinc-300 bg-white p-4 dark:border-zinc-700 dark:bg-zinc-900">
         <h4 className="text-xl font-bold">
           {priceFormatter.format(payload[0].value / 100)}
         </h4>

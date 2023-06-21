@@ -27,7 +27,7 @@ const Tooltip = ({ triggerElement, content }: TooltipProps) => {
           )}
         >
           <TooltipPrimitive.Arrow className="fill-current text-black" />
-          <span className="block text-xs leading-none whitespace-pre-line text-gray-700">
+          <span className="block whitespace-pre-line text-xs leading-none text-gray-700">
             {content}
           </span>
         </TooltipPrimitive.Content>

@@ -9,13 +9,13 @@ const CouponPopover = ({ comments }: CouponTooltipProps) => {
     <>
       <Popover.Root>
         <Popover.Trigger asChild>
-          <button className=" h-8 w-8 top-5 right-10 absolute text-amber-300 hover:text-white transition-colors">
+          <button className=" absolute right-10 top-5 h-8 w-8 text-amber-300 transition-colors hover:text-white">
             <FaInfoCircle size={30} />
           </button>
         </Popover.Trigger>
         <Popover.Portal>
           <Popover.Content
-            className="bg-gradient-to-br from-zinc-800 to-zinc-600 rounded-lg text-zinc-50 font-semibold p-4 max-w-xs"
+            className="max-w-xs rounded-lg bg-gradient-to-br from-zinc-800 to-zinc-600 p-4 font-semibold text-zinc-50"
             sideOffset={5}
           >
             {comments}

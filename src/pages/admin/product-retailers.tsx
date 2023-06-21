@@ -72,9 +72,9 @@ export default function ProductRetailersPage({
         />
 
         {switchProductsOrRetailers === 'products' ? (
-          <div className="flex flex-1 flex-col max-h-[calc(100vh-172px)] py-6 sm:pl-8 sm:pr-2">
-            <div className="flex justify-center items-center gap-6 pb-4">
-              <button className="text-violet-500 border-b-2 border-violet-500 font-semibold">
+          <div className="flex max-h-[calc(100vh-172px)] flex-1 flex-col py-6 sm:pl-8 sm:pr-2">
+            <div className="flex items-center justify-center gap-6 pb-4">
+              <button className="border-b-2 border-violet-500 font-semibold text-violet-500">
                 Produtos
               </button>
               <button
@@ -91,24 +91,24 @@ export default function ProductRetailersPage({
             />
           </div>
         ) : (
-          <div className="flex flex-1 flex-col max-h-[calc(100vh-172px)] py-6 sm:pl-8 sm:pr-2">
-            <div className="flex justify-center items-center gap-6 pb-4">
+          <div className="flex max-h-[calc(100vh-172px)] flex-1 flex-col py-6 sm:pl-8 sm:pr-2">
+            <div className="flex items-center justify-center gap-6 pb-4">
               <button
                 className="hover:text-violet-500"
                 onClick={() => setSwitchProductsOrRetailers('products')}
               >
                 Produtos
               </button>
-              <button className="text-violet-500 border-b-2 border-violet-500 font-semibold">
+              <button className="border-b-2 border-violet-500 font-semibold text-violet-500">
                 Anúncios
               </button>
             </div>
             {targetProductRetailer && targetProduct && (
               <>
                 <label>Anúncio selecionado</label>
-                <div className="flex items-start flex-col py-4 px-2 rounded-lg bg-violet-500/80 text-white mb-8 relative">
+                <div className="relative mb-8 flex flex-col items-start rounded-lg bg-violet-500/80 px-2 py-4 text-white">
                   <button
-                    className="absolute p-1 top-2 right-2 bg-red-500 rounded-lg hover:bg-red-400"
+                    className="absolute right-2 top-2 rounded-lg bg-red-500 p-1 hover:bg-red-400"
                     onClick={() => setTargetProductRetailer(undefined)}
                   >
                     <BsX />
@@ -136,7 +136,7 @@ export default function ProductRetailersPage({
                     onClick={() => {
                       setTargetProductRetailer(retailer)
                     }}
-                    className="relative group flex flex-col items-start justify-start py-4 px-2 cursor-pointer rounded-lg hover:bg-violet-500/80 hover:text-white"
+                    className="group relative flex cursor-pointer flex-col items-start justify-start rounded-lg px-2 py-4 hover:bg-violet-500/80 hover:text-white"
                   >
                     <h1 className="font-semibold text-violet-500 group-hover:text-white">
                       {retailer.retailer.name}
