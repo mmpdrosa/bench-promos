@@ -33,6 +33,7 @@ interface Sale {
   comments: string
   coupon: string
   created_at: Date
+  label: string
 }
 
 export default function ProductsAdmin({

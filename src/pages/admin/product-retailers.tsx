@@ -30,6 +30,7 @@ interface Product {
   review_url: string
   specs: { title: string; value: string }[]
   reference_price: number
+  description: string
 }
 
 export default function ProductRetailersPage({
