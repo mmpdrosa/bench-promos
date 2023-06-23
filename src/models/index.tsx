@@ -34,6 +34,7 @@ export type Product = {
   coupon?: Coupon
   specs?: { title: string; value: string }[]
   review_url?: string
+  description?: string
   cashback?: {
     name: string
     affiliatedLink: string
@@ -83,4 +84,5 @@ export type Sale = {
   coupon?: string
   reactions?: { [key: string]: number }
   product_id?: string
+  label?: string
 }

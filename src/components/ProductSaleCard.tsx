@@ -23,6 +23,7 @@ interface ProductSaleCardProps {
   coupon?: string
   reactions?: { [key: string]: number }
   product_id?: string
+  label?: string
 }
 
 export function ProductSaleCard({
@@ -38,6 +39,7 @@ export function ProductSaleCard({
   product_id = '',
   reactions = {},
   specs = '',
+  label,
 }: ProductSaleCardProps) {
   const [openComments, setOpenComments] = useState(false)
 
@@ -57,8 +59,13 @@ export function ProductSaleCard({
       id={id}
       className="inline-flex w-[408px] max-w-[408px] flex-col overflow-hidden rounded-lg border border-zinc-300 transition duration-300 ease-in-out hover:shadow-xl dark:border-zinc-700 dark:bg-zinc-800 dark:transition-none dark:hover:bg-zinc-700"
     >
-      <div className="flex items-center justify-between px-4 py-2 text-sm dark:text-zinc-300">
+      <div className="relative flex items-center justify-between px-4 py-2 text-sm dark:text-zinc-300">
         <span className="text-sm tracking-wider">{category}</span>
+        {label && (
+          <span className="border-0.5 absolute right-1/2 translate-x-1/2 rounded-full bg-amber-200 px-4 py-0.5 font-semibold text-zinc-900">
+            {label}
+          </span>
+        )}
         <span className="text-xs">{dayjs(created_at).fromNow()}</span>
       </div>
 

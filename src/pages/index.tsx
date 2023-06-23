@@ -98,6 +98,7 @@ export default function Home({
                 reactions={sale.reactions}
                 product_id={sale.product_id}
                 comments={sale.comments}
+                label={sale.label}
               />
             ))}
         </div>

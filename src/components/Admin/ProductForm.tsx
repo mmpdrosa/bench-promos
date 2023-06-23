@@ -19,6 +19,7 @@ interface Product {
   review_url: string
   specs: { title: string; value: string }[]
   reference_price: number
+  description: string
 }
 
 interface Props {
@@ -42,6 +43,7 @@ const productSchema = z.object({
   review_url: z.string().optional(),
   reference_price: z.number().nonnegative().optional(),
   recommended: z.boolean(),
+  description: z.string().optional(),
 })
 
 type ProductData = z.infer<typeof productSchema>
@@ -83,6 +85,7 @@ export default function ProductForm({ targetProduct }: Props) {
     setValue('review_url', targetProduct?.review_url || '')
     setValue('recommended', targetProduct?.recommended.valueOf() || false)
     setValue('specs', targetProduct?.specs || [{ title: '', value: '' }])
+    setValue('description', targetProduct?.description || '')
   }, [targetProduct, setValue])
 
   async function submit(data: ProductData) {
@@ -290,6 +293,17 @@ export default function ProductForm({ targetProduct }: Props) {
           ))}
         {errors.specs && (
           <span className="text-red-500">{errors.specs.message}</span>
+        )}
+      </fieldset>
+
+      <fieldset className="flex flex-col">
+        <label>Descrição (opcional)</label>
+        <textarea
+          className="h-36 rounded-lg border border-black/20 p-2 text-lg outline-none focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-800 dark:bg-zinc-900"
+          {...register('description')}
+        />
+        {errors.description && (
+          <span className="text-red-500">{errors.description.message}</span>
         )}
       </fieldset>
 

@@ -11,6 +11,7 @@ import {
   FaPlus,
   FaRegListAlt,
   FaVideo,
+  FaWhmcs,
 } from 'react-icons/fa'
 import { TbDiscount2 } from 'react-icons/tb'
 import { NumericFormat } from 'react-number-format'
@@ -186,8 +187,17 @@ export default function ProductPage({
                   href="#specs"
                   className="flex items-center gap-2.5 px-4 py-2 hover:underline"
                 >
-                  <FaRegListAlt className="text-amber-400" />
+                  <FaWhmcs className="text-amber-400" />
                   Especificações
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#description"
+                  className="flex items-center gap-2.5 px-4 py-2 hover:underline"
+                >
+                  <FaRegListAlt className="text-amber-400" />
+                  Descrição
                 </a>
               </li>
               <li>
@@ -357,6 +367,22 @@ export default function ProductPage({
                     </li>
                   ))}
                 </ul>
+              </div>
+            </div>
+          )}
+
+          {product.description && (
+            <div id="description" className="space-y-10">
+              <div className="w-max">
+                <h2 className="text-xl font-extrabold text-violet-600">
+                  DESCRIÇÃO
+                </h2>
+                <div className="h-2 w-3/4 rounded-full bg-violet-600"></div>
+              </div>
+              <div className="overflow-hidden rounded-xl border border-zinc-300 dark:border-zinc-700">
+                <p className="px-8 py-10 text-lg font-semibold">
+                  {product.description}
+                </p>
               </div>
             </div>
           )}

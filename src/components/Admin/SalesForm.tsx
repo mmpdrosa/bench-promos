@@ -21,6 +21,7 @@ interface Sale {
   comments: string
   coupon: string
   product_id: string
+  label: string
 }
 
 interface Product {
@@ -63,11 +64,13 @@ const saleSchema = z.object({
     .optional(),
   /* eslint-enable */
   coupon: z.string().optional(),
+  label: z.string().optional(),
 })
 
 type SaleData = z.infer<typeof saleSchema>
 
 export default function SalesForm({ targetSale, targetProduct }: Props) {
+  const labelOptions = ['', 'LANÇAMENTO', 'PREÇÃO', 'BAIXOU', 'PARCELADO']
   const { categories } = useCategory()
   const [submitOption, setSubmitOption] = useState<
     'create' | 'edit' | 'delete'
@@ -94,6 +97,7 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
     setValue('coupon', targetSale?.coupon || '')
     setValue('comments', targetSale?.comments || '')
     setValue('specs', targetSale?.specs || '')
+    setValue('label', targetSale?.label || '')
   }, [targetSale, setValue])
 
   function telegramMessageFoward(saleData: SaleData) {
@@ -286,9 +290,27 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
       </fieldset>
 
       <fieldset className="flex flex-col">
+        <label>Destaque</label>
+        <select
+          className="rounded-lg border border-black/20 p-2 text-lg outline-none focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-800 dark:bg-zinc-900"
+          {...register('label')}
+        >
+          {labelOptions.map((label, index) => (
+            <option key={index} value={label}>
+              {label}
+            </option>
+          ))}
+        </select>
+
+        {errors.label && (
+          <span className="text-red-500">{errors.label.message}</span>
+        )}
+      </fieldset>
+
+      <fieldset className="flex flex-col">
         <label>Comentários</label>
         <textarea
-          className="rounded-lg border border-black/20 p-2 text-lg outline-none focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-800 dark:bg-zinc-900"
+          className="h-36 rounded-lg border border-black/20 p-2 text-lg outline-none focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-800 dark:bg-zinc-900"
           {...register('comments')}
         />
         {errors.comments && (
