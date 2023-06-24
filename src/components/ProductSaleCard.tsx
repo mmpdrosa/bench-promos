@@ -62,7 +62,7 @@ export function ProductSaleCard({
       <div className="relative flex items-center justify-between px-4 py-2 text-sm dark:text-zinc-300">
         <span className="text-sm tracking-wider">{category}</span>
         {label && (
-          <span className="border-0.5 absolute right-1/2 translate-x-1/2 rounded-full bg-amber-200 px-4 py-0.5 font-semibold text-zinc-900">
+          <span className="border-0.5 absolute right-1/2 translate-x-1/2 rounded-full bg-amber-200 px-4 py-0.5 font-semibold text-zinc-900 max-sm:px-2 max-sm:text-xs">
             {label}
           </span>
         )}

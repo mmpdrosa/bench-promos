@@ -6,26 +6,25 @@ import { HiCheckBadge } from 'react-icons/hi2'
 
 import { useCategory } from '@/contexts/CategoryContext'
 import { TbDiscount2 } from 'react-icons/tb'
-import ThemeToggleButton from '../ThemeToggle'
 
 export function Menu() {
   const { categories } = useCategory()
 
   return (
     <div className="mx-auto flex max-w-screen-xl items-center justify-between pb-2 max-lg:justify-center">
-      <div className="w-64 max-lg:hidden"></div>
+      <div className="w-40 max-lg:hidden"></div>
       <NavigationMenu.Root className="relative z-[2] flex justify-center max-sm:hidden">
         <NavigationMenu.List className="flex justify-center">
           <NavigationMenu.Item>
             <NavigationMenu.Trigger
               title="Produtos"
-              className="group flex select-none items-center justify-between gap-3 px-3 py-2 text-xl font-semibold text-white rdx-state-open:bg-white rdx-state-open:text-black dark:text-zinc-200 
+              className="group flex select-none items-center justify-between gap-3 px-3 py-2 text-lg font-semibold text-white rdx-state-open:bg-white rdx-state-open:text-black dark:text-zinc-200 
               dark:rdx-state-open:bg-zinc-800 dark:rdx-state-open:text-white "
             >
               <FaBars className="text-amber-300 group-rdx-state-open:text-black dark:group-rdx-state-open:text-amber-300/75" />
               Produtos
             </NavigationMenu.Trigger>
-            <NavigationMenu.Content className="animate-slide-right-fade bg-white p-4 shadow-xl dark:bg-zinc-800 dark:text-zinc-300">
+            <NavigationMenu.Content className=" bg-white p-4 shadow-xl dark:bg-zinc-800 dark:text-zinc-300">
               <NavigationMenu.Sub>
                 <NavigationMenu.List className="flex flex-col gap-4">
                   {categories?.map((category) => (
@@ -73,7 +72,7 @@ export function Menu() {
             <Link
               href="/"
               title="Promoções"
-              className="flex cursor-pointer select-none items-center gap-2 px-3 py-2 text-xl font-semibold text-white hover:underline dark:text-zinc-200"
+              className="flex cursor-pointer select-none items-center gap-2 px-3 py-2 text-lg font-semibold text-white hover:underline dark:text-zinc-200"
             >
               <FaDollarSign className="text-amber-300" />
               Promoções
@@ -84,7 +83,7 @@ export function Menu() {
             <Link
               href="/cupons"
               title="Cupons"
-              className="flex cursor-pointer select-none items-center gap-2 px-3 py-2 text-xl font-semibold text-white hover:underline dark:text-zinc-200"
+              className="flex cursor-pointer select-none items-center gap-2 px-3 py-2 text-lg font-semibold text-white hover:underline dark:text-zinc-200"
             >
               <TbDiscount2 className="text-2xl text-amber-300" />
               Cupons
@@ -95,7 +94,7 @@ export function Menu() {
             <Link
               href="/recomendados"
               title="Recomendados"
-              className="flex cursor-pointer select-none items-center gap-2 px-3 py-2 text-xl font-semibold text-white hover:underline dark:text-zinc-200 max-md:hidden"
+              className="flex cursor-pointer select-none items-center gap-2 px-3 py-2 text-lg font-semibold text-white hover:underline dark:text-zinc-200 max-md:hidden"
             >
               <HiCheckBadge className="text-2xl text-amber-300" />
               Recomendados
@@ -103,9 +102,7 @@ export function Menu() {
           </NavigationMenu.Item>
         </NavigationMenu.List>
       </NavigationMenu.Root>
-      <div className="px-2 max-lg:hidden">
-        <ThemeToggleButton />
-      </div>
+
       <div className="flex flex-col">
         <div className="flex items-center gap-1 max-lg:hidden">
           <h1 className="text-lg font-semibold text-white dark:text-zinc-200">
