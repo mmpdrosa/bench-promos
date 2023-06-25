@@ -1,14 +1,30 @@
 import * as NavigationMenu from '@radix-ui/react-navigation-menu'
 import Link from 'next/link'
 import { AiOutlineCaretRight } from 'react-icons/ai'
-import { FaBars, FaDiscord, FaDollarSign, FaTelegram } from 'react-icons/fa'
-import { HiCheckBadge } from 'react-icons/hi2'
+import {
+  FaBars,
+  FaDiscord,
+  FaLaptop,
+  FaTelegram,
+  FaDesktop,
+  FaHeadphones,
+} from 'react-icons/fa'
 
 import { useCategory } from '@/contexts/CategoryContext'
-import { TbDiscount2 } from 'react-icons/tb'
-
 export function Menu() {
   const { categories } = useCategory()
+
+  const notebooksCategory = categories.find(
+    (category) => category.name === 'Notebooks',
+  )
+
+  const setupCategory = categories.find(
+    (category) => category.name === 'Periféricos',
+  )
+
+  const desktopCategory = categories.find(
+    (category) => category.name === 'Desktop',
+  )
 
   return (
     <div className="mx-auto flex max-w-screen-xl items-center justify-between pb-2 max-lg:justify-center">
@@ -22,7 +38,7 @@ export function Menu() {
               dark:rdx-state-open:bg-zinc-800 dark:rdx-state-open:text-white "
             >
               <FaBars className="text-amber-300 group-rdx-state-open:text-black dark:group-rdx-state-open:text-amber-300/75" />
-              Produtos
+              Categorias
             </NavigationMenu.Trigger>
             <NavigationMenu.Content className=" bg-white p-4 shadow-xl dark:bg-zinc-800 dark:text-zinc-300">
               <NavigationMenu.Sub>
@@ -31,11 +47,11 @@ export function Menu() {
                     <NavigationMenu.Item key={category.id}>
                       <Link href={`/${category.id}`} passHref>
                         <NavigationMenu.Trigger
-                          className="group flex w-full items-center justify-between gap-2 text-sm transition-colors rdx-state-open:text-violet-500"
+                          className="group flex w-full items-center justify-between gap-2 text-sm transition-colors hover:text-violet-500"
                           title={category.name}
                         >
                           {category.name}
-                          <AiOutlineCaretRight className="text-sm text-white group-rdx-state-open:text-black dark:text-zinc-400 dark:group-rdx-state-open:text-violet-500" />
+                          <AiOutlineCaretRight className="text-sm text-white group-hover:text-black dark:text-zinc-400 dark:group-hover:text-violet-500" />
                         </NavigationMenu.Trigger>
                       </Link>
                       <NavigationMenu.Content className="min-w-[296px] px-4 py-2 h-rdx-navigation-menu-viewport">
@@ -55,6 +71,33 @@ export function Menu() {
                       </NavigationMenu.Content>
                     </NavigationMenu.Item>
                   ))}
+                  <NavigationMenu.Item>
+                    <Link
+                      href="/"
+                      title="Promoções"
+                      className="text-sm font-bold hover:text-violet-500"
+                    >
+                      Promoções
+                    </Link>
+                  </NavigationMenu.Item>
+                  <NavigationMenu.Item>
+                    <Link
+                      href="/cupons"
+                      title="Cupons"
+                      className="text-sm font-bold hover:text-violet-500"
+                    >
+                      Cupons
+                    </Link>
+                  </NavigationMenu.Item>
+                  <NavigationMenu.Item>
+                    <Link
+                      href="/recomendados"
+                      title="Recomendados"
+                      className="text-sm font-bold hover:text-violet-500"
+                    >
+                      Recomendados
+                    </Link>
+                  </NavigationMenu.Item>
                 </NavigationMenu.List>
 
                 <div className="absolute left-full top-0 h-full min-w-max rounded-r border border-l border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-800">
@@ -70,34 +113,34 @@ export function Menu() {
 
           <NavigationMenu.Item>
             <Link
-              href="/"
-              title="Promoções"
+              href={`/${notebooksCategory?.id}`}
+              title="Notebooks"
               className="flex cursor-pointer select-none items-center gap-2 px-3 py-2 text-lg font-semibold text-white hover:underline dark:text-zinc-200"
             >
-              <FaDollarSign className="text-amber-300" />
-              Promoções
+              <FaLaptop className="text-lg text-amber-300" />
+              Notebooks
             </Link>
           </NavigationMenu.Item>
 
           <NavigationMenu.Item>
             <Link
-              href="/cupons"
-              title="Cupons"
+              href={`/${desktopCategory?.id}`}
+              title="Desktop"
               className="flex cursor-pointer select-none items-center gap-2 px-3 py-2 text-lg font-semibold text-white hover:underline dark:text-zinc-200"
             >
-              <TbDiscount2 className="text-2xl text-amber-300" />
-              Cupons
+              <FaDesktop className="text-lg  text-amber-300" />
+              Desktop
             </Link>
           </NavigationMenu.Item>
 
           <NavigationMenu.Item>
             <Link
-              href="/recomendados"
-              title="Recomendados"
-              className="flex cursor-pointer select-none items-center gap-2 px-3 py-2 text-lg font-semibold text-white hover:underline dark:text-zinc-200 max-md:hidden"
+              href={`/${setupCategory?.id}`}
+              title="Periféricos"
+              className="flex cursor-pointer select-none items-center gap-2 px-3 py-2 text-lg font-semibold text-white hover:underline dark:text-zinc-200"
             >
-              <HiCheckBadge className="text-2xl text-amber-300" />
-              Recomendados
+              <FaHeadphones className="text-lg text-amber-300" />
+              Periféricos
             </Link>
           </NavigationMenu.Item>
         </NavigationMenu.List>

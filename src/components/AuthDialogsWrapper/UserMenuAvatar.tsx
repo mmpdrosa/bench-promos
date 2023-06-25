@@ -103,7 +103,7 @@ export function UserMenuAvatar() {
             <FaSignOutAlt />
           </DropdownMenu.Item>
 
-          <DropdownMenu.Arrow className="fill-white" />
+          <DropdownMenu.Arrow className="fill-white dark:fill-zinc-800" />
         </DropdownMenu.Content>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>

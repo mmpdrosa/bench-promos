@@ -4,14 +4,26 @@ import ReactPaginate from 'react-paginate'
 
 import { Product } from '@/models'
 import { ProductCard } from './ProductCard'
+import Link from 'next/link'
+
+interface Subcategory {
+  id: string
+  name: string
+}
 
 interface ProductListProps {
   products: Product[]
+  subcategories?: Subcategory[]
+  categoryId?: string
 }
 
 const ITEMS_PER_PAGE = 12
 
-export function ProductList({ products }: ProductListProps) {
+export function ProductList({
+  products,
+  subcategories,
+  categoryId,
+}: ProductListProps) {
   const [sortOrder, setSortOrder] = useState('default')
   const [productOffset, setProductOffset] = useState(0)
 
@@ -46,6 +58,24 @@ export function ProductList({ products }: ProductListProps) {
 
   return (
     <>
+      {subcategories && subcategories.length > 0 && (
+        <div className="space-y-2">
+          {subcategories.map((subcategory) => (
+            <button
+              key={subcategory.id}
+              className="mr-2 h-8 rounded-full border border-zinc-300  transition-colors hover:bg-violet-500 hover:text-white dark:border-zinc-700"
+            >
+              <Link
+                className="px-4 py-1 text-sm font-medium"
+                href={`${categoryId}/${subcategory.id}`}
+              >
+                <span className="mx-1">{subcategory.name}</span>
+              </Link>
+            </button>
+          ))}
+        </div>
+      )}
+
       <div id="products" className="flex items-center justify-between">
         <span className="text-xs">{products.length} resultados</span>
 

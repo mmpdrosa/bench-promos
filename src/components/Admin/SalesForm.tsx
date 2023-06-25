@@ -101,9 +101,11 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
   }, [targetSale, setValue])
 
   function telegramMessageFoward(saleData: SaleData) {
-    const message = `🔥 ${saleData.title} - ${priceFormatter.format(
-      saleData.price / 100,
-    )} 🔥\n ${saleData.specs && `\n🔴 ${saleData.specs} 🔴\n`} ${
+    const message = `${saleData.label && `⭐️ ${saleData.label}! ⭐️\n\n`}🔥 ${
+      saleData.title
+    } - ${priceFormatter.format(saleData.price / 100)} 🔥\n ${
+      saleData.specs && `\n🔴 ${saleData.specs} 🔴\n`
+    } ${
       saleData.coupon && `\n🎟 Cupom: ${saleData.coupon}`
     } \n💸 ${priceFormatter.format(saleData.price / 100)}\n  \n🔗 ${
       saleData.html_url
