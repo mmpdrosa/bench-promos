@@ -66,7 +66,9 @@ export function ProductSaleCard({
             {label}
           </span>
         )}
-        <span className="text-[11px]">{dayjs(created_at).fromNow()}</span>
+        <span className="text-xs max-sm:text-[11px]">
+          {dayjs(created_at).fromNow()}
+        </span>
       </div>
 
       <div className="inline-flex w-full flex-1 flex-col p-4">
