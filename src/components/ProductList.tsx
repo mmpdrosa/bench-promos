@@ -59,11 +59,11 @@ export function ProductList({
   return (
     <>
       {subcategories && subcategories.length > 0 && (
-        <div className="space-y-2">
+        <div className="max-sm:flex max-sm:overflow-x-auto sm:space-y-2">
           {subcategories.map((subcategory) => (
             <button
               key={subcategory.id}
-              className="mr-2 h-8 rounded-full border border-zinc-300  transition-colors hover:bg-violet-500 hover:text-white dark:border-zinc-700"
+              className="mr-2 h-8 rounded-full border border-zinc-300 transition-colors  hover:bg-violet-500 hover:text-white dark:border-zinc-700 max-sm:min-w-fit"
             >
               <Link
                 className="px-4 py-1 text-sm font-medium"
