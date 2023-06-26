@@ -62,11 +62,11 @@ export function ProductSaleCard({
       <div className="relative flex items-center justify-between px-4 py-2 text-sm dark:text-zinc-300">
         <span className="text-sm tracking-wider">{category}</span>
         {label && (
-          <span className="border-0.5 absolute right-1/2 translate-x-1/2 rounded-full bg-amber-200 px-4 py-0.5 font-semibold text-zinc-900 max-sm:px-2 max-sm:text-xs">
+          <span className="border-0.5 absolute right-1/2 translate-x-1/2 rounded bg-amber-200 px-2 py-0.5 text-xs font-semibold text-zinc-900 max-sm:px-0.5">
             {label}
           </span>
         )}
-        <span className="text-xs">{dayjs(created_at).fromNow()}</span>
+        <span className="text-[11px]">{dayjs(created_at).fromNow()}</span>
       </div>
 
       <div className="inline-flex w-full flex-1 flex-col p-4">
