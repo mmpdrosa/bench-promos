@@ -162,7 +162,6 @@ export default function ProductForm({ targetProduct }: Props) {
         <select
           className="h-12 rounded-lg border border-black/20 p-2 text-lg outline-none focus:border-violet-500 focus:ring-violet-500 dark:border-zinc-800 dark:bg-zinc-900"
           {...register('category_id')}
-          onChange={() => setValue('subcategory_id', '')}
         >
           <option value=""></option>
           {categories.map((category) => {
