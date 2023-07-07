@@ -100,8 +100,8 @@ export function Header() {
           </button>
         </form>
 
-        <div className="flex items-center justify-end gap-4 max-lg:ml-auto lg:w-60">
-          <div className="ml-0 mr-0 scale-75">
+        <div className="flex items-center justify-end gap-3 max-lg:ml-auto sm:gap-4 lg:w-60">
+          <div className="-mr-2 scale-75 max-xl:hidden max-lg:flex">
             <ThemeToggleButton />
           </div>
           <Link

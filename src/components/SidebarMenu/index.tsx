@@ -17,7 +17,7 @@ export function SidebarMenu() {
   return (
     <>
       <button
-        className="dark:text-zinc-700 sm:hidden"
+        className="dark:text-zinc-200 sm:hidden"
         onClick={handleToggleSidebar}
       >
         <FaBars />

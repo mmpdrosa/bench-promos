@@ -184,20 +184,20 @@ export default function ProductPage({
               </li>
               <li>
                 <a
-                  href="#specs"
-                  className="flex items-center gap-2.5 px-4 py-2 hover:underline"
-                >
-                  <FaWhmcs className="text-amber-400" />
-                  Especificações
-                </a>
-              </li>
-              <li>
-                <a
                   href="#description"
                   className="flex items-center gap-2.5 px-4 py-2 hover:underline"
                 >
                   <FaRegListAlt className="text-amber-400" />
                   Descrição
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#specs"
+                  className="flex items-center gap-2.5 px-4 py-2 hover:underline"
+                >
+                  <FaWhmcs className="text-amber-400" />
+                  Especificações
                 </a>
               </li>
               <li>

@@ -11,6 +11,7 @@ import {
 } from 'react-icons/fa'
 
 import { useCategory } from '@/contexts/CategoryContext'
+import ThemeToggleButton from '../ThemeToggle'
 export function Menu() {
   const { categories } = useCategory()
 
@@ -148,6 +149,9 @@ export function Menu() {
 
       <div className="flex flex-col">
         <div className="flex items-center gap-1 max-lg:hidden">
+          <div className="scale-75 max-sm:hidden xl:hidden">
+            <ThemeToggleButton />
+          </div>
           <h1 className="text-lg font-semibold text-white dark:text-zinc-200">
             Grupos
           </h1>

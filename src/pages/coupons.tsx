@@ -68,7 +68,7 @@ export default function Coupons({
           {retailersWithCoupons.map((retailerWithCoupons) => (
             <div
               key={retailerWithCoupons.id}
-              className="space-y-8 border-b border-zinc-300 pb-12 last:border-0"
+              className="space-y-8 border-b border-zinc-300 pb-12 last:border-0 dark:border-zinc-700"
             >
               <div className="w-max">
                 <h2 className="text-xl font-extrabold uppercase text-violet-600">

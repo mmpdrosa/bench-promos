@@ -9,6 +9,7 @@ import { useInfiniteQuery } from 'react-query'
 import { ProductSaleCard } from '@/components/ProductSaleCard'
 import { api } from '@/lib/axios'
 import { Sale } from '@/models'
+import MobileNavBar from '@/components/MobileNavBar'
 
 export const metadata: Metadata = {
   title: 'Bench Promos: As Melhores Ofertas e Promoções',
@@ -72,12 +73,13 @@ export default function Home({
       <Head>
         <title>Bench Promos: As Melhores Ofertas e Promoções</title>
       </Head>
-      <div className="mx-auto max-w-screen-xl space-y-8 py-8 max-xl:px-4">
+      <div className="mx-auto max-w-screen-xl max-xl:px-4 sm:space-y-8">
         {search && (
           <div>
             <span>Você pesquisou por: {search}</span>
           </div>
         )}
+        <MobileNavBar />
 
         <div className="flex flex-wrap justify-center gap-7">
           {sales!.pages

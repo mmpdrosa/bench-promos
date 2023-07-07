@@ -33,16 +33,16 @@ export function AuthDialogsWrapper() {
       {!user ? (
         <button
           title="Entrar"
-          className="group flex cursor-pointer items-center gap-2 rounded-full bg-white bg-opacity-50 p-2 dark:bg-zinc-800 dark:text-zinc-200"
+          className="group flex cursor-pointer items-center gap-2 rounded-full bg-white p-1 dark:bg-zinc-800 dark:text-zinc-200 sm:bg-opacity-50 sm:p-2"
           onClick={() => handleSignInOpenChange(true)}
         >
-          <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white dark:bg-zinc-900">
-            <HiOutlineUser className="dark:text-zinc-200" />
+          <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white dark:bg-zinc-800 dark:sm:bg-zinc-900">
+            <HiOutlineUser className="dark:text-zinc-300" />
           </div>
           <span className="text-sm font-bold group-hover:underline max-sm:hidden">
             Entrar
           </span>
-          <RxChevronRight />
+          <RxChevronRight className="max-sm:hidden" />
         </button>
       ) : (
         <UserMenuAvatar />

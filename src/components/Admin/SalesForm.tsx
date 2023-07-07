@@ -106,7 +106,7 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
     } - ${priceFormatter.format(saleData.price / 100)} 🔥\n ${
       saleData.specs && `\n🔴 ${saleData.specs} 🔴\n`
     } ${
-      saleData.coupon && `\n🎟 Cupom: ${saleData.coupon}`
+      saleData.coupon && `\n🎟 Cupom: \`${saleData.coupon}\``
     } \n💸 ${priceFormatter.format(saleData.price / 100)}\n  \n🔗 ${
       saleData.html_url
     }\n ${
@@ -132,6 +132,7 @@ export default function SalesForm({ targetSale, targetProduct }: Props) {
               photo: data.image_url,
               caption: telegramMessageFoward(data),
               chat_id: process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID,
+              parse_mode: 'Markdown',
             },
             {
               timeout: 20000,
