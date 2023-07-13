@@ -149,7 +149,7 @@ export default function ProductPage({
               </a>
             </div>
             <div className="flex justify-center max-sm:order-2">
-              <div className="relative h-[512px] w-full max-sm:h-80 max-sm:w-80">
+              <div className="relative h-[350px] w-full max-sm:h-80 max-sm:w-80">
                 <Image
                   className="object-contain"
                   alt=""
