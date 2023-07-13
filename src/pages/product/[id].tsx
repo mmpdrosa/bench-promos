@@ -149,7 +149,7 @@ export default function ProductPage({
               </a>
             </div>
             <div className="flex justify-center max-sm:order-2">
-              <div className="relative h-[350px] w-full max-sm:h-80 max-sm:w-80">
+              <div className="relative w-full max-sm:h-80 max-sm:w-80 sm:h-[350px]">
                 <Image
                   className="object-contain"
                   alt=""
@@ -220,7 +220,7 @@ export default function ProductPage({
               <div className="h-2 w-3/4 rounded-full bg-violet-600"></div>
             </div>
             <div className="grid grid-cols-3 items-end gap-8 max-lg:grid-cols-1 max-lg:gap-x-0">
-              <div className="col-span-2 max-lg:order-last">
+              <div className="col-span-2">
                 <ProductPriceChart
                   productId={product.id}
                   onInsertLowestPrice={changeLowestPrice}
