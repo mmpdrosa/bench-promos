@@ -214,8 +214,13 @@ export default function PrivacyPolicy() {
           <p>
             7.2. Se você tiver qualquer dúvida em relação a esta Política de
             Privacidade ou a respeito da forma como o Bench Promos trata seus
-            dados pessoais, entre em contato pelo e-mail:
-            <a href="mailto:contato@benchpromos.com">contato@benchpromos.com</a>
+            dados pessoais, entre em contato pelo e-mail:{' '}
+            <a
+              className="text-violet-500"
+              href="mailto:contato@benchpromos.com"
+            >
+              contato@benchpromos.com
+            </a>
           </p>
           <p>
             Esta é a versão da Política de Privacidade, publicada em 21 de abril
