@@ -3,13 +3,14 @@ import { GetServerSideProps, InferGetServerSidePropsType, Metadata } from 'next'
 import Head from 'next/head'
 import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
-import { useInView } from 'react-intersection-observer'
+// import { useInView } from 'react-intersection-observer'
 import { useInfiniteQuery } from 'react-query'
 
 import { ProductSaleCard } from '@/components/ProductSaleCard'
 import { api } from '@/lib/axios'
 import { Sale } from '@/models'
 import MobileNavBar from '@/components/MobileNavBar'
+import { BsPlus } from 'react-icons/bs'
 
 export const metadata: Metadata = {
   title: 'Bench Promos: As Melhores Ofertas e Promoções',
@@ -17,12 +18,12 @@ export const metadata: Metadata = {
     'Encontre os melhores os descontos, ofertas, cupons e promoções em uma comunidade especializada em tecnologia.',
 }
 
-const ITEMS_PER_LOAD = 12
+const ITEMS_PER_LOAD = 18
 
 export default function Home({
   sales: initialSales,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const { ref, inView } = useInView()
+  // const { ref, inView } = useInView()
   const searchParams = useSearchParams()
 
   const search = searchParams.get('q') ?? ''
@@ -61,12 +62,12 @@ export default function Home({
     refetch()
   }, [refetch, search])
 
-  useEffect(() => {
-    if (inView) {
-      fetchNextPage()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView])
+  // useEffect(() => {
+  //   if (inView) {
+  //     fetchNextPage()
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [inView])
 
   return (
     <>
@@ -105,17 +106,20 @@ export default function Home({
             ))}
         </div>
 
-        <div className="text-center">
-          <button
-            ref={ref}
-            onClick={() => fetchNextPage()}
-            disabled={!hasNextPage || isFetchingNextPage}
-            hidden={!hasNextPage}
-          >
-            {isFetchingNextPage && (
-              <CircularProgress className="text-violet-500" />
-            )}
-          </button>
+        <div className="pb-8 text-center max-sm:py-2">
+          {isFetchingNextPage ? (
+            <CircularProgress className="text-violet-500" />
+          ) : (
+            <button
+              // ref={ref}
+              className="h-10 w-10 rounded-full bg-violet-500 p-2 text-white transition-colors hover:bg-violet-400"
+              onClick={() => fetchNextPage()}
+              disabled={!hasNextPage}
+              hidden={!hasNextPage}
+            >
+              <BsPlus size={24} />
+            </button>
+          )}
         </div>
       </div>
     </>
