@@ -22,7 +22,7 @@ interface ProductCardProps {
 
 export function ProductCard(product: ProductCardProps) {
   return (
-    <div className="flex min-h-[544px] w-74 min-w-[296px] flex-col overflow-hidden rounded-lg border border-zinc-300 bg-white transition duration-300 ease-in-out hover:shadow-xl dark:border-zinc-700 dark:bg-zinc-800 dark:transition-none dark:hover:bg-zinc-700">
+    <div className="flex min-h-[544px] w-74 min-w-[296px] flex-col overflow-hidden rounded-lg border border-zinc-300 bg-white transition duration-300 ease-in-out hover:shadow-xl dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700">
       <Link
         className="relative h-74 w-full"
         href={`/produto/${product.id}`}

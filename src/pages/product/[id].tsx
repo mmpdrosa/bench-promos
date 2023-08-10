@@ -24,6 +24,13 @@ import { api } from '@/lib/axios'
 import { Product } from '@/models'
 import { priceFormatter } from '@/utils/formatter'
 import { MdSell } from 'react-icons/md'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 
 type Sale = {
   id: string
@@ -131,6 +138,34 @@ export default function ProductPage({
                           </a>
                           <FaExternalLinkAlt />
                         </div>
+
+                        {/* PROVISÓRIO (colocar o campo "tutorial" no schema) */}
+                        {product.cashback.name === 'Cuponomia' && (
+                          <Dialog>
+                            <DialogTrigger>
+                              <button className="ml-2 h-9 w-9 cursor-pointer items-center rounded-full bg-violet-500 text-center text-lg font-semibold tracking-wider text-white transition-colors hover:bg-violet-400">
+                                ?
+                              </button>
+                            </DialogTrigger>
+                            <DialogContent className="w-full sm:max-w-[1280px]">
+                              <DialogHeader>
+                                <DialogTitle className="max-sm:text-sm">
+                                  Como usar o cashback da Cuponomia?
+                                </DialogTitle>
+                              </DialogHeader>
+                              <div className="aspect-video">
+                                <iframe
+                                  width="100%"
+                                  height="100%"
+                                  src="https://www.youtube.com/embed/AkU3-v7tJJo"
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                  allowFullScreen
+                                  className="rounded-lg"
+                                />
+                              </div>
+                            </DialogContent>
+                          </Dialog>
+                        )}
                       </div>
                     </div>
                   )}
@@ -432,7 +467,7 @@ export default function ProductPage({
                   src={product.review_url}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
-                ></iframe>
+                />
               </div>
             </div>
           )}

@@ -57,7 +57,7 @@ export function ProductSaleCard({
   return (
     <div
       id={id}
-      className="inline-flex w-[408px] max-w-[408px] flex-col overflow-hidden rounded-lg border border-zinc-300 transition duration-300 ease-in-out hover:shadow-xl dark:border-zinc-700 dark:bg-zinc-800 dark:transition-none dark:hover:bg-zinc-700"
+      className="inline-flex w-[408px] max-w-[408px] flex-col overflow-hidden rounded-lg border border-zinc-300 transition duration-300 ease-in-out hover:shadow-xl dark:border-zinc-700 dark:bg-zinc-800 dark:hover:bg-zinc-700"
     >
       <div className="relative flex items-center justify-between px-4 py-2 text-sm dark:text-zinc-300">
         <span className="text-sm tracking-wider">{category}</span>
