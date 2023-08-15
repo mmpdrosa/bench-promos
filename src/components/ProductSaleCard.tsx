@@ -110,7 +110,7 @@ export function ProductSaleCard({
           {coupon && (
             <div className="mt-2 text-sm text-zinc-700 dark:text-zinc-200">
               <span>Com cupom</span>
-              <div className="flex h-8 items-center gap-1 rounded-full border border-dashed border-black bg-amber-200 px-4 py-1 dark:border-zinc-500 dark:text-zinc-900">
+              <div className="flex items-center gap-1 rounded-full border border-dashed border-black bg-amber-200 px-4 py-0.5 dark:border-zinc-500 dark:text-zinc-900">
                 <MdSell className="text-2xl text-violet-400" />
                 <span className="mr-auto font-semibold tracking-wider max-md:text-xs">
                   {coupon}
