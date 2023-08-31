@@ -415,7 +415,7 @@ export default function ProductPage({
                 <div className="h-2 w-3/4 rounded-full bg-violet-600"></div>
               </div>
               <div className="overflow-hidden rounded-xl border border-zinc-300 dark:border-zinc-700">
-                <p className="px-8 py-10 text-lg font-semibold">
+                <p className="whitespace-pre-line px-8 py-10 text-lg font-semibold">
                   {product.description}
                 </p>
               </div>
