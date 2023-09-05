@@ -84,8 +84,8 @@ export default function ProductPage({
         <div className="flex flex-col gap-8 max-xl:px-4">
           <Breadcrumbs />
 
-          <div className="grid grid-cols-2 items-stretch gap-y-6 max-sm:grid-cols-1">
-            <h1 className="mb-6 text-lg font-semibold sm:hidden">
+          <div className="grid grid-cols-2 items-stretch gap-y-2 max-sm:grid-cols-1 sm:gap-y-6">
+            <h1 className="mb-6 text-lg font-semibold max-sm:leading-tight sm:hidden">
               {product.title}
             </h1>
             <div className="flex flex-col items-start max-sm:order-3">
@@ -177,14 +177,14 @@ export default function ProductPage({
               <a
                 href={product.html_url}
                 target="_blank"
-                className="mt-6 flex cursor-pointer items-center justify-center gap-2 rounded-full bg-violet-500 px-6 py-4 text-xl font-semibold text-white transition-colors hover:bg-violet-400 max-sm:w-full"
+                className="mt-4 flex cursor-pointer items-center justify-center gap-2 rounded-full bg-violet-500 px-6 py-4 text-xl font-semibold text-white transition-colors hover:bg-violet-400 max-sm:w-full sm:mt-6"
                 rel="noreferrer"
               >
                 ACESSAR <FaExternalLinkAlt />
               </a>
             </div>
             <div className="flex justify-center max-sm:order-2">
-              <div className="relative w-full max-sm:h-80 max-sm:w-80 sm:h-[350px]">
+              <div className="relative w-full max-sm:h-60 max-sm:w-80 sm:h-[350px]">
                 <Image
                   className="object-contain"
                   alt=""
